@@ -1,0 +1,36 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "از شعر تا داده",
+  "alternateName": "From Poetry to Data",
+  "description": "اطلس تعاملی و دانشنامه داده‌ای تحلیل شعر فارسی، شامل هشت پژوهش، ۶۷ نمایه شاعر، ۱۱ مضمون، ۱۰ خانواده استعاری، ۱۳ صفحه سده‌ای، نمودارهای پویا و API ماشین‌خوان.",
+  "version": "5.0.2",
+  "datePublished": "2026-07-26",
+  "programmingLanguage": [
+    "JavaScript",
+    "Python",
+    "HTML",
+    "CSS"
+  ],
+  "runtimePlatform": "Node.js >= 22.12",
+  "license": "https://spdx.org/licenses/MIT",
+  "author": {
+    "@type": "Person",
+    "givenName": "حسین",
+    "familyName": "کریمی",
+    "sameAs": "https://www.linkedin.com/in/hossein-karimi-8a452153/"
+  },
+  "keywords": [
+    "شعر فارسی",
+    "علوم انسانی دیجیتال",
+    "Persian poetry",
+    "stylometry",
+    "intertextuality",
+    "topic modeling",
+    "literary geography",
+    "lexical lifecycle"
+  ],
+  "developmentStatus": "active",
+  "applicationCategory": "Digital Humanities",
+  "operatingSystem": "Web"
+}

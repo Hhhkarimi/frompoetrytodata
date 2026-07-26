@@ -1,0 +1,31 @@
+{
+  "name": "az-sher-ta-dadeh",
+  "private": true,
+  "version": "5.0.2",
+  "description": "از شعر تا داده؛ هشت پژوهش تعاملی و دانشنامه داده‌ای شعر فارسی با صفحات موجودیت، API و گراف دانش",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/postbuild.mjs && node scripts/enhance-seo-geo.mjs && node scripts/seo-audit.mjs",
+    "build:local": "SITE_URL=http://localhost:4173 vite build && SITE_URL=http://localhost:4173 node scripts/postbuild.mjs && SITE_URL=http://localhost:4173 node scripts/enhance-seo-geo.mjs && node scripts/seo-audit.mjs",
+    "preview": "vite preview",
+    "data:generate": "python scripts/generate_data.py",
+    "seo:generate": "node scripts/postbuild.mjs && node scripts/enhance-seo-geo.mjs",
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "geo:generate": "node scripts/enhance-seo-geo.mjs"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "echarts": "6.1.0",
+    "echarts-for-react": "3.0.6",
+    "lucide-react": "1.26.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.0.4",
+    "vite": "8.1.5"
+  }
+}
