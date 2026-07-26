@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 3,
+  "slug": "religion-sufism-praise",
+  "url": "http://localhost:4173/themes/religion-sufism-praise/",
+  "name": "دین، تصوف تعلیمی و مناقب",
+  "keywords": [
+    "الله",
+    "حق",
+    "تعالی",
+    "علیه",
+    "رضی"
+  ],
+  "answer": "مضمون محاسباتی «دین، تصوف تعلیمی و مناقب» در کل پیکره سهم ۵٫۴٪ دارد، در سده ۵ به بیشترین سهم خود یعنی ۱۳٫۱٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+  "overallShare": 5.4,
+  "peakCentury": 5,
+  "peakShare": 13.1,
+  "trend": {
+    "rho": -0.181,
+    "q": 0.196,
+    "significant": false,
+    "direction": "کاهشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 3.1
+    },
+    {
+      "century": 4,
+      "share": 1.6
+    },
+    {
+      "century": 5,
+      "share": 13.1
+    },
+    {
+      "century": 6,
+      "share": 6.9
+    },
+    {
+      "century": 7,
+      "share": 4
+    },
+    {
+      "century": 8,
+      "share": 6.9
+    },
+    {
+      "century": 9,
+      "share": 2.6
+    },
+    {
+      "century": 10,
+      "share": 5.3
+    },
+    {
+      "century": 11,
+      "share": 3.6
+    },
+    {
+      "century": 12,
+      "share": 3.4
+    },
+    {
+      "century": 13,
+      "share": 4
+    },
+    {
+      "century": 14,
+      "share": 2.1
+    },
+    {
+      "century": 15,
+      "share": 3.3
+    }
+  ],
+  "related": [
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "correlation": -0.3548
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "correlation": 0.3447
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "correlation": 0.2979
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": -0.2543
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

@@ -1,0 +1,199 @@
+[
+  {
+    "century": 3,
+    "texts": 539,
+    "poets": [
+      "رودکی"
+    ],
+    "books": 8,
+    "medianWords": 14,
+    "share": 0.99,
+    "url": "http://localhost:4173/centuries/3/"
+  },
+  {
+    "century": 4,
+    "texts": 730,
+    "poets": [
+      "فردوسی",
+      "کسایی"
+    ],
+    "books": 64,
+    "medianWords": 452.5,
+    "share": 1.34,
+    "url": "http://localhost:4173/centuries/4/"
+  },
+  {
+    "century": 5,
+    "texts": 2253,
+    "poets": [
+      "ابوسعید ابوالخیر",
+      "ناصرخسرو",
+      "باباطاهر",
+      "هجویری",
+      "اسدی توسی",
+      "فخرالدین اسعد گرگانی",
+      "منوچهری",
+      "فرخی سیستانی",
+      "مسعود سعد سلمان"
+    ],
+    "books": 53,
+    "medianWords": 32,
+    "share": 4.13,
+    "url": "http://localhost:4173/centuries/5/"
+  },
+  {
+    "century": 6,
+    "texts": 10990,
+    "poets": [
+      "عطار",
+      "سنایی",
+      "انوری",
+      "خاقانی",
+      "نظامی",
+      "خیام",
+      "نصرالله منشی",
+      "باباافضل کاشانی",
+      "مهستی گنجوی",
+      "عبدالواسع جبلی"
+    ],
+    "books": 195,
+    "medianWords": 81,
+    "share": 20.16,
+    "url": "http://localhost:4173/centuries/6/"
+  },
+  {
+    "century": 7,
+    "texts": 9846,
+    "poets": [
+      "مولوی",
+      "سعدی",
+      "خواجوی کرمانی",
+      "عراقی",
+      "سیف فرغانی"
+    ],
+    "books": 54,
+    "medianWords": 120,
+    "share": 18.06,
+    "url": "http://localhost:4173/centuries/7/"
+  },
+  {
+    "century": 8,
+    "texts": 6709,
+    "poets": [
+      "شاه نعمت‌الله ولی",
+      "اوحدی",
+      "سلمان ساوجی",
+      "امیرخسرو دهلوی",
+      "حافظ",
+      "عبید زاکانی",
+      "شیخ محمود شبستری"
+    ],
+    "books": 27,
+    "medianWords": 91,
+    "share": 12.3,
+    "url": "http://localhost:4173/centuries/8/"
+  },
+  {
+    "century": 9,
+    "texts": 541,
+    "poets": [
+      "هلالی جغتایی",
+      "جامی"
+    ],
+    "books": 13,
+    "medianWords": 125,
+    "share": 0.99,
+    "url": "http://localhost:4173/centuries/9/"
+  },
+  {
+    "century": 10,
+    "texts": 2730,
+    "poets": [
+      "محتشم کاشانی",
+      "عرفی",
+      "وحشی",
+      "رضی‌الدین آرتیمانی",
+      "شیخ بهایی"
+    ],
+    "books": 24,
+    "medianWords": 100,
+    "share": 5.01,
+    "url": "http://localhost:4173/centuries/10/"
+  },
+  {
+    "century": 11,
+    "texts": 13886,
+    "poets": [
+      "صائب تبریزی",
+      "بیدل دهلوی",
+      "فیض کاشانی"
+    ],
+    "books": 9,
+    "medianWords": 140,
+    "share": 25.47,
+    "url": "http://localhost:4173/centuries/11/"
+  },
+  {
+    "century": 12,
+    "texts": 194,
+    "poets": [
+      "هاتف اصفهانی"
+    ],
+    "books": 8,
+    "medianWords": 89,
+    "share": 0.36,
+    "url": "http://localhost:4173/centuries/12/"
+  },
+  {
+    "century": 13,
+    "texts": 1382,
+    "poets": [
+      "قاآنی",
+      "فروغی بسطامی",
+      "ملا هادی سبزواری"
+    ],
+    "books": 11,
+    "medianWords": 162.5,
+    "share": 2.53,
+    "url": "http://localhost:4173/centuries/13/"
+  },
+  {
+    "century": 14,
+    "texts": 4212,
+    "poets": [
+      "ملک‌الشعرای بهار",
+      "اقبال لاهوری",
+      "احمد شاملو",
+      "سیمین بهبهانی",
+      "پروین اعتصامی",
+      "شهریار",
+      "کامبیز صدیقی کسمایی",
+      "رهی معیری",
+      "سهراب سپهری",
+      "فروغ فرخزاد",
+      "مهدی اخوان ثالث",
+      "بهرام سالکی",
+      "شاطرعباس صبوحی",
+      "شیون فومنی",
+      "نیما یوشیج (آوای آزاد)",
+      "خلیل‌الله خلیلی",
+      "محمدحسن بارق شفیعی"
+    ],
+    "books": 91,
+    "medianWords": 117,
+    "share": 7.73,
+    "url": "http://localhost:4173/centuries/14/"
+  },
+  {
+    "century": 15,
+    "texts": 512,
+    "poets": [
+      "ا لیار (جبار محمدی)",
+      "عبدالقهار عاصی"
+    ],
+    "books": 12,
+    "medianWords": 33,
+    "share": 0.94,
+    "url": "http://localhost:4173/centuries/15/"
+  }
+]

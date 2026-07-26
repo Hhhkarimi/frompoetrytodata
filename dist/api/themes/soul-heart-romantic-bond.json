@@ -1,0 +1,109 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 4,
+  "slug": "soul-heart-romantic-bond",
+  "url": "http://localhost:4173/themes/soul-heart-romantic-bond/",
+  "name": "جان، دل و پیوند عاشقانه",
+  "keywords": [
+    "دل",
+    "جان",
+    "درد",
+    "دلم",
+    "تن",
+    "جانان"
+  ],
+  "answer": "مضمون محاسباتی «جان، دل و پیوند عاشقانه» در کل پیکره سهم ۱۱٫۵٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۸٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+  "overallShare": 11.5,
+  "peakCentury": 12,
+  "peakShare": 18.9,
+  "trend": {
+    "rho": 0.012,
+    "q": 0.924,
+    "significant": false,
+    "direction": "افزایشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 7.1
+    },
+    {
+      "century": 4,
+      "share": 5.2
+    },
+    {
+      "century": 5,
+      "share": 8.8
+    },
+    {
+      "century": 6,
+      "share": 11.1
+    },
+    {
+      "century": 7,
+      "share": 16.7
+    },
+    {
+      "century": 8,
+      "share": 14.4
+    },
+    {
+      "century": 9,
+      "share": 13.3
+    },
+    {
+      "century": 10,
+      "share": 14.5
+    },
+    {
+      "century": 11,
+      "share": 14.3
+    },
+    {
+      "century": 12,
+      "share": 18.9
+    },
+    {
+      "century": 13,
+      "share": 12.6
+    },
+    {
+      "century": 14,
+      "share": 8.3
+    },
+    {
+      "century": 15,
+      "share": 18.5
+    }
+  ],
+  "related": [
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "correlation": 0.772
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "correlation": -0.7431
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "correlation": 0.7266
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "correlation": -0.5739
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

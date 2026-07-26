@@ -1,0 +1,90 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "wine-cupbearer",
+  "url": "http://localhost:4173/metaphors/wine-cupbearer/",
+  "name": "باده، شراب و ساقی",
+  "answer": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
+  "occurrences": 21796,
+  "poems": 10856,
+  "poemPercent": 19.9,
+  "rate": 22.4,
+  "poets": 67,
+  "stableEmergence": 4,
+  "stablePeak": 8,
+  "dominantPeriod": "۶–۸",
+  "newToEarlyRatio": 2.17,
+  "epsilonSquared": 0.219,
+  "rho": 0.213,
+  "qTrend": 0.084,
+  "semanticField": "عشق، بدن و معشوق",
+  "semanticShiftPoints": 6,
+  "semanticR2": 0.068,
+  "semanticQ": 0.164,
+  "values": [
+    {
+      "century": 3,
+      "rate": 13.04
+    },
+    {
+      "century": 4,
+      "rate": 11.597
+    },
+    {
+      "century": 5,
+      "rate": 10.074
+    },
+    {
+      "century": 6,
+      "rate": 17.166
+    },
+    {
+      "century": 7,
+      "rate": 30.493
+    },
+    {
+      "century": 8,
+      "rate": 43.699
+    },
+    {
+      "century": 9,
+      "rate": 16.69
+    },
+    {
+      "century": 10,
+      "rate": 27.398
+    },
+    {
+      "century": 11,
+      "rate": 29.231
+    },
+    {
+      "century": 12,
+      "rate": 28.39
+    },
+    {
+      "century": 13,
+      "rate": 40.748
+    },
+    {
+      "century": 14,
+      "rate": 17.483
+    },
+    {
+      "century": 15,
+      "rate": 23.792
+    }
+  ],
+  "related": [],
+  "strongestSemanticShift": {
+    "name": "باده، شراب و ساقی",
+    "from": 5,
+    "to": 6,
+    "jsd": 0.36,
+    "poetsBefore": 9,
+    "poetsAfter": 10
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

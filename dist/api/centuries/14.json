@@ -1,0 +1,309 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "century": 14,
+  "url": "http://localhost:4173/centuries/14/",
+  "corpus": {
+    "century": 14,
+    "texts": 4212,
+    "poets": 17,
+    "books": 91,
+    "medianWords": 117,
+    "share": 7.73
+  },
+  "poets": [
+    {
+      "name": "ملک‌الشعرای بهار",
+      "slug": "malek-al-shoara-bahar",
+      "url": "http://localhost:4173/poets/malek-al-shoara-bahar/",
+      "poems": 1105,
+      "totalCouplets": 21807,
+      "totalWords": 279418,
+      "books": 21,
+      "medianWords": 157
+    },
+    {
+      "name": "اقبال لاهوری",
+      "slug": "iqbal-lahori",
+      "url": "http://localhost:4173/poets/iqbal-lahori/",
+      "poems": 972,
+      "totalCouplets": 8155,
+      "totalWords": 102906,
+      "books": 7,
+      "medianWords": 27
+    },
+    {
+      "name": "احمد شاملو",
+      "slug": "ahmad-shamlou",
+      "url": "http://localhost:4173/poets/ahmad-shamlou/",
+      "poems": 323,
+      "totalCouplets": 7301,
+      "totalWords": 66463,
+      "books": 17,
+      "medianWords": 122
+    },
+    {
+      "name": "سیمین بهبهانی",
+      "slug": "simin-behbahani",
+      "url": "http://localhost:4173/poets/simin-behbahani/",
+      "poems": 227,
+      "totalCouplets": 2812,
+      "totalWords": 38817,
+      "books": 1,
+      "medianWords": 145
+    },
+    {
+      "name": "پروین اعتصامی",
+      "slug": "parvin-etesami",
+      "url": "http://localhost:4173/poets/parvin-etesami/",
+      "poems": 223,
+      "totalCouplets": 5594,
+      "totalWords": 70776,
+      "books": 2,
+      "medianWords": 283
+    },
+    {
+      "name": "شهریار",
+      "slug": "shahriar",
+      "url": "http://localhost:4173/poets/shahriar/",
+      "poems": 190,
+      "totalCouplets": 2607,
+      "totalWords": 37244,
+      "books": 3,
+      "medianWords": 143
+    },
+    {
+      "name": "کامبیز صدیقی کسمایی",
+      "slug": "kambiz-sedighi-kasmaei",
+      "url": "http://localhost:4173/poets/kambiz-sedighi-kasmaei/",
+      "poems": 181,
+      "totalCouplets": 1268,
+      "totalWords": 11169,
+      "books": 3,
+      "medianWords": 43
+    },
+    {
+      "name": "رهی معیری",
+      "slug": "rahi-moayeri",
+      "url": "http://localhost:4173/poets/rahi-moayeri/",
+      "poems": 159,
+      "totalCouplets": 1050,
+      "totalWords": 15577,
+      "books": 9,
+      "medianWords": 94
+    },
+    {
+      "name": "سهراب سپهری",
+      "slug": "sohrab-sepehri",
+      "url": "http://localhost:4173/poets/sohrab-sepehri/",
+      "poems": 136,
+      "totalCouplets": 2007,
+      "totalWords": 24696,
+      "books": 8,
+      "medianWords": 124
+    },
+    {
+      "name": "فروغ فرخزاد",
+      "slug": "forough-farrokhzad",
+      "url": "http://localhost:4173/poets/forough-farrokhzad/",
+      "poems": 124,
+      "totalCouplets": 2856,
+      "totalWords": 34314,
+      "books": 5,
+      "medianWords": 207.5
+    },
+    {
+      "name": "مهدی اخوان ثالث",
+      "slug": "mehdi-akhavan-sales",
+      "url": "http://localhost:4173/poets/mehdi-akhavan-sales/",
+      "poems": 116,
+      "totalCouplets": 2651,
+      "totalWords": 34234,
+      "books": 5,
+      "medianWords": 195.5
+    },
+    {
+      "name": "بهرام سالکی",
+      "slug": "bahram-saleki",
+      "url": "http://localhost:4173/poets/bahram-saleki/",
+      "poems": 104,
+      "totalCouplets": 2332,
+      "totalWords": 27090,
+      "books": 4,
+      "medianWords": 201
+    },
+    {
+      "name": "شاطرعباس صبوحی",
+      "slug": "shater-abbas-sabouhi",
+      "url": "http://localhost:4173/poets/shater-abbas-sabouhi/",
+      "poems": 98,
+      "totalCouplets": 608,
+      "totalWords": 9683,
+      "books": 4,
+      "medianWords": 100.5
+    },
+    {
+      "name": "شیون فومنی",
+      "slug": "shivon-foumani",
+      "url": "http://localhost:4173/poets/shivon-foumani/",
+      "poems": 97,
+      "totalCouplets": 764,
+      "totalWords": 8376,
+      "books": 4,
+      "medianWords": 45
+    },
+    {
+      "name": "نیما یوشیج (آوای آزاد)",
+      "slug": "nima-yushij",
+      "url": "http://localhost:4173/poets/nima-yushij/",
+      "poems": 55,
+      "totalCouplets": 1463,
+      "totalWords": 17389,
+      "books": 1,
+      "medianWords": 139
+    },
+    {
+      "name": "خلیل‌الله خلیلی",
+      "slug": "khalilullah-khalili",
+      "url": "http://localhost:4173/poets/khalilullah-khalili/",
+      "poems": 54,
+      "totalCouplets": 108,
+      "totalWords": 1481,
+      "books": 1,
+      "medianWords": 28
+    },
+    {
+      "name": "محمدحسن بارق شفیعی",
+      "slug": "mohammad-hasan-bareq-shafiei",
+      "url": "http://localhost:4173/poets/mohammad-hasan-bareq-shafiei/",
+      "poems": 48,
+      "totalCouplets": 711,
+      "totalWords": 8420,
+      "books": 1,
+      "medianWords": 154.5
+    }
+  ],
+  "topics": [
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "share": 28.7
+    },
+    {
+      "id": 8,
+      "name": "شب، زمان و گذر عمر",
+      "slug": "night-time-life",
+      "share": 12.8
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "share": 10.1
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "share": 8.5
+    },
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "share": 8.3
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "share": 7
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "share": 6.4
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "share": 6.3
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "share": 5.6
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "share": 4.2
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "share": 2.1
+    }
+  ],
+  "metaphors": [
+    {
+      "name": "گل و بلبل",
+      "slug": "flower-nightingale",
+      "rate": 36.305
+    },
+    {
+      "name": "راه، سفر و منزل",
+      "slug": "journey-road-destination",
+      "rate": 31.231
+    },
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "rate": 20.576
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "rate": 19.852
+    },
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "rate": 19.824
+    },
+    {
+      "name": "باده، شراب و ساقی",
+      "slug": "wine-cupbearer",
+      "rate": 17.483
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "rate": 16.37
+    },
+    {
+      "name": "آینه و بازتاب",
+      "slug": "mirror-reflection",
+      "rate": 5.696
+    },
+    {
+      "name": "قفس و زندان",
+      "slug": "cage-prison",
+      "rate": 4.378
+    },
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "rate": 3.455
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

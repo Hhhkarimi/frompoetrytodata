@@ -1,0 +1,109 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "fire-flame-spark",
+  "url": "http://localhost:4173/metaphors/fire-flame-spark/",
+  "name": "آتش، شعله و شرر",
+  "answer": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+  "occurrences": 19037,
+  "poems": 11033,
+  "poemPercent": 20.2,
+  "rate": 19.5,
+  "poets": 67,
+  "stableEmergence": 4,
+  "stablePeak": 11,
+  "dominantPeriod": "۹–۱۱",
+  "newToEarlyRatio": 1.55,
+  "epsilonSquared": 0.099,
+  "rho": 0.332,
+  "qTrend": 0.012,
+  "semanticField": "عشق، بدن و معشوق",
+  "semanticShiftPoints": 2.9,
+  "semanticR2": 0.072,
+  "semanticQ": 0.1,
+  "values": [
+    {
+      "century": 3,
+      "rate": 12.315
+    },
+    {
+      "century": 4,
+      "rate": 7.187
+    },
+    {
+      "century": 5,
+      "rate": 13.85
+    },
+    {
+      "century": 6,
+      "rate": 12.871
+    },
+    {
+      "century": 7,
+      "rate": 15.364
+    },
+    {
+      "century": 8,
+      "rate": 11.023
+    },
+    {
+      "century": 9,
+      "rate": 15.092
+    },
+    {
+      "century": 10,
+      "rate": 21.068
+    },
+    {
+      "century": 11,
+      "rate": 25.209
+    },
+    {
+      "century": 12,
+      "rate": 13.54
+    },
+    {
+      "century": 13,
+      "rate": 17.152
+    },
+    {
+      "century": 14,
+      "rate": 19.852
+    },
+    {
+      "century": 15,
+      "rate": 17.652
+    }
+  ],
+  "related": [
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "period": "کلاسیک",
+      "npmi": 0.253
+    },
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "period": "کلاسیک",
+      "npmi": 0.244
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "period": "جدید",
+      "npmi": 0.233
+    }
+  ],
+  "strongestSemanticShift": {
+    "name": "آتش، شعله و شرر",
+    "from": 13,
+    "to": 14,
+    "jsd": 0.293,
+    "poetsBefore": 3,
+    "poetsAfter": 16
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

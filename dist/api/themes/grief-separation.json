@@ -1,0 +1,109 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 11,
+  "slug": "grief-separation",
+  "url": "http://localhost:4173/themes/grief-separation/",
+  "name": "غم، فراق و هجران",
+  "keywords": [
+    "غم",
+    "دلم",
+    "یار",
+    "شادی",
+    "درد",
+    "عمر"
+  ],
+  "answer": "مضمون محاسباتی «غم، فراق و هجران» در کل پیکره سهم ۶٫۴٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۰٫۲٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+  "overallShare": 6.4,
+  "peakCentury": 12,
+  "peakShare": 10.2,
+  "trend": {
+    "rho": 0.108,
+    "q": 0.471,
+    "significant": false,
+    "direction": "افزایشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 4.4
+    },
+    {
+      "century": 4,
+      "share": 1.9
+    },
+    {
+      "century": 5,
+      "share": 6.8
+    },
+    {
+      "century": 6,
+      "share": 6.3
+    },
+    {
+      "century": 7,
+      "share": 7.3
+    },
+    {
+      "century": 8,
+      "share": 5.9
+    },
+    {
+      "century": 9,
+      "share": 8.4
+    },
+    {
+      "century": 10,
+      "share": 10.2
+    },
+    {
+      "century": 11,
+      "share": 5.4
+    },
+    {
+      "century": 12,
+      "share": 10.2
+    },
+    {
+      "century": 13,
+      "share": 4.7
+    },
+    {
+      "century": 14,
+      "share": 5.6
+    },
+    {
+      "century": 15,
+      "share": 7.5
+    }
+  ],
+  "related": [
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "correlation": 0.7266
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "correlation": -0.6576
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "correlation": 0.451
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": 0.3154
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

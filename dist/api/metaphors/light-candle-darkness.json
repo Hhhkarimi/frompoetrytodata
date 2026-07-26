@@ -1,0 +1,103 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "light-candle-darkness",
+  "url": "http://localhost:4173/metaphors/light-candle-darkness/",
+  "name": "نور، شمع و تاریکی",
+  "answer": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
+  "occurrences": 23952,
+  "poems": 12588,
+  "poemPercent": 23.1,
+  "rate": 24.6,
+  "poets": 67,
+  "stableEmergence": 4,
+  "stablePeak": 8,
+  "dominantPeriod": "۶–۸",
+  "newToEarlyRatio": 1.55,
+  "epsilonSquared": 0.177,
+  "rho": 0.376,
+  "qTrend": 0.004,
+  "semanticField": "رنج، مرگ و فقدان",
+  "semanticShiftPoints": 5.2,
+  "semanticR2": 0.122,
+  "semanticQ": 0.007,
+  "values": [
+    {
+      "century": 3,
+      "rate": 7.244
+    },
+    {
+      "century": 4,
+      "rate": 8.218
+    },
+    {
+      "century": 5,
+      "rate": 7.412
+    },
+    {
+      "century": 6,
+      "rate": 12.897
+    },
+    {
+      "century": 7,
+      "rate": 19.875
+    },
+    {
+      "century": 8,
+      "rate": 25.476
+    },
+    {
+      "century": 9,
+      "rate": 16.178
+    },
+    {
+      "century": 10,
+      "rate": 16.193
+    },
+    {
+      "century": 11,
+      "rate": 24.39
+    },
+    {
+      "century": 12,
+      "rate": 10.046
+    },
+    {
+      "century": 13,
+      "rate": 13.845
+    },
+    {
+      "century": 14,
+      "rate": 19.824
+    },
+    {
+      "century": 15,
+      "rate": 21.653
+    }
+  ],
+  "related": [
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "period": "کلاسیک",
+      "npmi": 0.253
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "period": "جدید",
+      "npmi": 0.248
+    }
+  ],
+  "strongestSemanticShift": {
+    "name": "نور، شمع و تاریکی",
+    "from": 13,
+    "to": 14,
+    "jsd": 0.324,
+    "poetsBefore": 3,
+    "poetsAfter": 16
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

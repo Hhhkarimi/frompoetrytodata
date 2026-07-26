@@ -1,0 +1,209 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "century": 8,
+  "url": "http://localhost:4173/centuries/8/",
+  "corpus": {
+    "century": 8,
+    "texts": 6709,
+    "poets": 7,
+    "books": 27,
+    "medianWords": 91,
+    "share": 12.3
+  },
+  "poets": [
+    {
+      "name": "شاه نعمت‌الله ولی",
+      "slug": "shah-nematollah-vali",
+      "url": "http://localhost:4173/poets/shah-nematollah-vali/",
+      "poems": 2701,
+      "totalCouplets": 14981,
+      "totalWords": 195568,
+      "books": 9,
+      "medianWords": 78
+    },
+    {
+      "name": "اوحدی",
+      "slug": "owhadi",
+      "url": "http://localhost:4173/poets/owhadi/",
+      "poems": 1326,
+      "totalCouplets": 14674,
+      "totalWords": 203831,
+      "books": 8,
+      "medianWords": 122
+    },
+    {
+      "name": "سلمان ساوجی",
+      "slug": "salman-savoji",
+      "url": "http://localhost:4173/poets/salman-savoji/",
+      "poems": 897,
+      "totalCouplets": 13104,
+      "totalWords": 190867,
+      "books": 8,
+      "medianWords": 133
+    },
+    {
+      "name": "امیرخسرو دهلوی",
+      "slug": "amir-khosrow-dehlavi",
+      "url": "http://localhost:4173/poets/amir-khosrow-dehlavi/",
+      "poems": 825,
+      "totalCouplets": 7563,
+      "totalWords": 96288,
+      "books": 8,
+      "medianWords": 38
+    },
+    {
+      "name": "حافظ",
+      "slug": "hafez",
+      "url": "http://localhost:4173/poets/hafez/",
+      "poems": 595,
+      "totalCouplets": 4751,
+      "totalWords": 72384,
+      "books": 6,
+      "medianWords": 122
+    },
+    {
+      "name": "عبید زاکانی",
+      "slug": "obeyd-zakani",
+      "url": "http://localhost:4173/poets/obeyd-zakani/",
+      "poems": 264,
+      "totalCouplets": 2925,
+      "totalWords": 38560,
+      "books": 9,
+      "medianWords": 98
+    },
+    {
+      "name": "شیخ محمود شبستری",
+      "slug": "mahmud-shabestari",
+      "url": "http://localhost:4173/poets/mahmud-shabestari/",
+      "poems": 101,
+      "totalCouplets": 1684,
+      "totalWords": 21632,
+      "books": 2,
+      "medianWords": 204
+    }
+  ],
+  "topics": [
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "share": 15.9
+    },
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "share": 14.4
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "share": 13.2
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "share": 11.9
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "share": 8.5
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "share": 7.6
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "share": 6.9
+    },
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "share": 6.4
+    },
+    {
+      "id": 8,
+      "name": "شب، زمان و گذر عمر",
+      "slug": "night-time-life",
+      "share": 5.9
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "share": 5.9
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "share": 3.4
+    }
+  ],
+  "metaphors": [
+    {
+      "name": "باده، شراب و ساقی",
+      "slug": "wine-cupbearer",
+      "rate": 43.699
+    },
+    {
+      "name": "راه، سفر و منزل",
+      "slug": "journey-road-destination",
+      "rate": 29.94
+    },
+    {
+      "name": "گل و بلبل",
+      "slug": "flower-nightingale",
+      "rate": 28.775
+    },
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "rate": 25.476
+    },
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "rate": 16.11
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "rate": 11.023
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "rate": 10.33
+    },
+    {
+      "name": "آینه و بازتاب",
+      "slug": "mirror-reflection",
+      "rate": 5.36
+    },
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "rate": 2.267
+    },
+    {
+      "name": "قفس و زندان",
+      "slug": "cage-prison",
+      "rate": 1.255
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

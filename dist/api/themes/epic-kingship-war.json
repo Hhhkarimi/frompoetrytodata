@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 2,
+  "slug": "epic-kingship-war",
+  "url": "http://localhost:4173/themes/epic-kingship-war/",
+  "name": "حماسه، شاهی و جنگ",
+  "keywords": [
+    "همی",
+    "شاه",
+    "سپاه",
+    "تخت",
+    "جنگ"
+  ],
+  "answer": "مضمون محاسباتی «حماسه، شاهی و جنگ» در کل پیکره سهم ۷٫۸٪ دارد، در سده ۴ به بیشترین سهم خود یعنی ۴۸٫۷٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۳۹).",
+  "overallShare": 7.8,
+  "peakCentury": 4,
+  "peakShare": 48.7,
+  "trend": {
+    "rho": -0.439,
+    "q": 0.001,
+    "significant": true,
+    "direction": "کاهشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 22
+    },
+    {
+      "century": 4,
+      "share": 48.7
+    },
+    {
+      "century": 5,
+      "share": 18.7
+    },
+    {
+      "century": 6,
+      "share": 7.5
+    },
+    {
+      "century": 7,
+      "share": 3.2
+    },
+    {
+      "century": 8,
+      "share": 3.4
+    },
+    {
+      "century": 9,
+      "share": 6
+    },
+    {
+      "century": 10,
+      "share": 2.8
+    },
+    {
+      "century": 11,
+      "share": 0.9
+    },
+    {
+      "century": 12,
+      "share": 2.9
+    },
+    {
+      "century": 13,
+      "share": 4
+    },
+    {
+      "century": 14,
+      "share": 4.2
+    },
+    {
+      "century": 15,
+      "share": 3.8
+    }
+  ],
+  "related": [
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "correlation": -0.7727
+    },
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "correlation": -0.7431
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "correlation": -0.6576
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "correlation": -0.4718
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

@@ -1,0 +1,110 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 10,
+  "slug": "cosmos-power-fortune",
+  "url": "http://localhost:4173/themes/cosmos-power-fortune/",
+  "name": "کیهان، قدرت و بخت",
+  "keywords": [
+    "جهان",
+    "ملک",
+    "فلک",
+    "باد",
+    "دولت",
+    "چرخ",
+    "شاه"
+  ],
+  "answer": "مضمون محاسباتی «کیهان، قدرت و بخت» در کل پیکره سهم ۱۰٫۹٪ دارد، در سده ۶ به بیشترین سهم خود یعنی ۱۸٫۵٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۳۲۲).",
+  "overallShare": 10.9,
+  "peakCentury": 6,
+  "peakShare": 18.5,
+  "trend": {
+    "rho": -0.322,
+    "q": 0.017,
+    "significant": true,
+    "direction": "کاهشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 9.2
+    },
+    {
+      "century": 4,
+      "share": 6.4
+    },
+    {
+      "century": 5,
+      "share": 10.3
+    },
+    {
+      "century": 6,
+      "share": 18.5
+    },
+    {
+      "century": 7,
+      "share": 10
+    },
+    {
+      "century": 8,
+      "share": 13.2
+    },
+    {
+      "century": 9,
+      "share": 11.9
+    },
+    {
+      "century": 10,
+      "share": 11.3
+    },
+    {
+      "century": 11,
+      "share": 7.1
+    },
+    {
+      "century": 12,
+      "share": 15.4
+    },
+    {
+      "century": 13,
+      "share": 17.1
+    },
+    {
+      "century": 14,
+      "share": 6.4
+    },
+    {
+      "century": 15,
+      "share": 6.3
+    }
+  ],
+  "related": [
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "correlation": -0.5571
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "correlation": 0.5005
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": -0.4072
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "correlation": -0.3268
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

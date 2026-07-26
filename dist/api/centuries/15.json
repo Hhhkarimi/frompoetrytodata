@@ -1,0 +1,159 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "century": 15,
+  "url": "http://localhost:4173/centuries/15/",
+  "corpus": {
+    "century": 15,
+    "texts": 512,
+    "poets": 2,
+    "books": 12,
+    "medianWords": 33,
+    "share": 0.94
+  },
+  "poets": [
+    {
+      "name": "ا لیار (جبار محمدی)",
+      "slug": "a-liyar-jabbar-mohammadi",
+      "url": "http://localhost:4173/poets/a-liyar-jabbar-mohammadi/",
+      "poems": 424,
+      "totalCouplets": 2132,
+      "totalWords": 30736,
+      "books": 6,
+      "medianWords": 33
+    },
+    {
+      "name": "عبدالقهار عاصی",
+      "slug": "abdul-qahar-asi",
+      "url": "http://localhost:4173/poets/abdul-qahar-asi/",
+      "poems": 88,
+      "totalCouplets": 711,
+      "totalWords": 7830,
+      "books": 6,
+      "medianWords": 28.5
+    }
+  ],
+  "topics": [
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "share": 18.5
+    },
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "share": 18.3
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "share": 12.8
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "share": 11.3
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "share": 7.5
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "share": 6.9
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "share": 6.3
+    },
+    {
+      "id": 8,
+      "name": "شب، زمان و گذر عمر",
+      "slug": "night-time-life",
+      "share": 6
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "share": 5.2
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "share": 3.8
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "share": 3.3
+    }
+  ],
+  "metaphors": [
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "rate": 53.123
+    },
+    {
+      "name": "گل و بلبل",
+      "slug": "flower-nightingale",
+      "rate": 47.8
+    },
+    {
+      "name": "راه، سفر و منزل",
+      "slug": "journey-road-destination",
+      "rate": 32.557
+    },
+    {
+      "name": "باده، شراب و ساقی",
+      "slug": "wine-cupbearer",
+      "rate": 23.792
+    },
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "rate": 21.653
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "rate": 17.652
+    },
+    {
+      "name": "آینه و بازتاب",
+      "slug": "mirror-reflection",
+      "rate": 8.675
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "rate": 4.506
+    },
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "rate": 4.193
+    },
+    {
+      "name": "قفس و زندان",
+      "slug": "cage-prison",
+      "rate": 3.705
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

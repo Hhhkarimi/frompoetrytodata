@@ -1,0 +1,159 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "century": 4,
+  "url": "http://localhost:4173/centuries/4/",
+  "corpus": {
+    "century": 4,
+    "texts": 730,
+    "poets": 2,
+    "books": 64,
+    "medianWords": 452.5,
+    "share": 1.34
+  },
+  "poets": [
+    {
+      "name": "فردوسی",
+      "slug": "ferdowsi",
+      "url": "http://localhost:4173/poets/ferdowsi/",
+      "poems": 616,
+      "totalCouplets": 49609,
+      "totalWords": 568515,
+      "books": 61,
+      "medianWords": 517
+    },
+    {
+      "name": "کسایی",
+      "slug": "kasaei",
+      "url": "http://localhost:4173/poets/kasaei/",
+      "poems": 114,
+      "totalCouplets": 307,
+      "totalWords": 4474,
+      "books": 3,
+      "medianWords": 24
+    }
+  ],
+  "topics": [
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "share": 48.7
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "share": 10.6
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "share": 7.1
+    },
+    {
+      "id": 8,
+      "name": "شب، زمان و گذر عمر",
+      "slug": "night-time-life",
+      "share": 6.7
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "share": 6.4
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "share": 5.6
+    },
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "share": 5.2
+    },
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "share": 5
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "share": 1.9
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "share": 1.6
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "share": 1.3
+    }
+  ],
+  "metaphors": [
+    {
+      "name": "گل و بلبل",
+      "slug": "flower-nightingale",
+      "rate": 27.973
+    },
+    {
+      "name": "راه، سفر و منزل",
+      "slug": "journey-road-destination",
+      "rate": 18.708
+    },
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "rate": 17.558
+    },
+    {
+      "name": "باده، شراب و ساقی",
+      "slug": "wine-cupbearer",
+      "rate": 11.597
+    },
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "rate": 8.218
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "rate": 7.187
+    },
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "rate": 3.872
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "rate": 3.686
+    },
+    {
+      "name": "آینه و بازتاب",
+      "slug": "mirror-reflection",
+      "rate": 3.379
+    },
+    {
+      "name": "قفس و زندان",
+      "slug": "cage-prison",
+      "rate": 0.704
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

@@ -1,0 +1,110 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 1,
+  "slug": "ethics-wisdom",
+  "url": "http://localhost:4173/themes/ethics-wisdom/",
+  "name": "اخلاق، حکمت و خرد",
+  "keywords": [
+    "کار",
+    "خویش",
+    "سخن",
+    "بد",
+    "همی",
+    "نیک",
+    "دست"
+  ],
+  "answer": "مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳).",
+  "overallShare": 10.8,
+  "peakCentury": 3,
+  "peakShare": 18.2,
+  "trend": {
+    "rho": -0.413,
+    "q": 0.002,
+    "significant": true,
+    "direction": "کاهشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 18.2
+    },
+    {
+      "century": 4,
+      "share": 10.6
+    },
+    {
+      "century": 5,
+      "share": 13.2
+    },
+    {
+      "century": 6,
+      "share": 15.8
+    },
+    {
+      "century": 7,
+      "share": 11.3
+    },
+    {
+      "century": 8,
+      "share": 11.9
+    },
+    {
+      "century": 9,
+      "share": 10.8
+    },
+    {
+      "century": 10,
+      "share": 9.7
+    },
+    {
+      "century": 11,
+      "share": 6.4
+    },
+    {
+      "century": 12,
+      "share": 6
+    },
+    {
+      "century": 13,
+      "share": 6.8
+    },
+    {
+      "century": 14,
+      "share": 8.5
+    },
+    {
+      "century": 15,
+      "share": 5.2
+    }
+  ],
+  "related": [
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": -0.6144
+    },
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "correlation": -0.5739
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "correlation": -0.5725
+    },
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "correlation": -0.4227
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

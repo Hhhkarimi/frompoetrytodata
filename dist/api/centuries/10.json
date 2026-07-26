@@ -1,0 +1,189 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "century": 10,
+  "url": "http://localhost:4173/centuries/10/",
+  "corpus": {
+    "century": 10,
+    "texts": 2730,
+    "poets": 5,
+    "books": 24,
+    "medianWords": 100,
+    "share": 5.01
+  },
+  "poets": [
+    {
+      "name": "محتشم کاشانی",
+      "slug": "mohtasham-kashani",
+      "url": "http://localhost:4173/poets/mohtasham-kashani/",
+      "poems": 972,
+      "totalCouplets": 10716,
+      "totalWords": 163001,
+      "books": 7,
+      "medianWords": 116
+    },
+    {
+      "name": "عرفی",
+      "slug": "orfi",
+      "url": "http://localhost:4173/poets/orfi/",
+      "poems": 698,
+      "totalCouplets": 3902,
+      "totalWords": 60658,
+      "books": 3,
+      "medianWords": 90
+    },
+    {
+      "name": "وحشی",
+      "slug": "vahshi",
+      "url": "http://localhost:4173/poets/vahshi/",
+      "poems": 651,
+      "totalCouplets": 10595,
+      "totalWords": 144600,
+      "books": 10,
+      "medianWords": 93
+    },
+    {
+      "name": "رضی‌الدین آرتیمانی",
+      "slug": "razi-al-din-artimani",
+      "url": "http://localhost:4173/poets/razi-al-din-artimani/",
+      "poems": 233,
+      "totalCouplets": 1550,
+      "totalWords": 19907,
+      "books": 6,
+      "medianWords": 31
+    },
+    {
+      "name": "شیخ بهایی",
+      "slug": "sheikh-bahaei",
+      "url": "http://localhost:4173/poets/sheikh-bahaei/",
+      "poems": 176,
+      "totalCouplets": 1289,
+      "totalWords": 16434,
+      "books": 8,
+      "medianWords": 33.5
+    }
+  ],
+  "topics": [
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "share": 14.5
+    },
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "share": 12.4
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "share": 12.2
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "share": 11.3
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "share": 10.2
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "share": 10.1
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "share": 9.7
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "share": 7
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "share": 5.3
+    },
+    {
+      "id": 8,
+      "name": "شب، زمان و گذر عمر",
+      "slug": "night-time-life",
+      "share": 4.4
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "share": 2.8
+    }
+  ],
+  "metaphors": [
+    {
+      "name": "راه، سفر و منزل",
+      "slug": "journey-road-destination",
+      "rate": 35.697
+    },
+    {
+      "name": "باده، شراب و ساقی",
+      "slug": "wine-cupbearer",
+      "rate": 27.398
+    },
+    {
+      "name": "گل و بلبل",
+      "slug": "flower-nightingale",
+      "rate": 27.089
+    },
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "rate": 21.91
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "rate": 21.068
+    },
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "rate": 16.193
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "rate": 3.886
+    },
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "rate": 3.037
+    },
+    {
+      "name": "قفس و زندان",
+      "slug": "cage-prison",
+      "rate": 2.524
+    },
+    {
+      "name": "آینه و بازتاب",
+      "slug": "mirror-reflection",
+      "rate": 2.365
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

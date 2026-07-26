@@ -1,0 +1,97 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "blood-wound-dagger",
+  "url": "http://localhost:4173/metaphors/blood-wound-dagger/",
+  "name": "خون، زخم و خنجر",
+  "answer": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
+  "occurrences": 23438,
+  "poems": 12895,
+  "poemPercent": 23.7,
+  "rate": 24.1,
+  "poets": 67,
+  "stableEmergence": 4,
+  "stablePeak": 13,
+  "dominantPeriod": "۱۲–۱۵",
+  "newToEarlyRatio": 2.13,
+  "epsilonSquared": 0,
+  "rho": 0.244,
+  "qTrend": 0.052,
+  "semanticField": "قدرت و نبرد",
+  "semanticShiftPoints": -4.4,
+  "semanticR2": 0.118,
+  "semanticQ": 0.02,
+  "values": [
+    {
+      "century": 3,
+      "rate": 6.52
+    },
+    {
+      "century": 4,
+      "rate": 17.558
+    },
+    {
+      "century": 5,
+      "rate": 18.039
+    },
+    {
+      "century": 6,
+      "rate": 16.655
+    },
+    {
+      "century": 7,
+      "rate": 17.588
+    },
+    {
+      "century": 8,
+      "rate": 16.11
+    },
+    {
+      "century": 9,
+      "rate": 22.427
+    },
+    {
+      "century": 10,
+      "rate": 21.91
+    },
+    {
+      "century": 11,
+      "rate": 24.519
+    },
+    {
+      "century": 12,
+      "rate": 22.712
+    },
+    {
+      "century": 13,
+      "rate": 29.036
+    },
+    {
+      "century": 14,
+      "rate": 20.576
+    },
+    {
+      "century": 15,
+      "rate": 53.123
+    }
+  ],
+  "related": [
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "period": "کلاسیک",
+      "npmi": 0.244
+    }
+  ],
+  "strongestSemanticShift": {
+    "name": "خون، زخم و خنجر",
+    "from": 5,
+    "to": 6,
+    "jsd": 0.267,
+    "poetsBefore": 9,
+    "poetsAfter": 10
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

@@ -1,0 +1,110 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 6,
+  "slug": "beloved-beauty-feast",
+  "url": "http://localhost:4173/themes/beloved-beauty-feast/",
+  "name": "زیبایی معشوق و بزم",
+  "keywords": [
+    "سر",
+    "زلف",
+    "لب",
+    "چشم",
+    "مست",
+    "لعل",
+    "رخ"
+  ],
+  "answer": "مضمون محاسباتی «زیبایی معشوق و بزم» در کل پیکره سهم ۱۰٪ دارد، در سده ۱۳ به بیشترین سهم خود یعنی ۲۰٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+  "overallShare": 10,
+  "peakCentury": 13,
+  "peakShare": 20.9,
+  "trend": {
+    "rho": -0.036,
+    "q": 0.849,
+    "significant": false,
+    "direction": "کاهشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 8.6
+    },
+    {
+      "century": 4,
+      "share": 5.6
+    },
+    {
+      "century": 5,
+      "share": 5.1
+    },
+    {
+      "century": 6,
+      "share": 9.5
+    },
+    {
+      "century": 7,
+      "share": 15.8
+    },
+    {
+      "century": 8,
+      "share": 15.9
+    },
+    {
+      "century": 9,
+      "share": 12.5
+    },
+    {
+      "century": 10,
+      "share": 12.2
+    },
+    {
+      "century": 11,
+      "share": 10.7
+    },
+    {
+      "century": 12,
+      "share": 7.9
+    },
+    {
+      "century": 13,
+      "share": 20.9
+    },
+    {
+      "century": 14,
+      "share": 7
+    },
+    {
+      "century": 15,
+      "share": 6.9
+    }
+  ],
+  "related": [
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "correlation": 0.5926
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "correlation": 0.5005
+    },
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "correlation": -0.4718
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": -0.4027
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

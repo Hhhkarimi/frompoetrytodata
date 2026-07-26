@@ -1,0 +1,90 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "mirror-reflection",
+  "url": "http://localhost:4173/metaphors/mirror-reflection/",
+  "name": "آینه و بازتاب",
+  "answer": "خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+  "occurrences": 9057,
+  "poems": 5831,
+  "poemPercent": 10.7,
+  "rate": 9.3,
+  "poets": 64,
+  "stableEmergence": 7,
+  "stablePeak": 11,
+  "dominantPeriod": "۹–۱۱",
+  "newToEarlyRatio": 2.33,
+  "epsilonSquared": 0.191,
+  "rho": 0.379,
+  "qTrend": 0.004,
+  "semanticField": "عشق، بدن و معشوق",
+  "semanticShiftPoints": 7.6,
+  "semanticR2": 0.091,
+  "semanticQ": 0.041,
+  "values": [
+    {
+      "century": 3,
+      "rate": 1.449
+    },
+    {
+      "century": 4,
+      "rate": 3.379
+    },
+    {
+      "century": 5,
+      "rate": 2.225
+    },
+    {
+      "century": 6,
+      "rate": 2.564
+    },
+    {
+      "century": 7,
+      "rate": 6.727
+    },
+    {
+      "century": 8,
+      "rate": 5.36
+    },
+    {
+      "century": 9,
+      "rate": 3.963
+    },
+    {
+      "century": 10,
+      "rate": 2.365
+    },
+    {
+      "century": 11,
+      "rate": 28.35
+    },
+    {
+      "century": 12,
+      "rate": 2.184
+    },
+    {
+      "century": 13,
+      "rate": 5.568
+    },
+    {
+      "century": 14,
+      "rate": 5.696
+    },
+    {
+      "century": 15,
+      "rate": 8.675
+    }
+  ],
+  "related": [],
+  "strongestSemanticShift": {
+    "name": "آینه و بازتاب",
+    "from": 5,
+    "to": 6,
+    "jsd": 0.578,
+    "poetsBefore": 6,
+    "poetsAfter": 8
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

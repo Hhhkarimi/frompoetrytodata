@@ -1,0 +1,97 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "cage-prison",
+  "url": "http://localhost:4173/metaphors/cage-prison/",
+  "name": "قفس و زندان",
+  "answer": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
+  "occurrences": 3376,
+  "poems": 2543,
+  "poemPercent": 4.7,
+  "rate": 3.5,
+  "poets": 64,
+  "stableEmergence": 5,
+  "stablePeak": 14,
+  "dominantPeriod": "۱۲–۱۵",
+  "newToEarlyRatio": 2.07,
+  "epsilonSquared": 0.198,
+  "rho": 0.489,
+  "qTrend": 0.0001,
+  "semanticField": "طبیعت و زیبایی",
+  "semanticShiftPoints": 18.9,
+  "semanticR2": 0.094,
+  "semanticQ": 0.041,
+  "values": [
+    {
+      "century": 3,
+      "rate": 2.898
+    },
+    {
+      "century": 4,
+      "rate": 0.704
+    },
+    {
+      "century": 5,
+      "rate": 2.067
+    },
+    {
+      "century": 6,
+      "rate": 1.328
+    },
+    {
+      "century": 7,
+      "rate": 2.019
+    },
+    {
+      "century": 8,
+      "rate": 1.255
+    },
+    {
+      "century": 9,
+      "rate": 3.63
+    },
+    {
+      "century": 10,
+      "rate": 2.524
+    },
+    {
+      "century": 11,
+      "rate": 4.81
+    },
+    {
+      "century": 12,
+      "rate": 5.241
+    },
+    {
+      "century": 13,
+      "rate": 2.547
+    },
+    {
+      "century": 14,
+      "rate": 4.378
+    },
+    {
+      "century": 15,
+      "rate": 3.705
+    }
+  ],
+  "related": [
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "period": "کلاسیک",
+      "npmi": 0.24
+    }
+  ],
+  "strongestSemanticShift": {
+    "name": "قفس و زندان",
+    "from": 13,
+    "to": 14,
+    "jsd": 0.55,
+    "poetsBefore": 3,
+    "poetsAfter": 15
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

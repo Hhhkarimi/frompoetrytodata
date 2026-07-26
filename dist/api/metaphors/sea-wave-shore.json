@@ -1,0 +1,103 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "sea-wave-shore",
+  "url": "http://localhost:4173/metaphors/sea-wave-shore/",
+  "name": "دریا، موج و ساحل",
+  "answer": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+  "occurrences": 17175,
+  "poems": 9182,
+  "poemPercent": 16.8,
+  "rate": 17.6,
+  "poets": 67,
+  "stableEmergence": 4,
+  "stablePeak": 11,
+  "dominantPeriod": "۹–۱۱",
+  "newToEarlyRatio": 1.54,
+  "epsilonSquared": 0.171,
+  "rho": 0.276,
+  "qTrend": 0.034,
+  "semanticField": "عشق، بدن و معشوق",
+  "semanticShiftPoints": 7.7,
+  "semanticR2": 0.087,
+  "semanticQ": 0.065,
+  "values": [
+    {
+      "century": 3,
+      "rate": 5.071
+    },
+    {
+      "century": 4,
+      "rate": 3.686
+    },
+    {
+      "century": 5,
+      "rate": 6.754
+    },
+    {
+      "century": 6,
+      "rate": 4.163
+    },
+    {
+      "century": 7,
+      "rate": 5.156
+    },
+    {
+      "century": 8,
+      "rate": 10.33
+    },
+    {
+      "century": 9,
+      "rate": 5.926
+    },
+    {
+      "century": 10,
+      "rate": 3.886
+    },
+    {
+      "century": 11,
+      "rate": 19.256
+    },
+    {
+      "century": 12,
+      "rate": 4.805
+    },
+    {
+      "century": 13,
+      "rate": 3.895
+    },
+    {
+      "century": 14,
+      "rate": 16.37
+    },
+    {
+      "century": 15,
+      "rate": 4.506
+    }
+  ],
+  "related": [
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "period": "جدید",
+      "npmi": 0.248
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "period": "جدید",
+      "npmi": 0.233
+    }
+  ],
+  "strongestSemanticShift": {
+    "name": "دریا، موج و ساحل",
+    "from": 13,
+    "to": 14,
+    "jsd": 0.428,
+    "poetsBefore": 3,
+    "poetsAfter": 16
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

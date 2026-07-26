@@ -1,0 +1,111 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 5,
+  "slug": "sensory-existential-images",
+  "url": "http://localhost:4173/themes/sensory-existential-images/",
+  "name": "تصویرهای حسی و وجودی",
+  "keywords": [
+    "آب",
+    "پر",
+    "چشم",
+    "رنگ",
+    "آتش",
+    "آیینه",
+    "خاک",
+    "سینه"
+  ],
+  "answer": "مضمون محاسباتی «تصویرهای حسی و وجودی» در کل پیکره سهم ۱۴٪ دارد، در سده ۱۱ به بیشترین سهم خود یعنی ۲۹٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۶۴۷).",
+  "overallShare": 14,
+  "peakCentury": 11,
+  "peakShare": 29,
+  "trend": {
+    "rho": 0.647,
+    "q": 0.0001,
+    "significant": true,
+    "direction": "افزایشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 10.8
+    },
+    {
+      "century": 4,
+      "share": 5
+    },
+    {
+      "century": 5,
+      "share": 5.6
+    },
+    {
+      "century": 6,
+      "share": 6.9
+    },
+    {
+      "century": 7,
+      "share": 5.8
+    },
+    {
+      "century": 8,
+      "share": 6.4
+    },
+    {
+      "century": 9,
+      "share": 10.7
+    },
+    {
+      "century": 10,
+      "share": 12.4
+    },
+    {
+      "century": 11,
+      "share": 29
+    },
+    {
+      "century": 12,
+      "share": 7.3
+    },
+    {
+      "century": 13,
+      "share": 7
+    },
+    {
+      "century": 14,
+      "share": 28.7
+    },
+    {
+      "century": 15,
+      "share": 18.3
+    }
+  ],
+  "related": [
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "correlation": -0.5571
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": 0.5041
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "correlation": -0.4227
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "correlation": -0.3548
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

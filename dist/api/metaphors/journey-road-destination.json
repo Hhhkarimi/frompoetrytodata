@@ -1,0 +1,90 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "slug": "journey-road-destination",
+  "url": "http://localhost:4173/metaphors/journey-road-destination/",
+  "name": "راه، سفر و منزل",
+  "answer": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
+  "occurrences": 35316,
+  "poems": 15591,
+  "poemPercent": 28.6,
+  "rate": 36.3,
+  "poets": 67,
+  "stableEmergence": 4,
+  "stablePeak": 10,
+  "dominantPeriod": "۹–۱۱",
+  "newToEarlyRatio": 1.58,
+  "epsilonSquared": 0,
+  "rho": 0.253,
+  "qTrend": 0.048,
+  "semanticField": "عشق، بدن و معشوق",
+  "semanticShiftPoints": 8.4,
+  "semanticR2": 0.143,
+  "semanticQ": 0.007,
+  "values": [
+    {
+      "century": 3,
+      "rate": 14.489
+    },
+    {
+      "century": 4,
+      "rate": 18.708
+    },
+    {
+      "century": 5,
+      "rate": 25.051
+    },
+    {
+      "century": 6,
+      "rate": 29.257
+    },
+    {
+      "century": 7,
+      "rate": 25.485
+    },
+    {
+      "century": 8,
+      "rate": 29.94
+    },
+    {
+      "century": 9,
+      "rate": 34.319
+    },
+    {
+      "century": 10,
+      "rate": 35.697
+    },
+    {
+      "century": 11,
+      "rate": 34.415
+    },
+    {
+      "century": 12,
+      "rate": 29.701
+    },
+    {
+      "century": 13,
+      "rate": 25.378
+    },
+    {
+      "century": 14,
+      "rate": 31.231
+    },
+    {
+      "century": 15,
+      "rate": 32.557
+    }
+  ],
+  "related": [],
+  "strongestSemanticShift": {
+    "name": "راه، سفر و منزل",
+    "from": 13,
+    "to": 14,
+    "jsd": 0.257,
+    "poetsBefore": 3,
+    "poetsAfter": 17
+  },
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

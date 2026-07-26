@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "id": "lexical-life",
+    "number": 8,
+    "title": "نیمه‌عمر واژگان در شعر فارسی",
+    "subtitle": "تولد، اوج، افول، ماندگاری و بازگشت واژه‌ها از سده سوم تا پانزدهم هجری",
+    "coreAnswer": "واژگان شعر فارسی چرخه عمر دارند، اما این چرخه بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق."
+  },
+  "corpus": {
+    "texts": 54524,
+    "poets": 67,
+    "tokens": 9283764,
+    "wordForms": 167991,
+    "lifecycleWords": 7935,
+    "centuries": "۳ تا ۱۵ هجری"
+  },
+  "halfLife": {
+    "observedWords": 6553,
+    "medianCenturies": 1.36,
+    "q1Centuries": 0.9,
+    "q3Centuries": 1.98,
+    "censoredWords": 1382,
+    "censoredShare": 0.174
+  },
+  "categories": [
+    {
+      "name": "پایدار",
+      "count": 2793,
+      "share": 0.352,
+      "medianSpan": 12,
+      "medianHalfLife": 1.74
+    },
+    {
+      "name": "روبه‌افول",
+      "count": 2258,
+      "share": 0.285,
+      "medianSpan": 11,
+      "medianHalfLife": 1.38
+    },
+    {
+      "name": "دوره‌ای/میانه",
+      "count": 1467,
+      "share": 0.185,
+      "medianSpan": 10,
+      "medianHalfLife": 1.11
+    },
+    {
+      "name": "احیاشده",
+      "count": 1054,
+      "share": 0.133,
+      "medianSpan": 13,
+      "medianHalfLife": 1.26
+    },
+    {
+      "name": "کوتاه‌عمر",
+      "count": 325,
+      "share": 0.041,
+      "medianSpan": 3,
+      "medianHalfLife": 0.92
+    },
+    {
+      "name": "نوظهور",
+      "count": 38,
+      "share": 0.005,
+      "medianSpan": 3,
+      "medianHalfLife": 0.78
+    }
+  ],
+  "examples": {
+    "stable": [
+      {
+        "word": "دل",
+        "frequency": 63279,
+        "poets": 67,
+        "peak": 15,
+        "earlyRate": 54.1,
+        "lateRate": 88.2,
+        "trendRho": 0.67,
+        "halfLife": null
+      },
+      {
+        "word": "جان",
+        "frequency": 37109,
+        "poets": 67,
+        "peak": 15,
+        "halfLife": null
+      },
+      {
+        "word": "عشق",
+        "frequency": 23234,
+        "poets": 67,
+        "peak": 15,
+        "halfLife": null
+      },
+      {
+        "word": "جهان",
+        "frequency": 22303,
+        "poets": 67,
+        "peak": 3,
+        "halfLife": 5.79
+      },
+      {
+        "word": "خاک",
+        "frequency": 15567,
+        "poets": 67,
+        "peak": 15,
+        "halfLife": null
+      },
+      {
+        "word": "آب",
+        "frequency": 20703,
+        "poets": 67,
+        "peak": 7,
+        "halfLife": null
+      }
+    ],
+    "declining": [
+      {
+        "word": "درم",
+        "frequency": 1252,
+        "peak": 3,
+        "lastActive": 15,
+        "halfLife": 1.66,
+        "earlyRate": 4.14,
+        "lateRate": 0.7,
+        "significant": true
+      },
+      {
+        "word": "دینار",
+        "frequency": 800,
+        "peak": 3,
+        "lastActive": 8,
+        "halfLife": 2.21,
+        "significant": true
+      },
+      {
+        "word": "خاقان",
+        "frequency": 643,
+        "peak": 4,
+        "lastActive": 12,
+        "halfLife": 1.45
+      },
+      {
+        "word": "سپه",
+        "frequency": 1299,
+        "peak": 4,
+        "lastActive": 10,
+        "halfLife": 1.4
+      },
+      {
+        "word": "سپهدار",
+        "frequency": 465,
+        "peak": 4,
+        "lastActive": 6,
+        "halfLife": 1.41
+      },
+      {
+        "word": "نبید",
+        "frequency": 128,
+        "peak": 4,
+        "lastActive": 5,
+        "halfLife": 0.84
+      }
+    ],
+    "late": [
+      {
+        "word": "آزادی",
+        "frequency": 686,
+        "poets": 52,
+        "birth": 14,
+        "peak": 15,
+        "earlyRate": 0.26,
+        "lateRate": 5.32,
+        "trendRho": 0.85
+      },
+      {
+        "word": "خیابان",
+        "frequency": 116,
+        "poets": 13,
+        "birth": 13,
+        "peak": 15
+      },
+      {
+        "word": "سکوت",
+        "frequency": 291,
+        "poets": 33,
+        "birth": 13,
+        "peak": 15
+      },
+      {
+        "word": "جنگل",
+        "frequency": 127,
+        "poets": 16,
+        "birth": 13,
+        "peak": 14
+      },
+      {
+        "word": "خاطره",
+        "frequency": 86,
+        "poets": 18,
+        "birth": 13,
+        "peak": 15
+      },
+      {
+        "word": "غروب",
+        "frequency": 133,
+        "poets": 24,
+        "birth": 13,
+        "peak": 14
+      }
+    ],
+    "revived": [
+      {
+        "word": "ملت",
+        "frequency": 506,
+        "lateToMiddleRatio": 3.7
+      },
+      {
+        "word": "ریشه",
+        "frequency": 736,
+        "lateToMiddleRatio": 1.8
+      },
+      {
+        "word": "پنجره",
+        "frequency": 216,
+        "lateToMiddleRatio": 32.4
+      },
+      {
+        "word": "ستاره",
+        "frequency": 1430,
+        "lateToMiddleRatio": 3.1
+      },
+      {
+        "word": "تنهایی",
+        "frequency": 491,
+        "lateToMiddleRatio": 3.6
+      },
+      {
+        "word": "خاموش",
+        "frequency": 1332,
+        "lateToMiddleRatio": 2.3
+      }
+    ]
+  },
+  "tests": {
+    "adjacentCenturyCosineDistance": 0.087,
+    "orderingPermutations": 1999,
+    "orderingP": 0.001,
+    "historicalPeriodRSquared": 0.138,
+    "historicalPeriodP": 0.001,
+    "frequencyHalfLifeRho": 0.327,
+    "frequencyHalfLifeP": 0.001,
+    "turnoverVolumeRho": -0.636,
+    "turnoverVolumeP": 0.026,
+    "significantIncreasingWords": 100,
+    "significantDecreasingWords": 86,
+    "trendFdr": 0.05
+  },
+  "method": {
+    "unit": "شاعر در سده",
+    "rate": "فراوانی هر واژه برای هر شاعر در ۱۰هزار واژه و سپس میانگین برابر شاعران در هر سده",
+    "halfLifeDefinition": "زمان پس از اوج تا رسیدن فراوانی هموارشده به نصف مقدار اوج",
+    "activityThreshold": "بزرگ‌تر از ۰٫۵ رخداد در ۱۰هزار واژه یا ۱۰٪ اوج",
+    "rightCensoring": "واژه‌هایی که تا سده پانزدهم به نصف اوج نرسیده‌اند، سانسور راست محسوب شده‌اند."
+  },
+  "caveats": [
+    "سده شاعر جای تاریخ دقیق سرایش شعر را گرفته است.",
+    "تعداد شاعر، قالب و حجم متن در همه سده‌ها برابر نیست.",
+    "ریشه‌یابی و یکسان‌سازی صرفی انجام نشده و هر صورت نوشتاری جداگانه سنجیده شده است.",
+    "چندمعنایی واژه و تغییر معنای تاریخی در فراوانی یک صورت ادغام می‌شود.",
+    "پایان سده پانزدهم باعث سانسور راست واژه‌های همچنان فعال می‌شود.",
+    "واژه با مفهوم یکی نیست؛ افول یک صورت لزوماً به معنی ناپدیدشدن مفهوم نیست."
+  ]
+}

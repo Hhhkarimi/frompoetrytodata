@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "id": 8,
+  "slug": "night-time-life",
+  "url": "http://localhost:4173/themes/night-time-life/",
+  "name": "شب، زمان و گذر عمر",
+  "keywords": [
+    "شب",
+    "روز",
+    "خواب",
+    "ماه",
+    "سیاه"
+  ],
+  "answer": "مضمون محاسباتی «شب، زمان و گذر عمر» در کل پیکره سهم ۸٪ دارد، در سده ۱۴ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+  "overallShare": 8,
+  "peakCentury": 14,
+  "peakShare": 12.8,
+  "trend": {
+    "rho": 0.212,
+    "q": 0.133,
+    "significant": false,
+    "direction": "افزایشی"
+  },
+  "values": [
+    {
+      "century": 3,
+      "share": 5.8
+    },
+    {
+      "century": 4,
+      "share": 6.7
+    },
+    {
+      "century": 5,
+      "share": 7.9
+    },
+    {
+      "century": 6,
+      "share": 6.4
+    },
+    {
+      "century": 7,
+      "share": 7
+    },
+    {
+      "century": 8,
+      "share": 5.9
+    },
+    {
+      "century": 9,
+      "share": 8
+    },
+    {
+      "century": 10,
+      "share": 4.4
+    },
+    {
+      "century": 11,
+      "share": 3.3
+    },
+    {
+      "century": 12,
+      "share": 10.8
+    },
+    {
+      "century": 13,
+      "share": 6.6
+    },
+    {
+      "century": 14,
+      "share": 12.8
+    },
+    {
+      "century": 15,
+      "share": 6
+    }
+  ],
+  "related": [
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "correlation": 0.3296
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "correlation": -0.2895
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "correlation": -0.2829
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "correlation": 0.1427
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

@@ -1,0 +1,229 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "century": 5,
+  "url": "http://localhost:4173/centuries/5/",
+  "corpus": {
+    "century": 5,
+    "texts": 2253,
+    "poets": 9,
+    "books": 53,
+    "medianWords": 32,
+    "share": 4.13
+  },
+  "poets": [
+    {
+      "name": "ابوسعید ابوالخیر",
+      "slug": "abu-saeid-abul-kheir",
+      "url": "http://localhost:4173/poets/abu-saeid-abul-kheir/",
+      "poems": 786,
+      "totalCouplets": 1589,
+      "totalWords": 21731,
+      "books": 2,
+      "medianWords": 27
+    },
+    {
+      "name": "ناصرخسرو",
+      "slug": "naser-khosrow",
+      "url": "http://localhost:4173/poets/naser-khosrow/",
+      "poems": 386,
+      "totalCouplets": 10911,
+      "totalWords": 187438,
+      "books": 4,
+      "medianWords": 477
+    },
+    {
+      "name": "باباطاهر",
+      "slug": "baba-taher",
+      "url": "http://localhost:4173/poets/baba-taher/",
+      "poems": 368,
+      "totalCouplets": 764,
+      "totalWords": 9131,
+      "books": 2,
+      "medianWords": 24
+    },
+    {
+      "name": "هجویری",
+      "slug": "hojviri",
+      "url": "http://localhost:4173/poets/hojviri/",
+      "poems": 210,
+      "totalCouplets": 1222,
+      "totalWords": 150023,
+      "books": 40,
+      "medianWords": 517
+    },
+    {
+      "name": "اسدی توسی",
+      "slug": "asadi-tusi",
+      "url": "http://localhost:4173/poets/asadi-tusi/",
+      "poems": 144,
+      "totalCouplets": 19389,
+      "totalWords": 109366,
+      "books": 1,
+      "medianWords": 624
+    },
+    {
+      "name": "فخرالدین اسعد گرگانی",
+      "slug": "fakhr-al-din-asad-gorgani",
+      "url": "http://localhost:4173/poets/fakhr-al-din-asad-gorgani/",
+      "poems": 113,
+      "totalCouplets": 8983,
+      "totalWords": 110625,
+      "books": 1,
+      "medianWords": 734
+    },
+    {
+      "name": "منوچهری",
+      "slug": "manuchehri",
+      "url": "http://localhost:4173/poets/manuchehri/",
+      "poems": 98,
+      "totalCouplets": 2816,
+      "totalWords": 39614,
+      "books": 4,
+      "medianWords": 345
+    },
+    {
+      "name": "فرخی سیستانی",
+      "slug": "farrokhi-sistani",
+      "url": "http://localhost:4173/poets/farrokhi-sistani/",
+      "poems": 87,
+      "totalCouplets": 2952,
+      "totalWords": 40967,
+      "books": 4,
+      "medianWords": 498
+    },
+    {
+      "name": "مسعود سعد سلمان",
+      "slug": "masud-sad-salman",
+      "url": "http://localhost:4173/poets/masud-sad-salman/",
+      "poems": 61,
+      "totalCouplets": 1227,
+      "totalWords": 16158,
+      "books": 3,
+      "medianWords": 172
+    }
+  ],
+  "topics": [
+    {
+      "id": 2,
+      "name": "حماسه، شاهی و جنگ",
+      "slug": "epic-kingship-war",
+      "share": 18.7
+    },
+    {
+      "id": 1,
+      "name": "اخلاق، حکمت و خرد",
+      "slug": "ethics-wisdom",
+      "share": 13.2
+    },
+    {
+      "id": 3,
+      "name": "دین، تصوف تعلیمی و مناقب",
+      "slug": "religion-sufism-praise",
+      "share": 13.1
+    },
+    {
+      "id": 10,
+      "name": "کیهان، قدرت و بخت",
+      "slug": "cosmos-power-fortune",
+      "share": 10.3
+    },
+    {
+      "id": 4,
+      "name": "جان، دل و پیوند عاشقانه",
+      "slug": "soul-heart-romantic-bond",
+      "share": 8.8
+    },
+    {
+      "id": 7,
+      "name": "طبیعت، گل و بهار",
+      "slug": "nature-flower-spring",
+      "share": 8.3
+    },
+    {
+      "id": 8,
+      "name": "شب، زمان و گذر عمر",
+      "slug": "night-time-life",
+      "share": 7.9
+    },
+    {
+      "id": 11,
+      "name": "غم، فراق و هجران",
+      "slug": "grief-separation",
+      "share": 6.8
+    },
+    {
+      "id": 5,
+      "name": "تصویرهای حسی و وجودی",
+      "slug": "sensory-existential-images",
+      "share": 5.6
+    },
+    {
+      "id": 6,
+      "name": "زیبایی معشوق و بزم",
+      "slug": "beloved-beauty-feast",
+      "share": 5.1
+    },
+    {
+      "id": 9,
+      "name": "عشق عرفانی و عاشقانه",
+      "slug": "mystical-romantic-love",
+      "share": 2.4
+    }
+  ],
+  "metaphors": [
+    {
+      "name": "گل و بلبل",
+      "slug": "flower-nightingale",
+      "rate": 27.068
+    },
+    {
+      "name": "راه، سفر و منزل",
+      "slug": "journey-road-destination",
+      "rate": 25.051
+    },
+    {
+      "name": "خون، زخم و خنجر",
+      "slug": "blood-wound-dagger",
+      "rate": 18.039
+    },
+    {
+      "name": "آتش، شعله و شرر",
+      "slug": "fire-flame-spark",
+      "rate": 13.85
+    },
+    {
+      "name": "باده، شراب و ساقی",
+      "slug": "wine-cupbearer",
+      "rate": 10.074
+    },
+    {
+      "name": "نور، شمع و تاریکی",
+      "slug": "light-candle-darkness",
+      "rate": 7.412
+    },
+    {
+      "name": "دریا، موج و ساحل",
+      "slug": "sea-wave-shore",
+      "rate": 6.754
+    },
+    {
+      "name": "آینه و بازتاب",
+      "slug": "mirror-reflection",
+      "rate": 2.225
+    },
+    {
+      "name": "زنجیر و اسارت",
+      "slug": "chain-captivity",
+      "rate": 2.096
+    },
+    {
+      "name": "قفس و زندان",
+      "slug": "cage-prison",
+      "rate": 2.067
+    }
+  ],
+  "methodology": "http://localhost:4173/methodology/",
+  "dataset": "http://localhost:4173/data/",
+  "dateModified": "2026-07-26"
+}

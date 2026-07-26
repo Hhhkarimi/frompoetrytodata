@@ -1,0 +1,882 @@
+[
+  {
+    "type": "website",
+    "title": "از شعر تا داده",
+    "url": "http://localhost:4173/",
+    "summary": "اطلس تعاملی تحلیل داده‌های شعر فارسی.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
+    "url": "http://localhost:4173/research/topics/",
+    "summary": "ترکیب موضوعی شعر فارسی در طول زمان به‌طور معناداری تغییر کرده است؛ سده تاریخی حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی این تفاوت را معنادار نشان می‌دهد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "تولد، خاموشی و دگرگونی استعاره‌ها در شعر فارسی",
+    "url": "http://localhost:4173/research/metaphors/",
+    "summary": "هیچ‌یک از خانواده‌های استعاری بررسی‌شده کاملاً ناپدید نمی‌شوند؛ الگوی غالب، خاموشی موقت، بازگشت و جابه‌جایی میدان معنایی است. تراکم کلی تصاویر میان دوره‌های تاریخی تفاوت معنادار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "شبکه بینامتنیت و قرابت محاسباتی شاعران فارسی",
+    "url": "http://localhost:4173/research/intertextuality/",
+    "summary": "شباهت عبارتی، واژگانی و موضوعی با افزایش فاصله زمانی شاعران کاهش می‌یابد؛ اما هر پیوند فقط قرابت محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "آیا هوش مصنوعی می‌تواند سده یک شعر فارسی را تشخیص دهد؟",
+    "url": "http://localhost:4173/research/century-ai/",
+    "summary": "هوش مصنوعی می‌تواند نشانه‌های زمانی را در زبان شعر بیابد، اما دقت ظاهراً بالا در تقسیم تصادفی ممکن است حاصل شناخت شاعر یا کتاب باشد. ارزیابی معتبر باید شاعر آزمون را کاملاً از آموزش حذف کند.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "اثر انگشت سبکی شاعران و کشف شعرهای نامتعارف",
+    "url": "http://localhost:4173/research/stylometry/",
+    "summary": "در آزمون متوازن ۴۹ شاعر، مدل نویسه‌ای به دقت ۶۶٫۷٪ رسید؛ بسیار بالاتر از خط مبنای حدود ۲٪. بااین‌حال، نامتعارف آماری الزاماً به معنی انتساب نادرست نیست.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "مقایسه تکامل غزل، قصیده، رباعی و مثنوی",
+    "url": "http://localhost:4173/research/forms/",
+    "summary": "چهار قالب فقط در اندازه تفاوت ندارند: قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد. قالب شعر ۳۷٫۵٪ از تفاوت معنایی نمونه را نیز توضیح می‌دهد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "جغرافیای تخیل و مهاجرت شعر فارسی",
+    "url": "http://localhost:4173/research/geography/",
+    "summary": "۲۴ شاعر از ۶۷ شاعر پیکره، یعنی ۳۵٫۸٪، در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ جابه‌جایی میان چهار دوره تاریخی تفاوت دارد؛ اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی در این نمونه معنادار نشد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "research",
+    "title": "نیمه‌عمر واژگان در شعر فارسی",
+    "url": "http://localhost:4173/research/lexical-life/",
+    "summary": "در ۶٬۵۵۳ واژه‌ای که افت تا نصف اوج مشاهده شد، میانه نیمه‌عمر ۱٫۳۶ سده است؛ بااین‌حال ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند. چرخه واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "اخلاق، حکمت و خرد",
+    "url": "http://localhost:4173/themes/ethics-wisdom/",
+    "summary": "مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳).",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "حماسه، شاهی و جنگ",
+    "url": "http://localhost:4173/themes/epic-kingship-war/",
+    "summary": "مضمون محاسباتی «حماسه، شاهی و جنگ» در کل پیکره سهم ۷٫۸٪ دارد، در سده ۴ به بیشترین سهم خود یعنی ۴۸٫۷٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۳۹).",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "دین، تصوف تعلیمی و مناقب",
+    "url": "http://localhost:4173/themes/religion-sufism-praise/",
+    "summary": "مضمون محاسباتی «دین، تصوف تعلیمی و مناقب» در کل پیکره سهم ۵٫۴٪ دارد، در سده ۵ به بیشترین سهم خود یعنی ۱۳٫۱٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "جان، دل و پیوند عاشقانه",
+    "url": "http://localhost:4173/themes/soul-heart-romantic-bond/",
+    "summary": "مضمون محاسباتی «جان، دل و پیوند عاشقانه» در کل پیکره سهم ۱۱٫۵٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۸٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "تصویرهای حسی و وجودی",
+    "url": "http://localhost:4173/themes/sensory-existential-images/",
+    "summary": "مضمون محاسباتی «تصویرهای حسی و وجودی» در کل پیکره سهم ۱۴٪ دارد، در سده ۱۱ به بیشترین سهم خود یعنی ۲۹٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۶۴۷).",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "زیبایی معشوق و بزم",
+    "url": "http://localhost:4173/themes/beloved-beauty-feast/",
+    "summary": "مضمون محاسباتی «زیبایی معشوق و بزم» در کل پیکره سهم ۱۰٪ دارد، در سده ۱۳ به بیشترین سهم خود یعنی ۲۰٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "طبیعت، گل و بهار",
+    "url": "http://localhost:4173/themes/nature-flower-spring/",
+    "summary": "مضمون محاسباتی «طبیعت، گل و بهار» در کل پیکره سهم ۸٫۴٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "شب، زمان و گذر عمر",
+    "url": "http://localhost:4173/themes/night-time-life/",
+    "summary": "مضمون محاسباتی «شب، زمان و گذر عمر» در کل پیکره سهم ۸٪ دارد، در سده ۱۴ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "عشق عرفانی و عاشقانه",
+    "url": "http://localhost:4173/themes/mystical-romantic-love/",
+    "summary": "مضمون محاسباتی «عشق عرفانی و عاشقانه» در کل پیکره سهم ۶٫۶٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۱٫۳٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۳۹۳).",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "کیهان، قدرت و بخت",
+    "url": "http://localhost:4173/themes/cosmos-power-fortune/",
+    "summary": "مضمون محاسباتی «کیهان، قدرت و بخت» در کل پیکره سهم ۱۰٫۹٪ دارد، در سده ۶ به بیشترین سهم خود یعنی ۱۸٫۵٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۳۲۲).",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "theme",
+    "title": "غم، فراق و هجران",
+    "url": "http://localhost:4173/themes/grief-separation/",
+    "summary": "مضمون محاسباتی «غم، فراق و هجران» در کل پیکره سهم ۶٫۴٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۰٫۲٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "راه، سفر و منزل",
+    "url": "http://localhost:4173/metaphors/journey-road-destination/",
+    "summary": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "گل و بلبل",
+    "url": "http://localhost:4173/metaphors/flower-nightingale/",
+    "summary": "خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "نور، شمع و تاریکی",
+    "url": "http://localhost:4173/metaphors/light-candle-darkness/",
+    "summary": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "خون، زخم و خنجر",
+    "url": "http://localhost:4173/metaphors/blood-wound-dagger/",
+    "summary": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "باده، شراب و ساقی",
+    "url": "http://localhost:4173/metaphors/wine-cupbearer/",
+    "summary": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "آتش، شعله و شرر",
+    "url": "http://localhost:4173/metaphors/fire-flame-spark/",
+    "summary": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "دریا، موج و ساحل",
+    "url": "http://localhost:4173/metaphors/sea-wave-shore/",
+    "summary": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "آینه و بازتاب",
+    "url": "http://localhost:4173/metaphors/mirror-reflection/",
+    "summary": "خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "قفس و زندان",
+    "url": "http://localhost:4173/metaphors/cage-prison/",
+    "summary": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "metaphor",
+    "title": "زنجیر و اسارت",
+    "url": "http://localhost:4173/metaphors/chain-captivity/",
+    "summary": "خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۳ هجری",
+    "url": "http://localhost:4173/centuries/3/",
+    "summary": "۵۳۹ متن از ۱ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۴ هجری",
+    "url": "http://localhost:4173/centuries/4/",
+    "summary": "۷۳۰ متن از ۲ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۵ هجری",
+    "url": "http://localhost:4173/centuries/5/",
+    "summary": "۲٬۲۵۳ متن از ۹ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۶ هجری",
+    "url": "http://localhost:4173/centuries/6/",
+    "summary": "۱۰٬۹۹۰ متن از ۱۰ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۷ هجری",
+    "url": "http://localhost:4173/centuries/7/",
+    "summary": "۹٬۸۴۶ متن از ۵ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۸ هجری",
+    "url": "http://localhost:4173/centuries/8/",
+    "summary": "۶٬۷۰۹ متن از ۷ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۹ هجری",
+    "url": "http://localhost:4173/centuries/9/",
+    "summary": "۵۴۱ متن از ۲ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۱۰ هجری",
+    "url": "http://localhost:4173/centuries/10/",
+    "summary": "۲٬۷۳۰ متن از ۵ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۱۱ هجری",
+    "url": "http://localhost:4173/centuries/11/",
+    "summary": "۱۳٬۸۸۶ متن از ۳ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۱۲ هجری",
+    "url": "http://localhost:4173/centuries/12/",
+    "summary": "۱۹۴ متن از ۱ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۱۳ هجری",
+    "url": "http://localhost:4173/centuries/13/",
+    "summary": "۱٬۳۸۲ متن از ۳ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۱۴ هجری",
+    "url": "http://localhost:4173/centuries/14/",
+    "summary": "۴٬۲۱۲ متن از ۱۷ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "century",
+    "title": "سده ۱۵ هجری",
+    "url": "http://localhost:4173/centuries/15/",
+    "summary": "۵۱۲ متن از ۲ شاعر.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "رودکی",
+    "url": "http://localhost:4173/poets/rudaki/",
+    "summary": "شاعر سده ۳ هجری؛ ۵۳۹ متن، ۱٬۰۴۷ بیت و ۱۳٬۸۰۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "فردوسی",
+    "url": "http://localhost:4173/poets/ferdowsi/",
+    "summary": "شاعر سده ۴ هجری؛ ۶۱۶ متن، ۴۹٬۶۰۹ بیت و ۵۶۸٬۵۱۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "کسایی",
+    "url": "http://localhost:4173/poets/kasaei/",
+    "summary": "شاعر سده ۴ هجری؛ ۱۱۴ متن، ۳۰۷ بیت و ۴٬۴۷۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "ابوسعید ابوالخیر",
+    "url": "http://localhost:4173/poets/abu-saeid-abul-kheir/",
+    "summary": "شاعر سده ۵ هجری؛ ۷۸۶ متن، ۱٬۵۸۹ بیت و ۲۱٬۷۳۱ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "ناصرخسرو",
+    "url": "http://localhost:4173/poets/naser-khosrow/",
+    "summary": "شاعر سده ۵ هجری؛ ۳۸۶ متن، ۱۰٬۹۱۱ بیت و ۱۸۷٬۴۳۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "باباطاهر",
+    "url": "http://localhost:4173/poets/baba-taher/",
+    "summary": "شاعر سده ۵ هجری؛ ۳۶۸ متن، ۷۶۴ بیت و ۹٬۱۳۱ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "هجویری",
+    "url": "http://localhost:4173/poets/hojviri/",
+    "summary": "شاعر سده ۵ هجری؛ ۲۱۰ متن، ۱٬۲۲۲ بیت و ۱۵۰٬۰۲۳ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "اسدی توسی",
+    "url": "http://localhost:4173/poets/asadi-tusi/",
+    "summary": "شاعر سده ۵ هجری؛ ۱۴۴ متن، ۱۹٬۳۸۹ بیت و ۱۰۹٬۳۶۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "فخرالدین اسعد گرگانی",
+    "url": "http://localhost:4173/poets/fakhr-al-din-asad-gorgani/",
+    "summary": "شاعر سده ۵ هجری؛ ۱۱۳ متن، ۸٬۹۸۳ بیت و ۱۱۰٬۶۲۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "منوچهری",
+    "url": "http://localhost:4173/poets/manuchehri/",
+    "summary": "شاعر سده ۵ هجری؛ ۹۸ متن، ۲٬۸۱۶ بیت و ۳۹٬۶۱۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "فرخی سیستانی",
+    "url": "http://localhost:4173/poets/farrokhi-sistani/",
+    "summary": "شاعر سده ۵ هجری؛ ۸۷ متن، ۲٬۹۵۲ بیت و ۴۰٬۹۶۷ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "مسعود سعد سلمان",
+    "url": "http://localhost:4173/poets/masud-sad-salman/",
+    "summary": "شاعر سده ۵ هجری؛ ۶۱ متن، ۱٬۲۲۷ بیت و ۱۶٬۱۵۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "عطار",
+    "url": "http://localhost:4173/poets/attar/",
+    "summary": "شاعر سده ۶ هجری؛ ۵٬۰۱۵ متن، ۹۸٬۲۸۹ بیت و ۱٬۴۰۵٬۱۷۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "سنایی",
+    "url": "http://localhost:4173/poets/sanai/",
+    "summary": "شاعر سده ۶ هجری؛ ۱٬۷۹۴ متن، ۲۶٬۱۰۹ بیت و ۳۵۳٬۰۷۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "انوری",
+    "url": "http://localhost:4173/poets/anvari/",
+    "summary": "شاعر سده ۶ هجری؛ ۱٬۴۶۴ متن، ۱۳٬۳۰۸ بیت و ۱۷۷٬۳۶۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "خاقانی",
+    "url": "http://localhost:4173/poets/khaghani/",
+    "summary": "شاعر سده ۶ هجری؛ ۱٬۳۶۵ متن، ۱۷٬۴۳۲ بیت و ۲۴۱٬۸۲۲ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "نظامی",
+    "url": "http://localhost:4173/poets/nezami/",
+    "summary": "شاعر سده ۶ هجری؛ ۳۷۸ متن، ۲۷٬۷۷۹ بیت و ۳۲۴٬۵۶۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "خیام",
+    "url": "http://localhost:4173/poets/khayyam/",
+    "summary": "شاعر سده ۶ هجری؛ ۳۲۴ متن، ۷۱۵ بیت و ۲۰٬۲۹۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "نصرالله منشی",
+    "url": "http://localhost:4173/poets/nasrallah-monshi/",
+    "summary": "شاعر سده ۶ هجری؛ ۲۵۰ متن، ۸۱۸ بیت و ۸۵٬۰۹۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "باباافضل کاشانی",
+    "url": "http://localhost:4173/poets/baba-afzal-kashani/",
+    "summary": "شاعر سده ۶ هجری؛ ۲۰۲ متن، ۵۰۰ بیت و ۷٬۴۷۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "مهستی گنجوی",
+    "url": "http://localhost:4173/poets/mahasti-ganjavi/",
+    "summary": "شاعر سده ۶ هجری؛ ۱۹۱ متن، ۳۸۲ بیت و ۵٬۳۸۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "عبدالواسع جبلی",
+    "url": "http://localhost:4173/poets/abd-al-vase-jabali/",
+    "summary": "شاعر سده ۶ هجری؛ ۷ متن، ۳۲۰ بیت و ۵٬۲۶۳ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "مولوی",
+    "url": "http://localhost:4173/poets/rumi/",
+    "summary": "شاعر سده ۷ هجری؛ ۶٬۲۴۲ متن، ۶۵٬۹۷۲ بیت و ۹۲۳٬۶۹۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "سعدی",
+    "url": "http://localhost:4173/poets/saadi/",
+    "summary": "شاعر سده ۷ هجری؛ ۱٬۹۰۴ متن، ۱۶٬۱۰۲ بیت و ۲۳۳٬۰۴۳ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "خواجوی کرمانی",
+    "url": "http://localhost:4173/poets/khwaju-kermani/",
+    "summary": "شاعر سده ۷ هجری؛ ۹۳۲ متن، ۸٬۸۴۹ بیت و ۱۲۶٬۶۱۳ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "عراقی",
+    "url": "http://localhost:4173/poets/iraqi/",
+    "summary": "شاعر سده ۷ هجری؛ ۵۷۹ متن، ۵٬۷۸۹ بیت و ۷۶٬۲۹۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "سیف فرغانی",
+    "url": "http://localhost:4173/poets/seyf-farghani/",
+    "summary": "شاعر سده ۷ هجری؛ ۱۸۹ متن، ۲٬۷۵۸ بیت و ۳۹٬۹۹۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "شاه نعمت‌الله ولی",
+    "url": "http://localhost:4173/poets/shah-nematollah-vali/",
+    "summary": "شاعر سده ۸ هجری؛ ۲٬۷۰۱ متن، ۱۴٬۹۸۱ بیت و ۱۹۵٬۵۶۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "اوحدی",
+    "url": "http://localhost:4173/poets/owhadi/",
+    "summary": "شاعر سده ۸ هجری؛ ۱٬۳۲۶ متن، ۱۴٬۶۷۴ بیت و ۲۰۳٬۸۳۱ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "سلمان ساوجی",
+    "url": "http://localhost:4173/poets/salman-savoji/",
+    "summary": "شاعر سده ۸ هجری؛ ۸۹۷ متن، ۱۳٬۱۰۴ بیت و ۱۹۰٬۸۶۷ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "امیرخسرو دهلوی",
+    "url": "http://localhost:4173/poets/amir-khosrow-dehlavi/",
+    "summary": "شاعر سده ۸ هجری؛ ۸۲۵ متن، ۷٬۵۶۳ بیت و ۹۶٬۲۸۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "حافظ",
+    "url": "http://localhost:4173/poets/hafez/",
+    "summary": "شاعر سده ۸ هجری؛ ۵۹۵ متن، ۴٬۷۵۱ بیت و ۷۲٬۳۸۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "عبید زاکانی",
+    "url": "http://localhost:4173/poets/obeyd-zakani/",
+    "summary": "شاعر سده ۸ هجری؛ ۲۶۴ متن، ۲٬۹۲۵ بیت و ۳۸٬۵۶۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "شیخ محمود شبستری",
+    "url": "http://localhost:4173/poets/mahmud-shabestari/",
+    "summary": "شاعر سده ۸ هجری؛ ۱۰۱ متن، ۱٬۶۸۴ بیت و ۲۱٬۶۳۲ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "هلالی جغتایی",
+    "url": "http://localhost:4173/poets/helali-jaghatai/",
+    "summary": "شاعر سده ۹ هجری؛ ۳۵۳ متن، ۳٬۱۷۲ بیت و ۴۵٬۴۷۹ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "جامی",
+    "url": "http://localhost:4173/poets/jami/",
+    "summary": "شاعر سده ۹ هجری؛ ۱۸۸ متن، ۵٬۴۱۰ بیت و ۶۴٬۶۸۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "محتشم کاشانی",
+    "url": "http://localhost:4173/poets/mohtasham-kashani/",
+    "summary": "شاعر سده ۱۰ هجری؛ ۹۷۲ متن، ۱۰٬۷۱۶ بیت و ۱۶۳٬۰۰۱ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "عرفی",
+    "url": "http://localhost:4173/poets/orfi/",
+    "summary": "شاعر سده ۱۰ هجری؛ ۶۹۸ متن، ۳٬۹۰۲ بیت و ۶۰٬۶۵۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "وحشی",
+    "url": "http://localhost:4173/poets/vahshi/",
+    "summary": "شاعر سده ۱۰ هجری؛ ۶۵۱ متن، ۱۰٬۵۹۵ بیت و ۱۴۴٬۶۰۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "رضی‌الدین آرتیمانی",
+    "url": "http://localhost:4173/poets/razi-al-din-artimani/",
+    "summary": "شاعر سده ۱۰ هجری؛ ۲۳۳ متن، ۱٬۵۵۰ بیت و ۱۹٬۹۰۷ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "شیخ بهایی",
+    "url": "http://localhost:4173/poets/sheikh-bahaei/",
+    "summary": "شاعر سده ۱۰ هجری؛ ۱۷۶ متن، ۱٬۲۸۹ بیت و ۱۶٬۴۳۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "صائب تبریزی",
+    "url": "http://localhost:4173/poets/saeb-tabrizi/",
+    "summary": "شاعر سده ۱۱ هجری؛ ۱۰٬۰۴۳ متن، ۷۸٬۸۹۰ بیت و ۱٬۲۱۰٬۲۶۹ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "بیدل دهلوی",
+    "url": "http://localhost:4173/poets/bidel-dehlavi/",
+    "summary": "شاعر سده ۱۱ هجری؛ ۲٬۸۲۷ متن، ۳۲٬۳۳۳ بیت و ۴۸۳٬۲۴۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "فیض کاشانی",
+    "url": "http://localhost:4173/poets/feiz-kashani/",
+    "summary": "شاعر سده ۱۱ هجری؛ ۱٬۰۱۶ متن، ۹٬۸۴۴ بیت و ۱۳۷٬۷۶۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "هاتف اصفهانی",
+    "url": "http://localhost:4173/poets/hatef-esfahani/",
+    "summary": "شاعر سده ۱۲ هجری؛ ۱۹۴ متن، ۱٬۵۸۷ بیت و ۲۲٬۸۹۵ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "قاآنی",
+    "url": "http://localhost:4173/poets/qaani/",
+    "summary": "شاعر سده ۱۳ هجری؛ ۶۲۵ متن، ۲۰٬۴۹۶ بیت و ۳۰۱٬۳۰۱ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "فروغی بسطامی",
+    "url": "http://localhost:4173/poets/forughi-bastami/",
+    "summary": "شاعر سده ۱۳ هجری؛ ۵۴۹ متن، ۵٬۸۶۳ بیت و ۸۸٬۹۵۹ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "ملا هادی سبزواری",
+    "url": "http://localhost:4173/poets/molla-hadi-sabzevari/",
+    "summary": "شاعر سده ۱۳ هجری؛ ۲۰۸ متن، ۱٬۷۹۵ بیت و ۲۳٬۷۰۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "ملک‌الشعرای بهار",
+    "url": "http://localhost:4173/poets/malek-al-shoara-bahar/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱٬۱۰۵ متن، ۲۱٬۸۰۷ بیت و ۲۷۹٬۴۱۸ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "اقبال لاهوری",
+    "url": "http://localhost:4173/poets/iqbal-lahori/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۹۷۲ متن، ۸٬۱۵۵ بیت و ۱۰۲٬۹۰۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "احمد شاملو",
+    "url": "http://localhost:4173/poets/ahmad-shamlou/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۳۲۳ متن، ۷٬۳۰۱ بیت و ۶۶٬۴۶۳ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "سیمین بهبهانی",
+    "url": "http://localhost:4173/poets/simin-behbahani/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۲۲۷ متن، ۲٬۸۱۲ بیت و ۳۸٬۸۱۷ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "پروین اعتصامی",
+    "url": "http://localhost:4173/poets/parvin-etesami/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۲۲۳ متن، ۵٬۵۹۴ بیت و ۷۰٬۷۷۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "شهریار",
+    "url": "http://localhost:4173/poets/shahriar/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۹۰ متن، ۲٬۶۰۷ بیت و ۳۷٬۲۴۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "کامبیز صدیقی کسمایی",
+    "url": "http://localhost:4173/poets/kambiz-sedighi-kasmaei/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۸۱ متن، ۱٬۲۶۸ بیت و ۱۱٬۱۶۹ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "رهی معیری",
+    "url": "http://localhost:4173/poets/rahi-moayeri/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۵۹ متن، ۱٬۰۵۰ بیت و ۱۵٬۵۷۷ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "سهراب سپهری",
+    "url": "http://localhost:4173/poets/sohrab-sepehri/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۳۶ متن، ۲٬۰۰۷ بیت و ۲۴٬۶۹۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "فروغ فرخزاد",
+    "url": "http://localhost:4173/poets/forough-farrokhzad/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۲۴ متن، ۲٬۸۵۶ بیت و ۳۴٬۳۱۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "مهدی اخوان ثالث",
+    "url": "http://localhost:4173/poets/mehdi-akhavan-sales/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۱۶ متن، ۲٬۶۵۱ بیت و ۳۴٬۲۳۴ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "بهرام سالکی",
+    "url": "http://localhost:4173/poets/bahram-saleki/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۱۰۴ متن، ۲٬۳۳۲ بیت و ۲۷٬۰۹۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "شاطرعباس صبوحی",
+    "url": "http://localhost:4173/poets/shater-abbas-sabouhi/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۹۸ متن، ۶۰۸ بیت و ۹٬۶۸۳ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "شیون فومنی",
+    "url": "http://localhost:4173/poets/shivon-foumani/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۹۷ متن، ۷۶۴ بیت و ۸٬۳۷۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "نیما یوشیج (آوای آزاد)",
+    "url": "http://localhost:4173/poets/nima-yushij/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۵۵ متن، ۱٬۴۶۳ بیت و ۱۷٬۳۸۹ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "خلیل‌الله خلیلی",
+    "url": "http://localhost:4173/poets/khalilullah-khalili/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۵۴ متن، ۱۰۸ بیت و ۱٬۴۸۱ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "محمدحسن بارق شفیعی",
+    "url": "http://localhost:4173/poets/mohammad-hasan-bareq-shafiei/",
+    "summary": "شاعر سده ۱۴ هجری؛ ۴۸ متن، ۷۱۱ بیت و ۸٬۴۲۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "ا لیار (جبار محمدی)",
+    "url": "http://localhost:4173/poets/a-liyar-jabbar-mohammadi/",
+    "summary": "شاعر سده ۱۵ هجری؛ ۴۲۴ متن، ۲٬۱۳۲ بیت و ۳۰٬۷۳۶ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  },
+  {
+    "type": "poet",
+    "title": "عبدالقهار عاصی",
+    "url": "http://localhost:4173/poets/abdul-qahar-asi/",
+    "summary": "شاعر سده ۱۵ هجری؛ ۸۸ متن، ۷۱۱ بیت و ۷٬۸۳۰ واژه در پیکره.",
+    "language": "fa-IR",
+    "dateModified": "2026-07-26"
+  }
+]
