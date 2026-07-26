@@ -1,0 +1,210 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "From Poetry to Data Static API",
+    "version": "5.0.2",
+    "description": "Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4173"
+    }
+  ],
+  "paths": {
+    "/api/atlas-summary.json": {
+      "get": {
+        "summary": "خلاصه اطلس",
+        "operationId": "getAtlasSummary",
+        "responses": {
+          "200": {
+            "description": "Atlas summary JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/content-index.json": {
+      "get": {
+        "summary": "نمایه همه صفحات و موجودیت‌ها",
+        "operationId": "getContentIndex",
+        "responses": {
+          "200": {
+            "description": "Content index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/themes.json": {
+      "get": {
+        "summary": "فهرست مضامین",
+        "operationId": "getThemes",
+        "responses": {
+          "200": {
+            "description": "Themes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/metaphors.json": {
+      "get": {
+        "summary": "فهرست خانواده‌های استعاری",
+        "operationId": "getMetaphors",
+        "responses": {
+          "200": {
+            "description": "Metaphors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/centuries.json": {
+      "get": {
+        "summary": "فهرست سده‌ها",
+        "operationId": "getCenturies",
+        "responses": {
+          "200": {
+            "description": "Centuries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/poets.json": {
+      "get": {
+        "summary": "فهرست شاعران",
+        "operationId": "getPoets",
+        "responses": {
+          "200": {
+            "description": "Poets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/forms.json": {
+      "get": {
+        "summary": "مقایسه غزل، قصیده، رباعی و مثنوی",
+        "operationId": "getPoetryForms",
+        "responses": {
+          "200": {
+            "description": "Poetry form comparison",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/geography.json": {
+      "get": {
+        "summary": "جغرافیا و جابه‌جایی شاعران",
+        "operationId": "getPoetryGeography",
+        "responses": {
+          "200": {
+            "description": "Poet geography and mobility",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/lexical-life.json": {
+      "get": {
+        "summary": "چرخه عمر و نیمه‌عمر واژگان",
+        "operationId": "getLexicalLifecycle",
+        "responses": {
+          "200": {
+            "description": "Lexical lifecycle research",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph.json": {
+      "get": {
+        "summary": "گراف دانش Schema.org",
+        "operationId": "getKnowledgeGraph",
+        "responses": {
+          "200": {
+            "description": "Knowledge graph",
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>http://localhost:4173/openapi.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/atlas-summary.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/research-findings.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/poets.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/themes.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/metaphors.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/centuries.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/forms.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/geography.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/lexical-life.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/content-index.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>http://localhost:4173/api/knowledge-graph.json</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+</urlset>

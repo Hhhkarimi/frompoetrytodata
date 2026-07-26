@@ -1,0 +1,32 @@
+{
+  "type": "webpage",
+  "id": "karimi-from-poetry-to-data",
+  "title": "از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی",
+  "author": [
+    {
+      "family": "کریمی",
+      "given": "حسین"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        25
+      ]
+    ]
+  },
+  "URL": "http://localhost:4173",
+  "language": "fa",
+  "version": "5.0.2",
+  "accessed": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        26
+      ]
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"><url><loc>http://localhost:4173/poets/ferdowsi/</loc><image:image><image:loc>http://localhost:4173/poets/ferdowsi.jpg</image:loc><image:title>تصویر فردوسی</image:title></image:image></url>
+<url><loc>http://localhost:4173/poets/rumi/</loc><image:image><image:loc>http://localhost:4173/poets/rumi.jpg</image:loc><image:title>تصویر مولوی</image:title></image:image></url>
+<url><loc>http://localhost:4173/poets/saadi/</loc><image:image><image:loc>http://localhost:4173/poets/saadi.png</image:loc><image:title>تصویر سعدی</image:title></image:image></url>
+<url><loc>http://localhost:4173/poets/hafez/</loc><image:image><image:loc>http://localhost:4173/poets/hafez.jpg</image:loc><image:title>تصویر حافظ</image:title></image:image></url>
+<url><loc>http://localhost:4173/poets/forough-farrokhzad/</loc><image:image><image:loc>http://localhost:4173/poets/forough.jpg</image:loc><image:title>تصویر فروغ فرخزاد</image:title></image:image></url>
+<url><loc>http://localhost:4173/poets/nima-yushij/</loc><image:image><image:loc>http://localhost:4173/poets/nima.jpg</image:loc><image:title>تصویر نیما یوشیج (آوای آزاد)</image:title></image:image></url></urlset>
