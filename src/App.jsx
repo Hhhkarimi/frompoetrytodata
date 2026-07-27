@@ -5,6 +5,7 @@ import {
   GitBranch, Heart, Info, Menu, Moon, Network, Search,
   Sparkles, Sun, X, ZoomIn,
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import atlas from './data/atlasData.json';
 import poetCouplets from './data/poetCouplets.json';
 import formResearch from './data/formResearch.json';
@@ -730,6 +731,7 @@ function App() {
         <small>تصاویر منتخب شاعران از Wikimedia Commons؛ اعتبار هر تصویر در کارت شاعر درج شده است.</small>
       </footer>
       <PoetModal poet={selectedPoet} onClose={() => setSelectedPoet(null)} />
+      <Analytics />
     </div>
   );
 }

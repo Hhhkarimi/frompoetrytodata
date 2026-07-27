@@ -18,6 +18,7 @@
     "node": "22.x"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "echarts": "6.1.0",
     "echarts-for-react": "3.0.6",
     "lucide-react": "1.26.0",
