@@ -1,8 +1,8 @@
 {
   "name": "az-sher-ta-dadeh",
   "private": true,
-  "version": "5.0.2",
-  "description": "از شعر تا داده؛ هشت پژوهش تعاملی و دانشنامه داده‌ای شعر فارسی با صفحات موجودیت، API و گراف دانش",
+  "version": "6.0.0",
+  "description": "از شعر تا داده؛ نه پژوهش تعاملی و دانشنامه داده‌ای شعر فارسی با تحلیل انتساب، صفحات موجودیت، API و گراف دانش",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,8 @@
     "data:generate": "python scripts/generate_data.py",
     "seo:generate": "node scripts/postbuild.mjs && node scripts/enhance-seo-geo.mjs",
     "seo:audit": "node scripts/seo-audit.mjs",
-    "geo:generate": "node scripts/enhance-seo-geo.mjs"
+    "geo:generate": "node scripts/enhance-seo-geo.mjs",
+    "data:attribution": "python scripts/generate_attribution_research.py public/data/poems_with_more_info.tsv"
   },
   "engines": {
     "node": "22.x"

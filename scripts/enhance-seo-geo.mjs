@@ -13,6 +13,7 @@ data.overview.couplets = data.overview.poets.reduce((sum, poet) => sum + poet.to
 const formResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/formResearch.json'), 'utf8'));
 const geographyResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/geographyResearch.json'), 'utf8'));
 const lexicalResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/lexicalResearch.json'), 'utf8'));
+const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/attributionResearch.json'), 'utf8'));
 const buildDate = new Date().toISOString().slice(0, 10);
 const productionHost = process.env.SITE_URL
   || process.env.VITE_SITE_URL
@@ -122,7 +123,7 @@ function globalGraph() {
       url: absolute('/data/'), inLanguage: 'fa', isAccessibleForFree: true,
       description: `خروجی‌های تحلیلی ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر فارسی.`,
       creator: { '@id': `${siteUrl}/#hossein-karimi` },
-      version: '5.0.2', dateModified: buildDate,
+      version: '6.0.0', dateModified: buildDate,
     },
   ];
 }
@@ -143,7 +144,7 @@ function head({ title, description, pathname, image = '/og/og-research.png', sch
 <meta name="robots" content="${robots}"><meta name="googlebot" content="${robots}"><meta name="bingbot" content="${robots}">
 <meta name="author" content="حسین کریمی"><meta name="creator" content="حسین کریمی"><meta name="publisher" content="حسین کریمی">
 ${googleVerification ? `<meta name="google-site-verification" content="${escapeHtml(googleVerification)}">` : ""}${bingVerification ? `<meta name="msvalidate.01" content="${escapeHtml(bingVerification)}">` : ""}
-<meta name="generator" content="From Poetry to Data static knowledge layer 5.0"><meta name="application-name" content="از شعر تا داده">
+<meta name="generator" content="From Poetry to Data static knowledge layer 6.0"><meta name="application-name" content="از شعر تا داده">
 <meta name="keywords" content="${escapeHtml(keywords.join('، '))}"><meta name="theme-color" content="#0b3b3a"><meta name="color-scheme" content="light dark">
 <link rel="canonical" href="${canonical}"><link rel="alternate" hreflang="fa" href="${canonical}"><link rel="alternate" hreflang="x-default" href="${canonical}">
 <link rel="author" href="${absolute('/about/')}"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.webmanifest">
@@ -455,7 +456,7 @@ function generateQuestionsPage() {
   const items = expandedFaq.map((item, index) => `<details class="qa-card" ${index < 3 ? 'open' : ''}><summary>${item.question}</summary><p>${item.answer}</p>${item.href ? `<a href="${item.href}">مشاهده شواهد و روش ←</a>` : ''}</details>`).join('');
   write('questions/index.html', shell({
     title: 'پرسش و پاسخ درباره تحلیل داده شعر فارسی | از شعر تا داده',
-    description: 'پاسخ روشن و مستند به پرسش‌های مهم درباره تحول شعر فارسی، استعاره‌ها، بینامتنیت، تشخیص سده با هوش مصنوعی، سبک شاعران و محدودیت داده.',
+    description: 'پاسخ روشن و مستند به پرسش‌های مهم دربارهٔ تحول شعر فارسی، استعاره‌ها، پیوندهای متنی، تشخیص سده با هوش مصنوعی، سبک شاعران، انتساب و محدودیت داده.',
     pathname, image: '/og/og-glossary.png', schemas: [faqSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'پرسش‌ها', path: pathname }])],
     keywords: ['پرسش درباره شعر فارسی', 'هوش مصنوعی و شعر', 'تحلیل داده ادبیات', 'FAQ شعر فارسی'],
     breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'پرسش‌های کلیدی', path: pathname }],
@@ -482,6 +483,7 @@ function generateMachineKnowledge() {
   write('api/forms.json', JSON.stringify(formResearch, null, 2));
   write('api/geography.json', JSON.stringify(geographyResearch, null, 2));
   write('api/lexical-life.json', JSON.stringify(lexicalResearch, null, 2));
+  write('api/attribution.json', JSON.stringify(attributionResearch, null, 2));
 
   const contentIndex = [
     { type: 'website', title: 'از شعر تا داده', url: absolute('/'), summary: 'اطلس تعاملی تحلیل داده‌های شعر فارسی.' },
@@ -504,7 +506,7 @@ function generateMachineKnowledge() {
 
   const openapi = {
     openapi: '3.1.0',
-    info: { title: 'From Poetry to Data Static API', version: '5.0.2', description: 'Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian.' },
+    info: { title: 'From Poetry to Data Static API', version: '6.0.0', description: 'Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian.' },
     servers: [{ url: siteUrl }],
     paths: {
       '/api/atlas-summary.json': { get: { summary: 'خلاصه اطلس', operationId: 'getAtlasSummary', responses: { 200: { description: 'Atlas summary JSON', content: { 'application/json': { schema: { type: 'object' } } } } } } },
@@ -516,6 +518,7 @@ function generateMachineKnowledge() {
       '/api/forms.json': { get: { summary: 'مقایسه غزل، قصیده، رباعی و مثنوی', operationId: 'getPoetryForms', responses: { 200: { description: 'Poetry form comparison', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/geography.json': { get: { summary: 'جغرافیا و جابه‌جایی شاعران', operationId: 'getPoetryGeography', responses: { 200: { description: 'Poet geography and mobility', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/lexical-life.json': { get: { summary: 'چرخه عمر و نیمه‌عمر واژگان', operationId: 'getLexicalLifecycle', responses: { 200: { description: 'Lexical lifecycle research', content: { 'application/json': { schema: { type: 'object' } } } } } } },
+      '/api/attribution.json': { get: { summary: 'ممیزی انتساب شعر و کیفیت پیکره', operationId: 'getPoetryAttribution', responses: { 200: { description: 'Poetry attribution research triage', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/knowledge-graph.json': { get: { summary: 'گراف دانش Schema.org', operationId: 'getKnowledgeGraph', responses: { 200: { description: 'Knowledge graph', content: { 'application/ld+json': { schema: { type: 'object' } } } } } } },
     },
   };
@@ -523,11 +526,11 @@ function generateMachineKnowledge() {
 
   const citation = {
     type: 'webpage', id: 'karimi-from-poetry-to-data', title: 'از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی',
-    author: [{ family: 'کریمی', given: 'حسین' }], issued: { 'date-parts': [[2026, 7, 25]] },
-    URL: siteUrl, language: 'fa', version: '5.0.2', accessed: { 'date-parts': [[Number(buildDate.slice(0, 4)), Number(buildDate.slice(5, 7)), Number(buildDate.slice(8, 10))]] },
+    author: [{ family: 'کریمی', given: 'حسین' }], issued: { 'date-parts': [[2026, 7, 27]] },
+    URL: siteUrl, language: 'fa', version: '6.0.0', accessed: { 'date-parts': [[Number(buildDate.slice(0, 4)), Number(buildDate.slice(5, 7)), Number(buildDate.slice(8, 10))]] },
   };
   write('citation.json', JSON.stringify(citation, null, 2));
-  write('citation.bib', `@misc{karimi_from_poetry_to_data_2026,\n  author = {Hossein Karimi},\n  title = {از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی},\n  year = {2026},\n  url = {${siteUrl}},\n  note = {Version 5.0.2; accessed ${buildDate}}\n}\n`);
+  write('citation.bib', `@misc{karimi_from_poetry_to_data_2026,\n  author = {Hossein Karimi},\n  title = {از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی},\n  year = {2026},\n  url = {${siteUrl}},\n  note = {Version 6.0.0; accessed ${buildDate}}\n}\n`);
   write('manifest.webmanifest', JSON.stringify({
     name: 'از شعر تا داده؛ اطلس تعاملی شعر فارسی', short_name: 'از شعر تا داده',
     description: 'دانشنامه داده‌ای و تعاملی تحلیل شعر فارسی', lang: 'fa', dir: 'rtl',
@@ -550,7 +553,7 @@ function generateDiscovery() {
     '/metaphors/', ...data.metaphors.items.map((m) => `/metaphors/${metaphorSlugs[m.name]}/`),
     '/centuries/', ...data.overview.centuryStats.map((c) => `/centuries/${c.century}/`),
   ];
-  const dataUrls = ['/openapi.json', '/api/atlas-summary.json', '/api/research-findings.json', '/api/poets.json', '/api/themes.json', '/api/metaphors.json', '/api/centuries.json', '/api/forms.json', '/api/geography.json', '/api/lexical-life.json', '/api/content-index.json', '/api/knowledge-graph.json'];
+  const dataUrls = ['/openapi.json', '/api/atlas-summary.json', '/api/research-findings.json', '/api/poets.json', '/api/themes.json', '/api/metaphors.json', '/api/centuries.json', '/api/forms.json', '/api/geography.json', '/api/lexical-life.json', '/api/attribution.json', '/api/content-index.json', '/api/knowledge-graph.json'];
   const urlset = (urls, defaultPriority = '0.7') => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${escapeXml(absolute(u))}</loc><lastmod>${buildDate}</lastmod><changefreq>${u === '/' ? 'weekly' : 'monthly'}</changefreq><priority>${u === '/' ? '1.0' : defaultPriority}</priority></url>`).join('\n')}\n</urlset>`;
   write('sitemap-core.xml', urlset(core, '0.9'));
   write('sitemap-entities.xml', urlset(entities, '0.8'));
@@ -559,15 +562,16 @@ function generateDiscovery() {
 
   write('robots.txt', `# از شعر تا داده — دانشنامه داده‌ای شعر فارسی\n# Generated: ${buildDate}\nUser-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ${absolute('/sitemap.xml')}\n`);
 
-  const llms = `# از شعر تا داده\n\n> اطلس تعاملی و دانشنامه داده‌ای شعر فارسی، کاری از حسین کریمی. شامل ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت، ${faNumber(data.overview.words)} واژه، ${faNumber(data.overview.poets.length)} شاعر و ${faNumber(data.overview.books)} عنوان کتاب.\n\n## پاسخ‌های اصلی\n- ترکیب موضوعی شعر فارسی در طول زمان تغییر معنادار دارد؛ سده حدود ${faPercent(data.topics.globalStats.rSquared * 100)} از تفاوت موضوعی میان شاعران را توضیح می‌دهد.\n- هیچ‌یک از ده خانواده استعاری بررسی‌شده کاملاً حذف نمی‌شود؛ الگوی غالب افت، بازگشت و رانش معنایی است.\n- پیوندهای شبکه بینامتنیت قرابت محاسباتی‌اند و تأثیر تاریخی مستقیم را به‌تنهایی اثبات نمی‌کنند.\n- تاریخ‌گذاری هوش مصنوعی باید با حذف کامل شاعر آزمون ارزیابی شود تا مدل به‌جای سده، شاعر را نشناسد.\n- مدل نویسه‌ای در آزمون متوازن ${faNumber(data.stylometry.metrics.eligible_poets)} شاعر به دقت ${faPercent(data.stylometry.metrics.accuracy * 100)} رسیده است؛ نامتعارف آماری حکم انتساب نیست.\n- در مقایسه چهار قالب، قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد؛ قالب ${faPercent(formResearch.semantic.rSquared * 100)} از تفاوت معنایی نمونه را توضیح می‌دهد.\n\n## مسیرهای توصیه‌شده\n- [پژوهش‌ها](${absolute('/research/')})\n- [پرسش‌های کلیدی](${absolute('/questions/')})\n- [مضامین](${absolute('/themes/')})\n- [استعاره‌ها](${absolute('/metaphors/')})\n- [سده‌ها](${absolute('/centuries/')})\n- [شاعران](${absolute('/poets/')})\n- [روش‌شناسی](${absolute('/methodology/')})\n- [داده و API](${absolute('/data/')})\n- [داده چهار قالب](${absolute('/api/forms.json')})\n- [OpenAPI](${absolute('/openapi.json')})\n- [گراف دانش](${absolute('/api/knowledge-graph.json')})\n\n## قواعد نقل\n۱. عدد را همراه روش و محدودیت نقل کنید.\n۲. «قرابت محاسباتی» را با «تأثیر قطعی» جایگزین نکنید.\n۳. «نامتعارف آماری» را «انتساب نادرست» ننامید.\n۴. اندازه حضور شاعر در پیکره رتبه ادبی نیست.\n\n## استناد\nکریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». ${siteUrl}/\n`;
+  const llms = `# از شعر تا داده\n\n> اطلس تعاملی و دانشنامه داده‌ای شعر فارسی، کاری از حسین کریمی. شامل ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت، ${faNumber(data.overview.words)} واژه، ${faNumber(data.overview.poets.length)} شاعر و ${faNumber(data.overview.books)} عنوان کتاب.\n\n## پاسخ‌های اصلی\n- ترکیب موضوعی شعر فارسی در طول زمان تغییر معنادار دارد؛ سده حدود ${faPercent(data.topics.globalStats.rSquared * 100)} از تفاوت موضوعی میان شاعران را توضیح می‌دهد.\n- هیچ‌یک از ده خانواده استعاری بررسی‌شده کاملاً حذف نمی‌شود؛ الگوی غالب افت، بازگشت و رانش معنایی است.\n- پیوندهای متنی، شباهت محاسباتی‌اند و تأثیر تاریخی مستقیم را به‌تنهایی اثبات نمی‌کنند.\n- تاریخ‌گذاری هوش مصنوعی باید با حذف کامل شاعر آزمون ارزیابی شود تا مدل به‌جای سده، شاعر را نشناسد.\n- مدل نویسه‌ای در آزمون متوازن ${faNumber(data.stylometry.metrics.eligible_poets)} شاعر به دقت ${faPercent(data.stylometry.metrics.accuracy * 100)} رسیده است؛ نامتعارف آماری حکم انتساب نیست.\n- در مقایسه چهار قالب، قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد؛ قالب ${faPercent(formResearch.semantic.rSquared * 100)} از تفاوت معنایی نمونه را توضیح می‌دهد.\n\n## مسیرهای توصیه‌شده\n- [پژوهش‌ها](${absolute('/research/')})\n- [پرسش‌های کلیدی](${absolute('/questions/')})\n- [مضامین](${absolute('/themes/')})\n- [استعاره‌ها](${absolute('/metaphors/')})\n- [سده‌ها](${absolute('/centuries/')})\n- [شاعران](${absolute('/poets/')})\n- [روش‌شناسی](${absolute('/methodology/')})\n- [داده و API](${absolute('/data/')})\n- [داده چهار قالب](${absolute('/api/forms.json')})\n- [OpenAPI](${absolute('/openapi.json')})\n- [گراف دانش](${absolute('/api/knowledge-graph.json')})\n\n## قواعد نقل\n۱. عدد را همراه روش و محدودیت نقل کنید.\n۲. «قرابت محاسباتی» را با «تأثیر قطعی» جایگزین نکنید.\n۳. «نامتعارف آماری» را «انتساب نادرست» ننامید.\n۴. اندازه حضور شاعر در پیکره رتبه ادبی نیست.\n\n## استناد\nکریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». ${siteUrl}/\n`;
   const llmsExtended = llms
     .replace('\n\n## مسیرهای توصیه‌شده', `\n- در پژوهش جغرافیا، ${faPercent(geographyResearch.mobility.mobileRate * 100)} شاعران جابه‌جا تعریف شدند؛ تفاوت دوره‌ها معنادار بود، اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی معنادار نشد.\n- در پژوهش نیمه‌عمر واژگان، میانه افت از اوج تا نصف ${faNumber(lexicalResearch.halfLife.medianCenturies, 2)} سده بود و ${faPercent(lexicalResearch.halfLife.censoredShare * 100)} واژه‌ها تا پایان پیکره به نصف اوج نرسیدند.\n\n## مسیرهای توصیه‌شده`)
-    .replace(`- [داده چهار قالب](${absolute('/api/forms.json')})`, `- [داده چهار قالب](${absolute('/api/forms.json')})\n- [داده جغرافیای شعر](${absolute('/api/geography.json')})\n- [داده چرخه عمر واژگان](${absolute('/api/lexical-life.json')})`);
+    .replace(`- [داده چهار قالب](${absolute('/api/forms.json')})`, `- [داده چهار قالب](${absolute('/api/forms.json')})\n- [داده جغرافیای شعر](${absolute('/api/geography.json')})\n- [داده چرخه عمر واژگان](${absolute('/api/lexical-life.json')})
+- [داده ممیزی انتساب](${absolute('/api/attribution.json')})`);
   write('llms.txt', llmsExtended);
-  const llmsFull = `${llms}\n## هشت مطالعه پژوهشی\n${researchPages.map((p) => `### ${p.title}\n${p.answer}\nصفحه: ${absolute(p.path)}\n`).join('\n')}\n## یازده مضمون\n${data.topics.items.map((t) => `- ${t.name}: ${topicAnswer(t)} صفحه: ${absolute(`/themes/${topicSlugs[t.id]}/`)}`).join('\n')}\n\n## ده خانواده استعاری\n${data.metaphors.items.map((m) => `- ${m.name}: ${metaphorAnswer(m)} صفحه: ${absolute(`/metaphors/${metaphorSlugs[m.name]}/`)}`).join('\n')}\n\n## سده‌ها\n${data.overview.centuryStats.map((c) => `- سده ${faNumber(c.century)}: ${faNumber(c.texts)} متن، ${faNumber(c.poets)} شاعر. ${absolute(`/centuries/${c.century}/`)}`).join('\n')}\n\n## API\n- ${absolute('/api/content-index.json')}\n- ${absolute('/api/themes.json')}\n- ${absolute('/api/metaphors.json')}\n- ${absolute('/api/centuries.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/knowledge-graph.json')}\n`;
+  const llmsFull = `${llms}\n## نه مطالعهٔ پژوهشی\n${researchPages.map((p) => `### ${p.title}\n${p.answer}\nصفحه: ${absolute(p.path)}\n`).join('\n')}\n## یازده مضمون\n${data.topics.items.map((t) => `- ${t.name}: ${topicAnswer(t)} صفحه: ${absolute(`/themes/${topicSlugs[t.id]}/`)}`).join('\n')}\n\n## ده خانواده استعاری\n${data.metaphors.items.map((m) => `- ${m.name}: ${metaphorAnswer(m)} صفحه: ${absolute(`/metaphors/${metaphorSlugs[m.name]}/`)}`).join('\n')}\n\n## سده‌ها\n${data.overview.centuryStats.map((c) => `- سده ${faNumber(c.century)}: ${faNumber(c.texts)} متن، ${faNumber(c.poets)} شاعر. ${absolute(`/centuries/${c.century}/`)}`).join('\n')}\n\n## API\n- ${absolute('/api/content-index.json')}\n- ${absolute('/api/themes.json')}\n- ${absolute('/api/metaphors.json')}\n- ${absolute('/api/centuries.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/knowledge-graph.json')}\n`;
   const llmsFullExtended = llmsFull
     .replace(llms, llmsExtended)
-    .replace(`- ${absolute('/api/forms.json')}\n`, `- ${absolute('/api/forms.json')}\n- ${absolute('/api/geography.json')}\n- ${absolute('/api/lexical-life.json')}\n`);
+    .replace(`- ${absolute('/api/forms.json')}\n`, `- ${absolute('/api/forms.json')}\n- ${absolute('/api/geography.json')}\n- ${absolute('/api/lexical-life.json')}\n- ${absolute('/api/attribution.json')}\n`);
   write('llms-full.txt', llmsFullExtended);
   write('llms-data.txt', `# Data dictionary — از شعر تا داده\n\n- poet: نام شاعر\n- century: سده هجری منتسب به دوره زندگی شاعر\n- poems/texts: تعداد متن در پیکره\n- totalCouplets: تعداد ابیات؛ جفت‌سازی مصراع‌های جداشده در متن منبع و گردکردن واحد پایانی فرد در هر رکورد\n- totalWords: مجموع واژه‌های فارسی شاعر پس از نرمال‌سازی\n- share: سهم موضوع از ترکیب سده، به درصد\n- rate: نرخ نرمال‌شده رخداد\n- rho: ضریب روند اسپیرمن\n- qTrend: p-value اصلاح‌شده برای چندآزمونی\n- JSD: فاصله جنسن–شنون میان توزیع‌ها\n- NPMI: قدرت هم‌رخدادی نرمال‌شده\n- robustZ: فاصله مقاوم متن از مرکز سبک شاعر\n- center_city: کانون تقریبی فعالیت شاعر\n- route_km: طول تقریبی مسیر منتخب، به کیلومتر\n- half_life: زمان پس از اوج تا نصف فراوانی\n- right_censored: نرسیدن واژه به نصف اوج تا پایان پیکره\n\nOpenAPI: ${absolute('/openapi.json')}\nKnowledge graph: ${absolute('/api/knowledge-graph.json')}\n`);
 }
@@ -587,7 +591,7 @@ function patchExistingPages() {
     if (html.includes('class="seo-header"') && !html.includes('href="/themes/"')) {
       html = html.replace('<a href="/research/">پژوهش‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a><a href="/methodology/">روش‌شناسی</a><a href="/glossary/">واژه‌نامه</a><a href="/about/">درباره</a>', '<a href="/research/">پژوهش‌ها</a><a href="/themes/">مضامین</a><a href="/metaphors/">استعاره‌ها</a><a href="/centuries/">سده‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a>');
     }
-    if (!html.includes('name="generator"')) html = html.replace('<meta name="author"', '<meta name="generator" content="From Poetry to Data static knowledge layer 5.0"><meta name="author"');
+    if (!html.includes('name="generator"')) html = html.replace('<meta name="author"', '<meta name="generator" content="From Poetry to Data static knowledge layer 6.0"><meta name="author"');
     fs.writeFileSync(file, html, 'utf8');
   }
 }
@@ -595,7 +599,7 @@ function patchExistingPages() {
 function validate() {
   const required = [
     'themes/index.html', 'metaphors/index.html', 'centuries/index.html', 'questions/index.html',
-    'api/themes.json', 'api/metaphors.json', 'api/centuries.json', 'api/geography.json', 'api/lexical-life.json', 'api/content-index.json', 'api/knowledge-graph.json',
+    'api/themes.json', 'api/metaphors.json', 'api/centuries.json', 'api/geography.json', 'api/lexical-life.json', 'api/attribution.json', 'api/content-index.json', 'api/knowledge-graph.json',
     'openapi.json', 'citation.json', 'citation.bib', 'llms-data.txt', 'sitemap-core.xml', 'sitemap-entities.xml',
   ];
   const missing = required.filter((file) => !fs.existsSync(path.join(dist, file)));

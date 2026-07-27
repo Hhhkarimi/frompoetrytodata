@@ -408,7 +408,7 @@ payload = {
         'creator':'حسین کریمی',
         'linkedin':'https://www.linkedin.com/in/hossein-karimi-8a452153/',
         'source':None,
-        'generatedFrom':'هشت مطالعه داده‌محور درباره مضامین، استعاره، بینامتنیت، تشخیص سده، سبک‌سنجی، مقایسه قالب‌ها، جغرافیای ادبی و چرخه عمر واژگان',
+        'generatedFrom':'نه مطالعهٔ داده‌محور دربارهٔ مضامین، استعاره، پیوند متنی، تشخیص سده، سبک‌سنجی، مقایسهٔ قالب‌ها، جغرافیای ادبی، چرخهٔ عمر واژگان و سنجش انتساب',
     },
     'overview': {
         'texts':int(len(df)), 'poets':int(df['poet'].nunique()), 'centuries':int(df['century'].nunique()),

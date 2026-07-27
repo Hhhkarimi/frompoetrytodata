@@ -10,6 +10,7 @@ import poetCouplets from './data/poetCouplets.json';
 import formResearch from './data/formResearch.json';
 import geographyResearch from './data/geographyResearch.json';
 import lexicalResearch from './data/lexicalResearch.json';
+import attributionResearch from './data/attributionResearch.json';
 import Logo from './components/Logo.jsx';
 import { Linkedin } from './components/BrandIcons.jsx';
 import Chart from './components/Chart.jsx';
@@ -21,17 +22,22 @@ import {
   rankingBarOption, centuryHeatmapOption, recallOption, evaluationOption,
   stylometryPcaOption, classifierOption, nearestOption, dispersionOption,
   reasonDonutOption, geographyCentersOption, regionFlowOption, periodMobilityOption,
-  lexicalLifecycleOption, halfLifeOption,
+  lexicalLifecycleOption, halfLifeOption, attributionDistributionOption, conceptProfileOption, systemConceptTrendOption,
 } from './chartOptions.js';
 import { compactFa, faDigits, faNumber, faPercent } from './utils.js';
-import { audiencePaths, faqItems, researchPages } from './content/siteContent.js';
+import { audiencePaths, faqItems, glossaryItems, researchPages } from './content/siteContent.js';
 
-const NAV_ITEMS = [
-  ['خانه', 'home'], ['پیکره', 'overview'], ['مضامین', 'topics'], ['استعاره‌ها', 'metaphors'],
-  ['بینامتنیت', 'intertext'], ['هوش مصنوعی', 'century-ai'], ['اثر انگشت', 'stylometry'],
-  ['قالب‌ها', 'forms'], ['جغرافیا', 'geography'], ['نیمه‌عمر واژه', 'lexical-life'],
-  ['شاعران', 'poets'], ['راهنما', 'knowledge'],
+const HEADER_NAV_ITEMS = [
+  { label: 'خانه', id: 'home', sections: ['home'] },
+  { label: 'پیکره', id: 'overview', sections: ['overview'] },
+  { label: 'روندها', id: 'topics', sections: ['topics', 'metaphors'] },
+  { label: 'پیوند متنی', id: 'intertext', sections: ['intertext'] },
+  { label: 'انتساب', id: 'attribution', sections: ['attribution'] },
+  { label: 'هوش و سبک', id: 'century-ai', sections: ['century-ai', 'stylometry'] },
+  { label: 'قالب و زمینه', id: 'forms', sections: ['forms', 'geography', 'lexical-life'] },
+  { label: 'راهنما', id: 'knowledge', sections: ['poets', 'knowledge', 'about'] },
 ];
+const OBSERVED_SECTION_IDS = ['home', 'overview', 'topics', 'metaphors', 'intertext', 'century-ai', 'stylometry', 'attribution', 'forms', 'geography', 'lexical-life', 'poets', 'knowledge', 'about'];
 
 const accents = ['#0f766e', '#b9862d', '#9f2f38', '#315ba8', '#7c3aed', '#c45d2a', '#0e7490', '#4d7c0f'];
 const corpusPoets = atlas.overview.poets.map((poet) => ({
@@ -83,6 +89,23 @@ function PersianSelect({ value, onChange, children, label }) {
       {label && <span>{label}</span>}
       <select value={value} onChange={(e) => onChange(e.target.value)}>{children}</select>
     </label>
+  );
+}
+
+function PlainLanguage({ title = 'به زبان ساده', children }) {
+  return <div className="plain-language reveal"><CircleHelp size={21} /><div><strong>{title}</strong><p>{children}</p></div></div>;
+}
+
+function GlossaryDrawer({ open, onClose }) {
+  if (!open) return null;
+  return (
+    <div className="drawer-backdrop" onClick={onClose} role="presentation">
+      <aside className="glossary-drawer" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="واژه‌نامه ساده">
+        <div className="drawer-head"><div><span className="eyebrow">واژه‌های دشوار</span><h2>همان مفهوم، با بیان روشن‌تر</h2></div><button className="modal-close" onClick={onClose} aria-label="بستن واژه‌نامه"><X /></button></div>
+        <div className="drawer-terms">{glossaryItems.slice(0, 10).map(([term, definition]) => <article key={term}><h3>{term}</h3><p>{definition}</p></article>)}</div>
+        <a className="secondary-button" href="/glossary/">مشاهده واژه‌نامه کامل <ArrowLeft size={17} /></a>
+      </aside>
+    </div>
   );
 }
 
@@ -150,6 +173,8 @@ function App() {
   const [metaphor, setMetaphor] = useState(atlas.metaphors.items[0].name);
   const [metaphorPeriod, setMetaphorPeriod] = useState('کلاسیک');
   const [edgeThreshold, setEdgeThreshold] = useState(0.94);
+  const [intertextLayout, setIntertextLayout] = useState('force');
+  const [intertextPoet, setIntertextPoet] = useState('همه');
   const [poetSearch, setPoetSearch] = useState('');
   const [poetCentury, setPoetCentury] = useState('همه');
   const [selectedPoet, setSelectedPoet] = useState(null);
@@ -157,6 +182,9 @@ function App() {
   const [poetMetric, setPoetMetric] = useState('poems');
   const [progress, setProgress] = useState(0);
   const [citationCopied, setCitationCopied] = useState(false);
+  const [audienceMode, setAudienceMode] = useState('general');
+  const [attributionCaseId, setAttributionCaseId] = useState(attributionResearch.cases[0].id);
+  const [glossaryOpen, setGlossaryOpen] = useState(false);
 
   const selectedTopic = atlas.topics.items.find((t) => t.id === Number(topicId)) || atlas.topics.items[0];
   const selectedMetaphor = atlas.metaphors.items.find((m) => m.name === metaphor) || atlas.metaphors.items[0];
@@ -168,10 +196,14 @@ function App() {
   }), [poetSearch, poetCentury]);
   const visiblePoets = showAllPoets ? filteredPoets : filteredPoets.slice(0, 18);
   const featuredPoets = corpusPoets.filter((p) => p.image);
+  const intertextPoets = useMemo(() => [...new Set(atlas.intertext.edges.flatMap((edge) => [edge.source, edge.target]))].sort((a, b) => a.localeCompare(b, 'fa')), []);
+  const visibleIntertextEdges = useMemo(() => intertextPoet === 'همه' ? atlas.intertext.edges : atlas.intertext.edges.filter((edge) => edge.source === intertextPoet || edge.target === intertextPoet), [intertextPoet]);
+  const selectedAttributionCase = attributionResearch.cases.find((item) => item.id === attributionCaseId) || attributionResearch.cases[0];
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-  }, [dark]);
+    document.documentElement.dataset.audience = audienceMode;
+  }, [dark, audienceMode]);
 
   useEffect(() => {
     const reveal = new IntersectionObserver((entries) => {
@@ -183,7 +215,7 @@ function App() {
       const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
       if (visible) setActive(visible.target.id);
     }, { rootMargin: '-20% 0px -65%', threshold: [0.05, 0.2, 0.5] });
-    NAV_ITEMS.forEach(([, id]) => { const el = document.getElementById(id); if (el) sections.observe(el); });
+    OBSERVED_SECTION_IDS.forEach((id) => { const el = document.getElementById(id); if (el) sections.observe(el); });
 
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -211,15 +243,17 @@ function App() {
   };
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell audience-${audienceMode}` }>
       <div className="scroll-progress" style={{ width: `${progress}%` }} />
       <header className="site-header">
         <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('home'); }}><Logo /></a>
         <nav className={menuOpen ? 'is-open' : ''}>
-          {NAV_ITEMS.map(([label, id]) => <button key={id} className={active === id ? 'active' : ''} onClick={() => scrollTo(id)}>{label}</button>)}
+          {HEADER_NAV_ITEMS.map((item) => <button key={item.id} className={item.sections.includes(active) ? 'active' : ''} onClick={() => scrollTo(item.id)}>{item.label}</button>)}
           <a className="nav-linkedin" href={atlas.meta.linkedin} target="_blank" rel="me noreferrer"><Linkedin size={17} />لینکدین</a>
         </nav>
         <div className="header-actions">
+          <div className="audience-switch" role="group" aria-label="سطح نمایش توضیحات"><button className={audienceMode === 'general' ? 'active' : ''} onClick={() => setAudienceMode('general')}>عمومی</button><button className={audienceMode === 'research' ? 'active' : ''} onClick={() => setAudienceMode('research')}>پژوهشی</button></div>
+          <button className="icon-button" onClick={() => setGlossaryOpen(true)} aria-label="واژه‌نامه ساده"><CircleHelp /></button>
           <button className="icon-button" onClick={() => setDark(!dark)} aria-label={dark ? 'حالت روشن' : 'حالت تاریک'}>{dark ? <Sun /> : <Moon />}</button>
           <button className="icon-button menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="فهرست">{menuOpen ? <X /> : <Menu />}</button>
         </div>
@@ -232,7 +266,7 @@ function App() {
             <span className="hero-badge"><Sparkles size={16} />روایت تعاملی هزار سال شعر فارسی</span>
             <h1>از <em>شعر</em> تا <strong>داده</strong></h1>
             <p className="nastaliq">واژه‌ها را ببین؛ تاریخ را لمس کن</p>
-            <p className="hero-intro">اطلسی عمومی و پژوهشی با هشت مطالعه درباره تحول مضامین، زندگی استعاره‌ها، شبکه شاعران، هوش مصنوعی، سبک، قالب، جغرافیا و چرخه عمر واژگان شعر فارسی.</p>
+            <p className="hero-intro">اطلسی عمومی و پژوهشی با نه مطالعه درباره تحول مضامین، زندگی استعاره‌ها، شبکه شاعران، هوش مصنوعی، سبک، قالب، جغرافیا و چرخه عمر واژگان شعر فارسی.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo('overview')}>شروع کاوش <ArrowDown size={18} /></button>
               <a className="secondary-button" href="/research/">مطالعات پژوهشی <BookOpen size={18} /></a>
@@ -251,6 +285,14 @@ function App() {
           </div>
           <button className="hero-scroll" onClick={() => scrollTo('overview')}><span>پایین بروید</span><ArrowDown /></button>
         </section>
+
+        <nav className="journey-nav reveal" aria-label="مسیر پیشنهادی کاوش">
+          <button onClick={() => scrollTo('overview')}><span>۱</span><strong>داده چیست؟</strong><small>پیکره و پوشش</small></button>
+          <button onClick={() => scrollTo('topics')}><span>۲</span><strong>چه تغییر کرده؟</strong><small>مضمون و استعاره</small></button>
+          <button onClick={() => scrollTo('intertext')}><span>۳</span><strong>چه متن‌هایی نزدیک‌اند؟</strong><small>شاخص شباهت متنی</small></button>
+          <button onClick={() => scrollTo('attribution')}><span>۴</span><strong>انتساب چقدر معتبر است؟</strong><small>خیام، حافظ و نسخه‌ها</small></button>
+          <button onClick={() => scrollTo('geography')}><span>۵</span><strong>زمینه چه اثری دارد؟</strong><small>قالب، تاریخ و جغرافیا</small></button>
+        </nav>
 
         <Section id="overview" eyebrow="در یک نگاه" title="گستره پیکره شعر فارسی" intro="پیش از هر تفسیر، باید بدانیم داده از چه دوره‌ها و شاعرانی ساخته شده است. اندازه هر بخش در این صفحه، بازتاب حضور آن در پیکره است؛ نه رتبه ادبی.">
           <div className="stats-grid corpus-stats">
@@ -370,26 +412,29 @@ function App() {
           </div>
         </Section>
 
-        <Section id="intertext" eyebrow="پژوهش سوم" title="شبکه بینامتنیت و قرابت شاعران" intro="شباهت عبارت‌های نادر، واژگان و الگوی موضوعی در یک شبکه جهت‌دار ترکیب شده‌اند. پیکان از شاعر قدیمی‌تر به شاعر جدیدتر می‌رود؛ اما این پیوند، شاهد محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند." className="section-tinted">
-          <div className="network-toolbar reveal">
-            <div><Network /><div><strong>آستانه نمایش شبکه</strong><span>پیوندهای قوی‌تر از {faNumber(edgeThreshold, { maximumFractionDigits: 2 })}</span></div></div>
-            <input type="range" min="0.93" max="0.98" step="0.005" value={edgeThreshold} onChange={(e) => setEdgeThreshold(Number(e.target.value))} />
+        <Section id="intertext" eyebrow="پژوهش سوم" title="نقشه پیوندهای متنی و شباهت شاعران" intro="سه نشانه—عبارت‌های نادر، واژگان و مضمون—در یک شاخص شباهت متنی ترکیب شده‌اند. اصطلاح دانشگاهی این رابطه «بینامتنیت» است، اما در این صفحه از نام ساده‌تر «پیوند متنی» استفاده می‌کنیم. پیکان فقط ترتیب زمانی را نشان می‌دهد و به‌تنهایی اثرگذاری تاریخی را ثابت نمی‌کند." className="section-tinted">
+          <PlainLanguage>هر خط یعنی دو شاعر از چند جهت به هم نزدیک شده‌اند. خط ضخیم‌تر یعنی شباهت محاسباتی بیشتر؛ نه اینکه حتماً شاعر دوم از شاعر اول اقتباس کرده باشد.</PlainLanguage>
+          <div className="network-workbench reveal">
+            <div className="network-control"><label><span>حداقل قدرت پیوند</span><strong>{faNumber(edgeThreshold, { maximumFractionDigits: 3 })}</strong></label><input type="range" min="0.93" max="0.98" step="0.005" value={edgeThreshold} onChange={(e) => setEdgeThreshold(Number(e.target.value))} /></div>
+            <PersianSelect label="تمرکز روی شاعر" value={intertextPoet} onChange={setIntertextPoet}><option value="همه">همه شاعران</option>{intertextPoets.map((name) => <option value={name} key={name}>{name}</option>)}</PersianSelect>
+            <div className="segmented" role="group" aria-label="چیدمان نقشه"><button className={intertextLayout === 'force' ? 'active' : ''} onClick={() => setIntertextLayout('force')}>آزاد</button><button className={intertextLayout === 'circular' ? 'active' : ''} onClick={() => setIntertextLayout('circular')}>حلقه‌ای</button></div>
+            <div className="network-counts"><span>{faNumber(visibleIntertextEdges.filter((edge) => edge.score >= edgeThreshold).length)} پیوند</span><span>{faNumber(new Set(visibleIntertextEdges.filter((edge) => edge.score >= edgeThreshold).flatMap((edge) => [edge.source, edge.target])).size)} شاعر</span></div>
           </div>
-          <ChartCard title="نقشه تعاملی قرابت بینامتنی" kicker="گره‌ها را جابه‌جا و شبکه را بزرگ‌نمایی کنید" note="ضخامت یال در پیوندهای نمایش‌داده‌شده از ۱٫۴ تا ۷٫۲ پیکسل نرمال شده و قدرت امتیاز مرکب را نشان می‌دهد؛ پیکان همیشه از شاعر متقدم به شاعر متأخر است. رنگ، نوع شاهد را جدا می‌کند.">
-            <Chart option={intertextNetworkOption(atlas.intertext.edges, edgeThreshold, dark)} height={650} />
-            <div className="network-legend" aria-label="راهنمای رنگ و ضخامت یال‌ها">
-              <span><i className="edge-thin" />امتیاز کمتر</span>
-              <span><i className="edge-thick" />امتیاز بیشتر</span>
-              <span><b className="evidence-strong" />شاهد بسیار قوی</span>
+          <ChartCard title="نقشه تعاملی پیوندهای متنی" kicker="روی شاعر یا خط مکث کنید؛ گره‌ها را جابه‌جا و نقشه را بزرگ‌نمایی کنید" note="رنگ خط نوع شاهد را نشان می‌دهد و ضخامت، امتیاز مرکب را. پیکان از شاعر متقدم به متأخر است؛ جهت زمانی، رابطه علت و معلولی نیست.">
+            <Chart option={intertextNetworkOption(visibleIntertextEdges, edgeThreshold, dark, intertextLayout)} height={650} ariaLabel="نقشه تعاملی شاخص شباهت متنی میان شاعران" />
+            <div className="network-legend" aria-label="راهنمای نقشه">
+              <span><i className="edge-thin" />شباهت کمتر</span>
+              <span><i className="edge-thick" />شباهت بیشتر</span>
+              <span><b className="evidence-strong" />چند شاهد هم‌سو</span>
               <span><b className="evidence-notable" />شاهد قابل توجه</span>
-              <span><b className="evidence-limited" />شاهد محدود</span>
+              <span><b className="evidence-limited" />نیازمند احتیاط</span>
             </div>
           </ChartCard>
           <div className="two-column">
             <ChartCard title="واژه شبیه است یا موضوع؟" kicker="مقایسه سه نوع شاهد">
-              <Chart option={intertextScatterOption(atlas.intertext.edges, dark)} />
+              <Chart option={intertextScatterOption(visibleIntertextEdges, dark)} />
             </ChartCard>
-            <Card className="method-card reveal">
+            <Card className="method-card reveal research-only">
               <span className="eyebrow">سه لایه شاهد</span>
               <div className="method-steps">
                 <div><span>۱</span><strong>عبارت نادر</strong><p>پنج‌واژه‌های مشترکی که در کل پیکره کم‌تکرارند.</p></div>
@@ -400,10 +445,10 @@ function App() {
             </Card>
           </div>
           <div className="two-column">
-            <ChartCard title="شاعران با بیشترین خروجی شبکه" kicker="اثرگذاری محاسباتی">
+            <ChartCard title="شاعران با بیشترین پیوند رو به جلو" kicker="مرکزیت محاسباتی؛ نه رتبه ادبی">
               <Chart option={rankingBarOption(atlas.intertext.influencers, 'strength', dark, '#0f766e')} />
             </ChartCard>
-            <ChartCard title="شاعران با بیشترین دریافت شبکه" kicker="ورودی قرابت‌های جهت‌دار">
+            <ChartCard title="شاعران با بیشترین پیوند از گذشته" kicker="ورودی شباهت‌های جهت‌دار">
               <Chart option={rankingBarOption(atlas.intertext.receivers, 'strength', dark, '#9f2f38')} />
             </ChartCard>
           </div>
@@ -499,6 +544,39 @@ function App() {
               <p className="chart-note"><Info size={15} />نامتعارف آماری به معنی انتساب نادرست نیست؛ ممکن است ژانر، طول متن یا آلودگی داده علت باشد.</p>
             </Card>
           </div>
+        </Section>
+
+
+        <Section id="attribution" eyebrow="پژوهش نهم · مبتنی بر پیکره" title="آزمایشگاه انتساب و سنجش اعتبار شعر" intro="این بخش با دادهٔ واقعی پیکره، سه مسئله را جدا می‌کند: پالایش و مقایسهٔ رباعیات خیام، اولویت‌بندی اشعار منتسب حافظ، و ردیابی شاعرمتوازن مفاهیم در سده‌ها. نتیجه‌ها ابزار بازبینی‌اند، نه حکم قطعی اصالت یا رابطهٔ علت‌ومعلولی." className="section-tinted attribution-section">
+          <div className="attribution-status reveal"><Fingerprint size={26} /><div><strong>{attributionResearch.status}</strong><p>تحلیل از {faNumber(attributionResearch.generatedFrom.rows)} رکورد، {faNumber(attributionResearch.generatedFrom.poets)} شاعر، {faNumber(attributionResearch.generatedFrom.books)} عنوان و {faNumber(attributionResearch.generatedFrom.centuries)} سده ساخته شده است. برای احتمال اصالت، دادهٔ نسخه، تاریخ شاهد و ارزیابی متخصص هنوز لازم است.</p></div></div>
+          <div className="case-tabs reveal" role="tablist" aria-label="پرونده‌های پژوهش انتساب">{attributionResearch.cases.map((item) => <button role="tab" aria-selected={attributionCaseId === item.id} className={attributionCaseId === item.id ? 'active' : ''} onClick={() => setAttributionCaseId(item.id)} key={item.id}><strong>{item.name}</strong><span>{item.subtitle}</span></button>)}</div>
+          <div className="case-dossier reveal">
+            <div className="case-question"><span className="eyebrow">پرسش پرونده</span><h3>{selectedAttributionCase.question}</h3><p>{selectedAttributionCase.next}</p></div>
+            <div className="case-metrics">{selectedAttributionCase.metrics.map((item) => <MiniMetric key={item.label} label={item.label} value={faNumber(item.value, { maximumFractionDigits: 1 })} detail={item.detail} />)}</div>
+            <div className="case-limit"><Info size={18} /><div><strong>مرز دادهٔ فعلی</strong><p>{selectedAttributionCase.currentLimit}</p></div></div>
+            <div className="case-columns"><div><strong>دادهٔ مرجع لازم</strong><ul>{selectedAttributionCase.reference.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>خطرهای تفسیر</strong><ul>{selectedAttributionCase.risks.map((item) => <li key={item}>{item}</li>)}</ul></div></div>
+          </div>
+          <div className="two-column attribution-charts">
+            <ChartCard title={selectedAttributionCase.id === 'systemic' ? 'پوشش متن در سده‌ها' : 'ترکیب دادهٔ پرونده'} kicker="بر پایه برچسب‌های واقعی پیکره" note="اندازهٔ دسته‌ها پوشش داده را نشان می‌دهد، نه اعتبار ادبی یا اصالت.">
+              <Chart option={attributionDistributionOption(selectedAttributionCase.distribution, dark, selectedAttributionCase.id === 'hafez' ? '#9f2f38' : '#7c3aed')} height={430} />
+            </ChartCard>
+            {selectedAttributionCase.id === 'systemic' ? <ChartCard title="روند شاعرمتوازن مفاهیم" kicker="میانگین نرخ هر شاعر، سپس میانگین سده" note="این نمودار هم‌زمانی را نشان می‌دهد؛ برای ادعای اثر سیاسی یا فکری، خط زمانی و گروه کنترل لازم است."><Chart option={systemConceptTrendOption(attributionResearch.systemTrends, dark)} height={430} /></ChartCard> : <ChartCard title="نمایهٔ مفهومی درون پیکره" kicker="رخداد در ده‌هزار واژه" note="این واژه‌نامه‌های مفهومی برای کاوش‌اند و جای تفسیر ادبی یا مدل معنایی کامل را نمی‌گیرند."><Chart option={conceptProfileOption(selectedAttributionCase.conceptProfile, dark)} height={430} /></ChartCard>}
+          </div>
+          <div className="attribution-findings reveal"><span className="eyebrow">آنچه از دادهٔ فعلی می‌توان گفت</span>{selectedAttributionCase.findings.map((item, index) => <article key={item}><span>{faNumber(index + 1)}</span><p>{item}</p></article>)}</div>
+          <Card className="review-list reveal">
+            <div className="card-head"><div><span>{selectedAttributionCase.id === 'systemic' ? 'جهش‌های مشاهده‌شده' : 'اولویت بازبینی'}</span><h3>{selectedAttributionCase.id === 'khayyam' ? 'نمونهٔ صورت‌های بسیار نزدیک رباعیات' : selectedAttributionCase.id === 'hafez' ? 'اشعار منتسبِ دورتر از مرکز غزل‌ها' : 'بزرگ‌ترین تغییرهای پیاپی مفهوم‌ها'}</h3></div></div>
+            <div className="review-grid">{selectedAttributionCase.reviewCandidates.map((item, index) => selectedAttributionCase.id === 'khayyam' ? <article key={`${item.left}-${item.right}`}><b>{faNumber(item.score, { maximumFractionDigits: 3 })}</b><div><strong>{item.left} ↔ {item.right}</strong><span>{item.leftBook}</span><p>{item.snippet}</p></div></article> : selectedAttributionCase.id === 'hafez' ? <article key={item.title}><b>{faNumber(item.distance, { maximumFractionDigits: 2 })}</b><div><strong>{item.title}</strong><span>{faNumber(item.words)} واژه · {faNumber(item.units)} واحد · عامل برجسته: {item.reason}</span><p>{item.snippet}</p></div></article> : <article key={`${item.concept}-${item.from}`}><b className={item.delta > 0 ? 'positive' : 'negative'}>{item.delta > 0 ? '+' : ''}{faNumber(item.delta, { maximumFractionDigits: 1 })}</b><div><strong>{item.concept}</strong><span>از سده {faNumber(item.from)} به {faNumber(item.to)} · {item.direction}</span></div></article>)}</div>
+            <p className="chart-note"><Info size={15} />این فهرست فقط ترتیب بازبینی را پیشنهاد می‌کند؛ امتیاز بالا به معنی جعلی‌بودن یا اثبات اثر تاریخی نیست.</p>
+          </Card>
+          <PlainLanguage title="چرا یک مدل کافی نیست؟">ممکن است واژگان یک رباعی شبیه خیام باشد، اما در شاهدهای متأخر ظاهر شده باشد؛ یا یک قرائت حافظ خوش‌آهنگ و سبک‌سازگار باشد، اما پشتوانهٔ نسخه‌ای ضعیفی داشته باشد. هر شاهد باید جدا ثبت و سپس با نظر متخصص ترکیب شود.</PlainLanguage>
+          <div className="data-alerts reveal"><div className="card-head"><div><span>ممیزی خودکار پیکره</span><h3>هشدارهایی که پیش از هر داوری باید حل شوند</h3></div><a href="/downloads/attribution-corpus-audit.csv" download>دریافت گزارش CSV</a></div>{attributionResearch.qualityAlerts.map((item) => <article key={item.title}><div><strong>{item.title}</strong><span>{item.items?.join('، ')}</span></div><b>{faNumber(item.value)} مورد</b><p>{item.detail}</p></article>)}</div>
+          <div className="evidence-grid">{attributionResearch.principles.map((item, index) => <Card className="evidence-card reveal" accent={accents[index % accents.length]} key={item.id}><span>{faNumber(index + 1)}</span><h3>{item.title}</h3><p>{item.plain}</p><small className="research-only">{item.detail}</small></Card>)}</div>
+          <div className="two-column attribution-lab">
+            <Card className="workflow-card reveal research-only"><span className="eyebrow">فرایند پیشنهادی</span><h3>از متن خام تا داوری قابل‌ردیابی</h3><div>{attributionResearch.workflow.map(([n, title, text]) => <article key={n}><span>{faDigits(n)}</span><div><strong>{title}</strong><p>{text}</p></div></article>)}</div></Card>
+            <Card className="output-card reveal"><span className="eyebrow">زبان نتیجه</span><h3>به‌جای «اصیل/جعلی» چهار وضعیت روشن</h3><div>{attributionResearch.outputs.map(([title, text]) => <article key={title}><strong>{title}</strong><p>{text}</p></article>)}</div></Card>
+          </div>
+          <div className="interdisciplinary reveal research-only"><div><span className="eyebrow">مطالعه میان‌رشته‌ای</span><h3>این مسئله با یک تخصص حل نمی‌شود</h3><p>پیشنهاد اجرایی: تشکیل شورای علمی کوچک و انتشار هر نتیجه با نام نقش‌ها، نسخهٔ داده، شواهد موافق و مخالف و صورت‌جلسهٔ تصمیم.</p></div><div className="team-grid">{attributionResearch.team.map(([title, text]) => <article key={title}><strong>{title}</strong><p>{text}</p></article>)}</div></div>
+          <div className="section-actions reveal"><a className="secondary-button" href="/research/attribution/">روش، محدودیت‌ها و نقشه راه <ArrowLeft size={17} /></a><button className="secondary-button" onClick={() => setAudienceMode('research')}>نمایش جزئیات پژوهشی <BrainCircuit size={17} /></button></div>
         </Section>
 
         <Section id="forms" eyebrow="پژوهش ششم" title="غزل، قصیده، رباعی و مثنوی چه تفاوتی دارند؟" intro="چهار قالب فقط ظرف‌هایی با طول متفاوت نیستند. ساختار قافیه، فشردگی، زاویه دید و نوع حرکت معنا در هر کدام الگوی متمایزی می‌سازد. این مقایسه بر ۳۶٬۱۰۷ متن دارای برچسب قالب انجام شده است.">
@@ -729,7 +807,9 @@ function App() {
         <div><a href={atlas.meta.linkedin} target="_blank" rel="me noreferrer"><Linkedin />حسین کریمی</a><a href="/research/">پژوهش‌ها</a><a href="/themes/">مضامین</a><a href="/metaphors/">استعاره‌ها</a><a href="/centuries/">سده‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a></div>
         <small>تصاویر منتخب شاعران از Wikimedia Commons؛ اعتبار هر تصویر در کارت شاعر درج شده است.</small>
       </footer>
+      <button className="floating-glossary" onClick={() => setGlossaryOpen(true)}><CircleHelp size={19} /><span>معنی واژه‌ها</span></button>
       <PoetModal poet={selectedPoet} onClose={() => setSelectedPoet(null)} />
+      <GlossaryDrawer open={glossaryOpen} onClose={() => setGlossaryOpen(false)} />
     </div>
   );
 }

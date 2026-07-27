@@ -209,7 +209,7 @@ export function metaphorNetworkOption(pairs, period, dark = false) {
   };
 }
 
-export function intertextNetworkOption(edges, threshold, dark = false) {
+export function intertextNetworkOption(edges, threshold, dark = false, layoutMode = 'force') {
   const chosen = edges.filter((e) => e.score >= threshold);
   const names = [...new Set(chosen.flatMap((e) => [e.source, e.target]))];
   const stats = Object.fromEntries(names.map((n) => [n, { in: 0, out: 0, century: 0 }]));
@@ -239,8 +239,9 @@ export function intertextNetworkOption(edges, threshold, dark = false) {
     },
     visualMap: { show: false, min: minCentury, max: maxCentury, dimension: 1, inRange: { color: ['#d29d35', '#0f766e', '#315ba8', '#9f2f38'] } },
     series: [{
-      type: 'graph', layout: 'force', roam: true, draggable: true,
+      type: 'graph', layout: layoutMode === 'circular' ? 'circular' : 'force', roam: true, draggable: layoutMode !== 'circular',
       force: { repulsion: 320, edgeLength: [100, 220], gravity: 0.055 },
+      circular: { rotateLabel: true },
       data: names.map((name) => ({ name, value: [stats[name].in + stats[name].out, stats[name].century], century: stats[name].century, symbolSize: 32 + (stats[name].in + stats[name].out) * 6 })),
       links: chosen.map((e) => ({ source: e.source, target: e.target, score: e.score, phrases: e.phrases, lexical: e.lexical, topic: e.topic, evidence: e.evidence, lineStyle: { width: edgeWidth(e.score), opacity: .76, curveness: .12, color: evidenceColor[e.evidence] || evidenceColor['محدود'] } })),
       edgeSymbol: ['none', 'arrow'], edgeSymbolSize: [0, 11],
@@ -499,5 +500,44 @@ export function halfLifeOption(halfLife, dark = false) {
       data: values.map((d) => ({ value: d.value, itemStyle: { color: d.color, borderRadius: [10, 10, 0, 0] } })),
       label: { show: true, position: 'top', formatter: (p) => faNumber(p.value, { maximumFractionDigits: 2 }), fontFamily: 'Vazirmatn', color: dark ? '#e8f1ef' : '#354744' },
     }],
+  };
+}
+
+export function attributionDistributionOption(items, dark = false, color = '#7c3aed') {
+  const data = [...items].sort((a, b) => a.value - b.value);
+  const max = Math.max(...data.map((d) => d.value), 1);
+  return {
+    color: [color],
+    tooltip: { ...baseTooltip(dark), trigger: 'item', formatter: (p) => `<b>${p.data.name}</b><br/>${faNumber(p.value)} رکورد<br/>${p.data.note || ''}` },
+    grid: { left: 26, right: 42, top: 20, bottom: 24, containLabel: true },
+    xAxis: { type: 'value', max: Math.ceil(max * 1.12), ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
+    yAxis: { type: 'category', data: data.map((d) => d.name), ...axis(dark), axisLabel: { ...axis(dark).axisLabel, width: 165, overflow: 'truncate' } },
+    series: [{ type: 'bar', data: data.map((d) => ({ ...d, value: d.value })), barMaxWidth: 24, itemStyle: { borderRadius: [0, 8, 8, 0] }, label: { show: true, position: 'right', formatter: (p) => faNumber(p.value), fontFamily: 'Vazirmatn', color: dark ? '#e8f0ee' : '#3d4d4a' } }],
+  };
+}
+
+export function conceptProfileOption(items, dark = false) {
+  const data = [...items].slice(0, 7).sort((a, b) => a.ratePer10k - b.ratePer10k);
+  return {
+    color: ['#0f766e'],
+    tooltip: { ...baseTooltip(dark), trigger: 'item', formatter: (p) => `<b>${p.data.name}</b><br/>${faNumber(p.value, { maximumFractionDigits: 1 })} رخداد در ده‌هزار واژه<br/>حضور در ${faPercent(p.data.documentShare)} متن` },
+    grid: { left: 26, right: 48, top: 20, bottom: 24, containLabel: true },
+    xAxis: { type: 'value', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
+    yAxis: { type: 'category', data: data.map((d) => d.name), ...axis(dark), axisLabel: { ...axis(dark).axisLabel, width: 180, overflow: 'truncate' } },
+    series: [{ type: 'bar', data: data.map((d) => ({ ...d, value: d.ratePer10k })), barMaxWidth: 21, itemStyle: { borderRadius: [0, 8, 8, 0] }, label: { show: true, position: 'right', formatter: (p) => faNumber(p.value, { maximumFractionDigits: 1 }), fontFamily: 'Vazirmatn', color: dark ? '#e8f0ee' : '#3d4d4a' } }],
+  };
+}
+
+export function systemConceptTrendOption(systemTrends, dark = false) {
+  const concepts = systemTrends.concepts;
+  const series = systemTrends.series;
+  return {
+    color: palette,
+    tooltip: { ...baseTooltip(dark), trigger: 'axis', formatter: (params) => [`<b>سده ${faNumber(params[0]?.axisValue)}</b>`, ...params.map((p) => `${p.marker}${p.seriesName}: ${faNumber(p.value, { maximumFractionDigits: 1 })}`)].join('<br/>') },
+    legend: { type: 'scroll', top: 0, textStyle: { fontFamily: 'Vazirmatn', color: dark ? '#dce8e5' : '#53605e', fontSize: 10 } },
+    grid: { left: 52, right: 25, top: 72, bottom: 44, containLabel: true },
+    xAxis: { type: 'category', data: series.map((d) => d.century), name: 'سده هجری', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
+    yAxis: { type: 'value', name: 'نرخ شاعرمتوازن در ده‌هزار واژه', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
+    series: concepts.map((name) => ({ name, type: 'line', smooth: .25, showSymbol: false, data: series.map((d) => d[name]), lineStyle: { width: 2.2 }, emphasis: { focus: 'series' } })),
   };
 }
