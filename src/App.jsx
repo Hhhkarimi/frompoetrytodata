@@ -11,6 +11,7 @@ import formResearch from './data/formResearch.json';
 import geographyResearch from './data/geographyResearch.json';
 import lexicalResearch from './data/lexicalResearch.json';
 import attributionResearch from './data/attributionResearch.json';
+import publicQuestionsResearch from './data/publicQuestionsResearch.json';
 import Logo from './components/Logo.jsx';
 import { Linkedin } from './components/BrandIcons.jsx';
 import Chart from './components/Chart.jsx';
@@ -22,7 +23,7 @@ import {
   rankingBarOption, centuryHeatmapOption, recallOption, evaluationOption,
   stylometryPcaOption, classifierOption, nearestOption, dispersionOption,
   reasonDonutOption, geographyCentersOption, regionFlowOption, periodMobilityOption,
-  lexicalLifecycleOption, halfLifeOption, attributionDistributionOption, conceptProfileOption, systemConceptTrendOption,
+  lexicalLifecycleOption, halfLifeOption, attributionDistributionOption, conceptProfileOption, systemConceptTrendOption, publicQuestionOption,
 } from './chartOptions.js';
 import { compactFa, faDigits, faNumber, faPercent } from './utils.js';
 import { audiencePaths, faqItems, glossaryItems, researchPages } from './content/siteContent.js';
@@ -30,14 +31,14 @@ import { audiencePaths, faqItems, glossaryItems, researchPages } from './content
 const HEADER_NAV_ITEMS = [
   { label: 'خانه', id: 'home', sections: ['home'] },
   { label: 'پیکره', id: 'overview', sections: ['overview'] },
-  { label: 'روندها', id: 'topics', sections: ['topics', 'metaphors'] },
+  { label: 'کاوش', id: 'curiosity', sections: ['curiosity', 'topics', 'metaphors'] },
   { label: 'پیوند متنی', id: 'intertext', sections: ['intertext'] },
   { label: 'انتساب', id: 'attribution', sections: ['attribution'] },
   { label: 'هوش و سبک', id: 'century-ai', sections: ['century-ai', 'stylometry'] },
   { label: 'قالب و زمینه', id: 'forms', sections: ['forms', 'geography', 'lexical-life'] },
   { label: 'راهنما', id: 'knowledge', sections: ['poets', 'knowledge', 'about'] },
 ];
-const OBSERVED_SECTION_IDS = ['home', 'overview', 'topics', 'metaphors', 'intertext', 'century-ai', 'stylometry', 'attribution', 'forms', 'geography', 'lexical-life', 'poets', 'knowledge', 'about'];
+const OBSERVED_SECTION_IDS = ['home', 'overview', 'curiosity', 'topics', 'metaphors', 'intertext', 'century-ai', 'stylometry', 'attribution', 'forms', 'geography', 'lexical-life', 'poets', 'knowledge', 'about'];
 
 const accents = ['#0f766e', '#b9862d', '#9f2f38', '#315ba8', '#7c3aed', '#c45d2a', '#0e7490', '#4d7c0f'];
 const corpusPoets = atlas.overview.poets.map((poet) => ({
@@ -184,6 +185,7 @@ function App() {
   const [citationCopied, setCitationCopied] = useState(false);
   const [audienceMode, setAudienceMode] = useState('general');
   const [attributionCaseId, setAttributionCaseId] = useState(attributionResearch.cases[0].id);
+  const [curiosityId, setCuriosityId] = useState(publicQuestionsResearch.questions[0].id);
   const [glossaryOpen, setGlossaryOpen] = useState(false);
 
   const selectedTopic = atlas.topics.items.find((t) => t.id === Number(topicId)) || atlas.topics.items[0];
@@ -199,6 +201,7 @@ function App() {
   const intertextPoets = useMemo(() => [...new Set(atlas.intertext.edges.flatMap((edge) => [edge.source, edge.target]))].sort((a, b) => a.localeCompare(b, 'fa')), []);
   const visibleIntertextEdges = useMemo(() => intertextPoet === 'همه' ? atlas.intertext.edges : atlas.intertext.edges.filter((edge) => edge.source === intertextPoet || edge.target === intertextPoet), [intertextPoet]);
   const selectedAttributionCase = attributionResearch.cases.find((item) => item.id === attributionCaseId) || attributionResearch.cases[0];
+  const selectedCuriosity = publicQuestionsResearch.questions.find((item) => item.id === curiosityId) || publicQuestionsResearch.questions[0];
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
@@ -266,7 +269,7 @@ function App() {
             <span className="hero-badge"><Sparkles size={16} />روایت تعاملی هزار سال شعر فارسی</span>
             <h1>از <em>شعر</em> تا <strong>داده</strong></h1>
             <p className="nastaliq">واژه‌ها را ببین؛ تاریخ را لمس کن</p>
-            <p className="hero-intro">اطلسی عمومی و پژوهشی با نه مطالعه درباره تحول مضامین، زندگی استعاره‌ها، شبکه شاعران، هوش مصنوعی، سبک، قالب، جغرافیا و چرخه عمر واژگان شعر فارسی.</p>
+            <p className="hero-intro">اطلسی عمومی و پژوهشی با ده مطالعه درباره پرسش‌های جذاب شعر، تحول مضامین، زندگی استعاره‌ها، شبکه شاعران، هوش مصنوعی، سبک، قالب، جغرافیا، چرخه عمر واژگان و سنجش انتساب.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo('overview')}>شروع کاوش <ArrowDown size={18} /></button>
               <a className="secondary-button" href="/research/">مطالعات پژوهشی <BookOpen size={18} /></a>
@@ -288,10 +291,11 @@ function App() {
 
         <nav className="journey-nav reveal" aria-label="مسیر پیشنهادی کاوش">
           <button onClick={() => scrollTo('overview')}><span>۱</span><strong>داده چیست؟</strong><small>پیکره و پوشش</small></button>
-          <button onClick={() => scrollTo('topics')}><span>۲</span><strong>چه تغییر کرده؟</strong><small>مضمون و استعاره</small></button>
-          <button onClick={() => scrollTo('intertext')}><span>۳</span><strong>چه متن‌هایی نزدیک‌اند؟</strong><small>شاخص شباهت متنی</small></button>
-          <button onClick={() => scrollTo('attribution')}><span>۴</span><strong>انتساب چقدر معتبر است؟</strong><small>خیام، حافظ و نسخه‌ها</small></button>
-          <button onClick={() => scrollTo('geography')}><span>۵</span><strong>زمینه چه اثری دارد؟</strong><small>قالب، تاریخ و جغرافیا</small></button>
+          <button onClick={() => scrollTo('curiosity')}><span>۲</span><strong>چه چیزی شگفت‌زده‌مان می‌کند؟</strong><small>ده پرسش برای همه</small></button>
+          <button onClick={() => scrollTo('topics')}><span>۳</span><strong>چه تغییر کرده؟</strong><small>مضمون و استعاره</small></button>
+          <button onClick={() => scrollTo('intertext')}><span>۴</span><strong>چه متن‌هایی نزدیک‌اند؟</strong><small>شاخص شباهت متنی</small></button>
+          <button onClick={() => scrollTo('attribution')}><span>۵</span><strong>انتساب چقدر معتبر است؟</strong><small>خیام، حافظ و نسخه‌ها</small></button>
+          <button onClick={() => scrollTo('geography')}><span>۶</span><strong>زمینه چه اثری دارد؟</strong><small>قالب، تاریخ و جغرافیا</small></button>
         </nav>
 
         <Section id="overview" eyebrow="در یک نگاه" title="گستره پیکره شعر فارسی" intro="پیش از هر تفسیر، باید بدانیم داده از چه دوره‌ها و شاعرانی ساخته شده است. اندازه هر بخش در این صفحه، بازتاب حضور آن در پیکره است؛ نه رتبه ادبی.">
@@ -321,6 +325,32 @@ function App() {
             <Insight title="یک سده، یک تاریخ دقیق نیست" tone="blue" icon={<CircleHelp />}>برچسب سده به دوره زندگی شاعر اشاره دارد، نه زمان دقیق سرایش هر متن؛ پس نتایج، روندهای کلان‌اند.</Insight>
             <Insight title="برای مخاطب عام" tone="teal" icon={<Heart />}>هر نمودار را می‌توانید لمس، بزرگ‌نمایی یا فیلتر کنید. توضیح پایین هر نمودار، معنای آن را بدون نیاز به دانش آماری بیان می‌کند.</Insight>
           </div>
+        </Section>
+
+        <Section id="curiosity" eyebrow="پژوهش دهم · برای مخاطب کنجکاو" title="ده پرسش جذاب از هزار سال شعر فارسی" intro="دل یا عقل؟ شب یا روز؟ غم یا شادی؟ این بخش پرسش‌هایی را که ممکن است سر میز شام، کلاس یا شبکه‌های اجتماعی مطرح شوند به تحلیل‌های شفاف و قابل‌ردیابی تبدیل می‌کند. هر پاسخ کنار روش و محدودیت خودش نمایش داده می‌شود." className="curiosity-section section-tinted">
+          <div className="curiosity-status reveal"><Sparkles size={27} /><div><strong>{publicQuestionsResearch.status}</strong><p>محاسبه از {faNumber(publicQuestionsResearch.generatedFrom.usableRows)} رکورد پالایش‌شده و {faNumber(publicQuestionsResearch.generatedFrom.words)} واژه انجام شده است. {faNumber(publicQuestionsResearch.generatedFrom.excludedEditorialRows)} رکورد توضیحی بلند پیش از تحلیل کنار گذاشته شد.</p></div><a href="/downloads/public-questions-analysis.csv" download>دانلود همه عددها <Database size={17} /></a></div>
+          <div className="curiosity-question-grid reveal" role="tablist" aria-label="پرسش‌های عمومی شعر فارسی">
+            {publicQuestionsResearch.questions.map((question, index) => <button type="button" role="tab" aria-selected={curiosityId === question.id} className={curiosityId === question.id ? 'active' : ''} onClick={() => setCuriosityId(question.id)} key={question.id}><span>{faNumber(index + 1)}</span><div><small>{question.category}</small><strong>{question.shortTitle}</strong></div></button>)}
+          </div>
+          <article className="curiosity-dossier reveal">
+            <div className="curiosity-copy"><span className="eyebrow">پرسش منتخب</span><h3>{selectedCuriosity.title}</h3><p className="curiosity-teaser">{selectedCuriosity.teaser}</p><div className="curiosity-answer"><CircleHelp size={22} /><p>{selectedCuriosity.answer}</p></div></div>
+            <div className="curiosity-metrics">{selectedCuriosity.metrics.map((metric) => <MiniMetric key={metric.label} label={metric.label} value={`${faNumber(metric.value, { maximumFractionDigits: 2 })}${metric.suffix ? ` ${metric.suffix}` : ''}`} detail={metric.detail} />)}</div>
+          </article>
+          <div className="two-column curiosity-analysis">
+            <ChartCard title={`پاسخ تصویری: ${selectedCuriosity.shortTitle}`} kicker={selectedCuriosity.chart.yLabel} note="نمودار با تغییر پرسش به‌روزرسانی می‌شود. برای دیدن مقدار دقیق روی هر نقطه یا میله مکث کنید.">
+              <Chart option={publicQuestionOption(selectedCuriosity, dark)} height={430} ariaLabel={`نمودار ${selectedCuriosity.title}`} />
+            </ChartCard>
+            <Card className="curiosity-evidence reveal">
+              <span className="eyebrow">چرا این پاسخ جالب است؟</span>
+              <h3>عدد، تفسیر و ترمزِ اغراق</h3>
+              <div className="curiosity-highlights">{selectedCuriosity.highlights.map((item, index) => <article key={item}><span>{faNumber(index + 1)}</span><p>{item}</p></article>)}</div>
+              <div className="curiosity-method"><strong>چطور محاسبه شد؟</strong><p>{selectedCuriosity.method}</p></div>
+              <div className="curiosity-caveat"><Info size={18} /><div><strong>این نتیجه چه چیزی را ثابت نمی‌کند؟</strong><p>{selectedCuriosity.caveat}</p></div></div>
+            </Card>
+          </div>
+          <PlainLanguage title="قانون خواندن این ده پاسخ">این‌ها پاسخ‌های اکتشافی به پرسش‌های عمومی‌اند. یک واژه می‌تواند چند معنا داشته باشد و پیکره نیز نمایندهٔ کامل همهٔ شعر فارسی نیست؛ بنابراین بهترین استفاده، آغاز گفت‌وگو و انتخاب نمونه برای خوانش نزدیک است.</PlainLanguage>
+          <div className="reading-guide reveal research-only">{publicQuestionsResearch.readingGuide.map(([title, text]) => <article key={title}><strong>{title}</strong><p>{text}</p></article>)}</div>
+          <div className="section-actions reveal"><button className="secondary-button curiosity-next" onClick={() => { const current = publicQuestionsResearch.questions.findIndex((item) => item.id === curiosityId); setCuriosityId(publicQuestionsResearch.questions[(current + 1) % publicQuestionsResearch.questions.length].id); }}>پرسش بعدی <Sparkles size={17} /></button><a className="secondary-button" href="/research/public-questions/">روش، جدول و پاسخ‌های کامل <ArrowLeft size={17} /></a><button className="secondary-button" onClick={() => setAudienceMode('research')}>نمایش جزئیات پژوهشی <BrainCircuit size={17} /></button></div>
         </Section>
 
         <Section id="topics" eyebrow="پژوهش یکم" title="رودخانه تحول مضامین" intro="یازده محور موضوعی نشان می‌دهند ذهن و زبان شعر فارسی در طول سده‌ها چگونه جابه‌جا شده است. این تحلیل روی نمونه‌ای متوازن از شاعران انجام شده تا شاعران پرحجم بر نتیجه مسلط نشوند." className="section-tinted">

@@ -3,8 +3,8 @@
   "@type": "SoftwareSourceCode",
   "name": "از شعر تا داده",
   "alternateName": "From Poetry to Data",
-  "description": "اطلس تعاملی و دانشنامهٔ داده‌ای تحلیل شعر فارسی، شامل نه پژوهش، سنجش انتساب، ۶۷ نمایهٔ شاعر، ۱۱ مضمون، ۱۰ خانوادهٔ استعاری، ۱۳ صفحهٔ سده‌ای، نمودارهای پویا و API ماشین‌خوان.",
-  "version": "6.0.0",
+  "description": "اطلس تعاملی و دانشنامهٔ داده‌ای تحلیل شعر فارسی، شامل ده پژوهش، ده پرسش عمومی، سنجش انتساب، ۶۷ نمایهٔ شاعر، ۱۱ مضمون، ۱۰ خانوادهٔ استعاری، ۱۳ صفحهٔ سده‌ای، نمودارهای پویا و API ماشین‌خوان.",
+  "version": "7.0.0",
   "datePublished": "2026-07-27",
   "programmingLanguage": [
     "JavaScript",
@@ -31,7 +31,10 @@
     "lexical lifecycle",
     "textual similarity",
     "poetry attribution",
-    "manuscript studies"
+    "manuscript studies",
+    "public humanities",
+    "corpus questions",
+    "exploratory data analysis"
   ],
   "developmentStatus": "active",
   "applicationCategory": "Digital Humanities",

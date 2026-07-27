@@ -541,3 +541,78 @@ export function systemConceptTrendOption(systemTrends, dark = false) {
     series: concepts.map((name) => ({ name, type: 'line', smooth: .25, showSymbol: false, data: series.map((d) => d[name]), lineStyle: { width: 2.2 }, emphasis: { focus: 'series' } })),
   };
 }
+
+export function publicQuestionOption(question, dark = false) {
+  const chart = question.chart;
+  const legendText = { fontFamily: 'Vazirmatn', color: dark ? '#dce8e5' : '#53605e', fontSize: 11 };
+
+  if (chart.kind === 'ranking' || chart.kind === 'ranking-poets') {
+    const items = [...chart.items].slice(0, 10).reverse();
+    const isPoetReach = chart.kind === 'ranking-poets';
+    return {
+      color: ['#9f2f38'],
+      tooltip: {
+        ...baseTooltip(dark),
+        trigger: 'item',
+        formatter: (p) => {
+          const item = p.data;
+          const main = isPoetReach
+            ? `${faNumber(item.poets)} شاعر`
+            : `${faNumber(item.value, { maximumFractionDigits: 1 })} ${chart.yLabel}`;
+          const details = [];
+          if (isPoetReach) details.push(`${faNumber(item.value)} رخداد`);
+          else if (typeof item.poets === 'number') details.push(`در آثار ${faNumber(item.poets)} شاعر`);
+          if (typeof item.hits === 'number') details.push(`${faNumber(item.hits)} رخداد واقعی`);
+          if (typeof item.words === 'number') details.push(`از ${faNumber(item.words)} واژه`);
+          return `<b>${item.name}</b><br/>${main}${details.length ? `<br/>${details.join('<br/>')}` : ''}`;
+        },
+      },
+      grid: { left: 28, right: 56, top: 24, bottom: 35, containLabel: true },
+      xAxis: {
+        type: 'value', name: chart.yLabel, ...axis(dark),
+        axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 1 }) },
+      },
+      yAxis: {
+        type: 'category', data: items.map((item) => item.name), ...axis(dark),
+        axisLabel: { ...axis(dark).axisLabel, width: 150, overflow: 'truncate' },
+      },
+      series: [{
+        type: 'bar', barMaxWidth: 24,
+        data: items.map((item) => ({ ...item, value: isPoetReach ? item.poets : item.value })),
+        itemStyle: { borderRadius: [0, 8, 8, 0] },
+        label: {
+          show: true, position: 'right', fontFamily: 'Vazirmatn', color: dark ? '#e8f0ee' : '#3d4d4a',
+          formatter: (p) => faNumber(p.value, { maximumFractionDigits: 1 }),
+        },
+      }],
+    };
+  }
+
+  if (chart.kind === 'grouped') {
+    return {
+      color: ['#315ba8', '#b9862d'],
+      tooltip: {
+        ...baseTooltip(dark), trigger: 'axis',
+        formatter: (params) => [`<b>${params[0]?.axisValue}</b>`, ...params.map((p) => `${p.marker}${p.seriesName}: ${faNumber(p.value, { maximumFractionDigits: 1 })}`)].join('<br/>'),
+      },
+      legend: { top: 0, textStyle: legendText },
+      grid: { left: 52, right: 28, top: 54, bottom: 64, containLabel: true },
+      xAxis: { type: 'category', data: chart.labels, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, interval: 0, rotate: 12 } },
+      yAxis: { type: 'value', name: chart.yLabel, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 1 }) } },
+      series: chart.series.map((series) => ({ name: series.name, type: 'bar', data: series.values, barMaxWidth: 38, itemStyle: { borderRadius: [7, 7, 0, 0] } })),
+    };
+  }
+
+  return {
+    color: palette,
+    tooltip: {
+      ...baseTooltip(dark), trigger: 'axis',
+      formatter: (params) => [`<b>سده ${faNumber(params[0]?.axisValue)}</b>`, ...params.map((p) => `${p.marker}${p.seriesName}: ${faNumber(p.value, { maximumFractionDigits: 1 })}`)].join('<br/>'),
+    },
+    legend: { type: 'scroll', top: 0, textStyle: legendText },
+    grid: { left: 54, right: 28, top: 56, bottom: 45, containLabel: true },
+    xAxis: { type: 'category', data: chart.labels, name: 'سده هجری', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
+    yAxis: { type: 'value', name: chart.yLabel, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 1 }) } },
+    series: chart.series.map((series) => ({ name: series.name, type: 'line', data: series.values, smooth: .24, showSymbol: false, lineStyle: { width: 3 }, emphasis: { focus: 'series' } })),
+  };
+}
