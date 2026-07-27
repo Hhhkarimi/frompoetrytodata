@@ -5,7 +5,7 @@ The output is intentionally descriptive and explainable. It does not perform
 sentiment classification, authorship verdicts, or historical causal inference.
 
 Writes:
-  - src/data/publicQuestionsResearch.json
+  - app/research-data.json
   - public/downloads/public-questions-analysis.csv
 
 Usage:
@@ -25,7 +25,7 @@ csv.field_size_limit(sys.maxsize)
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'public' / 'data' / 'poems_with_more_info.tsv'
-OUT = ROOT / 'src' / 'data' / 'publicQuestionsResearch.json'
+OUT = ROOT / 'app' / 'research-data.json'
 CSV_OUT = ROOT / 'public' / 'downloads' / 'public-questions-analysis.csv'
 
 FA_MAP = str.maketrans({'ي': 'ی', 'ك': 'ک', 'ۀ': 'ه', 'ة': 'ه', 'ؤ': 'و', 'إ': 'ا', 'أ': 'ا', 'ٱ': 'ا', 'ـ': ''})

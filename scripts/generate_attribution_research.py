@@ -3,7 +3,7 @@
 
 The script intentionally produces *research triage*, not authenticity verdicts.
 It reads the five-column corpus and writes:
-  - src/data/attributionResearch.json
+  - app/attribution-data.json
   - public/downloads/attribution-corpus-audit.csv
 
 Usage:
@@ -24,7 +24,7 @@ csv.field_size_limit(sys.maxsize)
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'public' / 'data' / 'poems_with_more_info.tsv'
-OUT = ROOT / 'src' / 'data' / 'attributionResearch.json'
+OUT = ROOT / 'app' / 'attribution-data.json'
 AUDIT = ROOT / 'public' / 'downloads' / 'attribution-corpus-audit.csv'
 
 FA_MAP = str.maketrans({'ي':'ی','ك':'ک','ۀ':'ه','ة':'ه','ؤ':'و','إ':'ا','أ':'ا','ٱ':'ا','ـ':''})
