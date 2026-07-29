@@ -12,12 +12,16 @@
     button.addEventListener('click', async () => {
       const target = document.querySelector(button.dataset.copy);
       if (!target) return;
+      const status = button.parentElement.querySelector('[role="status"]');
       try {
         await navigator.clipboard.writeText(target.textContent.trim());
         const old = button.textContent;
         button.textContent = 'کپی شد';
+        if (status) status.textContent = 'استناد در حافظهٔ موقت کپی شد.';
         setTimeout(() => { button.textContent = old; }, 1800);
-      } catch { button.textContent = 'کپی نشد'; }
+      } catch {
+        if (status) status.textContent = 'کپی خودکار ممکن نشد؛ متن استناد را انتخاب و کپی کنید.';
+      }
     });
   });
 

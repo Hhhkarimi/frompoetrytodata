@@ -1,8 +1,11 @@
 const PARAMETER_ORDER = [
   'q',
+  'entity',
   'century',
   'topic',
   'metaphor',
+  'study',
+  'sort',
   'period',
   'threshold',
   'layout',
@@ -16,6 +19,8 @@ const PARAMETER_ORDER = [
 const METRICS = ['poems', 'couplets', 'words'];
 const LAYOUTS = ['force', 'circular'];
 const AUDIENCES = ['general', 'research'];
+const ENTITY_TYPES = ['poet', 'century', 'theme', 'metaphor', 'research'];
+const SORTS = ['relevance', 'title'];
 
 function allowedValue(parameters, name, allowed, invalidParameters, transform = (value) => value) {
   const raw = parameters.get(name);
@@ -42,6 +47,7 @@ export function parseAtlasUrl(input, options) {
 
   const state = {
     query,
+    entityType: allowedValue(parameters, 'entity', ENTITY_TYPES, invalidParameters),
     century: allowedValue(parameters, 'century', options.centuries, invalidParameters, Number),
     topic: allowedValue(parameters, 'topic', options.topics, invalidParameters, Number),
     metaphor: allowedValue(parameters, 'metaphor', options.metaphors, invalidParameters),
@@ -52,6 +58,8 @@ export function parseAtlasUrl(input, options) {
     metric: allowedValue(parameters, 'metric', METRICS, invalidParameters),
     caseId: allowedValue(parameters, 'case', options.cases, invalidParameters),
     question: allowedValue(parameters, 'question', options.questions, invalidParameters),
+    study: allowedValue(parameters, 'study', options.studies, invalidParameters),
+    sort: allowedValue(parameters, 'sort', SORTS, invalidParameters),
     audience: allowedValue(parameters, 'audience', AUDIENCES, invalidParameters),
   };
 
@@ -62,9 +70,12 @@ export function serializeAtlasState(state) {
   /** @type {Record<string, unknown>} */
   const values = {
     q: state.query?.trim() || null,
+    entity: state.entityType,
     century: state.century,
     topic: state.topic,
     metaphor: state.metaphor,
+    study: state.study,
+    sort: state.sort,
     period: state.period,
     threshold: state.threshold,
     layout: state.layout,

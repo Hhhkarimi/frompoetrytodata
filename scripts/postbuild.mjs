@@ -19,7 +19,8 @@ const geographyResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/g
 const lexicalResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/lexicalResearch.json'), 'utf8'));
 const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/attribution-data.json'), 'utf8'));
 const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/research-data.json'), 'utf8'));
-const buildDate = new Date().toISOString().slice(0, 10);
+const buildDate = PUBLICATION.modifiedDate;
+const securityExpiry = `${Number(PUBLICATION.modifiedDate.slice(0, 4)) + 1}${PUBLICATION.modifiedDate.slice(4)}T00:00:00.000Z`;
 const siteUrl = resolvePublicationOrigin();
 const isProduction = siteUrl.startsWith('https://') && !siteUrl.includes('localhost');
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION || '';
@@ -39,6 +40,13 @@ const write = (relativePath, content) => {
   fs.writeFileSync(target, content, 'utf8');
 };
 const absolute = (pathname = '/') => `${siteUrl}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
+const publicationMetadata = () => ({
+  schemaVersion: 1,
+  publicationVersion: PUBLICATION.version,
+  modifiedDate: PUBLICATION.modifiedDate,
+});
+const versionObject = (value) => ({ ...publicationMetadata(), ...value });
+const versionItems = (items) => ({ ...publicationMetadata(), items });
 
 const knownSlugs = {
   'رودکی': 'rudaki', 'فردوسی': 'ferdowsi', 'کسایی': 'kasaei', 'ابوسعید ابوالخیر': 'abu-saeid-abul-kheir',
@@ -172,7 +180,7 @@ ${breadcrumbs.length ? `<nav class="breadcrumbs" aria-label="مسیر صفحه">
 
 function citationBlock(title, pathname) {
   const citation = buildPersianCitation(title, pathname, siteUrl);
-  return `<section id="citation" class="citation-box"><div><span class="kicker">استناد پیشنهادی</span><h2>چگونه به این صفحه استناد کنیم؟</h2></div><blockquote id="citation-text">${escapeHtml(citation)}</blockquote><button type="button" data-copy="#citation-text">کپی استناد</button></section>`;
+  return `<section id="citation" class="citation-box"><div><span class="kicker">استناد پیشنهادی</span><h2>چگونه به این صفحه استناد کنیم؟</h2></div><blockquote id="citation-text">${escapeHtml(citation)}</blockquote><button type="button" data-copy="#citation-text" aria-describedby="citation-copy-status">کپی استناد</button><p id="citation-copy-status" class="citation-copy-status" role="status" aria-live="polite"></p></section>`;
 }
 
 function researchData(id) {
@@ -413,7 +421,9 @@ function relatedResearch(currentId) {
 }
 
 function generateResearchPages() {
-  const researchIndexItems = researchPages.map((p) => `<article class="research-index-card" style="--accent:${p.color}"><span>${p.eyebrow}</span><h2><a href="${p.path}">${p.title}</a></h2><p>${p.answer}</p><a class="text-link" href="${p.path}">مشاهده یافته‌ها، روش و جدول‌ها ←</a></article>`).join('');
+  const missingQualification = researchPages.find((page) => !page.qualification);
+  if (missingQualification) throw new Error(`Missing research qualification: ${missingQualification.id}`);
+  const researchIndexItems = researchPages.map((p) => `<article class="research-index-card" style="--accent:${p.color}"><span>${p.eyebrow}</span><h2><a href="${p.path}">${p.title}</a></h2><p>${p.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${p.qualification}</p><small>شاهد محاسباتی · جدول داده · روش و عدم‌قطعیت</small><div class="inline-actions"><a class="text-link" href="${p.path}">مشاهده یافته‌ها و جدول‌ها ←</a><a href="/methodology/">روش</a><a href="/data/">داده</a></div></article>`).join('');
   const indexSchema = {
     '@type': 'CollectionPage', '@id': `${siteUrl}/research/#page`, name: 'پژوهش‌های از شعر تا داده', url: absolute('/research/'),
     isPartOf: { '@id': `${siteUrl}/#website` }, hasPart: researchPages.map((p) => ({ '@type': 'Article', headline: p.title, url: absolute(p.path) })),
@@ -438,10 +448,12 @@ function generateResearchPages() {
       citation: [absolute('/methodology/'), absolute('/data/')],
     };
     const content = `<article>
-<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p></div><div class="hero-actions"><a class="primary" href="/atlas/#${page.anchor}">بازکردن نمودار تعاملی</a><a href="/methodology/">روش‌شناسی</a></div></header>
-<section id="results"><span class="kicker">نتیجه‌های اصلی</span><h2>چه چیزی از داده فهمیدیم؟</h2>${renderMetrics(r.metrics)}<ol class="finding-list">${r.findings.map((f) => `<li>${f}</li>`).join('')}</ol></section>
+<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${page.qualification}</p></div><div class="hero-actions"><a class="primary" href="/atlas/#${page.anchor}">بازکردن نمودار تعاملی</a><a href="/methodology/">روش‌شناسی</a></div></header>
+<section id="results"><span class="kicker">شاهد محاسباتی و واحد تحلیل</span><h2>چه چیزی محاسبه شد؟</h2>${renderMetrics(r.metrics)}<ol class="finding-list">${r.findings.map((f) => `<li>${f}</li>`).join('')}</ol></section>
 <section id="data"><span class="kicker">جدول داده</span><h2>خلاصه عددی قابل جست‌وجو</h2><p>جدول زیر همان اعداد اصلی نمودارها را به‌صورت متنی و قابل خواندن برای موتورهای جست‌وجو، ابزارهای کمکی و پژوهشگران ارائه می‌کند.</p>${renderTable(r.tableHeaders, r.tableRows)}</section>
-<section id="method"><div class="method-grid"><div><span class="kicker">روش</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div></section>
+<section id="method"><div class="method-grid"><div><span class="kicker">روش و عدم‌قطعیت</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div></section>
+<section id="interpretation"><span class="kicker">تفسیر ادبی</span><h2>این شاهد چه خوانشی را پیشنهاد می‌کند؟</h2><p>${page.answer}</p><p class="local-qualification">${page.qualification}</p></section>
+<section id="downloads"><span class="kicker">ممیزی و استفادهٔ دوباره</span><h2>داده، روش و موجودیت‌های مرتبط</h2><div class="hero-actions"><a class="primary" href="/data/">دانلودهای JSON و CSV</a><a href="/methodology/">روش‌شناسی مشترک</a><a href="/poets/">شاعران</a><a href="/centuries/">سده‌ها</a><a href="/themes/">مضمون‌ها</a><a href="/metaphors/">استعاره‌ها</a></div></section>
 <section id="faq"><span class="kicker">پرسش‌های مرتبط</span><h2>خوانش درست نتیجه</h2><div class="faq-list">${faqItems.slice(1, 5).map((item) => `<details><summary>${item.question}</summary><p>${item.answer}</p></details>`).join('')}</div></section>
 ${citationBlock(page.title, page.path)}${relatedResearch(page.id)}</article>`;
     const faqsSchema = { '@type': 'FAQPage', mainEntity: faqItems.slice(1, 5).map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) };
@@ -449,7 +461,7 @@ ${citationBlock(page.title, page.path)}${relatedResearch(page.id)}</article>`;
       title: `${page.title} | از شعر تا داده`, description: page.description, pathname: page.path,
       image: `/og/og-${page.id}.png`, type: 'article', schemas: [schema, faqsSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }, { name: page.shortTitle, path: page.path }])],
       keywords: page.keywords, breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }, { name: page.shortTitle, path: page.path }],
-      toc: [{ id: 'results', label: 'نتایج اصلی' }, { id: 'data', label: 'جدول داده' }, { id: 'method', label: 'روش و محدودیت' }, { id: 'faq', label: 'پرسش‌ها' }, { id: 'citation', label: 'استناد' }], content,
+      toc: [{ id: 'results', label: 'شاهد محاسباتی' }, { id: 'data', label: 'جدول داده' }, { id: 'method', label: 'روش و محدودیت' }, { id: 'interpretation', label: 'تفسیر ادبی' }, { id: 'downloads', label: 'داده و پیوندها' }, { id: 'citation', label: 'استناد' }], content,
     }));
   }
 }
@@ -583,7 +595,7 @@ function writeCsv(file, headers, rows) {
   write(file, `\uFEFF${headers.map(csvEscape).join(',')}\n${rows.map((row) => row.map(csvEscape).join(',')).join('\n')}\n`);
 }
 function generateMachineReadable() {
-  const summary = {
+  const summary = versionObject({
     meta: { ...data.meta, generatedFrom: 'ده مطالعهٔ داده‌محور دربارهٔ پرسش‌های عمومی، مضامین، استعاره، پیوند متنی، تشخیص سده، سبک‌سنجی، قالب‌ها، جغرافیای ادبی، چرخهٔ واژگان و سنجش انتساب', siteUrl, buildDate, language: 'fa-IR', license: 'See ATTRIBUTIONS.md and LICENSE' },
     corpus: { texts: data.overview.texts, poets: data.overview.poets.length, books: data.overview.books, couplets: data.overview.couplets, words: data.overview.words, centuries: data.overview.centuries },
     research: researchPages.map((page) => ({ id: page.id, title: page.title, url: absolute(page.path), answer: page.answer, keywords: page.keywords })),
@@ -595,16 +607,16 @@ function generateMachineReadable() {
       lexicalLife: lexicalResearch,
       attribution: attributionResearch,
     },
-  };
+  });
   write('api/atlas-summary.json', JSON.stringify(summary, null, 2));
-  write('api/research-findings.json', JSON.stringify(researchPages.map((page) => ({ ...page, metrics: researchData(page.id).metrics, findings: researchData(page.id).findings, method: researchData(page.id).method, limitation: researchData(page.id).limit })), null, 2));
-  write('api/poets.json', JSON.stringify(data.overview.poets.map((p) => ({ ...p, slug: poetSlug(p.name), url: absolute(`/poets/${poetSlug(p.name)}/`) })), null, 2));
-  write('api/atlas-data.json', JSON.stringify(data, null, 2));
-  write('api/forms.json', JSON.stringify(formResearch, null, 2));
-  write('api/geography.json', JSON.stringify(geographyResearch, null, 2));
-  write('api/lexical-life.json', JSON.stringify(lexicalResearch, null, 2));
-  write('api/attribution.json', JSON.stringify(attributionResearch, null, 2));
-  write('api/public-questions.json', JSON.stringify(publicQuestionsResearch, null, 2));
+  write('api/research-findings.json', JSON.stringify(versionItems(researchPages.map((page) => ({ ...page, metrics: researchData(page.id).metrics, findings: researchData(page.id).findings, method: researchData(page.id).method, limitation: researchData(page.id).limit }))), null, 2));
+  write('api/poets.json', JSON.stringify(versionItems(data.overview.poets.map((p) => ({ ...p, slug: poetSlug(p.name), url: absolute(`/poets/${poetSlug(p.name)}/`) }))), null, 2));
+  write('api/atlas-data.json', JSON.stringify(versionObject(data), null, 2));
+  write('api/forms.json', JSON.stringify(versionObject(formResearch), null, 2));
+  write('api/geography.json', JSON.stringify(versionObject(geographyResearch), null, 2));
+  write('api/lexical-life.json', JSON.stringify(versionObject(lexicalResearch), null, 2));
+  write('api/attribution.json', JSON.stringify(versionObject(attributionResearch), null, 2));
+  write('api/public-questions.json', JSON.stringify(versionObject(publicQuestionsResearch), null, 2));
   write('CITATION.cff', fs.readFileSync(path.join(root, 'CITATION.cff'), 'utf8'));
   write('codemeta.json', fs.readFileSync(path.join(root, 'codemeta.json'), 'utf8'));
   write('CHANGELOG.md', fs.readFileSync(path.join(root, 'CHANGELOG.md'), 'utf8'));
@@ -641,7 +653,12 @@ function generateDownloadManifest() {
       const content = fs.readFileSync(file);
       return {
         path: path.relative(downloadsRoot, file).split(path.sep).join('/'),
+        datasetId: path.relative(downloadsRoot, file).split(path.sep).join('/').replace(/\.[^.]+$/, ''),
         mediaType: mediaTypes[path.extname(file)] || 'application/octet-stream',
+        scope: `Published ${path.basename(file)} distribution from From Poetry to Data`,
+        license: absolute('/attributions/'),
+        provenance: absolute('/methodology/'),
+        citation: buildPersianCitation('مجموعه‌دادهٔ از شعر تا داده', '/data/', siteUrl),
         bytes: content.byteLength,
         sha256: createHash('sha256').update(content).digest('hex'),
       };
@@ -662,7 +679,7 @@ function generateDownloadManifest() {
 }
 
 function homeFallback() {
-  return `<div class="prerender-home"><header><span>روایت داده‌محور شعر فارسی</span><h1>شعر فارسی در سیزده سده چگونه تغییر کرده است؟</h1><p>داده‌ها از جابه‌جایی مضمون‌ها، دگرگونی خانواده‌های استعاری و تفاوت الگوهای زبانی خبر می‌دهند؛ اما این الگوها شاهد محاسباتی‌اند، نه حکم قطعی درباره ارزش ادبی یا علت تاریخی.</p><a href="/atlas/">کاوش در اطلس</a><a href="/research/">دیدن یافته‌های پژوهشی</a></header><main id="main"><section><h2>دامنه پیکره</h2><p>${faNumber(data.overview.texts)} متن از ${faNumber(data.overview.poets.length)} شاعر در سیزده سدهٔ منتسب. پوشش پیکره معادل اهمیت ادبی نیست و سدهٔ منتسب لزوماً تاریخ دقیق سرایش نیست.</p></section><section><h2>برای چه کاری آمده‌اید؟</h2><nav><a href="/research/public-questions/">خوانندهٔ عمومی</a><a href="/research/">پژوهشگر ادبی</a><a href="/methodology/">پژوهشگر علوم انسانی دیجیتال</a><a href="/data/">کاربر داده</a></nav></section><section><h2>ده پژوهش اصلی</h2>${researchPages.map((p) => `<article><h3><a href="${p.path}">${p.title}</a></h3><p>${p.answer}</p></article>`).join('')}</section></main></div>`;
+  return `<div class="prerender-home"><header><span>روایت داده‌محور شعر فارسی</span><h1>شعر فارسی در سیزده سده چگونه تغییر کرده است؟</h1><p>داده‌ها از جابه‌جایی مضمون‌ها، دگرگونی خانواده‌های استعاری و تفاوت الگوهای زبانی خبر می‌دهند؛ اما این الگوها شاهد محاسباتی‌اند، نه حکم قطعی درباره ارزش ادبی یا علت تاریخی.</p><a href="/atlas/">کاوش در اطلس</a><a href="/research/">دیدن یافته‌های پژوهشی</a></header><main id="main"><section><h2>دامنه پیکره</h2><p>${faNumber(data.overview.texts)} متن از ${faNumber(data.overview.poets.length)} شاعر در سیزده سدهٔ منتسب. پوشش پیکره معادل اهمیت ادبی نیست و سدهٔ منتسب لزوماً تاریخ دقیق سرایش نیست.</p></section><section><h2>برای چه کاری آمده‌اید؟</h2><nav><a href="/research/public-questions/">خوانندهٔ عمومی</a><a href="/research/">پژوهشگر ادبی</a><a href="/methodology/">پژوهشگر علوم انسانی دیجیتال</a><a href="/data/">کاربر داده</a></nav></section><section><h2>ده پژوهش اصلی</h2>${researchPages.map((p) => `<article><h3><a href="${p.path}">${p.title}</a></h3><p>${p.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${p.qualification}</p></article>`).join('')}</section></main></div>`;
 }
 
 function atlasFallback() {
@@ -744,7 +761,7 @@ function generateDiscoveryFiles() {
   const full = `${llms}\n## یافته‌ها و روش‌های تفصیلی\n${researchPages.map((p) => { const r = researchData(p.id); return `\n### ${p.title}\n${p.description}\n\nپاسخ: ${p.answer}\n\nیافته‌ها:\n${r.findings.map((x) => `- ${x}`).join('\n')}\n\nروش: ${r.method}\n\nمحدودیت: ${r.limit}\n`; }).join('\n')}\n## داده و API\n- ${absolute('/api/atlas-summary.json')}\n- ${absolute('/api/research-findings.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/geography.json')}\n- ${absolute('/api/lexical-life.json')}\n- ${absolute('/api/attribution.json')}\n- ${absolute('/downloads/attribution-corpus-audit.csv')}\n- ${absolute('/downloads/topics-by-century.csv')}\n- ${absolute('/downloads/metaphors-by-century.csv')}\n- ${absolute('/downloads/intertext-edges.csv')}\n- ${absolute('/downloads/forms-comparison.csv')}\n- ${absolute('/downloads/geography/poet_geography.csv')}\n- ${absolute('/downloads/lexical-lifecycle.csv')}\n`;
   write('llms-full.txt', full);
   write('humans.txt', `/* TEAM */\nCreator: حسین کریمی\nLinkedIn: ${data.meta.linkedin}\n\n/* SITE */\nName: از شعر تا داده\nLanguage: Persian (fa-IR)\nLast update: ${buildDate}\nTechnology: React, Vite, Apache ECharts\n`);
-  write('.well-known/security.txt', `Contact: ${data.meta.linkedin}\nPreferred-Languages: fa, en\nCanonical: ${absolute('/.well-known/security.txt')}\nExpires: ${new Date(Date.now() + 365 * 86400000).toISOString()}\n`);
+  write('.well-known/security.txt', `Contact: ${data.meta.linkedin}\nPreferred-Languages: fa, en\nCanonical: ${absolute('/.well-known/security.txt')}\nExpires: ${securityExpiry}\n`);
   write('opensearch.xml', `<?xml version="1.0" encoding="UTF-8"?><OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"><ShortName>از شعر تا داده</ShortName><Description>جست‌وجوی شاعران در اطلس شعر فارسی</Description><InputEncoding>UTF-8</InputEncoding><Url type="text/html" template="${absolute('/poets/?q={searchTerms}')}"/></OpenSearchDescription>`);
   write('manifest.webmanifest', JSON.stringify({ name: 'از شعر تا داده؛ اطلس تعاملی شعر فارسی', short_name: 'از شعر تا داده', description: 'تحلیل تعاملی بیش از پنجاه‌وچهار هزار متن شعر فارسی', lang: 'fa', dir: 'rtl', start_url: '/', scope: '/', display: 'standalone', background_color: '#f8f2e5', theme_color: '#0b3b3a', icons: [{ src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any maskable' }] }, null, 2));
   write('404.html', `${head({ title: 'صفحه پیدا نشد | از شعر تا داده', description: 'صفحه درخواستی در اطلس تعاملی از شعر تا داده پیدا نشد؛ از صفحه اصلی، پژوهش‌ها یا فهرست شاعران مسیر درست را پیدا کنید.', path: '/404.html', schemas: [] })}<body><main class="not-found"><span class="kicker">خطای ${faNumber(404)}</span><h1>این بیت در دفتر ما نیست</h1><p>صفحه‌ای که دنبالش بودید پیدا نشد.</p><a class="primary" href="/">بازگشت به صفحه اصلی</a></main></body></html>`);
@@ -770,6 +787,7 @@ function validateOutput() {
 function urlsCount() { return 1 + 1 + researchPages.length + 1 + data.overview.poets.length + 6; }
 
 ensureDir(dist);
+fs.rmSync(path.join(dist, 'prototype'), { recursive: true, force: true });
 generateResearchPages();
 generatePoetPages();
 generateUtilityPages();

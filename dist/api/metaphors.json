@@ -1,112 +1,117 @@
-[
-  {
-    "slug": "journey-road-destination",
-    "name": "راه، سفر و منزل",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/",
-    "answer": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
-    "occurrences": 35316,
-    "poemPercent": 28.6,
-    "rate": 36.3,
-    "peakCentury": 10,
-    "semanticField": "عشق، بدن و معشوق"
-  },
-  {
-    "slug": "flower-nightingale",
-    "name": "گل و بلبل",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/",
-    "answer": "خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-    "occurrences": 27370,
-    "poemPercent": 24.9,
-    "rate": 28.1,
-    "peakCentury": 11,
-    "semanticField": "عشق، بدن و معشوق"
-  },
-  {
-    "slug": "light-candle-darkness",
-    "name": "نور، شمع و تاریکی",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/",
-    "answer": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
-    "occurrences": 23952,
-    "poemPercent": 23.1,
-    "rate": 24.6,
-    "peakCentury": 8,
-    "semanticField": "رنج، مرگ و فقدان"
-  },
-  {
-    "slug": "blood-wound-dagger",
-    "name": "خون، زخم و خنجر",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/",
-    "answer": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
-    "occurrences": 23438,
-    "poemPercent": 23.7,
-    "rate": 24.1,
-    "peakCentury": 13,
-    "semanticField": "قدرت و نبرد"
-  },
-  {
-    "slug": "wine-cupbearer",
-    "name": "باده، شراب و ساقی",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/",
-    "answer": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
-    "occurrences": 21796,
-    "poemPercent": 19.9,
-    "rate": 22.4,
-    "peakCentury": 8,
-    "semanticField": "عشق، بدن و معشوق"
-  },
-  {
-    "slug": "fire-flame-spark",
-    "name": "آتش، شعله و شرر",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/",
-    "answer": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-    "occurrences": 19037,
-    "poemPercent": 20.2,
-    "rate": 19.5,
-    "peakCentury": 11,
-    "semanticField": "عشق، بدن و معشوق"
-  },
-  {
-    "slug": "sea-wave-shore",
-    "name": "دریا، موج و ساحل",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/",
-    "answer": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-    "occurrences": 17175,
-    "poemPercent": 16.8,
-    "rate": 17.6,
-    "peakCentury": 11,
-    "semanticField": "عشق، بدن و معشوق"
-  },
-  {
-    "slug": "mirror-reflection",
-    "name": "آینه و بازتاب",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/mirror-reflection/",
-    "answer": "خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-    "occurrences": 9057,
-    "poemPercent": 10.7,
-    "rate": 9.3,
-    "peakCentury": 11,
-    "semanticField": "عشق، بدن و معشوق"
-  },
-  {
-    "slug": "cage-prison",
-    "name": "قفس و زندان",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/cage-prison/",
-    "answer": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
-    "occurrences": 3376,
-    "poemPercent": 4.7,
-    "rate": 3.5,
-    "peakCentury": 14,
-    "semanticField": "طبیعت و زیبایی"
-  },
-  {
-    "slug": "chain-captivity",
-    "name": "زنجیر و اسارت",
-    "url": "https://frompoetrytodata.vercel.app/metaphors/chain-captivity/",
-    "answer": "خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-    "occurrences": 3055,
-    "poemPercent": 4.5,
-    "rate": 3.1,
-    "peakCentury": 11,
-    "semanticField": "عشق، بدن و معشوق"
-  }
-]
+{
+  "schemaVersion": 1,
+  "publicationVersion": "7.0.0",
+  "modifiedDate": "2026-07-29",
+  "items": [
+    {
+      "slug": "journey-road-destination",
+      "name": "راه، سفر و منزل",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/",
+      "answer": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
+      "occurrences": 35316,
+      "poemPercent": 28.6,
+      "rate": 36.3,
+      "peakCentury": 10,
+      "semanticField": "عشق، بدن و معشوق"
+    },
+    {
+      "slug": "flower-nightingale",
+      "name": "گل و بلبل",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/",
+      "answer": "خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+      "occurrences": 27370,
+      "poemPercent": 24.9,
+      "rate": 28.1,
+      "peakCentury": 11,
+      "semanticField": "عشق، بدن و معشوق"
+    },
+    {
+      "slug": "light-candle-darkness",
+      "name": "نور، شمع و تاریکی",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/",
+      "answer": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
+      "occurrences": 23952,
+      "poemPercent": 23.1,
+      "rate": 24.6,
+      "peakCentury": 8,
+      "semanticField": "رنج، مرگ و فقدان"
+    },
+    {
+      "slug": "blood-wound-dagger",
+      "name": "خون، زخم و خنجر",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/",
+      "answer": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
+      "occurrences": 23438,
+      "poemPercent": 23.7,
+      "rate": 24.1,
+      "peakCentury": 13,
+      "semanticField": "قدرت و نبرد"
+    },
+    {
+      "slug": "wine-cupbearer",
+      "name": "باده، شراب و ساقی",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/",
+      "answer": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
+      "occurrences": 21796,
+      "poemPercent": 19.9,
+      "rate": 22.4,
+      "peakCentury": 8,
+      "semanticField": "عشق، بدن و معشوق"
+    },
+    {
+      "slug": "fire-flame-spark",
+      "name": "آتش، شعله و شرر",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/",
+      "answer": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+      "occurrences": 19037,
+      "poemPercent": 20.2,
+      "rate": 19.5,
+      "peakCentury": 11,
+      "semanticField": "عشق، بدن و معشوق"
+    },
+    {
+      "slug": "sea-wave-shore",
+      "name": "دریا، موج و ساحل",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/",
+      "answer": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+      "occurrences": 17175,
+      "poemPercent": 16.8,
+      "rate": 17.6,
+      "peakCentury": 11,
+      "semanticField": "عشق، بدن و معشوق"
+    },
+    {
+      "slug": "mirror-reflection",
+      "name": "آینه و بازتاب",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/mirror-reflection/",
+      "answer": "خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+      "occurrences": 9057,
+      "poemPercent": 10.7,
+      "rate": 9.3,
+      "peakCentury": 11,
+      "semanticField": "عشق، بدن و معشوق"
+    },
+    {
+      "slug": "cage-prison",
+      "name": "قفس و زندان",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/cage-prison/",
+      "answer": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
+      "occurrences": 3376,
+      "poemPercent": 4.7,
+      "rate": 3.5,
+      "peakCentury": 14,
+      "semanticField": "طبیعت و زیبایی"
+    },
+    {
+      "slug": "chain-captivity",
+      "name": "زنجیر و اسارت",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/chain-captivity/",
+      "answer": "خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
+      "occurrences": 3055,
+      "poemPercent": 4.5,
+      "rate": 3.1,
+      "peakCentury": 11,
+      "semanticField": "عشق، بدن و معشوق"
+    }
+  ]
+}

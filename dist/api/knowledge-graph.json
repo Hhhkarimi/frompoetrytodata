@@ -1,4 +1,7 @@
 {
+  "schemaVersion": 1,
+  "publicationVersion": "7.0.0",
+  "modifiedDate": "2026-07-29",
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -51,7 +54,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/topics/#article",
       "headline": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
-      "abstract": "ترکیب موضوعی شعر فارسی در طول زمان به‌طور معناداری تغییر کرده است؛ سده تاریخی حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی این تفاوت را معنادار نشان می‌دهد.",
+      "abstract": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ canonical ساخته می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/topics/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -103,7 +106,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/stylometry/#article",
       "headline": "اثر انگشت سبکی شاعران و کشف شعرهای نامتعارف",
-      "abstract": "در آزمون متوازن ۴۹ شاعر، مدل نویسه‌ای به دقت ۶۶٫۷٪ رسید؛ بسیار بالاتر از خط مبنای حدود ۲٪. بااین‌حال، نامتعارف آماری الزاماً به معنی انتساب نادرست نیست.",
+      "abstract": "مدل نویسه‌ای در آزمون متوازن از خط مبنا بهتر عمل می‌کند؛ مقدارهای دقیق و تعریف نمونه از دادهٔ پژوهش در صفحهٔ شواهد نمایش داده می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/stylometry/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -116,7 +119,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/forms/#article",
       "headline": "مقایسه تکامل غزل، قصیده، رباعی و مثنوی",
-      "abstract": "چهار قالب فقط در اندازه تفاوت ندارند: قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد. قالب شعر ۳۷٫۵٪ از تفاوت معنایی نمونه را نیز توضیح می‌دهد.",
+      "abstract": "قالب‌های بررسی‌شده در طول، ساختار و الگوی معنایی تفاوت دارند؛ اندازهٔ اثر دقیق و دامنهٔ نمونه از artifact پژوهش به صفحهٔ شواهد می‌آید.",
       "url": "https://frompoetrytodata.vercel.app/research/forms/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -129,7 +132,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/geography/#article",
       "headline": "جغرافیای تخیل و مهاجرت شعر فارسی",
-      "abstract": "۲۴ شاعر از ۶۷ شاعر پیکره، یعنی ۳۵٫۸٪، در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ جابه‌جایی میان چهار دوره تاریخی تفاوت دارد؛ اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی در این نمونه معنادار نشد.",
+      "abstract": "بخشی از شاعران پیکره در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ مشاهده‌شده میان دوره‌ها تفاوت دارد؛ عددها و آزمون‌ها مستقیماً از artifact جغرافیا نمایش داده می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/geography/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -142,7 +145,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/lexical-life/#article",
       "headline": "نیمه‌عمر واژگان در شعر فارسی",
-      "abstract": "در ۶٬۵۵۳ واژه‌ای که افت تا نصف اوج مشاهده شد، میانه نیمه‌عمر ۱٫۳۶ سده است؛ بااین‌حال ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند. چرخه واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق.",
+      "abstract": "چرخهٔ واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق؛ میانه، نمونهٔ مشاهده‌شده و موارد سانسور راست از artifact پژوهش محاسبه و نمایش داده می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/lexical-life/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -155,7 +158,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/attribution/#article",
       "headline": "سنجش انتساب شعر با شواهد زبانی، فکری و تاریخی",
-      "abstract": "پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد. در دادهٔ خیام سه متن نثری و ده‌ها صورت نزدیک میان مجموعه‌ها شناسایی شد.",
+      "abstract": "پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد؛ شمار هشدارها از artifact ممیزی نمایش داده می‌شود.",
       "url": "https://frompoetrytodata.vercel.app/research/attribution/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -168,7 +171,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/public-questions/#article",
       "headline": "ده پرسش جذاب از هزار سال شعر فارسی",
-      "abstract": "در این پیکره «دل» حدود ۸٫۶ برابر «عقل»، نشانه‌های غم ۲٫۸ برابر شادی و ضمیرهای فردی ۲٫۴ برابر جمعی دیده می‌شوند. بااین‌حال هر نتیجه کنار تعریف واژه‌ها و محدودیت معنایی آن نمایش داده می‌شود.",
+      "abstract": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ canonical هر پرسش نمایش داده می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/public-questions/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"

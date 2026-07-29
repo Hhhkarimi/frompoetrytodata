@@ -1,14 +1,17 @@
+import { useId } from 'react';
+
 export default function Logo({ compact = false }) {
+  const gradientId = useId();
   return (
-    <div className={`brand-logo ${compact ? 'brand-logo--compact' : ''}`} aria-label="از شعر تا داده">
+    <div className={`brand-logo ${compact ? 'brand-logo--compact' : ''}`} role="img" aria-label="از شعر تا داده">
       <svg className="brand-mark" viewBox="0 0 128 128" role="img" aria-hidden="true">
         <defs>
-          <linearGradient id="brandGradient" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stopColor="#0b615c" />
             <stop offset="1" stopColor="#b9862d" />
           </linearGradient>
         </defs>
-        <path d="M64 8 114 37v54L64 120 14 91V37Z" fill="url(#brandGradient)" />
+        <path d="M64 8 114 37v54L64 120 14 91V37Z" fill={`url(#${gradientId})`} />
         <path d="M64 28 87 56 64 99 41 56Z" fill="#fff8e8" />
         <circle cx="64" cy="60" r="8" fill="#9f2f38" />
         <path d="M64 68v23" stroke="#9f2f38" strokeWidth="6" strokeLinecap="round" />

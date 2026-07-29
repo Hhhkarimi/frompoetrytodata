@@ -18,7 +18,7 @@ const geographyResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/g
 const lexicalResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/lexicalResearch.json'), 'utf8'));
 const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/attribution-data.json'), 'utf8'));
 const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/research-data.json'), 'utf8'));
-const buildDate = new Date().toISOString().slice(0, 10);
+const buildDate = PUBLICATION.modifiedDate;
 const siteUrl = resolvePublicationOrigin();
 const isProduction = siteUrl.startsWith('https://') && !siteUrl.includes('localhost');
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION || '';
@@ -41,6 +41,13 @@ const write = (relativePath, content) => {
 };
 const absolute = (pathname = '/') => `${siteUrl}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
 const jsonLd = (value) => `<script type="application/ld+json">${JSON.stringify(value).replaceAll('<', '\\u003c')}</script>`;
+const publicationMetadata = () => ({
+  schemaVersion: 1,
+  publicationVersion: PUBLICATION.version,
+  modifiedDate: PUBLICATION.modifiedDate,
+});
+const versionObject = (value) => ({ ...publicationMetadata(), ...value });
+const versionItems = (items) => ({ ...publicationMetadata(), items });
 
 const topicSlugs = {
   1: 'ethics-wisdom',
@@ -172,7 +179,7 @@ function shell({ title, description, pathname, image, schemas = [], keywords = [
 
 function citationBlock(title, pathname) {
   const citation = buildPersianCitation(title, pathname, siteUrl);
-  return `<section id="citation" class="citation-box"><div><span class="kicker">استناد آماده</span><h2>استناد پیشنهادی</h2></div><blockquote id="citation-text">${escapeHtml(citation)}</blockquote><button type="button" data-copy="#citation-text">کپی استناد</button></section>`;
+  return `<section id="citation" class="citation-box"><div><span class="kicker">استناد آماده</span><h2>استناد پیشنهادی</h2></div><blockquote id="citation-text">${escapeHtml(citation)}</blockquote><button type="button" data-copy="#citation-text" aria-describedby="citation-copy-status">کپی استناد</button><p id="citation-copy-status" class="citation-copy-status" role="status" aria-live="polite"></p></section>`;
 }
 
 function renderMetrics(metrics) {
@@ -269,13 +276,13 @@ ${citationBlock(`تحول مضمون ${topic.name} در شعر فارسی`, path
       toc: [{ id: 'profile', label: 'پروفایل کمی' }, { id: 'trajectory', label: 'روند سده‌ای' }, { id: 'relations', label: 'موضوع‌های مرتبط' }, { id: 'interpretation', label: 'راهنمای تفسیر' }, { id: 'citation', label: 'استناد' }],
       content,
     }));
-    write(`api/themes/${slug}.json`, JSON.stringify({
+    write(`api/themes/${slug}.json`, JSON.stringify(versionObject({
       '@context': 'https://schema.org', '@type': 'DefinedTerm', id: topic.id, slug, url: absolute(pathname),
       name: topic.name, keywords: topic.keywords, answer: topicAnswer(topic), overallShare: topic.overallShare,
       peakCentury: topic.peakCentury, peakShare: topic.peakShare, trend: { rho: topic.rho, q: topic.qTrend, significant: topic.significantTrend, direction: topic.direction },
       values: topic.values, related: related.map((r) => ({ id: r.id, name: r.name, slug: topicSlugs[r.id], correlation: Number(r.similarity.toFixed(4)) })),
       methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: PUBLICATION.modifiedDate,
-    }, null, 2));
+    }), null, 2));
   }
 }
 
@@ -344,11 +351,11 @@ ${citationBlock(`تحول استعاره ${item.name} در شعر فارسی`, p
       toc: [{ id: 'profile', label: 'پروفایل کمی' }, { id: 'trajectory', label: 'روند تاریخی' }, { id: 'shift', label: 'رانش معنایی' }, { id: 'relations', label: 'تصویرهای همراه' }, { id: 'interpretation', label: 'راهنمای تفسیر' }, { id: 'citation', label: 'استناد' }],
       content,
     }));
-    write(`api/metaphors/${slug}.json`, JSON.stringify({
+    write(`api/metaphors/${slug}.json`, JSON.stringify(versionObject({
       '@context': 'https://schema.org', '@type': 'DefinedTerm', slug, url: absolute(pathname), name: item.name,
       answer: metaphorAnswer(item), ...item, values: series, related: relations.map((r) => ({ name: r.other, slug: metaphorSlugs[r.other], period: r.period, npmi: r.npmi })),
       strongestSemanticShift: strongestShift || null, methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: PUBLICATION.modifiedDate,
-    }, null, 2));
+    }), null, 2));
   }
 }
 
@@ -406,13 +413,13 @@ ${citationBlock(`شعر فارسی در سده ${faNumber(century)} هجری`, p
       toc: [{ id: 'corpus', label: 'آمار پیکره' }, { id: 'poets', label: 'شاعران' }, { id: 'topics', label: 'مضامین' }, { id: 'metaphors', label: 'استعاره‌ها' }, { id: 'context', label: 'خط زمانی' }, { id: 'limits', label: 'محدودیت' }, { id: 'citation', label: 'استناد' }],
       content,
     }));
-    write(`api/centuries/${century}.json`, JSON.stringify({
+    write(`api/centuries/${century}.json`, JSON.stringify(versionObject({
       '@context': 'https://schema.org', '@type': 'CollectionPage', century, url: absolute(pathname), corpus: row,
       poets: poets.map((p) => ({ name: p.name, slug: poetSlug(p.name), url: absolute(`/poets/${poetSlug(p.name)}/`), poems: p.poems, totalCouplets: p.totalCouplets, totalWords: p.totalWords, books: p.books, medianWords: p.medianWords })),
       topics: topics.map((t) => ({ id: t.id, name: t.name, slug: topicSlugs[t.id], share: t.share })),
       metaphors: metaphors.map((m) => ({ name: m.name, slug: metaphorSlugs[m.name], rate: m.centuryRate })),
       methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: PUBLICATION.modifiedDate,
-    }, null, 2));
+    }), null, 2));
   }
 }
 
@@ -476,14 +483,14 @@ function generateMachineKnowledge() {
     ...row, url: absolute(`/centuries/${row.century}/`),
     poets: data.overview.poets.filter((p) => p.century === row.century).map((p) => p.name),
   }));
-  write('api/themes.json', JSON.stringify(themes, null, 2));
-  write('api/metaphors.json', JSON.stringify(metaphors, null, 2));
-  write('api/centuries.json', JSON.stringify(centuries, null, 2));
-  write('api/forms.json', JSON.stringify(formResearch, null, 2));
-  write('api/geography.json', JSON.stringify(geographyResearch, null, 2));
-  write('api/lexical-life.json', JSON.stringify(lexicalResearch, null, 2));
-  write('api/attribution.json', JSON.stringify(attributionResearch, null, 2));
-  write('api/public-questions.json', JSON.stringify(publicQuestionsResearch, null, 2));
+  write('api/themes.json', JSON.stringify(versionItems(themes), null, 2));
+  write('api/metaphors.json', JSON.stringify(versionItems(metaphors), null, 2));
+  write('api/centuries.json', JSON.stringify(versionItems(centuries), null, 2));
+  write('api/forms.json', JSON.stringify(versionObject(formResearch), null, 2));
+  write('api/geography.json', JSON.stringify(versionObject(geographyResearch), null, 2));
+  write('api/lexical-life.json', JSON.stringify(versionObject(lexicalResearch), null, 2));
+  write('api/attribution.json', JSON.stringify(versionObject(attributionResearch), null, 2));
+  write('api/public-questions.json', JSON.stringify(versionObject(publicQuestionsResearch), null, 2));
 
   const contentIndex = [
     { type: 'website', title: 'از شعر تا داده', url: absolute('/'), summary: 'اطلس تعاملی تحلیل داده‌های شعر فارسی.' },
@@ -493,7 +500,7 @@ function generateMachineKnowledge() {
     ...centuries.map((item) => ({ type: 'century', title: `سده ${faNumber(item.century)} هجری`, url: item.url, summary: `${faNumber(item.texts)} متن از ${faNumber(item.poets.length)} شاعر.` })),
     ...data.overview.poets.map((p) => ({ type: 'poet', title: p.name, url: absolute(`/poets/${poetSlug(p.name)}/`), summary: `شاعر سده ${faNumber(p.century)} هجری؛ ${faNumber(p.poems)} متن، ${faNumber(p.totalCouplets)} بیت و ${faNumber(p.totalWords)} واژه در پیکره.` })),
   ].map((item) => ({ ...item, language: 'fa-IR', dateModified: PUBLICATION.modifiedDate }));
-  write('api/content-index.json', JSON.stringify(contentIndex, null, 2));
+  write('api/content-index.json', JSON.stringify(versionItems(contentIndex), null, 2));
 
   const graph = [
     ...globalGraph(),
@@ -502,7 +509,7 @@ function generateMachineKnowledge() {
     ...metaphors.map((item) => ({ '@type': 'DefinedTerm', '@id': `${item.url}#term`, name: item.name, description: item.answer, url: item.url, inDefinedTermSet: { '@id': `${siteUrl}/metaphors/#set` } })),
     ...data.overview.poets.map((p) => ({ '@type': 'Person', '@id': `${absolute(`/poets/${poetSlug(p.name)}/`)}#person`, name: p.name, subjectOf: absolute(`/poets/${poetSlug(p.name)}/`), additionalProperty: [{ '@type': 'PropertyValue', name: 'سده هجری', value: p.century }, { '@type': 'PropertyValue', name: 'تعداد متن در پیکره', value: p.poems }, { '@type': 'PropertyValue', name: 'تعداد بیت در پیکره', value: p.totalCouplets }, { '@type': 'PropertyValue', name: 'کل واژه‌ها در پیکره', value: p.totalWords }] })),
   ];
-  write('api/knowledge-graph.json', JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2));
+  write('api/knowledge-graph.json', JSON.stringify(versionObject({ '@context': 'https://schema.org', '@graph': graph }), null, 2));
 
   const openapi = {
     openapi: '3.1.0',

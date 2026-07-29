@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { before, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { researchPages } from '../src/content/siteContent.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -119,7 +120,40 @@ test('download manifest records version, provenance, and verified checksums', ()
     const file = fs.readFileSync(path.join(dist, 'downloads', entry.path));
     assert.equal(entry.bytes, file.byteLength);
     assert.equal(entry.sha256, createHash('sha256').update(file).digest('hex'));
+    assert.ok(entry.datasetId);
+    assert.ok(entry.scope);
+    assert.ok(entry.license);
+    assert.ok(entry.provenance);
+    assert.ok(entry.citation);
   }
+});
+
+test('published JSON APIs declare their schema and publication version', () => {
+  const files = [
+    'atlas-summary.json',
+    'atlas-data.json',
+    'research-findings.json',
+    'poets.json',
+    'themes.json',
+    'metaphors.json',
+    'centuries.json',
+    'forms.json',
+    'geography.json',
+    'lexical-life.json',
+    'attribution.json',
+    'public-questions.json',
+  ];
+
+  for (const filename of files) {
+    const payload = JSON.parse(fs.readFileSync(path.join(dist, 'api', filename), 'utf8'));
+    assert.equal(payload.schemaVersion, 1, `${filename} schemaVersion`);
+    assert.equal(payload.publicationVersion, '7.0.0', `${filename} publicationVersion`);
+  }
+});
+
+test('disposable prototypes are not emitted as canonical production pages', () => {
+  assert.equal(fs.existsSync(path.join(dist, 'prototype')), false);
+  assert.doesNotMatch(fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8'), /\/prototype\//);
 });
 
 test('all entity families are generated with local qualifications and current atlas links', () => {
@@ -142,6 +176,31 @@ test('all entity families are generated with local qualifications and current at
       assert.match(html, /rel="canonical"/);
       assert.doesNotMatch(html, /href="\/#(?:overview|topics|metaphors|poets|attribution)"/);
     }
+  }
+});
+
+test('every sensitive research summary carries its mandatory local qualification', () => {
+  const homepage = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
+  const researchIndex = fs.readFileSync(path.join(dist, 'research/index.html'), 'utf8');
+
+  for (const page of researchPages) {
+    assert.ok(page.qualification, `${page.id} must define a qualification`);
+    assert.ok(homepage.includes(page.qualification), `${page.id} homepage qualification`);
+    assert.ok(researchIndex.includes(page.qualification), `${page.id} index qualification`);
+    const article = fs.readFileSync(path.join(dist, page.path.slice(1), 'index.html'), 'utf8');
+    assert.ok(article.includes(page.qualification), `${page.id} article qualification`);
+  }
+});
+
+test('research results separate evidence, method, interpretation, and reuse paths', () => {
+  for (const page of researchPages) {
+    const article = fs.readFileSync(path.join(dist, page.path.slice(1), 'index.html'), 'utf8');
+    assert.match(article, /شاهد محاسباتی و واحد تحلیل/, `${page.id} evidence section`);
+    assert.match(article, /روش و عدم‌قطعیت/, `${page.id} method section`);
+    assert.match(article, /تفسیر ادبی/, `${page.id} interpretation section`);
+    assert.match(article, /دانلودهای JSON و CSV/, `${page.id} download path`);
+    assert.match(article, /href="\/methodology\/"/, `${page.id} methodology path`);
+    assert.match(article, /href="\/(?:poets|centuries|themes|metaphors)\/"/, `${page.id} entity path`);
   }
 });
 

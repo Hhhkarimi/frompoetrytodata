@@ -7,6 +7,12 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const readJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(root, relativePath), 'utf8'));
 const number = (value) => Number(String(value).replace(/^\uFEFF/, ''));
+const evidenceWithoutPublicationMetadata = ({
+  schemaVersion: _schemaVersion,
+  publicationVersion: _publicationVersion,
+  modifiedDate: _modifiedDate,
+  ...evidence
+}) => evidence;
 
 function parseCsv(relativePath) {
   const input = fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/^\uFEFF/, '');
@@ -45,8 +51,14 @@ function parseCsv(relativePath) {
 }
 
 test('generated research APIs preserve the canonical computed evidence', () => {
-  assert.deepEqual(readJson('dist/api/attribution.json'), readJson('app/attribution-data.json'));
-  assert.deepEqual(readJson('dist/api/public-questions.json'), readJson('app/research-data.json'));
+  assert.deepEqual(
+    evidenceWithoutPublicationMetadata(readJson('dist/api/attribution.json')),
+    readJson('app/attribution-data.json'),
+  );
+  assert.deepEqual(
+    evidenceWithoutPublicationMetadata(readJson('dist/api/public-questions.json')),
+    readJson('app/research-data.json'),
+  );
 });
 
 test('computed research evidence has one committed source of truth', () => {

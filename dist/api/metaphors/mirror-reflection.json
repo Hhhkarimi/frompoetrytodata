@@ -1,4 +1,7 @@
 {
+  "schemaVersion": 1,
+  "publicationVersion": "7.0.0",
+  "modifiedDate": "2026-07-29",
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "mirror-reflection",

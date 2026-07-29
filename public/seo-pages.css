@@ -17,3 +17,4 @@
 
 .attribution-pre{direction:rtl;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px;font-family:Vazirmatn,system-ui,sans-serif;line-height:2;color:var(--muted);box-shadow:0 8px 30px rgba(65,48,24,.05)}
 .seo-main .article-hero>p,.seo-main .poet-profile-hero>div>p{color:rgba(255,255,255,.82)}.seo-main .article-hero .answer-box p{color:#fff9eb}.seo-main .article-hero .hero-actions>a:not(.primary){color:#fff9eb}.seo-main .poet-profile-hero figcaption{color:rgba(255,255,255,.65)}
+.local-qualification{margin-block:12px;padding:12px 14px;border-inline-start:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 10%,var(--paper));color:var(--muted);font-size:.9rem;line-height:1.9}.article-hero .local-qualification{color:#fff9eb;background:rgba(255,255,255,.08)}

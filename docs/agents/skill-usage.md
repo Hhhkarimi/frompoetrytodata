@@ -32,16 +32,22 @@
   slices covering routing, URL state, accessible charts and dialogs,
   publication identity, generated entities, downloads, data integrity,
   analytics contracts, loading/error states, and performance boundaries.
-- `code-review`: two-axis review of the prototype package; see `docs/reviews/prototype-code-review.md`.
+- `code-review`: two-axis review of the prototype package and an independent
+  standards/specification review of the complete implementation. The first
+  implementation review drove the multi-entity explorer, evidence contract,
+  research-page, API/manifest, citation-fallback, mobile-navigation, and
+  automated-accessibility remediation slices.
 
 ## Deliberate boundaries
 
 - `diagnosing-bugs`: used for the prototype production-domain metadata
-  regression and the TypeScript 7 compiler failure under the container's
-  `/proc/self/exe` restrictions. The root causes were fixed through canonical
-  publication identity and an exact TypeScript 5.9 toolchain rather than by
-  weakening tests. The unavailable headless browser remains an environment
-  limitation and was not patched around in application code.
+  regression, the TypeScript 7 compiler failure under the container's
+  `/proc/self/exe` restrictions, graph/scatter table projection failures, and
+  the first automated accessibility run. Root causes were corrected in
+  publication identity, the exact TypeScript 5.9 toolchain, the shared table
+  adapter, and source control semantics. The unavailable headless browser
+  remains an environment limitation and was not patched around in application
+  code.
 
 Optional wholesale pipeline rewrites and unrelated content changes remain out
 of scope.

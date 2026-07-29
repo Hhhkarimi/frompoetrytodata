@@ -29,11 +29,19 @@ export function chartTableRows(option = {}) {
         rows.push({ category: node.name || 'گره', series: 'گره', value: displayValue(node.value ?? '') });
       }
       for (const link of itemSeries.links || itemSeries.edges || []) {
+        const linkLabel = `${link.source} ← ${link.target}`;
         rows.push({
-          category: `${link.source} ← ${link.target}`,
-          series: 'پیوند',
-          value: displayValue(link.value ?? ''),
+          category: linkLabel,
+          series: 'امتیاز پیوند',
+          value: displayValue(link.value ?? link.score ?? ''),
         });
+        if (link.phrases !== undefined) {
+          rows.push({
+            category: linkLabel,
+            series: 'تعداد عبارت مشترک',
+            value: displayValue(link.phrases),
+          });
+        }
       }
       continue;
     }
@@ -46,6 +54,23 @@ export function chartTableRows(option = {}) {
           category: `${xAxis?.data?.[value[0]] ?? value[0]} / ${yAxis?.data?.[value[1]] ?? value[1]}`,
           series: seriesName,
           value: value[2],
+        });
+        continue;
+      }
+
+      if (itemSeries.type === 'scatter' && Array.isArray(value)) {
+        const dimensionLabels = [
+          xAxis?.name || itemSeries.dimensions?.[0] || 'محور افقی',
+          yAxis?.name || itemSeries.dimensions?.[1] || 'محور عمودی',
+          itemSeries.dimensions?.[2] || 'اندازه نشانه',
+        ];
+        const label = item?.name || categoryLabel(categoryAxis, item, index);
+        value.forEach((dimensionValue, dimensionIndex) => {
+          rows.push({
+            category: label,
+            series: dimensionLabels[dimensionIndex] || `بعد ${dimensionIndex + 1}`,
+            value: displayValue(dimensionValue),
+          });
         });
         continue;
       }

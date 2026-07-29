@@ -78,6 +78,7 @@ export default function NarrativeHome({ summary }) {
                 <span>{page.eyebrow}</span>
                 <h3><a href={page.path}>{page.shortTitle}</a></h3>
                 <p>{page.answer}</p>
+                <p className="local-qualification"><strong>مرز ادعا:</strong> {page.qualification}</p>
               </article>
             ))}
           </div>

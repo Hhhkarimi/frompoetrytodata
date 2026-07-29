@@ -109,3 +109,29 @@ The last metadata slice reproduced duplicate homepage/atlas descriptions,
 introduced a failing production-build assertion, then gave each route a
 distinct description and expanded the atlas no-JavaScript qualification while
 keeping publication dates projected from the shared publication model.
+
+## 2026-07-29 — review remediation slices
+
+- **Multi-entity explorer:** a failing browser test required theme search,
+  canonical entity links, global reset, URL-backed entity/study/sort fields,
+  history restoration, and focus return. Pure filtering and route adapters
+  were added, then wired into the atlas.
+- **Chart/table equivalence:** graph links and scatter tuples first failed
+  exact row assertions. The shared table projection now preserves link scores,
+  phrase counts, and named scatter dimensions.
+- **Published evidence:** a failing contract test required identifier, label,
+  definition, unit, denominator, precision, source/version, qualification, and
+  values. The chart and native table now consume the same versioned record.
+- **Research qualifications:** production-artifact tests now fail if any
+  sensitive research summary lacks its adjacent qualification or if a research
+  page omits evidence, method, interpretation, and reuse sections.
+- **Accessibility:** the first automated axe run found three serious issues:
+  invalid logo labelling, an unnamed threshold slider, and two unnamed select
+  controls. Their source semantics were corrected and the unmodified serious/
+  critical rule set passed for the narrative homepage and atlas shell.
+- **API and download contracts:** failing build tests required schema and
+  publication versions for JSON APIs, per-file manifest identity/scope/license/
+  provenance/citation, and exclusion of disposable prototypes from production.
+- **Citation fallback:** a rejected clipboard promise first failed the browser
+  test; visible selectable citation text and an announced manual-copy path now
+  remain available without changing focus.

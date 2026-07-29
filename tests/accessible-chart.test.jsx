@@ -24,6 +24,11 @@ test('chart exposes an equivalent native data table before the canvas loads', as
       ariaLabel="روند نمونه"
       summary="مقایسه دو مقدار در دو سده"
       qualification="این مقدار پوشش پیکره است، نه اهمیت ادبی."
+      metricId="atlas:sample-trend"
+      definition="مقایسهٔ سهم دو مقدار در دو سده"
+      unit="درصد"
+      denominator="کل رکوردهای همان سده"
+      precision={1}
       option={{
         xAxis: { type: 'category', data: ['سده ۷', 'سده ۸'] },
         yAxis: { type: 'value', name: 'درصد' },
@@ -34,6 +39,9 @@ test('chart exposes an equivalent native data table before the canvas loads', as
 
   expect(screen.getByText('مقایسه دو مقدار در دو سده')).toBeTruthy();
   expect(screen.getByText('این مقدار پوشش پیکره است، نه اهمیت ادبی.')).toBeTruthy();
+  const evidence = screen.getByRole('region', { name: 'روند نمونه' });
+  expect(evidence.getAttribute('data-evidence-id')).toBe('atlas:sample-trend');
+  expect(evidence.getAttribute('data-publication-version')).toBe('7.0.0');
 
   await user.click(screen.getByRole('button', { name: 'نمایش جدول داده' }));
   const table = screen.getByRole('table', { name: 'داده‌های روند نمونه' });

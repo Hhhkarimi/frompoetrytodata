@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Children, cloneElement, isValidElement, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowDown, ArrowLeft, BarChart3, BookOpen, BrainCircuit, ChevronLeft,
   CircleHelp, Clock3, Database, ExternalLink, Feather, Fingerprint,
@@ -33,6 +33,7 @@ import { handleTabKeyDown } from './accessibility/tabs.js';
 import { copyText } from './accessibility/clipboard.js';
 import { buildPersianCitation } from './publication/publication.js';
 import { emitAnalyticsEvent, searchLengthBucket } from './analytics/events.js';
+import { createExplorerItems, filterExplorerItems } from './atlas/explorer.js';
 
 const HEADER_NAV_ITEMS = [
   { label: 'خانه', id: 'home', sections: ['home'] },
@@ -61,12 +62,21 @@ const atlasUrlOptions = {
   poets: intertextPoets,
   cases: attributionResearch.cases.map((item) => item.id),
   questions: publicQuestionsResearch.questions.map((item) => item.id),
+  studies: researchPages.map((page) => page.id),
 };
 const POET_METRICS = {
   poems: { label: 'شعر/متن', note: 'تعداد رکوردهای کامل هر شاعر در پیکره' },
   couplets: { label: 'بیت', note: 'تعداد ابیات هر شاعر بر پایه جفت‌سازی مصراع‌های جداشده در متن منبع' },
   words: { label: 'واژه', note: 'مجموع واژه‌های فارسی هر شاعر پس از نرمال‌سازی' },
 };
+const EXPLORER_ITEMS = createExplorerItems({
+  poets: corpusPoets,
+  centuries: atlas.overview.centuryStats,
+  topics: atlas.topics.items,
+  metaphors: atlas.metaphors.items,
+  metaphorRates: atlas.metaphors.ratesByCentury,
+  researchPages,
+});
 
 function StatCard({ value, label, note, icon: Icon, accent = '#0f766e' }) {
   return (
@@ -80,13 +90,23 @@ function StatCard({ value, label, note, icon: Icon, accent = '#0f766e' }) {
 }
 
 function ChartCard({ title, kicker, children, className = '', actions, note }) {
+  const chart = Children.map(children, (child) => (
+    isValidElement(child) && child.type === Chart
+      ? cloneElement(child, {
+        ariaLabel: child.props.ariaLabel || title,
+        metricId: child.props.metricId || `atlas:${title}`,
+        qualification: child.props.qualification || note,
+        summary: child.props.summary || [kicker, title].filter(Boolean).join('؛ '),
+      })
+      : child
+  ));
   return (
     <Card className={`chart-card reveal ${className}`}>
       <div className="card-head">
         <div>{kicker && <span>{kicker}</span>}<h3>{title}</h3></div>
         {actions && <div className="card-actions">{actions}</div>}
       </div>
-      {children}
+      {chart}
       {note && <p className="chart-note"><Info size={15} />{note}</p>}
     </Card>
   );
@@ -197,18 +217,22 @@ function App() {
   const [intertextLayout, setIntertextLayout] = useState(initialAtlasState.layout ?? 'force');
   const [intertextPoet, setIntertextPoet] = useState(initialAtlasState.poet ?? 'همه');
   const [poetSearch, setPoetSearch] = useState(initialAtlasState.query);
+  const [entityType, setEntityType] = useState(initialAtlasState.entityType ?? 'all');
   const [poetCentury, setPoetCentury] = useState(initialAtlasState.century === null ? 'همه' : String(initialAtlasState.century));
   const [selectedPoet, setSelectedPoet] = useState(null);
   const [showAllPoets, setShowAllPoets] = useState(false);
   const [poetMetric, setPoetMetric] = useState(initialAtlasState.metric ?? 'poems');
   const [progress, setProgress] = useState(0);
-  const [citationCopied, setCitationCopied] = useState(false);
+  const [citationStatus, setCitationStatus] = useState('');
   const [shareNotice, setShareNotice] = useState('');
   const [audienceMode, setAudienceMode] = useState(initialAtlasState.audience ?? 'general');
   const [attributionCaseId, setAttributionCaseId] = useState(initialAtlasState.caseId ?? attributionResearch.cases[0].id);
   const [curiosityId, setCuriosityId] = useState(initialAtlasState.question ?? publicQuestionsResearch.questions[0].id);
+  const [researchStudy, setResearchStudy] = useState(initialAtlasState.study ?? 'all');
+  const [explorerSort, setExplorerSort] = useState(initialAtlasState.sort ?? 'relevance');
   const [glossaryOpen, setGlossaryOpen] = useState(false);
   const [urlNotice, setUrlNotice] = useState(initialAtlasUrl.invalidParameters);
+  const explorerSearchRef = useRef(null);
 
   const selectedTopic = atlas.topics.items.find((t) => t.id === Number(topicId)) || atlas.topics.items[0];
   const selectedMetaphor = atlas.metaphors.items.find((m) => m.name === metaphor) || atlas.metaphors.items[0];
@@ -219,6 +243,30 @@ function App() {
     return searchOk && centuryOk;
   }), [poetSearch, poetCentury]);
   const visiblePoets = showAllPoets ? filteredPoets : filteredPoets.slice(0, 18);
+  const filteredExplorerItems = useMemo(() => filterExplorerItems(EXPLORER_ITEMS, {
+    query: poetSearch,
+    entityType: entityType === 'all' ? null : entityType,
+    century: poetCentury === 'همه' ? null : Number(poetCentury),
+    topic: Number(topicId) === atlas.topics.items[0].id ? null : Number(topicId),
+    metaphor: metaphor === atlas.metaphors.items[0].name ? null : metaphor,
+    study: researchStudy === 'all' ? null : researchStudy,
+    sort: explorerSort,
+  }), [entityType, explorerSort, metaphor, poetCentury, poetSearch, researchStudy, topicId]);
+  const activeExplorerFilterCount = (overrides = {}) => {
+    const state = {
+      entityType,
+      poetCentury,
+      researchStudy,
+      explorerSort,
+      ...overrides,
+    };
+    return [
+      state.entityType !== 'all',
+      state.poetCentury !== 'همه',
+      state.researchStudy !== 'all',
+      state.explorerSort !== 'relevance',
+    ].filter(Boolean).length;
+  };
   const featuredPoets = corpusPoets.filter((p) => p.image);
   const visibleIntertextEdges = useMemo(() => intertextPoet === 'همه' ? atlas.intertext.edges : atlas.intertext.edges.filter((edge) => edge.source === intertextPoet || edge.target === intertextPoet), [intertextPoet]);
   const selectedAttributionCase = attributionResearch.cases.find((item) => item.id === attributionCaseId) || attributionResearch.cases[0];
@@ -232,6 +280,7 @@ function App() {
   useEffect(() => {
     const query = serializeAtlasState({
       query: poetSearch,
+      entityType: entityType === 'all' ? null : entityType,
       century: poetCentury === 'همه' ? null : Number(poetCentury),
       topic: Number(topicId) === atlas.topics.items[0].id ? null : Number(topicId),
       metaphor: metaphor === atlas.metaphors.items[0].name ? null : metaphor,
@@ -242,6 +291,8 @@ function App() {
       metric: poetMetric === 'poems' ? null : poetMetric,
       caseId: attributionCaseId === attributionResearch.cases[0].id ? null : attributionCaseId,
       question: curiosityId === publicQuestionsResearch.questions[0].id ? null : curiosityId,
+      study: researchStudy === 'all' ? null : researchStudy,
+      sort: explorerSort === 'relevance' ? null : explorerSort,
       audience: audienceMode === 'general' ? null : audienceMode,
     });
     const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
@@ -251,6 +302,8 @@ function App() {
     audienceMode,
     curiosityId,
     edgeThreshold,
+    entityType,
+    explorerSort,
     intertextLayout,
     intertextPoet,
     metaphor,
@@ -258,6 +311,7 @@ function App() {
     poetCentury,
     poetMetric,
     poetSearch,
+    researchStudy,
     topicId,
   ]);
 
@@ -266,6 +320,7 @@ function App() {
       const parsed = parseAtlasUrl(window.location.href, atlasUrlOptions);
       const state = parsed.state;
       setPoetSearch(state.query);
+      setEntityType(state.entityType ?? 'all');
       setPoetCentury(state.century === null ? 'همه' : String(state.century));
       setTopicId(state.topic ?? atlas.topics.items[0].id);
       setMetaphor(state.metaphor ?? atlas.metaphors.items[0].name);
@@ -276,8 +331,11 @@ function App() {
       setPoetMetric(state.metric ?? 'poems');
       setAttributionCaseId(state.caseId ?? attributionResearch.cases[0].id);
       setCuriosityId(state.question ?? publicQuestionsResearch.questions[0].id);
+      setResearchStudy(state.study ?? 'all');
+      setExplorerSort(state.sort ?? 'relevance');
       setAudienceMode(state.audience ?? 'general');
       setUrlNotice(parsed.invalidParameters);
+      window.requestAnimationFrame(() => explorerSearchRef.current?.focus());
     };
     window.addEventListener('popstate', restoreUrlState);
     return () => window.removeEventListener('popstate', restoreUrlState);
@@ -314,10 +372,10 @@ function App() {
     try {
       await copyText(citation);
       emitAnalyticsEvent('citation_copied', { resource_type: 'publication', citation_format: 'text' });
-      setCitationCopied(true);
-      window.setTimeout(() => setCitationCopied(false), 1800);
+      setCitationStatus('success');
+      window.setTimeout(() => setCitationStatus(''), 1800);
     } catch {
-      setCitationCopied(false);
+      setCitationStatus('failure');
     }
   };
 
@@ -338,8 +396,8 @@ function App() {
       <div className="scroll-progress" style={{ width: `${progress}%` }} />
       <header className="site-header">
         <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('home'); }}><Logo /></a>
-        <nav className={menuOpen ? 'is-open' : ''}>
-          {HEADER_NAV_ITEMS.map((item) => <button key={item.id} className={item.sections.includes(active) ? 'active' : ''} onClick={() => scrollTo(item.id)}>{item.label}</button>)}
+        <nav id="atlas-navigation" aria-label="بخش‌های اطلس" className={menuOpen ? 'is-open' : ''}>
+          {HEADER_NAV_ITEMS.map((item) => <button key={item.id} aria-current={item.sections.includes(active) ? 'location' : undefined} className={item.sections.includes(active) ? 'active' : ''} onClick={() => scrollTo(item.id)}>{item.label}</button>)}
           <a className="nav-linkedin" href={atlas.meta.linkedin} target="_blank" rel="me noreferrer"><Linkedin size={17} />لینکدین</a>
         </nav>
         <div className="header-actions">
@@ -347,7 +405,7 @@ function App() {
           <button className="icon-button" onClick={copyCurrentView} aria-label="کپی پیوند این نما"><Share2 /></button>
           <button className="icon-button" onClick={() => setGlossaryOpen(true)} aria-label="واژه‌نامه ساده"><CircleHelp /></button>
           <button className="icon-button" onClick={() => setDark(!dark)} aria-label={dark ? 'حالت روشن' : 'حالت تاریک'}>{dark ? <Sun /> : <Moon />}</button>
-          <button className="icon-button menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="فهرست">{menuOpen ? <X /> : <Menu />}</button>
+          <button className="icon-button menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="فهرست" aria-controls="atlas-navigation" aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
           {shareNotice && <span className="sr-only" role="status" aria-live="polite">{shareNotice}</span>}
         </div>
       </header>
@@ -455,7 +513,7 @@ function App() {
           </ChartCard>
           <div className="two-column split-40-60">
             <ChartCard title="داستان یک مضمون" kicker="انتخاب و دنبال‌کردن یک مسیر" actions={
-              <PersianSelect value={topicId} onChange={setTopicId}>
+              <PersianSelect label="انتخاب مضمون محاسباتی" value={topicId} onChange={setTopicId}>
                 {atlas.topics.items.map((t) => <option value={t.id} key={t.id}>{t.name}</option>)}
               </PersianSelect>
             }>
@@ -499,7 +557,7 @@ function App() {
               <Chart option={metaphorBubbleOption(atlas.metaphors.items, dark)} />
             </ChartCard>
             <ChartCard title="خط زندگی یک استعاره" kicker="نرخ متوازن میان شاعران" actions={
-              <PersianSelect value={metaphor} onChange={setMetaphor}>
+              <PersianSelect label="انتخاب خانوادهٔ استعاری" value={metaphor} onChange={setMetaphor}>
                 {atlas.metaphors.items.map((m) => <option key={m.name}>{m.name}</option>)}
               </PersianSelect>
             }>
@@ -535,7 +593,7 @@ function App() {
         <Section id="intertext" eyebrow="پژوهش سوم" title="نقشه پیوندهای متنی و شباهت شاعران" intro="سه نشانه—عبارت‌های نادر، واژگان و مضمون—در یک شاخص شباهت متنی ترکیب شده‌اند. اصطلاح دانشگاهی این رابطه «بینامتنیت» است، اما در این صفحه از نام ساده‌تر «پیوند متنی» استفاده می‌کنیم. پیکان فقط ترتیب زمانی را نشان می‌دهد و به‌تنهایی اثرگذاری تاریخی را ثابت نمی‌کند." className="section-tinted">
           <PlainLanguage>هر خط یعنی دو شاعر از چند جهت به هم نزدیک شده‌اند. خط ضخیم‌تر یعنی شباهت محاسباتی بیشتر؛ نه اینکه حتماً شاعر دوم از شاعر اول اقتباس کرده باشد.</PlainLanguage>
           <div className="network-workbench reveal">
-            <div className="network-control"><label><span>حداقل قدرت پیوند</span><strong>{faNumber(edgeThreshold, { maximumFractionDigits: 3 })}</strong></label><input type="range" min="0.93" max="0.98" step="0.005" value={edgeThreshold} onChange={(e) => setEdgeThreshold(Number(e.target.value))} /></div>
+            <div className="network-control"><label htmlFor="intertext-threshold"><span>حداقل قدرت پیوند</span><strong>{faNumber(edgeThreshold, { maximumFractionDigits: 3 })}</strong></label><input id="intertext-threshold" type="range" min="0.93" max="0.98" step="0.005" value={edgeThreshold} onChange={(e) => setEdgeThreshold(Number(e.target.value))} /></div>
             <PersianSelect label="تمرکز روی شاعر" value={intertextPoet} onChange={setIntertextPoet}><option value="همه">همه شاعران</option>{intertextPoets.map((name) => <option value={name} key={name}>{name}</option>)}</PersianSelect>
             <div className="segmented" role="group" aria-label="چیدمان نقشه"><button className={intertextLayout === 'force' ? 'active' : ''} onClick={() => setIntertextLayout('force')}>آزاد</button><button className={intertextLayout === 'circular' ? 'active' : ''} onClick={() => setIntertextLayout('circular')}>حلقه‌ای</button></div>
             <div className="network-counts"><span>{faNumber(visibleIntertextEdges.filter((edge) => edge.score >= edgeThreshold).length)} پیوند</span><span>{faNumber(new Set(visibleIntertextEdges.filter((edge) => edge.score >= edgeThreshold).flatMap((edge) => [edge.source, edge.target])).size)} شاعر</span></div>
@@ -857,23 +915,34 @@ function App() {
           </div>
         </Section>
 
-        <Section id="poets" eyebrow="دایره‌المعارف داده‌ای" title="۶۷ شاعر، یک نمای قابل جست‌وجو" intro="نام همه شاعران و اعداد به فارسی ارائه شده‌اند. با جست‌وجو یا انتخاب سده، حضور هر شاعر در پیکره را ببینید.">
+        <Section id="poets" eyebrow="کاوشگر چندموجودیتی" title="شاعر، سده، مضمون، استعاره و پژوهش" intro="یک جست‌وجوی canonical برای رسیدن مستقیم به صفحهٔ موجودیت؛ همهٔ فیلترهای متعهدشده در نشانی قابل اشتراک باقی می‌مانند.">
           {urlNotice.length > 0 && <p className="url-notice" role="status">پارامترهای نامعتبر حذف شدند: <bdi dir="ltr">{urlNotice.join(', ')}</bdi></p>}
-          <form className="poet-tools reveal" role="search" onSubmit={(event) => { event.preventDefault(); window.history.pushState({}, '', window.location.href); emitAnalyticsEvent('atlas_search_committed', { query_length_bucket: searchLengthBucket(poetSearch), result_count: filteredPoets.length, entity_type: 'poet' }); }}>
-            <label className="search-box"><span className="sr-only">جست‌وجوی شاعر</span><Search size={20} /><input type="search" value={poetSearch} onChange={(e) => setPoetSearch(e.target.value)} placeholder="نام شاعر را جست‌وجو کنید…" /></label>
-            <PersianSelect label="فیلتر سده شاعر" value={poetCentury} onChange={(value) => { setPoetCentury(value); emitAnalyticsEvent('atlas_filters_changed', { filter_keys: ['century'], active_filter_count: value === 'همه' ? 0 : 1, result_count: corpusPoets.filter((poet) => (value === 'همه' || poet.century === Number(value)) && poet.name.replace(/\s/g, '').includes(poetSearch.replace(/\s/g, ''))).length }); }}><option value="همه">همه سده‌ها</option>{centuries.map((c) => <option value={c} key={c}>سده {faNumber(c)}</option>)}</PersianSelect>
-            <span role="status" aria-live="polite">{faNumber(filteredPoets.length)} نتیجه؛ شاعر یافت شد</span>
+          <form className="poet-tools explorer-tools reveal" role="search" onSubmit={(event) => { event.preventDefault(); window.history.pushState({}, '', window.location.href); emitAnalyticsEvent('atlas_search_committed', { query_length_bucket: searchLengthBucket(poetSearch), result_count: filteredExplorerItems.length, entity_type: entityType }); }}>
+            <label className="search-box"><span className="sr-only">جست‌وجوی اطلس</span><Search size={20} /><input ref={explorerSearchRef} type="search" value={poetSearch} onChange={(event) => setPoetSearch(event.target.value)} placeholder="شاعر، سده، مضمون، استعاره یا پژوهش…" /></label>
+            <PersianSelect label="نوع موجودیت" value={entityType} onChange={(value) => { setEntityType(value); emitAnalyticsEvent('atlas_filters_changed', { filter_keys: ['entity'], active_filter_count: activeExplorerFilterCount({ entityType: value }), result_count: filteredExplorerItems.length }); }}>
+              <option value="all">همهٔ موجودیت‌ها</option><option value="poet">شاعر</option><option value="century">سدهٔ منتسب</option><option value="theme">مضمون محاسباتی</option><option value="metaphor">خانوادهٔ استعاری</option><option value="research">پژوهش</option>
+            </PersianSelect>
+            <PersianSelect label="فیلتر سدهٔ منتسب" value={poetCentury} onChange={(value) => { setPoetCentury(value); emitAnalyticsEvent('atlas_filters_changed', { filter_keys: ['century'], active_filter_count: activeExplorerFilterCount({ poetCentury: value }), result_count: filteredExplorerItems.length }); }}><option value="همه">همه سده‌ها</option>{centuries.map((c) => <option value={c} key={c}>سده {faNumber(c)}</option>)}</PersianSelect>
+            <PersianSelect label="پژوهش" value={researchStudy} onChange={(value) => { setResearchStudy(value); emitAnalyticsEvent('atlas_filters_changed', { filter_keys: ['study'], active_filter_count: activeExplorerFilterCount({ researchStudy: value }), result_count: filteredExplorerItems.length }); }}><option value="all">همهٔ پژوهش‌ها</option>{researchPages.map((page) => <option value={page.id} key={page.id}>{page.shortTitle}</option>)}</PersianSelect>
+            <PersianSelect label="ترتیب نتیجه‌ها" value={explorerSort} onChange={(value) => { setExplorerSort(value); emitAnalyticsEvent('atlas_filters_changed', { filter_keys: ['sort'], active_filter_count: activeExplorerFilterCount({ explorerSort: value }), result_count: filteredExplorerItems.length }); }}><option value="relevance">ارتباط با جست‌وجو</option><option value="title">عنوان الفبایی</option></PersianSelect>
+            <button type="button" className="secondary-button explorer-reset" aria-label="بازنشانی همهٔ فیلترهای کاوشگر" onClick={() => { setPoetSearch(''); setEntityType('all'); setPoetCentury('همه'); setResearchStudy('all'); setExplorerSort('relevance'); setTopicId(atlas.topics.items[0].id); setMetaphor(atlas.metaphors.items[0].name); setShowAllPoets(false); }}>بازنشانی فیلترها</button>
+            <span role="status" aria-live="polite" aria-label="تعداد نتیجه‌های کاوشگر">
+              {faNumber(filteredExplorerItems.length)} نتیجه در کاوشگر
+            </span>
           </form>
-          {filteredPoets.length > 0 ? (
-            <div className="poet-grid">{visiblePoets.map((p) => <PoetCard poet={p} onOpen={(poet) => { emitAnalyticsEvent('entity_result_opened', { entity_type: 'poet', source_view: 'atlas' }); setSelectedPoet(poet); }} key={p.name} />)}</div>
+          {filteredExplorerItems.length > 0 ? (
+            <div className="explorer-results" aria-label="نتیجه‌های کاوشگر">
+              {filteredExplorerItems.slice(0, 80).map((item) => <a href={item.url} key={`${item.type}:${item.id}`} onClick={() => emitAnalyticsEvent('entity_result_opened', { entity_type: item.type, source_view: 'atlas' })}><small>{item.typeLabel}</small><strong>{item.title}</strong><span>{item.summary}</span><ArrowLeft size={17} /></a>)}
+            </div>
           ) : (
             <div className="poet-empty" role="region" aria-live="polite">
               <Search size={28} />
-              <div><h3>شاعری با این فیلترها پیدا نشد</h3><p>املای نام را بررسی کنید یا جست‌وجو و فیلتر سده را پاک کنید.</p></div>
-              <button type="button" className="secondary-button" aria-label="پاک‌کردن فیلترهای شاعر" onClick={() => { setPoetSearch(''); setPoetCentury('همه'); setShowAllPoets(false); }}>پاک‌کردن فیلترها</button>
+              <div><h3>موردی با این فیلترها پیدا نشد</h3><p>عبارت، نوع موجودیت، سده یا پژوهش انتخابی را تغییر دهید.</p></div>
+              <button type="button" className="secondary-button" aria-label="پاک‌کردن فیلترهای کاوشگر" onClick={() => { setPoetSearch(''); setEntityType('all'); setPoetCentury('همه'); setResearchStudy('all'); setExplorerSort('relevance'); }}>پاک‌کردن فیلترها</button>
             </div>
           )}
-          {filteredPoets.length > 18 && <button className="load-more" onClick={() => setShowAllPoets(!showAllPoets)}>{showAllPoets ? 'نمایش کمتر' : `نمایش همه ${faNumber(filteredPoets.length)} شاعر`}<ZoomIn size={17} /></button>}
+          {(entityType === 'all' || entityType === 'poet') && filteredPoets.length > 0 && <div className="poet-grid">{visiblePoets.map((p) => <PoetCard poet={p} onOpen={(poet) => { emitAnalyticsEvent('entity_result_opened', { entity_type: 'poet', source_view: 'atlas' }); setSelectedPoet(poet); }} key={p.name} />)}</div>}
+          {(entityType === 'all' || entityType === 'poet') && filteredPoets.length > 18 && <button className="load-more" onClick={() => setShowAllPoets(!showAllPoets)}>{showAllPoets ? 'نمایش کمتر' : `نمایش همه ${faNumber(filteredPoets.length)} شاعر`}<ZoomIn size={17} /></button>}
         </Section>
 
 
@@ -890,7 +959,7 @@ function App() {
             <div className="research-door-grid">
               {researchPages.map((page, index) => (
                 <a className="research-door reveal" href={page.path} key={page.id} style={{ '--accent': page.color }}>
-                  <span>{faNumber(index + 1)}</span><small>{page.eyebrow}</small><h3>{page.shortTitle}</h3><p>{page.answer}</p><strong>صفحه پژوهشی و جدول داده <ArrowLeft size={16} /></strong>
+                  <span>{faNumber(index + 1)}</span><small>{page.eyebrow}</small><h3>{page.shortTitle}</h3><p>{page.answer}</p><p className="local-qualification"><strong>مرز ادعا:</strong> {page.qualification}</p><strong>صفحه پژوهشی و جدول داده <ArrowLeft size={16} /></strong>
                 </a>
               ))}
             </div>
@@ -907,7 +976,9 @@ function App() {
                 <a href="/glossary/"><CircleHelp size={18} />واژه‌نامه ساده</a>
                 <a href="/llms.txt"><BrainCircuit size={18} />راهنمای مدل‌های هوش مصنوعی</a>
               </div>
-              <button className="copy-citation" onClick={copyCitation}>{citationCopied ? 'استناد کپی شد' : 'کپی استناد پیشنهادی'}</button>
+              <blockquote className="visible-citation">{buildPersianCitation()}</blockquote>
+              <button className="copy-citation" onClick={copyCitation}>{citationStatus === 'success' ? 'استناد کپی شد' : 'کپی استناد پیشنهادی'}</button>
+              <p className="citation-status" role="status" aria-live="polite">{citationStatus === 'success' ? 'استناد در حافظهٔ موقت کپی شد.' : citationStatus === 'failure' ? 'کپی خودکار ممکن نشد؛ متن استناد را انتخاب و کپی کنید.' : ''}</p>
             </Card>
           </div>
           <div className="faq-block reveal">

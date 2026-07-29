@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { chartTableRows } from '../evidence/chart-table.js';
+import { evidenceFromChart } from '../evidence/published-evidence.js';
 import { faNumber } from '../utils.js';
 import { emitAnalyticsEvent } from '../analytics/events.js';
 
@@ -23,11 +24,28 @@ export default function Chart({
   qualification = DEFAULT_QUALIFICATION,
   metricId = 'chart',
   pageType = 'atlas',
+  definition,
+  unit,
+  denominator,
+  precision,
+  dataset,
 }) {
   const shellRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [tableVisible, setTableVisible] = useState(false);
-  const rows = chartTableRows(option);
+  const label = ariaLabel || 'نمودار تعاملی';
+  const evidence = evidenceFromChart({
+    id: metricId,
+    label,
+    definition: definition || summary || label,
+    qualification,
+    values: option,
+    unit,
+    denominator,
+    precision,
+    dataset,
+  });
+  const rows = chartTableRows(evidence.values);
 
   useEffect(() => {
     const node = shellRef.current;
@@ -46,15 +64,24 @@ export default function Chart({
     aria: { enabled: true, decal: { show: false }, description: ariaLabel || 'نمودار تعاملی از پروژه از شعر تا داده' },
     animationDuration: 650,
     animationDurationUpdate: 420,
-    ...option,
+    ...evidence.values,
   };
 
-  const label = ariaLabel || 'نمودار تعاملی';
-
   return (
-    <section className={`evidence-view ${className}`} aria-label={label}>
+    <section
+      className={`evidence-view ${className}`}
+      aria-label={label}
+      data-evidence-id={evidence.id}
+      data-publication-version={evidence.source.publicationVersion}
+    >
       <p className="chart-summary">{summary || label}</p>
       <p className="chart-qualification">{qualification}</p>
+      <dl className="evidence-metadata">
+        <div><dt>واحد</dt><dd>{evidence.unit}</dd></div>
+        <div><dt>مخرج/دامنه</dt><dd>{evidence.denominator}</dd></div>
+        <div><dt>دقت</dt><dd>{faNumber(evidence.precision)} رقم اعشار</dd></div>
+        <div><dt>نسخه</dt><dd dir="ltr">{evidence.source.publicationVersion}</dd></div>
+      </dl>
       <div ref={shellRef} className="chart-shell" role="figure" aria-label={label} style={{ minHeight: height }} aria-busy={!ready}>
         {ready ? (
           <Suspense fallback={<div className="chart-loading" style={{ height }}><span />در حال آماده‌سازی نمودار…</div>}>
