@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 3,
   "slug": "religion-sufism-praise",
-  "url": "http://localhost:4173/themes/religion-sufism-praise/",
+  "url": "https://frompoetrytodata.vercel.app/themes/religion-sufism-praise/",
   "name": "دین، تصوف تعلیمی و مناقب",
   "keywords": [
     "الله",
@@ -102,7 +102,7 @@
       "correlation": -0.2543
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

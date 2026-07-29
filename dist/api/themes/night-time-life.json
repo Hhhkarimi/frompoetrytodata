@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 8,
   "slug": "night-time-life",
-  "url": "http://localhost:4173/themes/night-time-life/",
+  "url": "https://frompoetrytodata.vercel.app/themes/night-time-life/",
   "name": "شب، زمان و گذر عمر",
   "keywords": [
     "شب",
@@ -102,7 +102,7 @@
       "correlation": 0.1427
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

@@ -15,9 +15,10 @@ test('prototype exposes an RTL, dependency-free, no-JavaScript-safe document', a
   assert.match(html, /<script type="module" src="\.\/prototype\.js"><\/script>/i);
   assert.match(
     html,
-    /<link\s+rel="canonical"\s+href="https:\/\/poetrytodata\.vercel\.app\/prototype\/"\s*\/?>/i,
+    /<link\s+rel="canonical"\s+href="https:\/\/frompoetrytodata\.vercel\.app\/prototype\/"\s*\/?>/i,
   );
-  assert.doesNotMatch(html, /<(?:script|link)[^>]+(?:src|href)="https?:\/\/(?!poetrytodata\.vercel\.app\/prototype\/)/i);
+  assert.doesNotMatch(html, /<(?:script|link)[^>]+(?:src|href)="https?:\/\/(?!frompoetrytodata\.vercel\.app\/prototype\/)/i);
+  assert.doesNotMatch(html, /https:\/\/poetrytodata\.vercel\.app\//i);
 });
 
 
@@ -35,17 +36,17 @@ test('prototype exposes exactly one document-level h1', async () => {
 test('prototype satisfies repository social metadata and structured-data requirements', async () => {
   const html = await read('public/prototype/index.html');
   assert.match(html, /<meta\s+property="og:title"\s+content="[^"]+"\s*\/>/i);
-  assert.match(html, /<meta\s+property="og:image"\s+content="https:\/\/poetrytodata\.vercel\.app\/prototype\/og-image\.png"\s*\/>/i);
+  assert.match(html, /<meta\s+property="og:image"\s+content="https:\/\/frompoetrytodata\.vercel\.app\/prototype\/og-image\.png"\s*\/>/i);
   assert.match(html, /<meta\s+name="twitter:card"\s+content="summary_large_image"\s*\/>/i);
   assert.match(html, /<meta\s+name="twitter:title"\s+content="[^"]+"\s*\/>/i);
-  assert.match(html, /<meta\s+name="twitter:image"\s+content="https:\/\/poetrytodata\.vercel\.app\/prototype\/og-image\.png"\s*\/>/i);
+  assert.match(html, /<meta\s+name="twitter:image"\s+content="https:\/\/frompoetrytodata\.vercel\.app\/prototype\/og-image\.png"\s*\/>/i);
 
   const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
   assert.ok(jsonLdMatch, 'prototype must include JSON-LD');
   const jsonLd = JSON.parse(jsonLdMatch[1]);
   assert.equal(jsonLd['@context'], 'https://schema.org');
   assert.equal(jsonLd['@type'], 'WebPage');
-  assert.equal(jsonLd.url, 'https://poetrytodata.vercel.app/prototype/');
+  assert.equal(jsonLd.url, 'https://frompoetrytodata.vercel.app/prototype/');
 
   const image = await stat(path.join(root, 'public/prototype/og-image.png'));
   assert(image.isFile());
@@ -88,6 +89,7 @@ test('prototype state is shareable and chart/table are rendered from one dataset
   assert.match(js, /<svg[^>]+aria-hidden="true"/);
   assert.match(js, /<table/);
   assert.match(js, /URL_STATE_KEYS/);
+  assert.match(js, /aria-current/);
 });
 
 test('prototype is explicitly disposable and does not alter production routes', async () => {

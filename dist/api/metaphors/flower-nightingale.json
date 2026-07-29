@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "flower-nightingale",
-  "url": "http://localhost:4173/metaphors/flower-nightingale/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/",
   "name": "گل و بلبل",
   "answer": "خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
   "occurrences": 27370,
@@ -84,7 +84,7 @@
     "poetsBefore": 3,
     "poetsAfter": 17
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

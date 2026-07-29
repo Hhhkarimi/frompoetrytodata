@@ -1,12 +1,11 @@
-export const faNumber = (value, options = {}) => {
-  if (value === null || value === undefined || Number.isNaN(Number(value))) return '—';
-  return new Intl.NumberFormat('fa-IR', options).format(Number(value));
-};
+import { persianDigits, persianNumber } from './publication/persian-format.js';
+
+export const faNumber = persianNumber;
 
 export const faPercent = (value, digits = 1) =>
   `${faNumber(value, { minimumFractionDigits: digits, maximumFractionDigits: digits })}٪`;
 
-export const faDigits = (value) => String(value).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+export const faDigits = persianDigits;
 
 export const compactFa = (value) =>
   faNumber(value, { notation: 'compact', maximumFractionDigits: 1 });

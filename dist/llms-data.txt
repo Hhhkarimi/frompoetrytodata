@@ -17,5 +17,5 @@
 - half_life: زمان پس از اوج تا نصف فراوانی
 - right_censored: نرسیدن واژه به نصف اوج تا پایان پیکره
 
-OpenAPI: http://localhost:4173/openapi.json
-Knowledge graph: http://localhost:4173/api/knowledge-graph.json
+OpenAPI: https://frompoetrytodata.vercel.app/openapi.json
+Knowledge graph: https://frompoetrytodata.vercel.app/api/knowledge-graph.json

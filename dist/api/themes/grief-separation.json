@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 11,
   "slug": "grief-separation",
-  "url": "http://localhost:4173/themes/grief-separation/",
+  "url": "https://frompoetrytodata.vercel.app/themes/grief-separation/",
   "name": "غم، فراق و هجران",
   "keywords": [
     "غم",
@@ -103,7 +103,7 @@
       "correlation": 0.3154
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

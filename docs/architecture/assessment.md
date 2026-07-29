@@ -1,10 +1,18 @@
 # Architecture assessment for the homepage and research-navigation improvement
 
-Date: 2026-07-27
+Last updated: 2026-07-29
 
 ## Scope
 
-This is an assessment only. It does not authorize broad refactoring. It focuses on modules and pipelines likely to be touched after a prototype is selected: the interactive application shell, research navigation, chart/table composition, generated pages, metadata, citations, filters, and data outputs.
+This is an assessment only. It does not authorize broad refactoring. It is
+bounded by the approved integrated-publication specification: the narrative
+homepage, atlas URL state, research navigation, chart/table composition,
+generated entity/research pages, metadata, citations, filters, and published
+data outputs.
+
+The scan used the current checkout at `c75b939`, recent file history, the domain
+model, ADR 0001, ADR 0002, and the three approved public testing seams. No
+production implementation was changed during the assessment.
 
 ## Codebase-design vocabulary
 
@@ -16,65 +24,201 @@ This is an assessment only. It does not authorize broad refactoring. It focuses 
 - **Coupling:** the amount of knowledge one module requires about another's implementation.
 - **Cohesion:** how closely a module's responsibilities belong together.
 
-## Observed or likely pressure points
+## Confirmed pressure points
 
 ### 1. Page-generation logic
 
-`postbuild.mjs` is documented as generating research/entity pages, Schema, sitemap, and API outputs. If templates, metadata, citations, and navigation are assembled in one script, it risks low cohesion and difficult testing.
-
-Assessment target after checkout: identify whether page types share a typed page model and reusable renderer, or duplicate HTML/meta/citation fragments.
+Two ordered generators own overlapping publication behavior.
+`scripts/postbuild.mjs` and `scripts/enhance-seo-geo.mjs` each define their own
+host resolution, Persian formatters, HTML escaping, JSON-LD serialization,
+breadcrumb rendering, document head, page shell, citation block, metric cards,
+and table rendering. The second generator then patches existing HTML by string
+replacement. Generator order is therefore part of an undocumented interface.
 
 ### 2. Metric definitions
 
-Analytical JSON, prose content, chart options, generated HTML, and CSV downloads can drift if values or denominators are restated in multiple places.
-
-Assessment target: trace a representative metric from Python generation through JSON, interactive chart, table, static page, structured data, and CSV. Record every transformation and rounding step.
+The React application and both generators independently import and transform
+the same analytical JSON files. For example, corpus couplets are reconstructed
+in both the interactive application and the static generator, while topic
+statistics are formatted in interactive cards, research HTML, entity HTML,
+machine-discovery prose, JSON, and CSV generation. There is no schema that
+requires metric identifier, denominator, precision, version, and local
+qualification to travel together.
 
 ### 3. Visualization wrappers
 
-A `chartOptions.js` module may be either a deep abstraction (owning accessible labels, formatting, RTL, resize behavior, table equivalence) or a shallow option factory that leaves every page to repeat concerns.
-
-Assessment target: determine whether chart configuration exposes a domain-level interface or leaks the chart library throughout the application.
+The current `Chart` module adds deferred loading, a figure label, and common
+ECharts ARIA/animation options, but its interface accepts a raw ECharts option
+object. Twenty-eight exported option factories and their callers therefore
+share knowledge of the chart library. The module cannot require a pre-chart
+explanation, local qualification, native table, units, precision, or equivalent
+filtered rows.
 
 ### 4. Citation generation
 
-Citation text exists on methodology/data pages and likely research pages. Repeated string construction risks mismatched title, year, canonical URL, version, and copy behavior.
-
-Assessment target: locate one citation model and render it to visible HTML, clipboard text, JSON-LD, `CITATION.cff`, and metadata projections.
+Citation strings are independently constructed in `App.jsx`,
+`postbuild.mjs`, and `enhance-seo-geo.mjs`, with different publication names.
+Machine-readable citation files are generated elsewhere. The interactive copy
+path derives its host from `window.location.origin`; generator paths derive it
+from several environment variables. A copied citation can therefore disagree
+with the visible static citation, canonical host, and machine metadata.
 
 ### 5. Persian number formatting
 
-Counts, percentages, years, p-values, and file sizes have different formatting rules. Repeated `toLocaleString` or manual replacement can produce inconsistent separators and machine-value loss.
-
-Assessment target: inventory formatting functions and create a small domain-aware formatter interface only if duplication is confirmed.
+Duplication is confirmed. `src/utils.js` uses `Intl.NumberFormat` with an options
+object, while both generators carry separate `faNumber`, `faPercent`, and
+`faDigits` implementations with different parameter shapes and defaults.
+Machine values and display values are not represented as an explicit pair.
 
 ### 6. Transformation/presentation coupling
 
-React components or page templates should not recompute research metrics. Python/data-generation code should not emit presentation-specific prose where a structured field would be more stable.
-
-Assessment target: classify each transformation as corpus cleaning, metric computation, evidence packaging, or presentation formatting.
+`App.jsx` selects, filters, aggregates, formats, narrates, and renders evidence
+inside one 847-line implementation. `postbuild.mjs` similarly derives research
+metrics, writes prose, renders documents, and writes CSV/JSON/filesystem
+outputs. This couples evidence packaging to presentation and makes it difficult
+to test the public data contract without exercising unrelated implementations.
 
 ### 7. Chart accessibility
 
-Chart-library output may be inaccessible if the only values are canvas/SVG marks or hover tooltips.
-
-Assessment target: verify whether chart and table consume one array/schema, whether keyboard users can reach meaningful controls, and whether qualification text is visible without interaction.
+Interactive charts render to canvas and expose an ARIA description, but
+production callers do not provide equivalent native tables from the same data.
+Some chart copy explicitly tells visitors to hover for exact values. Static
+generated pages contain tables, but those tables are separate renderings and
+are not protected against drift from the interactive chart.
 
 ### 8. Metadata generation
 
-Repeated title/description/canonical/JSON-LD assembly across page types creates drift and duplicate-page risk.
-
-Assessment target: identify a page metadata interface keyed by page identity and content version.
+Metadata assembly is duplicated by the two generators. One generator assigns
+the build date as research publication and modification date, while the other
+has a fixed publication date but still uses build time widely as modification
+time. Host resolution can also select a deployment alias. Page identity,
+content version, publication date, modification date, citation, and canonical
+host are not one cohesive publication model.
 
 ### 9. URL state
 
-Explorer filters that live only in React state cannot be shared, bookmarked, restored, or tested through stable public seams.
+`App.jsx` initializes at least 17 local state values, including topic,
+metaphor, period, similarity threshold/layout/poet, poet search/century/metric,
+audience mode, attribution case, and public question. It does not parse or
+serialize `URLSearchParams`, push/replace browser history, or restore state on
+navigation. Static pages link back to homepage fragments rather than a
+canonical atlas-state contract.
 
-Assessment target: map filter state to normalized URL parameters, define defaults, ordering, invalid-value behavior, and canonical/indexing policy.
+## Deepening candidates
+
+### Candidate 1: published-evidence module
+
+- **Classification:** required by the approved specification
+- **Recommendation:** Strong
+- **Files/modules involved:** analytical JSON sources, the interactive
+  application, chart-option implementation, both static generators, JSON APIs,
+  and CSV downloads
+- **Problem:** callers must know where each metric lives, how to transform it,
+  how to format it, which qualification belongs to it, and how its download is
+  generated. This is a broad and unstable interface spread across callers.
+  Attribution and public-question generators also write `app/` artifacts while
+  the React application consumes corresponding `src/data/` artifacts, leaving
+  byte-equal copies without one enforced ownership path.
+- **Deepening:** place evidence identity, values, unit, denominator, precision,
+  source version, and required qualification behind one cohesive module.
+  Interactive, static-page, table, JSON, and CSV adapters consume the same
+  published record.
+- **Deletion test:** deleting this module would force metric definitions,
+  version rules, qualification validation, and projections back into every
+  caller. That concentration demonstrates depth.
+- **Leverage/locality:** one integrity rule protects every representation;
+  metric or qualification fixes remain local; data-contract tests use the same
+  seam as production callers.
+
+### Candidate 2: atlas-state module
+
+- **Classification:** required by the approved specification
+- **Recommendation:** Strong
+- **Files/modules involved:** interactive application state, explorer filtering,
+  navigation links, canonical/indexing logic, and browser tests
+- **Problem:** local state and filter implementation are the effective
+  interface. URLs, history, invalid values, defaults, result projection, and
+  canonical behavior are absent or scattered.
+- **Deepening:** own normalized atlas state, parsing, serialization, validation,
+  deterministic ordering, filter projection, and history semantics in one
+  module. The browser URL is the public seam.
+- **Deletion test:** deleting this module would redistribute parsing,
+  validation, history, canonicalization, and filter rules through event
+  handlers and pages. The proposed module therefore earns its seam.
+- **Leverage/locality:** browser tests exercise stable URLs; all entry links and
+  filter controls share one rule set; invalid-state bugs become local.
+
+### Candidate 3: accessible-evidence module
+
+- **Classification:** required by the approved specification
+- **Recommendation:** Strong
+- **Files/modules involved:** chart shell, option factories, chart cards,
+  methodological qualification rendering, native tables, loading/error states,
+  and ECharts adapter
+- **Problem:** the current chart interface leaks ECharts options and cannot
+  enforce equivalent tables, local qualifications, accessible summaries,
+  units, or filtered-row equality.
+- **Deepening:** make the evidence presentation—not the chart-library option—
+  the meaningful interface. Keep ECharts as one adapter inside the
+  implementation alongside the native-table and no-JavaScript projections.
+- **Deletion test:** deleting this module would return accessible-summary,
+  qualification, table, loading, and chart-equivalence logic to every chart
+  caller. This is substantial complexity worth concentrating.
+- **Leverage/locality:** each published-evidence record gains the same
+  accessible behavior; chart/table tests cross one seam; a future visualization
+  adapter could change without rewriting evidence callers.
+
+### Candidate 4: generated-publication module
+
+- **Classification:** required behavior plus safe preparatory refactor
+- **Recommendation:** Strong
+- **Files/modules involved:** both ordered generators, shared page shells,
+  metadata, structured data, breadcrumbs, citation, Persian display formatting,
+  filesystem output, and SEO audit
+- **Problem:** two implementations repeat the same publication rules and then
+  patch each other's HTML. Filesystem writing, page identity, rendering,
+  citation, metadata, and date semantics are coupled.
+- **Deepening:** concentrate the publication model and renderer behind one seam;
+  keep page-type adapters explicit, and keep filesystem writing as an
+  implementation detail. Page identity, citation fields, canonical host and
+  publication dates form a cohesive internal module used by the renderer.
+  Consolidate Persian display formatting only where the feature exercises it.
+- **Deletion test:** deleting the module would duplicate the shell, metadata,
+  citation, date, formatting, and structured-data logic across every page
+  family, which is the current failure mode.
+- **Leverage/locality:** one fix updates all generated page families; built-
+  artifact tests use the same seam; generator ordering stops defining output
+  semantics.
+
+### Candidate 5: wholesale application or analysis-pipeline rewrite
+
+- **Classification:** optional future work; outside the approved specification
+- **Recommendation:** Speculative
+- **Files/modules involved:** the full React application, framework entry,
+  Python research pipeline, and all analytical artifacts
+- **Problem:** `App.jsx` is large and the raw-data pipeline is not reproducible
+  from the checkout, but size and incompleteness alone do not justify an
+  unrelated rewrite.
+- **Assessment:** do not create a generic module decomposition, replace the
+  framework, or rewrite research computation during this feature. Extract only
+  the seams demanded by the approved browser, build-artifact, and data
+  contracts.
+- **Deletion test:** a speculative layer with only one pass-through adapter
+  would move code rather than remove caller complexity. It would be shallow.
+
+## Priority
+
+| Order | Candidate | Why now |
+| --- | --- | --- |
+| 1 | Published evidence | ADR 0002 and chart/download integrity depend on it |
+| 2 | Atlas state | The approved explorer and shareable URL are impossible without it |
+| 3 | Accessible evidence | Every in-scope chart needs a table and qualification contract |
+| 4 | Generated publication | Research/entity metadata and citation consistency depend on it |
+| Later | Wholesale rewrite | No approved user story requires it |
 
 ## Changes required by the selected feature
 
-These are likely required regardless of visual direction, but still need specification approval:
+These are authorized by the approved specification:
 
 1. A stable URL contract for selected navigation/filter behavior.
 2. An accessible chart/table composition contract.
@@ -85,14 +229,17 @@ These are likely required regardless of visual direction, but still need specifi
 
 ## Safe preparatory refactors
 
-Only perform these when duplication is confirmed and the selected feature needs them:
+Duplication is confirmed. Perform these only in the vertical slice that needs
+them, behind characterization tests:
 
 - extract a pure URL-state parser/serializer;
 - extract a pure Persian display formatter while preserving machine values;
-- extract a claim/evidence/qualification data shape;
-- extract a chart-table projection from one dataset;
-- extract a citation model/rendering function;
-- split page metadata assembly from filesystem output in the generator.
+- extract the approved published-evidence/qualification record;
+- extract one chart-table projection from one published dataset before
+  expanding it;
+- consolidate citation identity and rendering where the selected pages use it;
+- separate page identity/metadata rendering from filesystem output without
+  rewriting unrelated discovery files.
 
 Each refactor should be protected by characterization tests and remain narrow.
 
@@ -110,4 +257,13 @@ These are explicitly outside the current approved work unless separately authori
 
 ## Architecture approval gate
 
-After a prototype direction is selected and specified, re-open this report against the actual checkout. Any refactor expanding beyond the selected user stories requires explicit approval.
+The implementation may perform Candidates 1–4 only to the extent required by
+the approved specification and its vertical TDD slices. Candidate 5 and any
+other broad refactor remain blocked. Architecture work that changes research
+definitions, replaces the framework or chart library, rewrites the Python
+pipeline, or expands beyond the approved user stories requires explicit product
+approval.
+
+The product owner approved Candidates 1–4 for site-wide production coverage on
+2026-07-29, while explicitly selecting preservation of React/Vite, ECharts, and
+the current data over a full technical rewrite.

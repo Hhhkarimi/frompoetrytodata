@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 10,
   "slug": "cosmos-power-fortune",
-  "url": "http://localhost:4173/themes/cosmos-power-fortune/",
+  "url": "https://frompoetrytodata.vercel.app/themes/cosmos-power-fortune/",
   "name": "کیهان، قدرت و بخت",
   "keywords": [
     "جهان",
@@ -104,7 +104,7 @@
       "correlation": -0.3268
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

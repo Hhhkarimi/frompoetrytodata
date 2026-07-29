@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 11,
-  "url": "http://localhost:4173/centuries/11/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/11/",
   "corpus": {
     "century": 11,
     "texts": 13886,
@@ -15,7 +15,7 @@
     {
       "name": "صائب تبریزی",
       "slug": "saeb-tabrizi",
-      "url": "http://localhost:4173/poets/saeb-tabrizi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/saeb-tabrizi/",
       "poems": 10043,
       "totalCouplets": 78890,
       "totalWords": 1210269,
@@ -25,7 +25,7 @@
     {
       "name": "بیدل دهلوی",
       "slug": "bidel-dehlavi",
-      "url": "http://localhost:4173/poets/bidel-dehlavi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/bidel-dehlavi/",
       "poems": 2827,
       "totalCouplets": 32333,
       "totalWords": 483244,
@@ -35,7 +35,7 @@
     {
       "name": "فیض کاشانی",
       "slug": "feiz-kashani",
-      "url": "http://localhost:4173/poets/feiz-kashani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/feiz-kashani/",
       "poems": 1016,
       "totalCouplets": 9844,
       "totalWords": 137768,
@@ -163,7 +163,7 @@
       "rate": 4.211
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

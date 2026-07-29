@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 13,
-  "url": "http://localhost:4173/centuries/13/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/13/",
   "corpus": {
     "century": 13,
     "texts": 1382,
@@ -15,7 +15,7 @@
     {
       "name": "قاآنی",
       "slug": "qaani",
-      "url": "http://localhost:4173/poets/qaani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/qaani/",
       "poems": 625,
       "totalCouplets": 20496,
       "totalWords": 301301,
@@ -25,7 +25,7 @@
     {
       "name": "فروغی بسطامی",
       "slug": "forughi-bastami",
-      "url": "http://localhost:4173/poets/forughi-bastami/",
+      "url": "https://frompoetrytodata.vercel.app/poets/forughi-bastami/",
       "poems": 549,
       "totalCouplets": 5863,
       "totalWords": 88959,
@@ -35,7 +35,7 @@
     {
       "name": "ملا هادی سبزواری",
       "slug": "molla-hadi-sabzevari",
-      "url": "http://localhost:4173/poets/molla-hadi-sabzevari/",
+      "url": "https://frompoetrytodata.vercel.app/poets/molla-hadi-sabzevari/",
       "poems": 208,
       "totalCouplets": 1795,
       "totalWords": 23700,
@@ -163,7 +163,7 @@
       "rate": 2.547
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

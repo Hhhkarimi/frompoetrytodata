@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 12,
-  "url": "http://localhost:4173/centuries/12/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/12/",
   "corpus": {
     "century": 12,
     "texts": 194,
@@ -15,7 +15,7 @@
     {
       "name": "هاتف اصفهانی",
       "slug": "hatef-esfahani",
-      "url": "http://localhost:4173/poets/hatef-esfahani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/hatef-esfahani/",
       "poems": 194,
       "totalCouplets": 1587,
       "totalWords": 22895,
@@ -143,7 +143,7 @@
       "rate": 0.437
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "sea-wave-shore",
-  "url": "http://localhost:4173/metaphors/sea-wave-shore/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/",
   "name": "دریا، موج و ساحل",
   "answer": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
   "occurrences": 17175,
@@ -97,7 +97,7 @@
     "poetsBefore": 3,
     "poetsAfter": 16
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

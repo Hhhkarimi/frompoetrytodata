@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "chain-captivity",
-  "url": "http://localhost:4173/metaphors/chain-captivity/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/chain-captivity/",
   "name": "زنجیر و اسارت",
   "answer": "خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
   "occurrences": 3055,
@@ -91,7 +91,7 @@
     "poetsBefore": 9,
     "poetsAfter": 8
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

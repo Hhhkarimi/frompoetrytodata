@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 7,
   "slug": "nature-flower-spring",
-  "url": "http://localhost:4173/themes/nature-flower-spring/",
+  "url": "https://frompoetrytodata.vercel.app/themes/nature-flower-spring/",
   "name": "طبیعت، گل و بهار",
   "keywords": [
     "گل",
@@ -104,7 +104,7 @@
       "correlation": -0.4072
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

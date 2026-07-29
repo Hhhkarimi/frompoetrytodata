@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 14,
-  "url": "http://localhost:4173/centuries/14/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/14/",
   "corpus": {
     "century": 14,
     "texts": 4212,
@@ -15,7 +15,7 @@
     {
       "name": "ملک‌الشعرای بهار",
       "slug": "malek-al-shoara-bahar",
-      "url": "http://localhost:4173/poets/malek-al-shoara-bahar/",
+      "url": "https://frompoetrytodata.vercel.app/poets/malek-al-shoara-bahar/",
       "poems": 1105,
       "totalCouplets": 21807,
       "totalWords": 279418,
@@ -25,7 +25,7 @@
     {
       "name": "اقبال لاهوری",
       "slug": "iqbal-lahori",
-      "url": "http://localhost:4173/poets/iqbal-lahori/",
+      "url": "https://frompoetrytodata.vercel.app/poets/iqbal-lahori/",
       "poems": 972,
       "totalCouplets": 8155,
       "totalWords": 102906,
@@ -35,7 +35,7 @@
     {
       "name": "احمد شاملو",
       "slug": "ahmad-shamlou",
-      "url": "http://localhost:4173/poets/ahmad-shamlou/",
+      "url": "https://frompoetrytodata.vercel.app/poets/ahmad-shamlou/",
       "poems": 323,
       "totalCouplets": 7301,
       "totalWords": 66463,
@@ -45,7 +45,7 @@
     {
       "name": "سیمین بهبهانی",
       "slug": "simin-behbahani",
-      "url": "http://localhost:4173/poets/simin-behbahani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/simin-behbahani/",
       "poems": 227,
       "totalCouplets": 2812,
       "totalWords": 38817,
@@ -55,7 +55,7 @@
     {
       "name": "پروین اعتصامی",
       "slug": "parvin-etesami",
-      "url": "http://localhost:4173/poets/parvin-etesami/",
+      "url": "https://frompoetrytodata.vercel.app/poets/parvin-etesami/",
       "poems": 223,
       "totalCouplets": 5594,
       "totalWords": 70776,
@@ -65,7 +65,7 @@
     {
       "name": "شهریار",
       "slug": "shahriar",
-      "url": "http://localhost:4173/poets/shahriar/",
+      "url": "https://frompoetrytodata.vercel.app/poets/shahriar/",
       "poems": 190,
       "totalCouplets": 2607,
       "totalWords": 37244,
@@ -75,7 +75,7 @@
     {
       "name": "کامبیز صدیقی کسمایی",
       "slug": "kambiz-sedighi-kasmaei",
-      "url": "http://localhost:4173/poets/kambiz-sedighi-kasmaei/",
+      "url": "https://frompoetrytodata.vercel.app/poets/kambiz-sedighi-kasmaei/",
       "poems": 181,
       "totalCouplets": 1268,
       "totalWords": 11169,
@@ -85,7 +85,7 @@
     {
       "name": "رهی معیری",
       "slug": "rahi-moayeri",
-      "url": "http://localhost:4173/poets/rahi-moayeri/",
+      "url": "https://frompoetrytodata.vercel.app/poets/rahi-moayeri/",
       "poems": 159,
       "totalCouplets": 1050,
       "totalWords": 15577,
@@ -95,7 +95,7 @@
     {
       "name": "سهراب سپهری",
       "slug": "sohrab-sepehri",
-      "url": "http://localhost:4173/poets/sohrab-sepehri/",
+      "url": "https://frompoetrytodata.vercel.app/poets/sohrab-sepehri/",
       "poems": 136,
       "totalCouplets": 2007,
       "totalWords": 24696,
@@ -105,7 +105,7 @@
     {
       "name": "فروغ فرخزاد",
       "slug": "forough-farrokhzad",
-      "url": "http://localhost:4173/poets/forough-farrokhzad/",
+      "url": "https://frompoetrytodata.vercel.app/poets/forough-farrokhzad/",
       "poems": 124,
       "totalCouplets": 2856,
       "totalWords": 34314,
@@ -115,7 +115,7 @@
     {
       "name": "مهدی اخوان ثالث",
       "slug": "mehdi-akhavan-sales",
-      "url": "http://localhost:4173/poets/mehdi-akhavan-sales/",
+      "url": "https://frompoetrytodata.vercel.app/poets/mehdi-akhavan-sales/",
       "poems": 116,
       "totalCouplets": 2651,
       "totalWords": 34234,
@@ -125,7 +125,7 @@
     {
       "name": "بهرام سالکی",
       "slug": "bahram-saleki",
-      "url": "http://localhost:4173/poets/bahram-saleki/",
+      "url": "https://frompoetrytodata.vercel.app/poets/bahram-saleki/",
       "poems": 104,
       "totalCouplets": 2332,
       "totalWords": 27090,
@@ -135,7 +135,7 @@
     {
       "name": "شاطرعباس صبوحی",
       "slug": "shater-abbas-sabouhi",
-      "url": "http://localhost:4173/poets/shater-abbas-sabouhi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/shater-abbas-sabouhi/",
       "poems": 98,
       "totalCouplets": 608,
       "totalWords": 9683,
@@ -145,7 +145,7 @@
     {
       "name": "شیون فومنی",
       "slug": "shivon-foumani",
-      "url": "http://localhost:4173/poets/shivon-foumani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/shivon-foumani/",
       "poems": 97,
       "totalCouplets": 764,
       "totalWords": 8376,
@@ -155,7 +155,7 @@
     {
       "name": "نیما یوشیج (آوای آزاد)",
       "slug": "nima-yushij",
-      "url": "http://localhost:4173/poets/nima-yushij/",
+      "url": "https://frompoetrytodata.vercel.app/poets/nima-yushij/",
       "poems": 55,
       "totalCouplets": 1463,
       "totalWords": 17389,
@@ -165,7 +165,7 @@
     {
       "name": "خلیل‌الله خلیلی",
       "slug": "khalilullah-khalili",
-      "url": "http://localhost:4173/poets/khalilullah-khalili/",
+      "url": "https://frompoetrytodata.vercel.app/poets/khalilullah-khalili/",
       "poems": 54,
       "totalCouplets": 108,
       "totalWords": 1481,
@@ -175,7 +175,7 @@
     {
       "name": "محمدحسن بارق شفیعی",
       "slug": "mohammad-hasan-bareq-shafiei",
-      "url": "http://localhost:4173/poets/mohammad-hasan-bareq-shafiei/",
+      "url": "https://frompoetrytodata.vercel.app/poets/mohammad-hasan-bareq-shafiei/",
       "poems": 48,
       "totalCouplets": 711,
       "totalWords": 8420,
@@ -303,7 +303,7 @@
       "rate": 3.455
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

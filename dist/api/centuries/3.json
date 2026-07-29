@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 3,
-  "url": "http://localhost:4173/centuries/3/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/3/",
   "corpus": {
     "century": 3,
     "texts": 539,
@@ -15,7 +15,7 @@
     {
       "name": "رودکی",
       "slug": "rudaki",
-      "url": "http://localhost:4173/poets/rudaki/",
+      "url": "https://frompoetrytodata.vercel.app/poets/rudaki/",
       "poems": 539,
       "totalCouplets": 1047,
       "totalWords": 13804,
@@ -143,7 +143,7 @@
       "rate": 1.449
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

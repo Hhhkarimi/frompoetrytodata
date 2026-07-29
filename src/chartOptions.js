@@ -95,7 +95,7 @@ export function topicRiverOption(topics, dark = false) {
     grid: { left: 42, right: 22, top: 70, bottom: 48, containLabel: true },
     xAxis: { type: 'category', boundaryGap: false, data: centuries, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
     yAxis: { type: 'value', max: 100, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => `${faNumber(v)}٪` } },
-    series: topics.map((t, i) => ({
+    series: topics.map((t) => ({
       name: t.name,
       type: 'line',
       stack: 'کل',

@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 5,
-  "url": "http://localhost:4173/centuries/5/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/5/",
   "corpus": {
     "century": 5,
     "texts": 2253,
@@ -15,7 +15,7 @@
     {
       "name": "ابوسعید ابوالخیر",
       "slug": "abu-saeid-abul-kheir",
-      "url": "http://localhost:4173/poets/abu-saeid-abul-kheir/",
+      "url": "https://frompoetrytodata.vercel.app/poets/abu-saeid-abul-kheir/",
       "poems": 786,
       "totalCouplets": 1589,
       "totalWords": 21731,
@@ -25,7 +25,7 @@
     {
       "name": "ناصرخسرو",
       "slug": "naser-khosrow",
-      "url": "http://localhost:4173/poets/naser-khosrow/",
+      "url": "https://frompoetrytodata.vercel.app/poets/naser-khosrow/",
       "poems": 386,
       "totalCouplets": 10911,
       "totalWords": 187438,
@@ -35,7 +35,7 @@
     {
       "name": "باباطاهر",
       "slug": "baba-taher",
-      "url": "http://localhost:4173/poets/baba-taher/",
+      "url": "https://frompoetrytodata.vercel.app/poets/baba-taher/",
       "poems": 368,
       "totalCouplets": 764,
       "totalWords": 9131,
@@ -45,7 +45,7 @@
     {
       "name": "هجویری",
       "slug": "hojviri",
-      "url": "http://localhost:4173/poets/hojviri/",
+      "url": "https://frompoetrytodata.vercel.app/poets/hojviri/",
       "poems": 210,
       "totalCouplets": 1222,
       "totalWords": 150023,
@@ -55,7 +55,7 @@
     {
       "name": "اسدی توسی",
       "slug": "asadi-tusi",
-      "url": "http://localhost:4173/poets/asadi-tusi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/asadi-tusi/",
       "poems": 144,
       "totalCouplets": 19389,
       "totalWords": 109366,
@@ -65,7 +65,7 @@
     {
       "name": "فخرالدین اسعد گرگانی",
       "slug": "fakhr-al-din-asad-gorgani",
-      "url": "http://localhost:4173/poets/fakhr-al-din-asad-gorgani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/fakhr-al-din-asad-gorgani/",
       "poems": 113,
       "totalCouplets": 8983,
       "totalWords": 110625,
@@ -75,7 +75,7 @@
     {
       "name": "منوچهری",
       "slug": "manuchehri",
-      "url": "http://localhost:4173/poets/manuchehri/",
+      "url": "https://frompoetrytodata.vercel.app/poets/manuchehri/",
       "poems": 98,
       "totalCouplets": 2816,
       "totalWords": 39614,
@@ -85,7 +85,7 @@
     {
       "name": "فرخی سیستانی",
       "slug": "farrokhi-sistani",
-      "url": "http://localhost:4173/poets/farrokhi-sistani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/farrokhi-sistani/",
       "poems": 87,
       "totalCouplets": 2952,
       "totalWords": 40967,
@@ -95,7 +95,7 @@
     {
       "name": "مسعود سعد سلمان",
       "slug": "masud-sad-salman",
-      "url": "http://localhost:4173/poets/masud-sad-salman/",
+      "url": "https://frompoetrytodata.vercel.app/poets/masud-sad-salman/",
       "poems": 61,
       "totalCouplets": 1227,
       "totalWords": 16158,
@@ -223,7 +223,7 @@
       "rate": 2.067
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

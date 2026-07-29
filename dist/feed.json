@@ -1,65 +1,79 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "از شعر تا داده",
-  "home_page_url": "http://localhost:4173",
-  "feed_url": "http://localhost:4173/feed.json",
+  "home_page_url": "https://frompoetrytodata.vercel.app",
+  "feed_url": "https://frompoetrytodata.vercel.app/feed.json",
   "language": "fa",
   "items": [
     {
-      "id": "http://localhost:4173/research/topics/",
-      "url": "http://localhost:4173/research/topics/",
+      "id": "https://frompoetrytodata.vercel.app/research/topics/",
+      "url": "https://frompoetrytodata.vercel.app/research/topics/",
       "title": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
       "summary": "ترکیب موضوعی شعر فارسی در طول زمان به‌طور معناداری تغییر کرده است؛ سده تاریخی حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی این تفاوت را معنادار نشان می‌دهد.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/metaphors/",
-      "url": "http://localhost:4173/research/metaphors/",
+      "id": "https://frompoetrytodata.vercel.app/research/metaphors/",
+      "url": "https://frompoetrytodata.vercel.app/research/metaphors/",
       "title": "تولد، خاموشی و دگرگونی استعاره‌ها در شعر فارسی",
       "summary": "هیچ‌یک از خانواده‌های استعاری بررسی‌شده کاملاً ناپدید نمی‌شوند؛ الگوی غالب، خاموشی موقت، بازگشت و جابه‌جایی میدان معنایی است. تراکم کلی تصاویر میان دوره‌های تاریخی تفاوت معنادار دارد.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/intertextuality/",
-      "url": "http://localhost:4173/research/intertextuality/",
-      "title": "شبکه بینامتنیت و قرابت محاسباتی شاعران فارسی",
+      "id": "https://frompoetrytodata.vercel.app/research/intertextuality/",
+      "url": "https://frompoetrytodata.vercel.app/research/intertextuality/",
+      "title": "نقشه پیوندهای متنی و شباهت شاعران فارسی",
       "summary": "شباهت عبارتی، واژگانی و موضوعی با افزایش فاصله زمانی شاعران کاهش می‌یابد؛ اما هر پیوند فقط قرابت محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/century-ai/",
-      "url": "http://localhost:4173/research/century-ai/",
+      "id": "https://frompoetrytodata.vercel.app/research/century-ai/",
+      "url": "https://frompoetrytodata.vercel.app/research/century-ai/",
       "title": "آیا هوش مصنوعی می‌تواند سده یک شعر فارسی را تشخیص دهد؟",
       "summary": "هوش مصنوعی می‌تواند نشانه‌های زمانی را در زبان شعر بیابد، اما دقت ظاهراً بالا در تقسیم تصادفی ممکن است حاصل شناخت شاعر یا کتاب باشد. ارزیابی معتبر باید شاعر آزمون را کاملاً از آموزش حذف کند.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/stylometry/",
-      "url": "http://localhost:4173/research/stylometry/",
+      "id": "https://frompoetrytodata.vercel.app/research/stylometry/",
+      "url": "https://frompoetrytodata.vercel.app/research/stylometry/",
       "title": "اثر انگشت سبکی شاعران و کشف شعرهای نامتعارف",
       "summary": "در آزمون متوازن ۴۹ شاعر، مدل نویسه‌ای به دقت ۶۶٫۷٪ رسید؛ بسیار بالاتر از خط مبنای حدود ۲٪. بااین‌حال، نامتعارف آماری الزاماً به معنی انتساب نادرست نیست.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/forms/",
-      "url": "http://localhost:4173/research/forms/",
+      "id": "https://frompoetrytodata.vercel.app/research/forms/",
+      "url": "https://frompoetrytodata.vercel.app/research/forms/",
       "title": "مقایسه تکامل غزل، قصیده، رباعی و مثنوی",
       "summary": "چهار قالب فقط در اندازه تفاوت ندارند: قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد. قالب شعر ۳۷٫۵٪ از تفاوت معنایی نمونه را نیز توضیح می‌دهد.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/geography/",
-      "url": "http://localhost:4173/research/geography/",
+      "id": "https://frompoetrytodata.vercel.app/research/geography/",
+      "url": "https://frompoetrytodata.vercel.app/research/geography/",
       "title": "جغرافیای تخیل و مهاجرت شعر فارسی",
       "summary": "۲۴ شاعر از ۶۷ شاعر پیکره، یعنی ۳۵٫۸٪، در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ جابه‌جایی میان چهار دوره تاریخی تفاوت دارد؛ اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی در این نمونه معنادار نشد.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
     },
     {
-      "id": "http://localhost:4173/research/lexical-life/",
-      "url": "http://localhost:4173/research/lexical-life/",
+      "id": "https://frompoetrytodata.vercel.app/research/lexical-life/",
+      "url": "https://frompoetrytodata.vercel.app/research/lexical-life/",
       "title": "نیمه‌عمر واژگان در شعر فارسی",
       "summary": "در ۶٬۵۵۳ واژه‌ای که افت تا نصف اوج مشاهده شد، میانه نیمه‌عمر ۱٫۳۶ سده است؛ بااین‌حال ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند. چرخه واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق.",
-      "date_modified": "2026-07-26T00:00:00Z"
+      "date_modified": "2026-07-29T00:00:00Z"
+    },
+    {
+      "id": "https://frompoetrytodata.vercel.app/research/attribution/",
+      "url": "https://frompoetrytodata.vercel.app/research/attribution/",
+      "title": "سنجش انتساب شعر با شواهد زبانی، فکری و تاریخی",
+      "summary": "پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد. در دادهٔ خیام سه متن نثری و ده‌ها صورت نزدیک میان مجموعه‌ها شناسایی شد.",
+      "date_modified": "2026-07-29T00:00:00Z"
+    },
+    {
+      "id": "https://frompoetrytodata.vercel.app/research/public-questions/",
+      "url": "https://frompoetrytodata.vercel.app/research/public-questions/",
+      "title": "ده پرسش جذاب از هزار سال شعر فارسی",
+      "summary": "در این پیکره «دل» حدود ۸٫۶ برابر «عقل»، نشانه‌های غم ۲٫۸ برابر شادی و ضمیرهای فردی ۲٫۴ برابر جمعی دیده می‌شوند. بااین‌حال هر نتیجه کنار تعریف واژه‌ها و محدودیت معنایی آن نمایش داده می‌شود.",
+      "date_modified": "2026-07-29T00:00:00Z"
     }
   ]
 }

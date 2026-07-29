@@ -3,9 +3,9 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/#hossein-karimi",
+      "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi",
       "name": "حسین کریمی",
-      "url": "http://localhost:4173/about/",
+      "url": "https://frompoetrytodata.vercel.app/about/",
       "sameAs": [
         "https://www.linkedin.com/in/hossein-karimi-8a452153/"
       ],
@@ -13,349 +13,385 @@
     },
     {
       "@type": "WebSite",
-      "@id": "http://localhost:4173/#website",
-      "url": "http://localhost:4173",
+      "@id": "https://frompoetrytodata.vercel.app/#website",
+      "url": "https://frompoetrytodata.vercel.app",
       "name": "از شعر تا داده",
       "alternateName": "From Poetry to Data",
       "inLanguage": "fa-IR",
       "description": "اطلس تعاملی و پژوهشی تحلیل داده‌های شعر فارسی از سده سوم تا پانزدهم هجری.",
       "creator": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       }
     },
     {
       "@type": "Dataset",
-      "@id": "http://localhost:4173/data/#dataset",
+      "@id": "https://frompoetrytodata.vercel.app/data/#dataset",
       "name": "خروجی‌های تحلیلی از شعر تا داده",
-      "url": "http://localhost:4173/data/",
+      "url": "https://frompoetrytodata.vercel.app/data/",
       "inLanguage": "fa",
       "isAccessibleForFree": true,
       "description": "خروجی‌های تحلیلی ۵۴٬۵۲۴ متن، ۶۹۹٬۹۹۹ بیت و ۹٬۷۲۵٬۶۵۲ واژه از ۶۷ شاعر فارسی.",
       "creator": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
-      "version": "5.0.2",
-      "dateModified": "2026-07-26"
+      "version": "7.0.0",
+      "datePublished": "2026-07-27",
+      "dateModified": "2026-07-29",
+      "license": "https://frompoetrytodata.vercel.app/attributions/",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://frompoetrytodata.vercel.app/downloads/manifest.json",
+          "name": "نسخه، منشأ و checksum دانلودها"
+        }
+      ]
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/topics/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/topics/#article",
       "headline": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
       "abstract": "ترکیب موضوعی شعر فارسی در طول زمان به‌طور معناداری تغییر کرده است؛ سده تاریخی حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی این تفاوت را معنادار نشان می‌دهد.",
-      "url": "http://localhost:4173/research/topics/",
+      "url": "https://frompoetrytodata.vercel.app/research/topics/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/metaphors/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/metaphors/#article",
       "headline": "تولد، خاموشی و دگرگونی استعاره‌ها در شعر فارسی",
       "abstract": "هیچ‌یک از خانواده‌های استعاری بررسی‌شده کاملاً ناپدید نمی‌شوند؛ الگوی غالب، خاموشی موقت، بازگشت و جابه‌جایی میدان معنایی است. تراکم کلی تصاویر میان دوره‌های تاریخی تفاوت معنادار دارد.",
-      "url": "http://localhost:4173/research/metaphors/",
+      "url": "https://frompoetrytodata.vercel.app/research/metaphors/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/intertextuality/#article",
-      "headline": "شبکه بینامتنیت و قرابت محاسباتی شاعران فارسی",
+      "@id": "https://frompoetrytodata.vercel.app/research/intertextuality/#article",
+      "headline": "نقشه پیوندهای متنی و شباهت شاعران فارسی",
       "abstract": "شباهت عبارتی، واژگانی و موضوعی با افزایش فاصله زمانی شاعران کاهش می‌یابد؛ اما هر پیوند فقط قرابت محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند.",
-      "url": "http://localhost:4173/research/intertextuality/",
+      "url": "https://frompoetrytodata.vercel.app/research/intertextuality/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/century-ai/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/century-ai/#article",
       "headline": "آیا هوش مصنوعی می‌تواند سده یک شعر فارسی را تشخیص دهد؟",
       "abstract": "هوش مصنوعی می‌تواند نشانه‌های زمانی را در زبان شعر بیابد، اما دقت ظاهراً بالا در تقسیم تصادفی ممکن است حاصل شناخت شاعر یا کتاب باشد. ارزیابی معتبر باید شاعر آزمون را کاملاً از آموزش حذف کند.",
-      "url": "http://localhost:4173/research/century-ai/",
+      "url": "https://frompoetrytodata.vercel.app/research/century-ai/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/stylometry/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/stylometry/#article",
       "headline": "اثر انگشت سبکی شاعران و کشف شعرهای نامتعارف",
       "abstract": "در آزمون متوازن ۴۹ شاعر، مدل نویسه‌ای به دقت ۶۶٫۷٪ رسید؛ بسیار بالاتر از خط مبنای حدود ۲٪. بااین‌حال، نامتعارف آماری الزاماً به معنی انتساب نادرست نیست.",
-      "url": "http://localhost:4173/research/stylometry/",
+      "url": "https://frompoetrytodata.vercel.app/research/stylometry/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/forms/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/forms/#article",
       "headline": "مقایسه تکامل غزل، قصیده، رباعی و مثنوی",
       "abstract": "چهار قالب فقط در اندازه تفاوت ندارند: قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد. قالب شعر ۳۷٫۵٪ از تفاوت معنایی نمونه را نیز توضیح می‌دهد.",
-      "url": "http://localhost:4173/research/forms/",
+      "url": "https://frompoetrytodata.vercel.app/research/forms/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/geography/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/geography/#article",
       "headline": "جغرافیای تخیل و مهاجرت شعر فارسی",
       "abstract": "۲۴ شاعر از ۶۷ شاعر پیکره، یعنی ۳۵٫۸٪، در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ جابه‌جایی میان چهار دوره تاریخی تفاوت دارد؛ اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی در این نمونه معنادار نشد.",
-      "url": "http://localhost:4173/research/geography/",
+      "url": "https://frompoetrytodata.vercel.app/research/geography/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "ScholarlyArticle",
-      "@id": "http://localhost:4173/research/lexical-life/#article",
+      "@id": "https://frompoetrytodata.vercel.app/research/lexical-life/#article",
       "headline": "نیمه‌عمر واژگان در شعر فارسی",
       "abstract": "در ۶٬۵۵۳ واژه‌ای که افت تا نصف اوج مشاهده شد، میانه نیمه‌عمر ۱٫۳۶ سده است؛ بااین‌حال ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند. چرخه واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق.",
-      "url": "http://localhost:4173/research/lexical-life/",
+      "url": "https://frompoetrytodata.vercel.app/research/lexical-life/",
       "author": {
-        "@id": "http://localhost:4173/#hossein-karimi"
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },
       "isBasedOn": {
-        "@id": "http://localhost:4173/data/#dataset"
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://frompoetrytodata.vercel.app/research/attribution/#article",
+      "headline": "سنجش انتساب شعر با شواهد زبانی، فکری و تاریخی",
+      "abstract": "پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد. در دادهٔ خیام سه متن نثری و ده‌ها صورت نزدیک میان مجموعه‌ها شناسایی شد.",
+      "url": "https://frompoetrytodata.vercel.app/research/attribution/",
+      "author": {
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
+      },
+      "isBasedOn": {
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://frompoetrytodata.vercel.app/research/public-questions/#article",
+      "headline": "ده پرسش جذاب از هزار سال شعر فارسی",
+      "abstract": "در این پیکره «دل» حدود ۸٫۶ برابر «عقل»، نشانه‌های غم ۲٫۸ برابر شادی و ضمیرهای فردی ۲٫۴ برابر جمعی دیده می‌شوند. بااین‌حال هر نتیجه کنار تعریف واژه‌ها و محدودیت معنایی آن نمایش داده می‌شود.",
+      "url": "https://frompoetrytodata.vercel.app/research/public-questions/",
+      "author": {
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
+      },
+      "isBasedOn": {
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/ethics-wisdom/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/ethics-wisdom/#term",
       "name": "اخلاق، حکمت و خرد",
       "description": "مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳).",
-      "url": "http://localhost:4173/themes/ethics-wisdom/",
+      "url": "https://frompoetrytodata.vercel.app/themes/ethics-wisdom/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/epic-kingship-war/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/epic-kingship-war/#term",
       "name": "حماسه، شاهی و جنگ",
       "description": "مضمون محاسباتی «حماسه، شاهی و جنگ» در کل پیکره سهم ۷٫۸٪ دارد، در سده ۴ به بیشترین سهم خود یعنی ۴۸٫۷٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۳۹).",
-      "url": "http://localhost:4173/themes/epic-kingship-war/",
+      "url": "https://frompoetrytodata.vercel.app/themes/epic-kingship-war/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/religion-sufism-praise/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/religion-sufism-praise/#term",
       "name": "دین، تصوف تعلیمی و مناقب",
       "description": "مضمون محاسباتی «دین، تصوف تعلیمی و مناقب» در کل پیکره سهم ۵٫۴٪ دارد، در سده ۵ به بیشترین سهم خود یعنی ۱۳٫۱٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
-      "url": "http://localhost:4173/themes/religion-sufism-praise/",
+      "url": "https://frompoetrytodata.vercel.app/themes/religion-sufism-praise/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/soul-heart-romantic-bond/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/soul-heart-romantic-bond/#term",
       "name": "جان، دل و پیوند عاشقانه",
       "description": "مضمون محاسباتی «جان، دل و پیوند عاشقانه» در کل پیکره سهم ۱۱٫۵٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۸٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
-      "url": "http://localhost:4173/themes/soul-heart-romantic-bond/",
+      "url": "https://frompoetrytodata.vercel.app/themes/soul-heart-romantic-bond/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/sensory-existential-images/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/sensory-existential-images/#term",
       "name": "تصویرهای حسی و وجودی",
       "description": "مضمون محاسباتی «تصویرهای حسی و وجودی» در کل پیکره سهم ۱۴٪ دارد، در سده ۱۱ به بیشترین سهم خود یعنی ۲۹٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۶۴۷).",
-      "url": "http://localhost:4173/themes/sensory-existential-images/",
+      "url": "https://frompoetrytodata.vercel.app/themes/sensory-existential-images/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/beloved-beauty-feast/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/beloved-beauty-feast/#term",
       "name": "زیبایی معشوق و بزم",
       "description": "مضمون محاسباتی «زیبایی معشوق و بزم» در کل پیکره سهم ۱۰٪ دارد، در سده ۱۳ به بیشترین سهم خود یعنی ۲۰٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
-      "url": "http://localhost:4173/themes/beloved-beauty-feast/",
+      "url": "https://frompoetrytodata.vercel.app/themes/beloved-beauty-feast/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/nature-flower-spring/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/nature-flower-spring/#term",
       "name": "طبیعت، گل و بهار",
       "description": "مضمون محاسباتی «طبیعت، گل و بهار» در کل پیکره سهم ۸٫۴٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
-      "url": "http://localhost:4173/themes/nature-flower-spring/",
+      "url": "https://frompoetrytodata.vercel.app/themes/nature-flower-spring/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/night-time-life/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/night-time-life/#term",
       "name": "شب، زمان و گذر عمر",
       "description": "مضمون محاسباتی «شب، زمان و گذر عمر» در کل پیکره سهم ۸٪ دارد، در سده ۱۴ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
-      "url": "http://localhost:4173/themes/night-time-life/",
+      "url": "https://frompoetrytodata.vercel.app/themes/night-time-life/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/mystical-romantic-love/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/mystical-romantic-love/#term",
       "name": "عشق عرفانی و عاشقانه",
       "description": "مضمون محاسباتی «عشق عرفانی و عاشقانه» در کل پیکره سهم ۶٫۶٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۱٫۳٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۳۹۳).",
-      "url": "http://localhost:4173/themes/mystical-romantic-love/",
+      "url": "https://frompoetrytodata.vercel.app/themes/mystical-romantic-love/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/cosmos-power-fortune/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/cosmos-power-fortune/#term",
       "name": "کیهان، قدرت و بخت",
       "description": "مضمون محاسباتی «کیهان، قدرت و بخت» در کل پیکره سهم ۱۰٫۹٪ دارد، در سده ۶ به بیشترین سهم خود یعنی ۱۸٫۵٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۳۲۲).",
-      "url": "http://localhost:4173/themes/cosmos-power-fortune/",
+      "url": "https://frompoetrytodata.vercel.app/themes/cosmos-power-fortune/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/themes/grief-separation/#term",
+      "@id": "https://frompoetrytodata.vercel.app/themes/grief-separation/#term",
       "name": "غم، فراق و هجران",
       "description": "مضمون محاسباتی «غم، فراق و هجران» در کل پیکره سهم ۶٫۴٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۰٫۲٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
-      "url": "http://localhost:4173/themes/grief-separation/",
+      "url": "https://frompoetrytodata.vercel.app/themes/grief-separation/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/themes/#set"
+        "@id": "https://frompoetrytodata.vercel.app/themes/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/journey-road-destination/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/#term",
       "name": "راه، سفر و منزل",
       "description": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/journey-road-destination/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/flower-nightingale/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/#term",
       "name": "گل و بلبل",
       "description": "خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/flower-nightingale/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/light-candle-darkness/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/#term",
       "name": "نور، شمع و تاریکی",
       "description": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/light-candle-darkness/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/blood-wound-dagger/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/#term",
       "name": "خون، زخم و خنجر",
       "description": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/blood-wound-dagger/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/wine-cupbearer/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/#term",
       "name": "باده، شراب و ساقی",
       "description": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/wine-cupbearer/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/fire-flame-spark/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/#term",
       "name": "آتش، شعله و شرر",
       "description": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/fire-flame-spark/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/sea-wave-shore/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/#term",
       "name": "دریا، موج و ساحل",
       "description": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/sea-wave-shore/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/mirror-reflection/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/mirror-reflection/#term",
       "name": "آینه و بازتاب",
       "description": "خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/mirror-reflection/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/mirror-reflection/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/cage-prison/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/cage-prison/#term",
       "name": "قفس و زندان",
       "description": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/cage-prison/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/cage-prison/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "DefinedTerm",
-      "@id": "http://localhost:4173/metaphors/chain-captivity/#term",
+      "@id": "https://frompoetrytodata.vercel.app/metaphors/chain-captivity/#term",
       "name": "زنجیر و اسارت",
       "description": "خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
-      "url": "http://localhost:4173/metaphors/chain-captivity/",
+      "url": "https://frompoetrytodata.vercel.app/metaphors/chain-captivity/",
       "inDefinedTermSet": {
-        "@id": "http://localhost:4173/metaphors/#set"
+        "@id": "https://frompoetrytodata.vercel.app/metaphors/#set"
       }
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/rudaki/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/rudaki/#person",
       "name": "رودکی",
-      "subjectOf": "http://localhost:4173/poets/rudaki/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/rudaki/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -381,9 +417,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/ferdowsi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/ferdowsi/#person",
       "name": "فردوسی",
-      "subjectOf": "http://localhost:4173/poets/ferdowsi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/ferdowsi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -409,9 +445,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/kasaei/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/kasaei/#person",
       "name": "کسایی",
-      "subjectOf": "http://localhost:4173/poets/kasaei/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/kasaei/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -437,9 +473,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/abu-saeid-abul-kheir/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/abu-saeid-abul-kheir/#person",
       "name": "ابوسعید ابوالخیر",
-      "subjectOf": "http://localhost:4173/poets/abu-saeid-abul-kheir/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/abu-saeid-abul-kheir/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -465,9 +501,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/naser-khosrow/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/naser-khosrow/#person",
       "name": "ناصرخسرو",
-      "subjectOf": "http://localhost:4173/poets/naser-khosrow/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/naser-khosrow/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -493,9 +529,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/baba-taher/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/baba-taher/#person",
       "name": "باباطاهر",
-      "subjectOf": "http://localhost:4173/poets/baba-taher/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/baba-taher/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -521,9 +557,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/hojviri/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/hojviri/#person",
       "name": "هجویری",
-      "subjectOf": "http://localhost:4173/poets/hojviri/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/hojviri/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -549,9 +585,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/asadi-tusi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/asadi-tusi/#person",
       "name": "اسدی توسی",
-      "subjectOf": "http://localhost:4173/poets/asadi-tusi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/asadi-tusi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -577,9 +613,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/fakhr-al-din-asad-gorgani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/fakhr-al-din-asad-gorgani/#person",
       "name": "فخرالدین اسعد گرگانی",
-      "subjectOf": "http://localhost:4173/poets/fakhr-al-din-asad-gorgani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/fakhr-al-din-asad-gorgani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -605,9 +641,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/manuchehri/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/manuchehri/#person",
       "name": "منوچهری",
-      "subjectOf": "http://localhost:4173/poets/manuchehri/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/manuchehri/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -633,9 +669,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/farrokhi-sistani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/farrokhi-sistani/#person",
       "name": "فرخی سیستانی",
-      "subjectOf": "http://localhost:4173/poets/farrokhi-sistani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/farrokhi-sistani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -661,9 +697,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/masud-sad-salman/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/masud-sad-salman/#person",
       "name": "مسعود سعد سلمان",
-      "subjectOf": "http://localhost:4173/poets/masud-sad-salman/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/masud-sad-salman/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -689,9 +725,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/attar/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/attar/#person",
       "name": "عطار",
-      "subjectOf": "http://localhost:4173/poets/attar/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/attar/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -717,9 +753,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/sanai/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/sanai/#person",
       "name": "سنایی",
-      "subjectOf": "http://localhost:4173/poets/sanai/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/sanai/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -745,9 +781,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/anvari/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/anvari/#person",
       "name": "انوری",
-      "subjectOf": "http://localhost:4173/poets/anvari/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/anvari/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -773,9 +809,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/khaghani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/khaghani/#person",
       "name": "خاقانی",
-      "subjectOf": "http://localhost:4173/poets/khaghani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/khaghani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -801,9 +837,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/nezami/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/nezami/#person",
       "name": "نظامی",
-      "subjectOf": "http://localhost:4173/poets/nezami/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/nezami/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -829,9 +865,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/khayyam/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/khayyam/#person",
       "name": "خیام",
-      "subjectOf": "http://localhost:4173/poets/khayyam/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/khayyam/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -857,9 +893,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/nasrallah-monshi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/nasrallah-monshi/#person",
       "name": "نصرالله منشی",
-      "subjectOf": "http://localhost:4173/poets/nasrallah-monshi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/nasrallah-monshi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -885,9 +921,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/baba-afzal-kashani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/baba-afzal-kashani/#person",
       "name": "باباافضل کاشانی",
-      "subjectOf": "http://localhost:4173/poets/baba-afzal-kashani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/baba-afzal-kashani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -913,9 +949,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/mahasti-ganjavi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/mahasti-ganjavi/#person",
       "name": "مهستی گنجوی",
-      "subjectOf": "http://localhost:4173/poets/mahasti-ganjavi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/mahasti-ganjavi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -941,9 +977,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/abd-al-vase-jabali/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/abd-al-vase-jabali/#person",
       "name": "عبدالواسع جبلی",
-      "subjectOf": "http://localhost:4173/poets/abd-al-vase-jabali/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/abd-al-vase-jabali/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -969,9 +1005,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/rumi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/rumi/#person",
       "name": "مولوی",
-      "subjectOf": "http://localhost:4173/poets/rumi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/rumi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -997,9 +1033,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/saadi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/saadi/#person",
       "name": "سعدی",
-      "subjectOf": "http://localhost:4173/poets/saadi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/saadi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1025,9 +1061,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/khwaju-kermani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/khwaju-kermani/#person",
       "name": "خواجوی کرمانی",
-      "subjectOf": "http://localhost:4173/poets/khwaju-kermani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/khwaju-kermani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1053,9 +1089,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/iraqi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/iraqi/#person",
       "name": "عراقی",
-      "subjectOf": "http://localhost:4173/poets/iraqi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/iraqi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1081,9 +1117,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/seyf-farghani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/seyf-farghani/#person",
       "name": "سیف فرغانی",
-      "subjectOf": "http://localhost:4173/poets/seyf-farghani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/seyf-farghani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1109,9 +1145,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/shah-nematollah-vali/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/shah-nematollah-vali/#person",
       "name": "شاه نعمت‌الله ولی",
-      "subjectOf": "http://localhost:4173/poets/shah-nematollah-vali/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/shah-nematollah-vali/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1137,9 +1173,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/owhadi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/owhadi/#person",
       "name": "اوحدی",
-      "subjectOf": "http://localhost:4173/poets/owhadi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/owhadi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1165,9 +1201,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/salman-savoji/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/salman-savoji/#person",
       "name": "سلمان ساوجی",
-      "subjectOf": "http://localhost:4173/poets/salman-savoji/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/salman-savoji/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1193,9 +1229,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/amir-khosrow-dehlavi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/amir-khosrow-dehlavi/#person",
       "name": "امیرخسرو دهلوی",
-      "subjectOf": "http://localhost:4173/poets/amir-khosrow-dehlavi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/amir-khosrow-dehlavi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1221,9 +1257,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/hafez/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/hafez/#person",
       "name": "حافظ",
-      "subjectOf": "http://localhost:4173/poets/hafez/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/hafez/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1249,9 +1285,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/obeyd-zakani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/obeyd-zakani/#person",
       "name": "عبید زاکانی",
-      "subjectOf": "http://localhost:4173/poets/obeyd-zakani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/obeyd-zakani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1277,9 +1313,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/mahmud-shabestari/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/mahmud-shabestari/#person",
       "name": "شیخ محمود شبستری",
-      "subjectOf": "http://localhost:4173/poets/mahmud-shabestari/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/mahmud-shabestari/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1305,9 +1341,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/helali-jaghatai/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/helali-jaghatai/#person",
       "name": "هلالی جغتایی",
-      "subjectOf": "http://localhost:4173/poets/helali-jaghatai/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/helali-jaghatai/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1333,9 +1369,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/jami/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/jami/#person",
       "name": "جامی",
-      "subjectOf": "http://localhost:4173/poets/jami/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/jami/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1361,9 +1397,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/mohtasham-kashani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/mohtasham-kashani/#person",
       "name": "محتشم کاشانی",
-      "subjectOf": "http://localhost:4173/poets/mohtasham-kashani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/mohtasham-kashani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1389,9 +1425,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/orfi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/orfi/#person",
       "name": "عرفی",
-      "subjectOf": "http://localhost:4173/poets/orfi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/orfi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1417,9 +1453,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/vahshi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/vahshi/#person",
       "name": "وحشی",
-      "subjectOf": "http://localhost:4173/poets/vahshi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/vahshi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1445,9 +1481,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/razi-al-din-artimani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/razi-al-din-artimani/#person",
       "name": "رضی‌الدین آرتیمانی",
-      "subjectOf": "http://localhost:4173/poets/razi-al-din-artimani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/razi-al-din-artimani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1473,9 +1509,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/sheikh-bahaei/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/sheikh-bahaei/#person",
       "name": "شیخ بهایی",
-      "subjectOf": "http://localhost:4173/poets/sheikh-bahaei/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/sheikh-bahaei/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1501,9 +1537,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/saeb-tabrizi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/saeb-tabrizi/#person",
       "name": "صائب تبریزی",
-      "subjectOf": "http://localhost:4173/poets/saeb-tabrizi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/saeb-tabrizi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1529,9 +1565,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/bidel-dehlavi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/bidel-dehlavi/#person",
       "name": "بیدل دهلوی",
-      "subjectOf": "http://localhost:4173/poets/bidel-dehlavi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/bidel-dehlavi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1557,9 +1593,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/feiz-kashani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/feiz-kashani/#person",
       "name": "فیض کاشانی",
-      "subjectOf": "http://localhost:4173/poets/feiz-kashani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/feiz-kashani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1585,9 +1621,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/hatef-esfahani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/hatef-esfahani/#person",
       "name": "هاتف اصفهانی",
-      "subjectOf": "http://localhost:4173/poets/hatef-esfahani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/hatef-esfahani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1613,9 +1649,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/qaani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/qaani/#person",
       "name": "قاآنی",
-      "subjectOf": "http://localhost:4173/poets/qaani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/qaani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1641,9 +1677,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/forughi-bastami/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/forughi-bastami/#person",
       "name": "فروغی بسطامی",
-      "subjectOf": "http://localhost:4173/poets/forughi-bastami/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/forughi-bastami/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1669,9 +1705,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/molla-hadi-sabzevari/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/molla-hadi-sabzevari/#person",
       "name": "ملا هادی سبزواری",
-      "subjectOf": "http://localhost:4173/poets/molla-hadi-sabzevari/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/molla-hadi-sabzevari/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1697,9 +1733,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/malek-al-shoara-bahar/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/malek-al-shoara-bahar/#person",
       "name": "ملک‌الشعرای بهار",
-      "subjectOf": "http://localhost:4173/poets/malek-al-shoara-bahar/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/malek-al-shoara-bahar/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1725,9 +1761,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/iqbal-lahori/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/iqbal-lahori/#person",
       "name": "اقبال لاهوری",
-      "subjectOf": "http://localhost:4173/poets/iqbal-lahori/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/iqbal-lahori/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1753,9 +1789,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/ahmad-shamlou/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/ahmad-shamlou/#person",
       "name": "احمد شاملو",
-      "subjectOf": "http://localhost:4173/poets/ahmad-shamlou/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/ahmad-shamlou/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1781,9 +1817,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/simin-behbahani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/simin-behbahani/#person",
       "name": "سیمین بهبهانی",
-      "subjectOf": "http://localhost:4173/poets/simin-behbahani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/simin-behbahani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1809,9 +1845,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/parvin-etesami/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/parvin-etesami/#person",
       "name": "پروین اعتصامی",
-      "subjectOf": "http://localhost:4173/poets/parvin-etesami/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/parvin-etesami/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1837,9 +1873,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/shahriar/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/shahriar/#person",
       "name": "شهریار",
-      "subjectOf": "http://localhost:4173/poets/shahriar/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/shahriar/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1865,9 +1901,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/kambiz-sedighi-kasmaei/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/kambiz-sedighi-kasmaei/#person",
       "name": "کامبیز صدیقی کسمایی",
-      "subjectOf": "http://localhost:4173/poets/kambiz-sedighi-kasmaei/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/kambiz-sedighi-kasmaei/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1893,9 +1929,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/rahi-moayeri/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/rahi-moayeri/#person",
       "name": "رهی معیری",
-      "subjectOf": "http://localhost:4173/poets/rahi-moayeri/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/rahi-moayeri/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1921,9 +1957,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/sohrab-sepehri/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/sohrab-sepehri/#person",
       "name": "سهراب سپهری",
-      "subjectOf": "http://localhost:4173/poets/sohrab-sepehri/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/sohrab-sepehri/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1949,9 +1985,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/forough-farrokhzad/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/forough-farrokhzad/#person",
       "name": "فروغ فرخزاد",
-      "subjectOf": "http://localhost:4173/poets/forough-farrokhzad/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/forough-farrokhzad/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -1977,9 +2013,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/mehdi-akhavan-sales/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/mehdi-akhavan-sales/#person",
       "name": "مهدی اخوان ثالث",
-      "subjectOf": "http://localhost:4173/poets/mehdi-akhavan-sales/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/mehdi-akhavan-sales/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2005,9 +2041,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/bahram-saleki/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/bahram-saleki/#person",
       "name": "بهرام سالکی",
-      "subjectOf": "http://localhost:4173/poets/bahram-saleki/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/bahram-saleki/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2033,9 +2069,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/shater-abbas-sabouhi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/shater-abbas-sabouhi/#person",
       "name": "شاطرعباس صبوحی",
-      "subjectOf": "http://localhost:4173/poets/shater-abbas-sabouhi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/shater-abbas-sabouhi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2061,9 +2097,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/shivon-foumani/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/shivon-foumani/#person",
       "name": "شیون فومنی",
-      "subjectOf": "http://localhost:4173/poets/shivon-foumani/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/shivon-foumani/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2089,9 +2125,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/nima-yushij/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/nima-yushij/#person",
       "name": "نیما یوشیج (آوای آزاد)",
-      "subjectOf": "http://localhost:4173/poets/nima-yushij/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/nima-yushij/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2117,9 +2153,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/khalilullah-khalili/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/khalilullah-khalili/#person",
       "name": "خلیل‌الله خلیلی",
-      "subjectOf": "http://localhost:4173/poets/khalilullah-khalili/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/khalilullah-khalili/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2145,9 +2181,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/mohammad-hasan-bareq-shafiei/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/mohammad-hasan-bareq-shafiei/#person",
       "name": "محمدحسن بارق شفیعی",
-      "subjectOf": "http://localhost:4173/poets/mohammad-hasan-bareq-shafiei/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/mohammad-hasan-bareq-shafiei/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2173,9 +2209,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/a-liyar-jabbar-mohammadi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/a-liyar-jabbar-mohammadi/#person",
       "name": "ا لیار (جبار محمدی)",
-      "subjectOf": "http://localhost:4173/poets/a-liyar-jabbar-mohammadi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/a-liyar-jabbar-mohammadi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",
@@ -2201,9 +2237,9 @@
     },
     {
       "@type": "Person",
-      "@id": "http://localhost:4173/poets/abdul-qahar-asi/#person",
+      "@id": "https://frompoetrytodata.vercel.app/poets/abdul-qahar-asi/#person",
       "name": "عبدالقهار عاصی",
-      "subjectOf": "http://localhost:4173/poets/abdul-qahar-asi/",
+      "subjectOf": "https://frompoetrytodata.vercel.app/poets/abdul-qahar-asi/",
       "additionalProperty": [
         {
           "@type": "PropertyValue",

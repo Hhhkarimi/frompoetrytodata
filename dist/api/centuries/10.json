@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 10,
-  "url": "http://localhost:4173/centuries/10/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/10/",
   "corpus": {
     "century": 10,
     "texts": 2730,
@@ -15,7 +15,7 @@
     {
       "name": "محتشم کاشانی",
       "slug": "mohtasham-kashani",
-      "url": "http://localhost:4173/poets/mohtasham-kashani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/mohtasham-kashani/",
       "poems": 972,
       "totalCouplets": 10716,
       "totalWords": 163001,
@@ -25,7 +25,7 @@
     {
       "name": "عرفی",
       "slug": "orfi",
-      "url": "http://localhost:4173/poets/orfi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/orfi/",
       "poems": 698,
       "totalCouplets": 3902,
       "totalWords": 60658,
@@ -35,7 +35,7 @@
     {
       "name": "وحشی",
       "slug": "vahshi",
-      "url": "http://localhost:4173/poets/vahshi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/vahshi/",
       "poems": 651,
       "totalCouplets": 10595,
       "totalWords": 144600,
@@ -45,7 +45,7 @@
     {
       "name": "رضی‌الدین آرتیمانی",
       "slug": "razi-al-din-artimani",
-      "url": "http://localhost:4173/poets/razi-al-din-artimani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/razi-al-din-artimani/",
       "poems": 233,
       "totalCouplets": 1550,
       "totalWords": 19907,
@@ -55,7 +55,7 @@
     {
       "name": "شیخ بهایی",
       "slug": "sheikh-bahaei",
-      "url": "http://localhost:4173/poets/sheikh-bahaei/",
+      "url": "https://frompoetrytodata.vercel.app/poets/sheikh-bahaei/",
       "poems": 176,
       "totalCouplets": 1289,
       "totalWords": 16434,
@@ -183,7 +183,7 @@
       "rate": 2.365
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

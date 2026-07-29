@@ -6,6 +6,8 @@
   "description": "اطلس تعاملی و دانشنامهٔ داده‌ای تحلیل شعر فارسی، شامل ده پژوهش، ده پرسش عمومی، سنجش انتساب، ۶۷ نمایهٔ شاعر، ۱۱ مضمون، ۱۰ خانوادهٔ استعاری، ۱۳ صفحهٔ سده‌ای، نمودارهای پویا و API ماشین‌خوان.",
   "version": "7.0.0",
   "datePublished": "2026-07-27",
+  "dateModified": "2026-07-29",
+  "url": "https://frompoetrytodata.vercel.app/",
   "programmingLanguage": [
     "JavaScript",
     "Python",

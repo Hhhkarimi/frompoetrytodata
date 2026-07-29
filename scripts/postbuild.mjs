@@ -1,7 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { researchPages, faqItems, glossaryItems } from '../src/content/siteContent.js';
+import { resolvePublicationOrigin } from './lib/publication-identity.mjs';
+import { buildPersianCitation, PUBLICATION } from '../src/publication/publication.js';
+import { persianDigits, persianNumber } from '../src/publication/persian-format.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -13,23 +17,16 @@ data.overview.couplets = data.overview.poets.reduce((sum, poet) => sum + poet.to
 const formResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/formResearch.json'), 'utf8'));
 const geographyResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/geographyResearch.json'), 'utf8'));
 const lexicalResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/lexicalResearch.json'), 'utf8'));
-const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/attributionResearch.json'), 'utf8'));
-const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/publicQuestionsResearch.json'), 'utf8'));
+const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/attribution-data.json'), 'utf8'));
+const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/research-data.json'), 'utf8'));
 const buildDate = new Date().toISOString().slice(0, 10);
-const productionHost = process.env.SITE_URL
-  || process.env.VITE_SITE_URL
-  || process.env.VITE_VERCEL_PROJECT_PRODUCTION_URL
-  || process.env.VERCEL_PROJECT_PRODUCTION_URL
-  || 'localhost:4173';
-const siteUrl = /^https?:\/\//.test(productionHost)
-  ? productionHost.replace(/\/$/, '')
-  : `${productionHost.startsWith('localhost') ? 'http' : 'https'}://${productionHost.replace(/\/$/, '')}`;
+const siteUrl = resolvePublicationOrigin();
 const isProduction = siteUrl.startsWith('https://') && !siteUrl.includes('localhost');
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION || '';
 const bingVerification = process.env.BING_SITE_VERIFICATION || '';
 
-const faDigits = (value) => String(value).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-const faNumber = (value, maxFraction = 1) => Number(value).toLocaleString('fa-IR', { maximumFractionDigits: maxFraction });
+const faDigits = persianDigits;
+const faNumber = (value, maxFraction = 1) => persianNumber(value, { maximumFractionDigits: maxFraction });
 const faPercent = (value, maxFraction = 1) => `${faNumber(value, maxFraction)}٪`;
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -42,7 +39,6 @@ const write = (relativePath, content) => {
   fs.writeFileSync(target, content, 'utf8');
 };
 const absolute = (pathname = '/') => `${siteUrl}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
-const urlPath = (value) => encodeURI(value).replaceAll('#', '%23');
 
 const knownSlugs = {
   'رودکی': 'rudaki', 'فردوسی': 'ferdowsi', 'کسایی': 'kasaei', 'ابوسعید ابوالخیر': 'abu-saeid-abul-kheir',
@@ -66,7 +62,6 @@ const knownSlugs = {
   'ا لیار (جبار محمدی)': 'a-liyar-jabbar-mohammadi', 'عبدالقهار عاصی': 'abdul-qahar-asi',
 };
 const poetSlug = (name) => knownSlugs[name] || `poet-${Buffer.from(name).toString('hex').slice(0, 16)}`;
-const poetByName = new Map(data.overview.poets.map((poet) => [poet.name, poet]));
 
 const logo = `<a class="seo-brand" href="/" aria-label="از شعر تا داده؛ صفحه اصلی">
   <svg viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b615c"/><stop offset="1" stop-color="#b9862d"/></linearGradient></defs><path d="M64 8 114 37v54L64 120 14 91V37Z" fill="url(#g)"/><path d="M64 28 87 56 64 99 41 56Z" fill="#fff8e8"/><circle cx="64" cy="60" r="8" fill="#9f2f38"/><path d="M64 68v23" stroke="#9f2f38" stroke-width="6" stroke-linecap="round"/></svg>
@@ -109,6 +104,10 @@ function globalSchemas() {
     description: `خروجی‌های توصیفی و تحلیلی ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر فارسی، شامل ده پژوهش دربارهٔ پرسش‌های عمومی، مضمون، استعاره، پیوند متنی، تشخیص سده، سبک، قالب، جغرافیا، چرخهٔ واژگان و سنجش انتساب.`,
     url: absolute('/data/'), inLanguage: 'fa', isAccessibleForFree: true,
     creator: { '@id': `${siteUrl}/#hossein-karimi` },
+    version: PUBLICATION.version,
+    datePublished: PUBLICATION.publishedDate,
+    dateModified: PUBLICATION.modifiedDate,
+    license: absolute('/attributions/'),
     includedInDataCatalog: { '@id': `${siteUrl}/data/#catalog` },
     measurementTechnique: ['مدل موضوعی', 'تحلیل هم‌رخدادی', 'TF–IDF', 'آزمون جایگشتی', 'سبک‌سنجی نویسه‌ای', 'ممیزی انتساب', 'تحلیل جغرافیایی', 'تحلیل چرخه عمر واژه'],
     temporalCoverage: '800/2025',
@@ -125,6 +124,7 @@ function globalSchemas() {
       { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/attribution-corpus-audit.csv'), name: 'ممیزی انتساب و کیفیت پیکره' },
       { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/public-questions.json'), name: 'ده پرسش عمومی شعر فارسی' },
       { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/public-questions-analysis.csv'), name: 'اعداد پرسش‌های عمومی' },
+      { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/manifest.json'), name: 'نسخه، منشأ و checksum دانلودها' },
     ],
   };
   catalog.dataset = { '@id': `${siteUrl}/data/#dataset` };
@@ -149,8 +149,8 @@ ${googleVerification ? `<meta name="google-site-verification" content="${escapeH
 <link rel="alternate" type="application/rss+xml" title="از شعر تا داده" href="${absolute('/feed.xml')}"><link rel="sitemap" type="application/xml" href="${absolute('/sitemap.xml')}">
 <meta property="og:locale" content="fa_IR"><meta property="og:site_name" content="از شعر تا داده"><meta property="og:type" content="${type}">
 <meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${ogImage}"><meta property="og:updated_time" content="${buildDate}T00:00:00Z"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${escapeHtml(title)}">
-${type === 'article' ? `<meta property="article:published_time" content="${buildDate}T00:00:00Z"><meta property="article:modified_time" content="${buildDate}T00:00:00Z"><meta property="article:author" content="${absolute('/about/')}">` : ''}
+<meta property="og:image" content="${ogImage}"><meta property="og:updated_time" content="${PUBLICATION.modifiedDate}T00:00:00Z"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${escapeHtml(title)}">
+${type === 'article' ? `<meta property="article:published_time" content="${PUBLICATION.publishedDate}T00:00:00Z"><meta property="article:modified_time" content="${PUBLICATION.modifiedDate}T00:00:00Z"><meta property="article:author" content="${absolute('/about/')}">` : ''}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(title)}"><meta name="twitter:description" content="${escapeHtml(description)}"><meta name="twitter:image" content="${ogImage}">
 <meta name="DC.title" content="${escapeHtml(title)}"><meta name="DC.creator" content="حسین کریمی"><meta name="DC.language" content="fa"><meta name="DC.type" content="InteractiveResource">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,7 +161,7 @@ function pageShell({ title, description, pathname, image, type = 'article', sche
   const crumbHtml = breadcrumbs.map((item, index) => `<li>${index === breadcrumbs.length - 1 ? `<span>${escapeHtml(item.name)}</span>` : `<a href="${item.path}">${escapeHtml(item.name)}</a>`}</li>`).join('');
   return `${head({ title, description, path: pathname, image, type, schemas, keywords })}<body>
 <a class="skip-link" href="#main">پرش به محتوای اصلی</a>
-<header class="seo-header"><div class="seo-header-inner">${logo}<nav aria-label="فهرست اصلی"><a href="/research/">پژوهش‌ها</a><a href="/themes/">مضامین</a><a href="/metaphors/">استعاره‌ها</a><a href="/centuries/">سده‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a></nav><a class="interactive-link" href="/#overview">ورود به اطلس تعاملی</a></div></header>
+<header class="seo-header"><div class="seo-header-inner">${logo}<nav aria-label="فهرست اصلی"><a href="/research/">پژوهش‌ها</a><a href="/themes/">مضامین</a><a href="/metaphors/">استعاره‌ها</a><a href="/centuries/">سده‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a></nav><a class="interactive-link" href="/atlas/#overview">ورود به اطلس تعاملی</a></div></header>
 ${breadcrumbs.length ? `<nav class="breadcrumbs" aria-label="مسیر صفحه"><ol>${crumbHtml}</ol></nav>` : ''}
 <div class="reading-progress" aria-hidden="true"></div>
 <div class="seo-layout${toc.length ? '' : ' seo-layout-wide'}">${toc.length ? `<aside class="seo-toc"><strong>در این صفحه</strong><ol>${toc.map((item) => `<li><a href="#${item.id}">${escapeHtml(item.label)}</a></li>`).join('')}</ol></aside>` : ''}
@@ -171,7 +171,7 @@ ${breadcrumbs.length ? `<nav class="breadcrumbs" aria-label="مسیر صفحه">
 }
 
 function citationBlock(title, pathname) {
-  const citation = `کریمی، حسین. (${faDigits(new Date().getFullYear())}). «${title}». از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی. ${absolute(pathname)}`;
+  const citation = buildPersianCitation(title, pathname, siteUrl);
   return `<section id="citation" class="citation-box"><div><span class="kicker">استناد پیشنهادی</span><h2>چگونه به این صفحه استناد کنیم؟</h2></div><blockquote id="citation-text">${escapeHtml(citation)}</blockquote><button type="button" data-copy="#citation-text">کپی استناد</button></section>`;
 }
 
@@ -424,21 +424,21 @@ function generateResearchPages() {
     pathname: '/research/', image: '/og/og-research.png', type: 'website', schemas: [indexSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }])],
     keywords: ['تحلیل داده شعر فارسی', 'علوم انسانی دیجیتال', 'پردازش زبان طبیعی فارسی'],
     breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }],
-    content: `<header class="article-hero"><span class="kicker">مرکز پژوهش</span><h1>ده راه برای دیدن تاریخ شعر فارسی با داده</h1><p>هر صفحه با یک پاسخ روشن آغاز می‌شود، سپس شواهد کمی، روش، جدول داده و محدودیت‌های تفسیر را ارائه می‌کند.</p><div class="hero-actions"><a class="primary" href="/#topics">مشاهده نمودارهای تعاملی</a><a href="/methodology/">روش‌شناسی مشترک</a></div></header><section class="research-index-grid">${researchIndexItems}</section>`,
+    content: `<header class="article-hero"><span class="kicker">مرکز پژوهش</span><h1>ده راه برای دیدن تاریخ شعر فارسی با داده</h1><p>هر صفحه با یک پاسخ روشن آغاز می‌شود، سپس شواهد کمی، روش، جدول داده و محدودیت‌های تفسیر را ارائه می‌کند.</p><div class="hero-actions"><a class="primary" href="/atlas/#topics">مشاهده نمودارهای تعاملی</a><a href="/methodology/">روش‌شناسی مشترک</a></div></header><section class="research-index-grid">${researchIndexItems}</section>`,
   }));
 
   for (const page of researchPages) {
     const r = researchData(page.id);
     const schema = {
       '@type': 'Article', '@id': `${siteUrl}${page.path}#article`, headline: page.title, description: page.description,
-      url: absolute(page.path), image: absolute(`/og/og-${page.id}.png`), inLanguage: 'fa-IR', datePublished: buildDate, dateModified: buildDate,
+      url: absolute(page.path), image: absolute(`/og/og-${page.id}.png`), inLanguage: 'fa-IR', datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
       author: { '@id': `${siteUrl}/#hossein-karimi` }, publisher: { '@id': `${siteUrl}/#hossein-karimi` },
       isPartOf: { '@id': `${siteUrl}/#website` }, about: page.keywords,
       mainEntityOfPage: absolute(page.path),
       citation: [absolute('/methodology/'), absolute('/data/')],
     };
     const content = `<article>
-<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p></div><div class="hero-actions"><a class="primary" href="/#${page.anchor}">بازکردن نمودار تعاملی</a><a href="/methodology/">روش‌شناسی</a></div></header>
+<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p></div><div class="hero-actions"><a class="primary" href="/atlas/#${page.anchor}">بازکردن نمودار تعاملی</a><a href="/methodology/">روش‌شناسی</a></div></header>
 <section id="results"><span class="kicker">نتیجه‌های اصلی</span><h2>چه چیزی از داده فهمیدیم؟</h2>${renderMetrics(r.metrics)}<ol class="finding-list">${r.findings.map((f) => `<li>${f}</li>`).join('')}</ol></section>
 <section id="data"><span class="kicker">جدول داده</span><h2>خلاصه عددی قابل جست‌وجو</h2><p>جدول زیر همان اعداد اصلی نمودارها را به‌صورت متنی و قابل خواندن برای موتورهای جست‌وجو، ابزارهای کمکی و پژوهشگران ارائه می‌کند.</p>${renderTable(r.tableHeaders, r.tableRows)}</section>
 <section id="method"><div class="method-grid"><div><span class="kicker">روش</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div></section>
@@ -478,7 +478,7 @@ function generatePoetPages() {
     const image = poet.image?.src || '/og/og-poets.png';
     const personSchema = {
       '@type': 'ProfilePage', '@id': `${siteUrl}/poets/${slug}/#profile`, name: `نمایه داده‌ای ${poet.name}`, url: absolute(`/poets/${slug}/`),
-      dateModified: buildDate, isPartOf: { '@id': `${siteUrl}/#website` },
+      dateModified: PUBLICATION.modifiedDate, isPartOf: { '@id': `${siteUrl}/#website` },
       mainEntity: {
         '@type': 'Person', name: poet.name, image: poet.image ? absolute(poet.image.src) : undefined,
         description: `${poet.name}، شاعر سده ${faNumber(poet.century)} هجری در پیکره از شعر تا داده؛ شامل ${faNumber(poet.poems)} متن و ${faNumber(poet.books)} عنوان کتاب.`,
@@ -492,7 +492,7 @@ function generatePoetPages() {
         ],
       },
     };
-    const content = `<article><header class="poet-profile-hero">${poet.image ? `<figure><img src="${poet.image.src}" alt="تصویر ${poet.name}" width="320" height="320"><figcaption>منبع و مجوز تصویر در پایین صفحه آمده است.</figcaption></figure>` : `<div class="poet-profile-initial">${poet.name.slice(0, 1)}</div>`}<div><span class="kicker">پرونده داده‌ای شاعر</span><h1>${poet.name}</h1><p>سده ${faNumber(poet.century)} هجری</p><a class="primary" href="/#poets">بازکردن در نمای تعاملی شاعران</a></div></header>
+    const content = `<article><header class="poet-profile-hero">${poet.image ? `<figure><img src="${poet.image.src}" alt="تصویر ${poet.name}" width="320" height="320"><figcaption>منبع و مجوز تصویر در پایین صفحه آمده است.</figcaption></figure>` : `<div class="poet-profile-initial">${poet.name.slice(0, 1)}</div>`}<div><span class="kicker">پرونده داده‌ای شاعر</span><h1>${poet.name}</h1><p>سده ${faNumber(poet.century)} هجری</p><a class="primary" href="/atlas/#poets">بازکردن در نمای تعاملی شاعران</a></div></header>
 <section id="statistics"><span class="kicker">در پیکره</span><h2>آمار توصیفی ${poet.name}</h2>${renderMetrics([['تعداد متن', faNumber(poet.poems)], ['تعداد ابیات', faNumber(poet.totalCouplets)], ['عنوان کتاب', faNumber(poet.books)], ['کل واژه‌ها', faNumber(poet.totalWords)], ['میانه طول متن', `${faNumber(poet.medianWords)} واژه`], ['سهم از کل پیکره', faPercent(share)]])}<p class="notice">کم یا زیاد بودن تعداد متن، بیت یا واژه معادل اهمیت ادبی شاعر نیست؛ این اعداد فقط پوشش داده را نشان می‌دهند.</p></section>
 <section id="context"><span class="kicker">هم‌دوره‌ها در پیکره</span><h2>شاعران دیگر سده ${faNumber(poet.century)}</h2><div class="tag-links">${peers.map((p) => `<a href="/poets/${poetSlug(p.name)}/">${p.name}</a>`).join('') || '<span>برای این سده شاعر دیگری در پیکره ثبت نشده است.</span>'}</div></section>
 <section id="interpretation"><span class="kicker">راهنمای خوانش</span><h2>این صفحه چه می‌گوید و چه نمی‌گوید؟</h2><p>این نمایه برای فهم ساختار پیکره ساخته شده است. برای قضاوت درباره سبک، دوره‌های زندگی، انتساب آثار یا جایگاه تاریخی ${poet.name} باید از نسخه‌ها و منابع تخصصی تاریخ ادبیات استفاده کرد.</p></section>
@@ -509,7 +509,7 @@ ${poet.image ? `<section class="image-credit"><h2>اعتبار تصویر</h2><p
 }
 
 function generateUtilityPages() {
-  const methodSchema = { '@type': 'TechArticle', headline: 'روش‌شناسی تحلیل داده‌های شعر فارسی', description: 'روش‌های کنترل عدم‌توازن، آزمون جایگشتی، مدل موضوعی، شبکهٔ پیوند متنی و سبک‌سنجی در پروژه از شعر تا داده.', url: absolute('/methodology/'), author: { '@id': `${siteUrl}/#hossein-karimi` }, inLanguage: 'fa-IR', dateModified: buildDate };
+  const methodSchema = { '@type': 'TechArticle', headline: 'روش‌شناسی تحلیل داده‌های شعر فارسی', description: 'روش‌های کنترل عدم‌توازن، آزمون جایگشتی، مدل موضوعی، شبکهٔ پیوند متنی و سبک‌سنجی در پروژه از شعر تا داده.', url: absolute('/methodology/'), author: { '@id': `${siteUrl}/#hossein-karimi` }, inLanguage: 'fa-IR', datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate };
   write('methodology/index.html', pageShell({
     title: 'روش‌شناسی تحلیل داده‌های شعر فارسی | از شعر تا داده', description: 'توضیح شفاف نمونه‌گیری متوازن، مدل موضوعی، استعاره، شبکه، هوش مصنوعی، سبک‌سنجی، قالب، جغرافیای ادبی، چرخه عمر واژگان و محدودیت‌ها.',
     pathname: '/methodology/', image: '/og/og-methodology.png', schemas: [methodSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'روش‌شناسی', path: '/methodology/' }])],
@@ -561,6 +561,7 @@ function generateUtilityPages() {
 <a href="/downloads/geography/period_mobility.csv"><strong>جابه‌جایی در چهار دوره</strong><span>CSV · نرخ و فاصله‌های مسیر</span></a>
 <a href="/downloads/lexical-lifecycle.csv"><strong>رده‌های چرخه عمر واژگان</strong><span>CSV · تعداد، سهم و نیمه‌عمر</span></a>
 <a href="/downloads/lexical-examples.csv"><strong>نمونه واژگان تاریخی</strong><span>CSV · پایدار، افولی، متأخر و بازبرجسته</span></a>
+<a href="/downloads/manifest.json"><strong>راستی‌آزمایی دانلودها</strong><span>JSON · نسخه، منشأ، اندازه و SHA-256 همه فایل‌ها</span></a>
 </div></section><section id="dictionary"><h2>فرهنگ داده</h2>${renderTable(['فیلد', 'معنا'], [['poet','نام شاعر'],['century','سده هجری منتسب به دوره زندگی شاعر'],['poems','تعداد متن‌های شاعر در پیکره'],['totalCouplets','تعداد ابیات؛ جفت مصراع‌های جداشده در منبع، با گردکردن واحد پایانی فرد در هر رکورد'],['totalWords','مجموع واژه‌های فارسی شاعر پس از نرمال‌سازی'],['share','سهم موضوع یا رده، به درصد'],['rate','نرخ نرمال‌شده رخداد'],['score','شاخص ترکیبی شباهت و پیوند متنی'],['robustZ','فاصله مقاوم متن از مرکز سبک شاعر'],['center_city','کانون تقریبی فعالیت شاعر'],['route_km','طول تقریبی مسیر منتخب، به کیلومتر'],['half_life','زمان پس از اوج تا نصف فراوانی'],['right_censored','نرسیدن به نصف اوج تا پایان پیکره']])}</section><section id="license"><h2>منبع، انتساب و مجوز</h2><p>کد رابط با مجوز MIT منتشر می‌شود؛ داده‌ها و تصاویر تابع شرایط منبع و اعتبارهای درج‌شده در پروژه‌اند. مختصات و مسیرهای پژوهش جغرافیا برای تحلیل کلان تقریبی‌اند.</p><div class="hero-actions"><a href="/attributions/">اعتبارها و مجوزها</a></div></section>${citationBlock('پیکره و خروجی‌های تحلیلی از شعر تا داده', '/data/')}</article>`,
   }));
 
@@ -617,8 +618,91 @@ function generateMachineReadable() {
   writeCsv('downloads/forms-comparison.csv', ['قالب', 'تعداد متن', 'تعداد شاعر', 'سده تحت پوشش', 'میانه واژه', 'میانه بیت', 'بازیابی مدل'], formResearch.formats.map((item) => [item.name, item.texts, item.poets, item.centuries, item.medianWords, item.medianCouplets, item.recall]));
 }
 
+function generateDownloadManifest() {
+  const downloadsRoot = path.join(dist, 'downloads');
+  const files = [];
+  const walk = (directory) => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const target = path.join(directory, entry.name);
+      if (entry.isDirectory()) walk(target);
+      else if (entry.name !== 'manifest.json') files.push(target);
+    }
+  };
+  walk(downloadsRoot);
+
+  const mediaTypes = {
+    '.csv': 'text/csv; charset=utf-8',
+    '.json': 'application/json',
+    '.md': 'text/markdown; charset=utf-8',
+  };
+  const entries = files
+    .sort((left, right) => left.localeCompare(right, 'en'))
+    .map((file) => {
+      const content = fs.readFileSync(file);
+      return {
+        path: path.relative(downloadsRoot, file).split(path.sep).join('/'),
+        mediaType: mediaTypes[path.extname(file)] || 'application/octet-stream',
+        bytes: content.byteLength,
+        sha256: createHash('sha256').update(content).digest('hex'),
+      };
+    });
+
+  write('downloads/manifest.json', JSON.stringify({
+    schemaVersion: 1,
+    publicationVersion: PUBLICATION.version,
+    modifiedDate: PUBLICATION.modifiedDate,
+    license: 'See /attributions/ and the repository LICENSE for code, data, and source-specific terms.',
+    provenance: {
+      methodology: absolute('/methodology/'),
+      attributions: absolute('/attributions/'),
+      generator: 'scripts/postbuild.mjs',
+    },
+    files: entries,
+  }, null, 2));
+}
+
 function homeFallback() {
-  return `<div class="prerender-home"><header><span>اطلس تعاملی تحلیل داده‌های شعر فارسی</span><h1>از شعر تا داده</h1><p>روایتی پژوهشی و بصری از ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت، ${faNumber(data.overview.words)} واژه و ${faNumber(data.overview.poets.length)} شاعر؛ کاری از حسین کریمی.</p><a href="#overview">شروع کاوش</a></header><main><section><h2>ده پژوهش اصلی</h2>${researchPages.map((p) => `<article><h3><a href="${p.path}">${p.title}</a></h3><p>${p.answer}</p></article>`).join('')}</section><section><h2>آمار پیکره</h2><ul><li>${faNumber(data.overview.texts)} متن</li><li>${faNumber(data.overview.couplets)} بیت</li><li>${faNumber(data.overview.words)} واژه</li><li>${faNumber(data.overview.poets.length)} شاعر</li><li>${faNumber(data.overview.books)} عنوان کتاب</li></ul></section><nav><a href="/research/">همه پژوهش‌ها</a><a href="/poets/">فهرست شاعران</a><a href="/data/">دانلود داده‌ها</a><a href="/methodology/">روش‌شناسی</a></nav></main></div>`;
+  return `<div class="prerender-home"><header><span>روایت داده‌محور شعر فارسی</span><h1>شعر فارسی در سیزده سده چگونه تغییر کرده است؟</h1><p>داده‌ها از جابه‌جایی مضمون‌ها، دگرگونی خانواده‌های استعاری و تفاوت الگوهای زبانی خبر می‌دهند؛ اما این الگوها شاهد محاسباتی‌اند، نه حکم قطعی درباره ارزش ادبی یا علت تاریخی.</p><a href="/atlas/">کاوش در اطلس</a><a href="/research/">دیدن یافته‌های پژوهشی</a></header><main id="main"><section><h2>دامنه پیکره</h2><p>${faNumber(data.overview.texts)} متن از ${faNumber(data.overview.poets.length)} شاعر در سیزده سدهٔ منتسب. پوشش پیکره معادل اهمیت ادبی نیست و سدهٔ منتسب لزوماً تاریخ دقیق سرایش نیست.</p></section><section><h2>برای چه کاری آمده‌اید؟</h2><nav><a href="/research/public-questions/">خوانندهٔ عمومی</a><a href="/research/">پژوهشگر ادبی</a><a href="/methodology/">پژوهشگر علوم انسانی دیجیتال</a><a href="/data/">کاربر داده</a></nav></section><section><h2>ده پژوهش اصلی</h2>${researchPages.map((p) => `<article><h3><a href="${p.path}">${p.title}</a></h3><p>${p.answer}</p></article>`).join('')}</section></main></div>`;
+}
+
+function atlasFallback() {
+  return `<div class="prerender-home"><header><span>کاوش مستقیم در پیکره</span><h1>اطلس کاوش شعر فارسی</h1><p>برای مشاهدهٔ نمودارهای تعاملی JavaScript را فعال کنید؛ همهٔ صفحات موجودیت، جدول‌ها، روش و داده‌های دانلودی بدون JavaScript در دسترس‌اند.</p></header><main id="main"><noscript><p>نسخهٔ تعاملی در دسترس نیست؛ از مسیرهای ایستای زیر استفاده کنید.</p></noscript><section><h2>این اطلس چه چیزی را نشان می‌دهد؟</h2><p>اطلس مسیرهای جست‌وجو و مقایسهٔ شاعران، سده‌های منتسب، مضمون‌های محاسباتی، خانواده‌های استعاری و یافته‌های پژوهشی را کنار هم قرار می‌دهد. نمودارها و جدول‌های هم‌ارز از یک دادهٔ منتشرشده تغذیه می‌شوند و داده‌های CSV و JSON نیز برای بررسی مستقل در دسترس‌اند.</p></section><section><h2>مرز تفسیر</h2><p>پوشش پیکره معادل اهمیت ادبی نیست؛ سدهٔ منتسب لزوماً تاریخ دقیق سرایش نیست و شباهت یا هم‌بستگی محاسباتی به‌تنهایی علت تاریخی، تأثیر ادبی یا انتساب قطعی را ثابت نمی‌کند.</p></section><nav aria-label="مسیرهای ایستای اطلس"><a href="/poets/">شاعران</a><a href="/centuries/">سده‌ها</a><a href="/themes/">مضمون‌ها</a><a href="/metaphors/">استعاره‌ها</a><a href="/research/">پژوهش‌ها</a><a href="/methodology/">روش‌شناسی</a><a href="/data/">داده‌ها</a></nav></main></div>`;
+}
+
+function patchAtlas() {
+  const source = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
+  const robots = isProduction ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow';
+  const atlasUrl = absolute('/atlas/');
+  const summary = JSON.stringify({ texts: data.overview.texts, poets: data.overview.poets.length, centuries: data.overview.centuryStats.length }).replaceAll('<', '\\u003c');
+  const { person, website, dataset } = globalSchemas();
+  const atlasSchema = {
+    '@type': 'CollectionPage',
+    '@id': `${atlasUrl}#page`,
+    name: 'اطلس کاوش شعر فارسی',
+    url: atlasUrl,
+    inLanguage: 'fa-IR',
+    isPartOf: { '@id': `${siteUrl}/#website` },
+    mainEntity: { '@id': `${siteUrl}/data/#dataset` },
+  };
+  const graph = jsonLd({ '@context': 'https://schema.org', '@graph': [person, website, dataset, atlasSchema] });
+  let html = source
+    .replaceAll('__SITE_URL__', siteUrl)
+    .replaceAll('__ROBOTS__', robots)
+    .replaceAll('__PUBLICATION_DATE__', PUBLICATION.publishedDate)
+    .replaceAll('__MODIFIED_DATE__', PUBLICATION.modifiedDate)
+    .replace('__HOME_JSON_LD__', graph)
+    .replace(`<link rel="canonical" href="${siteUrl}/" />`, `<link rel="canonical" href="${atlasUrl}" />`)
+    .replace(`<link rel="alternate" hreflang="fa" href="${siteUrl}/" />`, `<link rel="alternate" hreflang="fa" href="${atlasUrl}" />`)
+    .replace(`<link rel="alternate" hreflang="x-default" href="${siteUrl}/" />`, `<link rel="alternate" hreflang="x-default" href="${atlasUrl}" />`)
+    .replace(`<meta property="og:url" content="${siteUrl}/" />`, `<meta property="og:url" content="${atlasUrl}" />`)
+    .replace('<title>از شعر تا داده | تحلیل تعاملی شعر فارسی و هوش مصنوعی</title>', '<title>اطلس کاوش شعر فارسی | از شعر تا داده</title>')
+    .replace(
+      '<meta name="description" content="روایتی داده‌محور از دگرگونی شعر فارسی در سیزده سده، با مسیرهای جدا برای خوانندگان عمومی، پژوهشگران ادبی، پژوهشگران داده و کاوش مستقیم در اطلس." />',
+      '<meta name="description" content="اطلس تعاملی ده پژوهش روی ۵۴٬۵۲۴ متن از ۶۷ شاعر فارسی؛ برای کاوش شاعران، سده‌های منتسب، مضمون‌ها، استعاره‌ها، روش‌شناسی و داده‌های قابل دانلود." />',
+    )
+    .replace('<meta name="citation_title" content="از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی" />', '<meta name="citation_title" content="اطلس کاوش شعر فارسی" />')
+    .replace('<div id="root"></div>', `<script type="application/json" id="publication-summary">${summary}</script><div id="root">${atlasFallback()}</div>`);
+  write('atlas/index.html', html);
 }
 
 function patchHome() {
@@ -628,16 +712,22 @@ function patchHome() {
   const faqSchema = { '@type': 'FAQPage', mainEntity: faqItems.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) };
   const collection = { '@type': 'CollectionPage', '@id': `${siteUrl}/#home`, name: 'از شعر تا داده', url: siteUrl, isPartOf: { '@id': `${siteUrl}/#website` }, mainEntity: { '@id': `${siteUrl}/data/#dataset` }, hasPart: researchPages.map((p) => ({ '@type': 'Article', headline: p.title, url: absolute(p.path) })) };
   const graph = jsonLd({ '@context': 'https://schema.org', '@graph': [person, website, dataset, collection, faqSchema] });
-  html = html.replaceAll('__SITE_URL__', siteUrl).replaceAll('__ROBOTS__', isProduction ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow').replace('__HOME_JSON_LD__', graph);
+  html = html
+    .replaceAll('__SITE_URL__', siteUrl)
+    .replaceAll('__ROBOTS__', isProduction ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow')
+    .replaceAll('__PUBLICATION_DATE__', PUBLICATION.publishedDate)
+    .replaceAll('__MODIFIED_DATE__', PUBLICATION.modifiedDate)
+    .replace('__HOME_JSON_LD__', graph);
   const homeVerification = `${googleVerification ? `<meta name="google-site-verification" content="${escapeHtml(googleVerification)}">` : ''}${bingVerification ? `<meta name="msvalidate.01" content="${escapeHtml(bingVerification)}">` : ''}`;
   if (homeVerification) html = html.replace('</head>', `${homeVerification}</head>`);
-  html = html.replace('<div id="root"></div>', `<div id="root">${homeFallback()}</div>`);
+  const summary = JSON.stringify({ texts: data.overview.texts, poets: data.overview.poets.length, centuries: data.overview.centuryStats.length }).replaceAll('<', '\\u003c');
+  html = html.replace('<div id="root"></div>', `<script type="application/json" id="publication-summary">${summary}</script><div id="root">${homeFallback()}</div>`);
   fs.writeFileSync(indexPath, html, 'utf8');
 }
 
 function generateDiscoveryFiles() {
   const urls = [
-    '/', '/research/', ...researchPages.map((p) => p.path), '/poets/',
+    '/', '/atlas/', '/research/', ...researchPages.map((p) => p.path), '/poets/',
     ...data.overview.poets.map((p) => `/poets/${poetSlug(p.name)}/`), '/data/', '/methodology/', '/glossary/', '/about/', '/attributions/',
   ];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${escapeHtml(absolute(u))}</loc><lastmod>${buildDate}</lastmod><changefreq>${u === '/' ? 'weekly' : 'monthly'}</changefreq><priority>${u === '/' ? '1.0' : u.startsWith('/research/') ? '0.9' : '0.7'}</priority></url>`).join('\n')}\n</urlset>`;
@@ -647,7 +737,7 @@ function generateDiscoveryFiles() {
   write('robots.txt', `# از شعر تا داده — ${buildDate}\nUser-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nSitemap: ${absolute('/sitemap.xml')}\nSitemap: ${absolute('/sitemap-images.xml')}\n`);
   const rssItems = researchPages.map((p) => `<item><title>${escapeHtml(p.title)}</title><link>${absolute(p.path)}</link><guid>${absolute(p.path)}</guid><description>${escapeHtml(p.answer)}</description><pubDate>${new Date(`${buildDate}T00:00:00Z`).toUTCString()}</pubDate></item>`).join('');
   write('feed.xml', `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>از شعر تا داده</title><link>${siteUrl}</link><description>پژوهش‌های تحلیل داده شعر فارسی</description><language>fa</language>${rssItems}</channel></rss>`);
-  write('feed.json', JSON.stringify({ version: 'https://jsonfeed.org/version/1.1', title: 'از شعر تا داده', home_page_url: siteUrl, feed_url: absolute('/feed.json'), language: 'fa', items: researchPages.map((p) => ({ id: absolute(p.path), url: absolute(p.path), title: p.title, summary: p.answer, date_modified: `${buildDate}T00:00:00Z` })) }, null, 2));
+  write('feed.json', JSON.stringify({ version: 'https://jsonfeed.org/version/1.1', title: 'از شعر تا داده', home_page_url: siteUrl, feed_url: absolute('/feed.json'), language: 'fa', items: researchPages.map((p) => ({ id: absolute(p.path), url: absolute(p.path), title: p.title, summary: p.answer, date_modified: `${PUBLICATION.modifiedDate}T00:00:00Z` })) }, null, 2));
   const llms = `# از شعر تا داده\n\n> اطلس تعاملی و پژوهشی تحلیل داده‌های شعر فارسی، کاری از حسین کریمی. پیکره شامل ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر است.\n\n## صفحات اصلی\n- [صفحه اصلی](${siteUrl}/): نمودارهای تعاملی و روایت عمومی\n- [پژوهش‌ها](${absolute('/research/')}): ده مطالعه مستقل با روش و جدول\n- [فهرست شاعران](${absolute('/poets/')}): نمایه داده‌ای همه شاعران\n- [داده‌های قابل دانلود](${absolute('/data/')}): JSON و CSV\n- [روش‌شناسی](${absolute('/methodology/')}): کنترل عدم‌توازن، آزمون‌ها و محدودیت‌ها\n- [واژه‌نامه](${absolute('/glossary/')}): تعریف اصطلاحات
 - [اعتبار منابع](${absolute('/attributions/')}): منابع، تصاویر و مجوزها\n\n## پژوهش‌ها\n${researchPages.map((p) => `- [${p.title}](${absolute(p.path)}): ${p.answer}`).join('\n')}\n\n## استناد\nکریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». ${siteUrl}/\n\n## سیاست تفسیر\nپیوندهای متنی، شباهت محاسباتی‌اند، نامتعارف آماری حکم انتساب نیست و اندازه حضور شاعر در پیکره رتبه ادبی محسوب نمی‌شود.\n`;
   write('llms.txt', llms);
@@ -684,6 +774,8 @@ generateResearchPages();
 generatePoetPages();
 generateUtilityPages();
 generateMachineReadable();
+generateDownloadManifest();
 generateDiscoveryFiles();
+patchAtlas();
 patchHome();
 validateOutput();

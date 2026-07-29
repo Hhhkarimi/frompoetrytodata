@@ -5,27 +5,30 @@
 ## پاسخ‌های اصلی
 - ترکیب موضوعی شعر فارسی در طول زمان تغییر معنادار دارد؛ سده حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد.
 - هیچ‌یک از ده خانواده استعاری بررسی‌شده کاملاً حذف نمی‌شود؛ الگوی غالب افت، بازگشت و رانش معنایی است.
-- پیوندهای شبکه بینامتنیت قرابت محاسباتی‌اند و تأثیر تاریخی مستقیم را به‌تنهایی اثبات نمی‌کنند.
+- پیوندهای متنی، شباهت محاسباتی‌اند و تأثیر تاریخی مستقیم را به‌تنهایی اثبات نمی‌کنند.
 - تاریخ‌گذاری هوش مصنوعی باید با حذف کامل شاعر آزمون ارزیابی شود تا مدل به‌جای سده، شاعر را نشناسد.
 - مدل نویسه‌ای در آزمون متوازن ۴۹ شاعر به دقت ۶۶٫۷٪ رسیده است؛ نامتعارف آماری حکم انتساب نیست.
 - در مقایسه چهار قالب، قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد؛ قالب ۳۷٫۵٪ از تفاوت معنایی نمونه را توضیح می‌دهد.
+- در پرسش‌های عمومی، «دل» ۸٫۵۸ برابر «عقل» دیده شد؛ این عدد فراوانی واژه است، نه حکم فلسفی درباره احساس و خرد.
 - در پژوهش جغرافیا، ۳۵٫۸٪ شاعران جابه‌جا تعریف شدند؛ تفاوت دوره‌ها معنادار بود، اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی معنادار نشد.
 - در پژوهش نیمه‌عمر واژگان، میانه افت از اوج تا نصف ۱٫۳۶ سده بود و ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند.
 
 ## مسیرهای توصیه‌شده
-- [پژوهش‌ها](http://localhost:4173/research/)
-- [پرسش‌های کلیدی](http://localhost:4173/questions/)
-- [مضامین](http://localhost:4173/themes/)
-- [استعاره‌ها](http://localhost:4173/metaphors/)
-- [سده‌ها](http://localhost:4173/centuries/)
-- [شاعران](http://localhost:4173/poets/)
-- [روش‌شناسی](http://localhost:4173/methodology/)
-- [داده و API](http://localhost:4173/data/)
-- [داده چهار قالب](http://localhost:4173/api/forms.json)
-- [داده جغرافیای شعر](http://localhost:4173/api/geography.json)
-- [داده چرخه عمر واژگان](http://localhost:4173/api/lexical-life.json)
-- [OpenAPI](http://localhost:4173/openapi.json)
-- [گراف دانش](http://localhost:4173/api/knowledge-graph.json)
+- [پژوهش‌ها](https://frompoetrytodata.vercel.app/research/)
+- [پرسش‌های کلیدی](https://frompoetrytodata.vercel.app/questions/)
+- [مضامین](https://frompoetrytodata.vercel.app/themes/)
+- [استعاره‌ها](https://frompoetrytodata.vercel.app/metaphors/)
+- [سده‌ها](https://frompoetrytodata.vercel.app/centuries/)
+- [شاعران](https://frompoetrytodata.vercel.app/poets/)
+- [روش‌شناسی](https://frompoetrytodata.vercel.app/methodology/)
+- [داده و API](https://frompoetrytodata.vercel.app/data/)
+- [داده چهار قالب](https://frompoetrytodata.vercel.app/api/forms.json)
+- [داده جغرافیای شعر](https://frompoetrytodata.vercel.app/api/geography.json)
+- [داده چرخه عمر واژگان](https://frompoetrytodata.vercel.app/api/lexical-life.json)
+- [داده ممیزی انتساب](https://frompoetrytodata.vercel.app/api/attribution.json)
+- [ده پرسش عمومی](https://frompoetrytodata.vercel.app/api/public-questions.json)
+- [OpenAPI](https://frompoetrytodata.vercel.app/openapi.json)
+- [گراف دانش](https://frompoetrytodata.vercel.app/api/knowledge-graph.json)
 
 ## قواعد نقل
 ۱. عدد را همراه روش و محدودیت نقل کنید.
@@ -34,4 +37,4 @@
 ۴. اندازه حضور شاعر در پیکره رتبه ادبی نیست.
 
 ## استناد
-کریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». http://localhost:4173/
+کریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». https://frompoetrytodata.vercel.app/

@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 15,
-  "url": "http://localhost:4173/centuries/15/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/15/",
   "corpus": {
     "century": 15,
     "texts": 512,
@@ -15,7 +15,7 @@
     {
       "name": "ا لیار (جبار محمدی)",
       "slug": "a-liyar-jabbar-mohammadi",
-      "url": "http://localhost:4173/poets/a-liyar-jabbar-mohammadi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/a-liyar-jabbar-mohammadi/",
       "poems": 424,
       "totalCouplets": 2132,
       "totalWords": 30736,
@@ -25,7 +25,7 @@
     {
       "name": "عبدالقهار عاصی",
       "slug": "abdul-qahar-asi",
-      "url": "http://localhost:4173/poets/abdul-qahar-asi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/abdul-qahar-asi/",
       "poems": 88,
       "totalCouplets": 711,
       "totalWords": 7830,
@@ -153,7 +153,7 @@
       "rate": 3.705
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

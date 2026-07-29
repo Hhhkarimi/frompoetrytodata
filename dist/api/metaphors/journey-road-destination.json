@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "journey-road-destination",
-  "url": "http://localhost:4173/metaphors/journey-road-destination/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/",
   "name": "راه، سفر و منزل",
   "answer": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
   "occurrences": 35316,
@@ -84,7 +84,7 @@
     "poetsBefore": 3,
     "poetsAfter": 17
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

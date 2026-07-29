@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Section({ id, eyebrow, title, intro, children, className = '' }) {
   return (
     <section id={id} className={`section ${className}`}>

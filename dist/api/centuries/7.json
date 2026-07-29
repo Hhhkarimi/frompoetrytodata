@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 7,
-  "url": "http://localhost:4173/centuries/7/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/7/",
   "corpus": {
     "century": 7,
     "texts": 9846,
@@ -15,7 +15,7 @@
     {
       "name": "مولوی",
       "slug": "rumi",
-      "url": "http://localhost:4173/poets/rumi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/rumi/",
       "poems": 6242,
       "totalCouplets": 65972,
       "totalWords": 923696,
@@ -25,7 +25,7 @@
     {
       "name": "سعدی",
       "slug": "saadi",
-      "url": "http://localhost:4173/poets/saadi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/saadi/",
       "poems": 1904,
       "totalCouplets": 16102,
       "totalWords": 233043,
@@ -35,7 +35,7 @@
     {
       "name": "خواجوی کرمانی",
       "slug": "khwaju-kermani",
-      "url": "http://localhost:4173/poets/khwaju-kermani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/khwaju-kermani/",
       "poems": 932,
       "totalCouplets": 8849,
       "totalWords": 126613,
@@ -45,7 +45,7 @@
     {
       "name": "عراقی",
       "slug": "iraqi",
-      "url": "http://localhost:4173/poets/iraqi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/iraqi/",
       "poems": 579,
       "totalCouplets": 5789,
       "totalWords": 76295,
@@ -55,7 +55,7 @@
     {
       "name": "سیف فرغانی",
       "slug": "seyf-farghani",
-      "url": "http://localhost:4173/poets/seyf-farghani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/seyf-farghani/",
       "poems": 189,
       "totalCouplets": 2758,
       "totalWords": 39995,
@@ -183,7 +183,7 @@
       "rate": 2.019
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function BrandIcon({ size = 24, children, ...props }) {
   return (
     <svg

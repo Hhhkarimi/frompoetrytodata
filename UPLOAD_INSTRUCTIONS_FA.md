@@ -4,7 +4,7 @@
 
 ## اصلاحات v4
 
-- canonical پروتوتایپ با دامنهٔ فعال build یعنی `https://poetrytodata.vercel.app/prototype/` هم‌راستا شده است.
+- canonical پروتوتایپ با دامنهٔ تولیدی اعلام‌شده یعنی `https://frompoetrytodata.vercel.app/prototype/` هم‌راستا شده است.
 - `og:title`، `og:image` و سایر متادیتای Open Graph اضافه شده‌اند.
 - Twitter Card کامل اضافه شده است.
 - JSON-LD معتبر از نوع `WebPage` اضافه شده است.

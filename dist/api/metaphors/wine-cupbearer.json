@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "wine-cupbearer",
-  "url": "http://localhost:4173/metaphors/wine-cupbearer/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/",
   "name": "باده، شراب و ساقی",
   "answer": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
   "occurrences": 21796,
@@ -84,7 +84,7 @@
     "poetsBefore": 9,
     "poetsAfter": 10
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

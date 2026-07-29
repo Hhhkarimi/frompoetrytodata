@@ -9,6 +9,11 @@
     "build": "vite build && node scripts/postbuild.mjs && node scripts/enhance-seo-geo.mjs && node scripts/seo-audit.mjs",
     "build:local": "SITE_URL=http://localhost:4173 vite build && SITE_URL=http://localhost:4173 node scripts/postbuild.mjs && SITE_URL=http://localhost:4173 node scripts/enhance-seo-geo.mjs && node scripts/seo-audit.mjs",
     "preview": "vite preview",
+    "typecheck": "tsc -p jsconfig.json",
+    "lint": "eslint src scripts tests vite.config.js --max-warnings 0",
+    "test:unit": "vitest run",
+    "test:node": "node --test tests/*.test.mjs",
+    "test": "npm run test:unit && npm run test:node",
     "data:generate": "python scripts/generate_data.py",
     "seo:generate": "node scripts/postbuild.mjs && node scripts/enhance-seo-geo.mjs",
     "seo:audit": "node scripts/seo-audit.mjs",
@@ -28,7 +33,15 @@
     "react-dom": "19.2.7"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@vitejs/plugin-react": "6.0.4",
-    "vite": "8.1.5"
+    "eslint": "^10.8.0",
+    "globals": "^17.8.0",
+    "jsdom": "^29.1.1",
+    "typescript": "5.9.3",
+    "vite": "8.1.5",
+    "vitest": "^4.1.10"
   }
 }

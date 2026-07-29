@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 8,
-  "url": "http://localhost:4173/centuries/8/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/8/",
   "corpus": {
     "century": 8,
     "texts": 6709,
@@ -15,7 +15,7 @@
     {
       "name": "شاه نعمت‌الله ولی",
       "slug": "shah-nematollah-vali",
-      "url": "http://localhost:4173/poets/shah-nematollah-vali/",
+      "url": "https://frompoetrytodata.vercel.app/poets/shah-nematollah-vali/",
       "poems": 2701,
       "totalCouplets": 14981,
       "totalWords": 195568,
@@ -25,7 +25,7 @@
     {
       "name": "اوحدی",
       "slug": "owhadi",
-      "url": "http://localhost:4173/poets/owhadi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/owhadi/",
       "poems": 1326,
       "totalCouplets": 14674,
       "totalWords": 203831,
@@ -35,7 +35,7 @@
     {
       "name": "سلمان ساوجی",
       "slug": "salman-savoji",
-      "url": "http://localhost:4173/poets/salman-savoji/",
+      "url": "https://frompoetrytodata.vercel.app/poets/salman-savoji/",
       "poems": 897,
       "totalCouplets": 13104,
       "totalWords": 190867,
@@ -45,7 +45,7 @@
     {
       "name": "امیرخسرو دهلوی",
       "slug": "amir-khosrow-dehlavi",
-      "url": "http://localhost:4173/poets/amir-khosrow-dehlavi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/amir-khosrow-dehlavi/",
       "poems": 825,
       "totalCouplets": 7563,
       "totalWords": 96288,
@@ -55,7 +55,7 @@
     {
       "name": "حافظ",
       "slug": "hafez",
-      "url": "http://localhost:4173/poets/hafez/",
+      "url": "https://frompoetrytodata.vercel.app/poets/hafez/",
       "poems": 595,
       "totalCouplets": 4751,
       "totalWords": 72384,
@@ -65,7 +65,7 @@
     {
       "name": "عبید زاکانی",
       "slug": "obeyd-zakani",
-      "url": "http://localhost:4173/poets/obeyd-zakani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/obeyd-zakani/",
       "poems": 264,
       "totalCouplets": 2925,
       "totalWords": 38560,
@@ -75,7 +75,7 @@
     {
       "name": "شیخ محمود شبستری",
       "slug": "mahmud-shabestari",
-      "url": "http://localhost:4173/poets/mahmud-shabestari/",
+      "url": "https://frompoetrytodata.vercel.app/poets/mahmud-shabestari/",
       "poems": 101,
       "totalCouplets": 1684,
       "totalWords": 21632,
@@ -203,7 +203,7 @@
       "rate": 1.255
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

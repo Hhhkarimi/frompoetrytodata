@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 6,
   "slug": "beloved-beauty-feast",
-  "url": "http://localhost:4173/themes/beloved-beauty-feast/",
+  "url": "https://frompoetrytodata.vercel.app/themes/beloved-beauty-feast/",
   "name": "زیبایی معشوق و بزم",
   "keywords": [
     "سر",
@@ -104,7 +104,7 @@
       "correlation": -0.4027
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

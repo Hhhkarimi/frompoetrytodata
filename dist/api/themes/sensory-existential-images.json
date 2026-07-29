@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 5,
   "slug": "sensory-existential-images",
-  "url": "http://localhost:4173/themes/sensory-existential-images/",
+  "url": "https://frompoetrytodata.vercel.app/themes/sensory-existential-images/",
   "name": "تصویرهای حسی و وجودی",
   "keywords": [
     "آب",
@@ -105,7 +105,7 @@
       "correlation": -0.3548
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

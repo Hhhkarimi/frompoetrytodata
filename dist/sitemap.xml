@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>http://localhost:4173/sitemap-core.xml</loc><lastmod>2026-07-26</lastmod></sitemap>
-  <sitemap><loc>http://localhost:4173/sitemap-entities.xml</loc><lastmod>2026-07-26</lastmod></sitemap>
-  <sitemap><loc>http://localhost:4173/sitemap-data.xml</loc><lastmod>2026-07-26</lastmod></sitemap>
-  <sitemap><loc>http://localhost:4173/sitemap-images.xml</loc><lastmod>2026-07-26</lastmod></sitemap>
+  <sitemap><loc>https://frompoetrytodata.vercel.app/sitemap-core.xml</loc><lastmod>2026-07-29</lastmod></sitemap>
+  <sitemap><loc>https://frompoetrytodata.vercel.app/sitemap-entities.xml</loc><lastmod>2026-07-29</lastmod></sitemap>
+  <sitemap><loc>https://frompoetrytodata.vercel.app/sitemap-data.xml</loc><lastmod>2026-07-29</lastmod></sitemap>
+  <sitemap><loc>https://frompoetrytodata.vercel.app/sitemap-images.xml</loc><lastmod>2026-07-29</lastmod></sitemap>
 </sitemapindex>

@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "cage-prison",
-  "url": "http://localhost:4173/metaphors/cage-prison/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/cage-prison/",
   "name": "قفس و زندان",
   "answer": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
   "occurrences": 3376,
@@ -91,7 +91,7 @@
     "poetsBefore": 3,
     "poetsAfter": 15
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

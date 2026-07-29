@@ -52,3 +52,60 @@ The minimum dependency-free implementation was added under `public/prototype/`. 
 - Red: repository SEO audit reported two `h1` elements in `prototype/index.html`.
 - Green: changed the no-JavaScript fallback heading to `h2` and added an exact-one-`h1` assertion.
 - Refactor: mirrored the assertion in the standalone prototype verifier.
+
+## 2026-07-29 — production-domain metadata regression
+
+- **Reproduce:** `/prototype/` on the declared production site
+  `frompoetrytodata.vercel.app` exposed canonical, Open Graph, Twitter, and
+  JSON-LD URLs for the alternate `poetrytodata.vercel.app` deployment.
+- **Root cause:** a previous build inferred the Vercel project URL and its value
+  was copied into static prototype metadata and regression assertions, even
+  though the product owner identifies `frompoetrytodata.vercel.app` as the
+  production website.
+- **Red:** changed the public-document assertions to require the declared
+  production host and reject the alternate alias; two tests failed.
+- **Green:** aligned all static prototype metadata and the standalone verifier
+  with `https://frompoetrytodata.vercel.app/prototype/`.
+- **Deferred:** canonical-host and redirect policy for the complete production
+  site belongs in the approved specification; this slice changes only the
+  disposable prototype.
+
+## 2026-07-29 — current prototype selection
+
+- **Red:** added a public-document assertion requiring a programmatically
+  exposed current item; the URL-state test failed because selection was only
+  represented by `data-*` attributes and styling.
+- **Green:** variant and sample-page links now expose `aria-current="page"` for
+  the current item and `aria-current="false"` for the remaining items.
+- **Scope:** this changes only the disposable prototype navigation.
+
+## 2026-07-29 — production vertical slices
+
+The approved integrated direction was implemented against three public seams:
+browser-observable behavior, generated production artifacts, and the published
+data contract.
+
+- **Routing and URL state:** tests first required a narrative `/`, an
+  independently addressable `/atlas/`, compatibility for legacy fragments,
+  deterministic filter serialization, history restoration, and exact share
+  URLs.
+- **Accessible evidence:** tests first required a native table derived from the
+  same row model as each chart, visible focus, APG tab keys, contained modal
+  focus, Escape close, and focus restoration.
+- **Publication identity:** tests first required one official origin,
+  source-controlled publication dates, consistent citations, Dataset JSON-LD,
+  and a download manifest with byte counts and SHA-256 checksums.
+- **Data integrity:** tests compare generated JSON and CSV values with their
+  canonical analytical sources and verify all generated poet, century,
+  metaphor, and research page families.
+- **Resilience and performance:** tests cover loading, recoverable failure,
+  empty search results, no-JavaScript entries, and the absence of atlas data and
+  ECharts from the homepage's initial request path.
+- **Refactor while green:** publication formatting, route compatibility,
+  analytics contracts, atlas URL state, modal behavior, and chart/table
+  projections were extracted behind small public modules.
+
+The last metadata slice reproduced duplicate homepage/atlas descriptions,
+introduced a failing production-build assertion, then gave each route a
+distinct description and expanded the atlas no-JavaScript qualification while
+keeping publication dates projected from the shared publication model.

@@ -147,7 +147,7 @@ for (const sitemapFile of ['sitemap-core.xml','sitemap-entities.xml','sitemap-da
       const url = new URL(match[1].replaceAll('&amp;', '&'));
       const target = targetForHref(url.pathname);
       if (target && !fs.existsSync(target)) errors.push(`${sitemapFile}: URL بدون خروجی ${url.pathname}`);
-    } catch (error) { errors.push(`${sitemapFile}: URL نامعتبر ${match[1]}`); }
+    } catch { errors.push(`${sitemapFile}: URL نامعتبر ${match[1]}`); }
   }
 }
 

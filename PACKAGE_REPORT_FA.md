@@ -82,7 +82,7 @@
 
 ## اصلاح build در نسخهٔ v3
 
-صفحهٔ `public/prototype/index.html` اکنون تمام الزامات مسدودکنندهٔ audit مخزن را دارد: Open Graph، تصویر اجتماعی محلی، Twitter Card و JSON-LD معتبر. canonical نیز با دامنهٔ فعال `poetrytodata.vercel.app` هم‌راستا شده و آزمون رگرسیون برای این قراردادها افزوده شده است.
+صفحهٔ `public/prototype/index.html` اکنون تمام الزامات مسدودکنندهٔ audit مخزن را دارد: Open Graph، تصویر اجتماعی محلی، Twitter Card و JSON-LD معتبر. canonical نیز با دامنهٔ تولیدی اعلام‌شدهٔ `frompoetrytodata.vercel.app` هم‌راستا شده و آزمون رگرسیون برای این قراردادها افزوده شده است.
 
 
 ## اصلاح build در نسخهٔ v4

@@ -5,27 +5,30 @@
 ## پاسخ‌های اصلی
 - ترکیب موضوعی شعر فارسی در طول زمان تغییر معنادار دارد؛ سده حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد.
 - هیچ‌یک از ده خانواده استعاری بررسی‌شده کاملاً حذف نمی‌شود؛ الگوی غالب افت، بازگشت و رانش معنایی است.
-- پیوندهای شبکه بینامتنیت قرابت محاسباتی‌اند و تأثیر تاریخی مستقیم را به‌تنهایی اثبات نمی‌کنند.
+- پیوندهای متنی، شباهت محاسباتی‌اند و تأثیر تاریخی مستقیم را به‌تنهایی اثبات نمی‌کنند.
 - تاریخ‌گذاری هوش مصنوعی باید با حذف کامل شاعر آزمون ارزیابی شود تا مدل به‌جای سده، شاعر را نشناسد.
 - مدل نویسه‌ای در آزمون متوازن ۴۹ شاعر به دقت ۶۶٫۷٪ رسیده است؛ نامتعارف آماری حکم انتساب نیست.
 - در مقایسه چهار قالب، قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد؛ قالب ۳۷٫۵٪ از تفاوت معنایی نمونه را توضیح می‌دهد.
+- در پرسش‌های عمومی، «دل» ۸٫۵۸ برابر «عقل» دیده شد؛ این عدد فراوانی واژه است، نه حکم فلسفی درباره احساس و خرد.
 - در پژوهش جغرافیا، ۳۵٫۸٪ شاعران جابه‌جا تعریف شدند؛ تفاوت دوره‌ها معنادار بود، اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی معنادار نشد.
 - در پژوهش نیمه‌عمر واژگان، میانه افت از اوج تا نصف ۱٫۳۶ سده بود و ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند.
 
 ## مسیرهای توصیه‌شده
-- [پژوهش‌ها](http://localhost:4173/research/)
-- [پرسش‌های کلیدی](http://localhost:4173/questions/)
-- [مضامین](http://localhost:4173/themes/)
-- [استعاره‌ها](http://localhost:4173/metaphors/)
-- [سده‌ها](http://localhost:4173/centuries/)
-- [شاعران](http://localhost:4173/poets/)
-- [روش‌شناسی](http://localhost:4173/methodology/)
-- [داده و API](http://localhost:4173/data/)
-- [داده چهار قالب](http://localhost:4173/api/forms.json)
-- [داده جغرافیای شعر](http://localhost:4173/api/geography.json)
-- [داده چرخه عمر واژگان](http://localhost:4173/api/lexical-life.json)
-- [OpenAPI](http://localhost:4173/openapi.json)
-- [گراف دانش](http://localhost:4173/api/knowledge-graph.json)
+- [پژوهش‌ها](https://frompoetrytodata.vercel.app/research/)
+- [پرسش‌های کلیدی](https://frompoetrytodata.vercel.app/questions/)
+- [مضامین](https://frompoetrytodata.vercel.app/themes/)
+- [استعاره‌ها](https://frompoetrytodata.vercel.app/metaphors/)
+- [سده‌ها](https://frompoetrytodata.vercel.app/centuries/)
+- [شاعران](https://frompoetrytodata.vercel.app/poets/)
+- [روش‌شناسی](https://frompoetrytodata.vercel.app/methodology/)
+- [داده و API](https://frompoetrytodata.vercel.app/data/)
+- [داده چهار قالب](https://frompoetrytodata.vercel.app/api/forms.json)
+- [داده جغرافیای شعر](https://frompoetrytodata.vercel.app/api/geography.json)
+- [داده چرخه عمر واژگان](https://frompoetrytodata.vercel.app/api/lexical-life.json)
+- [داده ممیزی انتساب](https://frompoetrytodata.vercel.app/api/attribution.json)
+- [ده پرسش عمومی](https://frompoetrytodata.vercel.app/api/public-questions.json)
+- [OpenAPI](https://frompoetrytodata.vercel.app/openapi.json)
+- [گراف دانش](https://frompoetrytodata.vercel.app/api/knowledge-graph.json)
 
 ## قواعد نقل
 ۱. عدد را همراه روش و محدودیت نقل کنید.
@@ -34,88 +37,98 @@
 ۴. اندازه حضور شاعر در پیکره رتبه ادبی نیست.
 
 ## استناد
-کریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». http://localhost:4173/
+کریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». https://frompoetrytodata.vercel.app/
 
-## هشت مطالعه پژوهشی
+## ده مطالعهٔ پژوهشی
 ### تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم
 ترکیب موضوعی شعر فارسی در طول زمان به‌طور معناداری تغییر کرده است؛ سده تاریخی حدود ۳۷٫۶٪ از تفاوت موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی این تفاوت را معنادار نشان می‌دهد.
-صفحه: http://localhost:4173/research/topics/
+صفحه: https://frompoetrytodata.vercel.app/research/topics/
 
 ### تولد، خاموشی و دگرگونی استعاره‌ها در شعر فارسی
 هیچ‌یک از خانواده‌های استعاری بررسی‌شده کاملاً ناپدید نمی‌شوند؛ الگوی غالب، خاموشی موقت، بازگشت و جابه‌جایی میدان معنایی است. تراکم کلی تصاویر میان دوره‌های تاریخی تفاوت معنادار دارد.
-صفحه: http://localhost:4173/research/metaphors/
+صفحه: https://frompoetrytodata.vercel.app/research/metaphors/
 
-### شبکه بینامتنیت و قرابت محاسباتی شاعران فارسی
+### نقشه پیوندهای متنی و شباهت شاعران فارسی
 شباهت عبارتی، واژگانی و موضوعی با افزایش فاصله زمانی شاعران کاهش می‌یابد؛ اما هر پیوند فقط قرابت محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند.
-صفحه: http://localhost:4173/research/intertextuality/
+صفحه: https://frompoetrytodata.vercel.app/research/intertextuality/
 
 ### آیا هوش مصنوعی می‌تواند سده یک شعر فارسی را تشخیص دهد؟
 هوش مصنوعی می‌تواند نشانه‌های زمانی را در زبان شعر بیابد، اما دقت ظاهراً بالا در تقسیم تصادفی ممکن است حاصل شناخت شاعر یا کتاب باشد. ارزیابی معتبر باید شاعر آزمون را کاملاً از آموزش حذف کند.
-صفحه: http://localhost:4173/research/century-ai/
+صفحه: https://frompoetrytodata.vercel.app/research/century-ai/
 
 ### اثر انگشت سبکی شاعران و کشف شعرهای نامتعارف
 در آزمون متوازن ۴۹ شاعر، مدل نویسه‌ای به دقت ۶۶٫۷٪ رسید؛ بسیار بالاتر از خط مبنای حدود ۲٪. بااین‌حال، نامتعارف آماری الزاماً به معنی انتساب نادرست نیست.
-صفحه: http://localhost:4173/research/stylometry/
+صفحه: https://frompoetrytodata.vercel.app/research/stylometry/
 
 ### مقایسه تکامل غزل، قصیده، رباعی و مثنوی
 چهار قالب فقط در اندازه تفاوت ندارند: قصیده جهان بیرونی را گسترش می‌دهد، غزل رابطه را فشرده می‌کند، رباعی معنا را کوتاه و ناگهانی جمع می‌کند و مثنوی زمان و روایت می‌سازد. قالب شعر ۳۷٫۵٪ از تفاوت معنایی نمونه را نیز توضیح می‌دهد.
-صفحه: http://localhost:4173/research/forms/
+صفحه: https://frompoetrytodata.vercel.app/research/forms/
 
 ### جغرافیای تخیل و مهاجرت شعر فارسی
 ۲۴ شاعر از ۶۷ شاعر پیکره، یعنی ۳۵٫۸٪، در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ جابه‌جایی میان چهار دوره تاریخی تفاوت دارد؛ اما سبک منطقه‌ای و رابطه جابه‌جایی با نوآوری سبکی در این نمونه معنادار نشد.
-صفحه: http://localhost:4173/research/geography/
+صفحه: https://frompoetrytodata.vercel.app/research/geography/
 
 ### نیمه‌عمر واژگان در شعر فارسی
 در ۶٬۵۵۳ واژه‌ای که افت تا نصف اوج مشاهده شد، میانه نیمه‌عمر ۱٫۳۶ سده است؛ بااین‌حال ۱۷٫۴٪ واژه‌ها تا پایان پیکره به نصف اوج نرسیدند. چرخه واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق.
-صفحه: http://localhost:4173/research/lexical-life/
+صفحه: https://frompoetrytodata.vercel.app/research/lexical-life/
+
+### سنجش انتساب شعر با شواهد زبانی، فکری و تاریخی
+پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد. در دادهٔ خیام سه متن نثری و ده‌ها صورت نزدیک میان مجموعه‌ها شناسایی شد.
+صفحه: https://frompoetrytodata.vercel.app/research/attribution/
+
+### ده پرسش جذاب از هزار سال شعر فارسی
+در این پیکره «دل» حدود ۸٫۶ برابر «عقل»، نشانه‌های غم ۲٫۸ برابر شادی و ضمیرهای فردی ۲٫۴ برابر جمعی دیده می‌شوند. بااین‌حال هر نتیجه کنار تعریف واژه‌ها و محدودیت معنایی آن نمایش داده می‌شود.
+صفحه: https://frompoetrytodata.vercel.app/research/public-questions/
 
 ## یازده مضمون
-- اخلاق، حکمت و خرد: مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳). صفحه: http://localhost:4173/themes/ethics-wisdom/
-- حماسه، شاهی و جنگ: مضمون محاسباتی «حماسه، شاهی و جنگ» در کل پیکره سهم ۷٫۸٪ دارد، در سده ۴ به بیشترین سهم خود یعنی ۴۸٫۷٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۳۹). صفحه: http://localhost:4173/themes/epic-kingship-war/
-- دین، تصوف تعلیمی و مناقب: مضمون محاسباتی «دین، تصوف تعلیمی و مناقب» در کل پیکره سهم ۵٫۴٪ دارد، در سده ۵ به بیشترین سهم خود یعنی ۱۳٫۱٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: http://localhost:4173/themes/religion-sufism-praise/
-- جان، دل و پیوند عاشقانه: مضمون محاسباتی «جان، دل و پیوند عاشقانه» در کل پیکره سهم ۱۱٫۵٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۸٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: http://localhost:4173/themes/soul-heart-romantic-bond/
-- تصویرهای حسی و وجودی: مضمون محاسباتی «تصویرهای حسی و وجودی» در کل پیکره سهم ۱۴٪ دارد، در سده ۱۱ به بیشترین سهم خود یعنی ۲۹٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۶۴۷). صفحه: http://localhost:4173/themes/sensory-existential-images/
-- زیبایی معشوق و بزم: مضمون محاسباتی «زیبایی معشوق و بزم» در کل پیکره سهم ۱۰٪ دارد، در سده ۱۳ به بیشترین سهم خود یعنی ۲۰٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: http://localhost:4173/themes/beloved-beauty-feast/
-- طبیعت، گل و بهار: مضمون محاسباتی «طبیعت، گل و بهار» در کل پیکره سهم ۸٫۴٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: http://localhost:4173/themes/nature-flower-spring/
-- شب، زمان و گذر عمر: مضمون محاسباتی «شب، زمان و گذر عمر» در کل پیکره سهم ۸٪ دارد، در سده ۱۴ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: http://localhost:4173/themes/night-time-life/
-- عشق عرفانی و عاشقانه: مضمون محاسباتی «عشق عرفانی و عاشقانه» در کل پیکره سهم ۶٫۶٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۱٫۳٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۳۹۳). صفحه: http://localhost:4173/themes/mystical-romantic-love/
-- کیهان، قدرت و بخت: مضمون محاسباتی «کیهان، قدرت و بخت» در کل پیکره سهم ۱۰٫۹٪ دارد، در سده ۶ به بیشترین سهم خود یعنی ۱۸٫۵٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۳۲۲). صفحه: http://localhost:4173/themes/cosmos-power-fortune/
-- غم، فراق و هجران: مضمون محاسباتی «غم، فراق و هجران» در کل پیکره سهم ۶٫۴٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۰٫۲٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: http://localhost:4173/themes/grief-separation/
+- اخلاق، حکمت و خرد: مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳). صفحه: https://frompoetrytodata.vercel.app/themes/ethics-wisdom/
+- حماسه، شاهی و جنگ: مضمون محاسباتی «حماسه، شاهی و جنگ» در کل پیکره سهم ۷٫۸٪ دارد، در سده ۴ به بیشترین سهم خود یعنی ۴۸٫۷٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۳۹). صفحه: https://frompoetrytodata.vercel.app/themes/epic-kingship-war/
+- دین، تصوف تعلیمی و مناقب: مضمون محاسباتی «دین، تصوف تعلیمی و مناقب» در کل پیکره سهم ۵٫۴٪ دارد، در سده ۵ به بیشترین سهم خود یعنی ۱۳٫۱٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: https://frompoetrytodata.vercel.app/themes/religion-sufism-praise/
+- جان، دل و پیوند عاشقانه: مضمون محاسباتی «جان، دل و پیوند عاشقانه» در کل پیکره سهم ۱۱٫۵٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۸٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: https://frompoetrytodata.vercel.app/themes/soul-heart-romantic-bond/
+- تصویرهای حسی و وجودی: مضمون محاسباتی «تصویرهای حسی و وجودی» در کل پیکره سهم ۱۴٪ دارد، در سده ۱۱ به بیشترین سهم خود یعنی ۲۹٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۶۴۷). صفحه: https://frompoetrytodata.vercel.app/themes/sensory-existential-images/
+- زیبایی معشوق و بزم: مضمون محاسباتی «زیبایی معشوق و بزم» در کل پیکره سهم ۱۰٪ دارد، در سده ۱۳ به بیشترین سهم خود یعنی ۲۰٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: https://frompoetrytodata.vercel.app/themes/beloved-beauty-feast/
+- طبیعت، گل و بهار: مضمون محاسباتی «طبیعت، گل و بهار» در کل پیکره سهم ۸٫۴٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: https://frompoetrytodata.vercel.app/themes/nature-flower-spring/
+- شب، زمان و گذر عمر: مضمون محاسباتی «شب، زمان و گذر عمر» در کل پیکره سهم ۸٪ دارد، در سده ۱۴ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: https://frompoetrytodata.vercel.app/themes/night-time-life/
+- عشق عرفانی و عاشقانه: مضمون محاسباتی «عشق عرفانی و عاشقانه» در کل پیکره سهم ۶٫۶٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۱٫۳٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۳۹۳). صفحه: https://frompoetrytodata.vercel.app/themes/mystical-romantic-love/
+- کیهان، قدرت و بخت: مضمون محاسباتی «کیهان، قدرت و بخت» در کل پیکره سهم ۱۰٫۹٪ دارد، در سده ۶ به بیشترین سهم خود یعنی ۱۸٫۵٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۳۲۲). صفحه: https://frompoetrytodata.vercel.app/themes/cosmos-power-fortune/
+- غم، فراق و هجران: مضمون محاسباتی «غم، فراق و هجران» در کل پیکره سهم ۶٫۴٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۰٫۲٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است. صفحه: https://frompoetrytodata.vercel.app/themes/grief-separation/
 
 ## ده خانواده استعاری
-- راه، سفر و منزل: خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد. صفحه: http://localhost:4173/metaphors/journey-road-destination/
-- گل و بلبل: خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: http://localhost:4173/metaphors/flower-nightingale/
-- نور، شمع و تاریکی: خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد. صفحه: http://localhost:4173/metaphors/light-candle-darkness/
-- خون، زخم و خنجر: خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد. صفحه: http://localhost:4173/metaphors/blood-wound-dagger/
-- باده، شراب و ساقی: خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد. صفحه: http://localhost:4173/metaphors/wine-cupbearer/
-- آتش، شعله و شرر: خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: http://localhost:4173/metaphors/fire-flame-spark/
-- دریا، موج و ساحل: خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: http://localhost:4173/metaphors/sea-wave-shore/
-- آینه و بازتاب: خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: http://localhost:4173/metaphors/mirror-reflection/
-- قفس و زندان: خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد. صفحه: http://localhost:4173/metaphors/cage-prison/
-- زنجیر و اسارت: خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: http://localhost:4173/metaphors/chain-captivity/
+- راه، سفر و منزل: خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/
+- گل و بلبل: خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/
+- نور، شمع و تاریکی: خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/
+- خون، زخم و خنجر: خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/
+- باده، شراب و ساقی: خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/
+- آتش، شعله و شرر: خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/
+- دریا، موج و ساحل: خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/
+- آینه و بازتاب: خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/mirror-reflection/
+- قفس و زندان: خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/cage-prison/
+- زنجیر و اسارت: خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد. صفحه: https://frompoetrytodata.vercel.app/metaphors/chain-captivity/
 
 ## سده‌ها
-- سده ۳: ۵۳۹ متن، ۱ شاعر. http://localhost:4173/centuries/3/
-- سده ۴: ۷۳۰ متن، ۲ شاعر. http://localhost:4173/centuries/4/
-- سده ۵: ۲٬۲۵۳ متن، ۹ شاعر. http://localhost:4173/centuries/5/
-- سده ۶: ۱۰٬۹۹۰ متن، ۱۰ شاعر. http://localhost:4173/centuries/6/
-- سده ۷: ۹٬۸۴۶ متن، ۵ شاعر. http://localhost:4173/centuries/7/
-- سده ۸: ۶٬۷۰۹ متن، ۷ شاعر. http://localhost:4173/centuries/8/
-- سده ۹: ۵۴۱ متن، ۲ شاعر. http://localhost:4173/centuries/9/
-- سده ۱۰: ۲٬۷۳۰ متن، ۵ شاعر. http://localhost:4173/centuries/10/
-- سده ۱۱: ۱۳٬۸۸۶ متن، ۳ شاعر. http://localhost:4173/centuries/11/
-- سده ۱۲: ۱۹۴ متن، ۱ شاعر. http://localhost:4173/centuries/12/
-- سده ۱۳: ۱٬۳۸۲ متن، ۳ شاعر. http://localhost:4173/centuries/13/
-- سده ۱۴: ۴٬۲۱۲ متن، ۱۷ شاعر. http://localhost:4173/centuries/14/
-- سده ۱۵: ۵۱۲ متن، ۲ شاعر. http://localhost:4173/centuries/15/
+- سده ۳: ۵۳۹ متن، ۱ شاعر. https://frompoetrytodata.vercel.app/centuries/3/
+- سده ۴: ۷۳۰ متن، ۲ شاعر. https://frompoetrytodata.vercel.app/centuries/4/
+- سده ۵: ۲٬۲۵۳ متن، ۹ شاعر. https://frompoetrytodata.vercel.app/centuries/5/
+- سده ۶: ۱۰٬۹۹۰ متن، ۱۰ شاعر. https://frompoetrytodata.vercel.app/centuries/6/
+- سده ۷: ۹٬۸۴۶ متن، ۵ شاعر. https://frompoetrytodata.vercel.app/centuries/7/
+- سده ۸: ۶٬۷۰۹ متن، ۷ شاعر. https://frompoetrytodata.vercel.app/centuries/8/
+- سده ۹: ۵۴۱ متن، ۲ شاعر. https://frompoetrytodata.vercel.app/centuries/9/
+- سده ۱۰: ۲٬۷۳۰ متن، ۵ شاعر. https://frompoetrytodata.vercel.app/centuries/10/
+- سده ۱۱: ۱۳٬۸۸۶ متن، ۳ شاعر. https://frompoetrytodata.vercel.app/centuries/11/
+- سده ۱۲: ۱۹۴ متن، ۱ شاعر. https://frompoetrytodata.vercel.app/centuries/12/
+- سده ۱۳: ۱٬۳۸۲ متن، ۳ شاعر. https://frompoetrytodata.vercel.app/centuries/13/
+- سده ۱۴: ۴٬۲۱۲ متن، ۱۷ شاعر. https://frompoetrytodata.vercel.app/centuries/14/
+- سده ۱۵: ۵۱۲ متن، ۲ شاعر. https://frompoetrytodata.vercel.app/centuries/15/
 
 ## API
-- http://localhost:4173/api/content-index.json
-- http://localhost:4173/api/themes.json
-- http://localhost:4173/api/metaphors.json
-- http://localhost:4173/api/centuries.json
-- http://localhost:4173/api/poets.json
-- http://localhost:4173/api/forms.json
-- http://localhost:4173/api/geography.json
-- http://localhost:4173/api/lexical-life.json
-- http://localhost:4173/api/knowledge-graph.json
+- https://frompoetrytodata.vercel.app/api/content-index.json
+- https://frompoetrytodata.vercel.app/api/themes.json
+- https://frompoetrytodata.vercel.app/api/metaphors.json
+- https://frompoetrytodata.vercel.app/api/centuries.json
+- https://frompoetrytodata.vercel.app/api/poets.json
+- https://frompoetrytodata.vercel.app/api/forms.json
+- https://frompoetrytodata.vercel.app/api/geography.json
+- https://frompoetrytodata.vercel.app/api/lexical-life.json
+- https://frompoetrytodata.vercel.app/api/attribution.json
+- https://frompoetrytodata.vercel.app/api/public-questions.json
+- https://frompoetrytodata.vercel.app/api/knowledge-graph.json

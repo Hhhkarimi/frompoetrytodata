@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 2,
   "slug": "epic-kingship-war",
-  "url": "http://localhost:4173/themes/epic-kingship-war/",
+  "url": "https://frompoetrytodata.vercel.app/themes/epic-kingship-war/",
   "name": "حماسه، شاهی و جنگ",
   "keywords": [
     "همی",
@@ -102,7 +102,7 @@
       "correlation": -0.4718
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

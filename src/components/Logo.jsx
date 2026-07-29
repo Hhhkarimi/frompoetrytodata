@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Logo({ compact = false }) {
   return (
     <div className={`brand-logo ${compact ? 'brand-logo--compact' : ''}`} aria-label="از شعر تا داده">

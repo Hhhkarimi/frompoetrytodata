@@ -24,12 +24,16 @@ const html = await readFile(path.join(root, required[0]), 'utf8');
 assert(html.includes('lang="fa" dir="rtl"'));
 assert(html.includes('<noscript>'));
 assert(
-  html.includes('<link rel="canonical" href="https://poetrytodata.vercel.app/prototype/" />'),
+  html.includes('<link rel="canonical" href="https://frompoetrytodata.vercel.app/prototype/" />'),
   'prototype must declare the production canonical URL',
 );
 assert(
-  !/<(?:script|link)[^>]+(?:src|href)="https?:\/\/(?!poetrytodata\.vercel\.app\/prototype\/)/i.test(html),
+  !/<(?:script|link)[^>]+(?:src|href)="https?:\/\/(?!frompoetrytodata\.vercel\.app\/prototype\/)/i.test(html),
   'prototype must remain free of external runtime dependencies',
+);
+assert(
+  !html.includes('https://poetrytodata.vercel.app/'),
+  'prototype metadata must not point at the alternate deployment alias',
 );
 
 

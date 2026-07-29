@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "publicationVersion": "7.0.0",
+  "modifiedDate": "2026-07-29",
+  "license": "See /attributions/ and the repository LICENSE for code, data, and source-specific terms.",
+  "provenance": {
+    "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+    "attributions": "https://frompoetrytodata.vercel.app/attributions/",
+    "generator": "scripts/postbuild.mjs"
+  },
+  "files": [
+    {
+      "path": "attribution-corpus-audit.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 4065,
+      "sha256": "a2a6a199613ed40a0b6d6f28755d5075addd0c776436b95d48ad556f435c0421"
+    },
+    {
+      "path": "century-model-recall.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 128,
+      "sha256": "e4ae99477a22cc94df275900444d6ca57465bc8ea7650f982dca3e799c53616a"
+    },
+    {
+      "path": "forms-comparison.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 265,
+      "sha256": "67867a746c97c59d96f8be05cedbf71f3ec425d8fb60a36b7acc86420b949c8f"
+    },
+    {
+      "path": "geography/century_centroids.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 2474,
+      "sha256": "96f96a893d99b3d87fc7f469fb95cf4fbee12c6056d75fd6504d50b640efeaae"
+    },
+    {
+      "path": "geography/century_diversity.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 854,
+      "sha256": "fe86b6c573fb41a0c0cb4d917dcf0342f272827da236594afda96b8b30486477"
+    },
+    {
+      "path": "geography/century_region_shares.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 910,
+      "sha256": "6f0dab608eccbb75cd77a36fb88164ea9b907a82199b13bdd62ccd26f5f21204"
+    },
+    {
+      "path": "geography/city_summary.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 2184,
+      "sha256": "f2a15563474780837ec2a7dfdd0d3d0f0997af965748a10150b773d5851493da"
+    },
+    {
+      "path": "geography/country_summary.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 282,
+      "sha256": "8c4ddd5164686103431a2b9c9cc52e591a451638ce23426d64b35a7b680537fb"
+    },
+    {
+      "path": "geography/intertext_geography.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 4208,
+      "sha256": "68f62051e8b78473e3d3de3c4395a5fe54660378fa9356e1101a9b10acb37194"
+    },
+    {
+      "path": "geography/mobility_stylistic_novelty.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 5316,
+      "sha256": "114a961139953f58103c85a8d1a89a2c12f499801b3e365c8f265b4d85bc6064"
+    },
+    {
+      "path": "geography/period_mobility.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 481,
+      "sha256": "7087b0c50a7202c8ae79699203467aa16a04fe76ff2ecc3eff019ae53fa7b1be"
+    },
+    {
+      "path": "geography/poet_geography.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 19610,
+      "sha256": "915dd8832b5b1f3b10a589908c6b8e978c15ed73cb7c925093c39f1cf19521f7"
+    },
+    {
+      "path": "geography/README.md",
+      "mediaType": "text/markdown; charset=utf-8",
+      "bytes": 1036,
+      "sha256": "2f57bb7588290bd2cbc2b0b3450d2095087a685b341408b452e00ea9668fd7c2"
+    },
+    {
+      "path": "geography/region_flow_matrix.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 657,
+      "sha256": "5fd02d07ba980a0c4b40baa4b91589f0b04fe55837052c5e964008aa02ad352e"
+    },
+    {
+      "path": "geography/region_flows.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 1963,
+      "sha256": "34c97523284cb38cb41cf4cfa5eade6b970b30c451db2a6f0e04bc67434f2503"
+    },
+    {
+      "path": "geography/region_style_profiles.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 1203,
+      "sha256": "b5004a2a4c8d60696986d64823a8ca72b938daa75c56d3cef0b5011669847739"
+    },
+    {
+      "path": "geography/region_summary.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 942,
+      "sha256": "5b30832b1ecbfccc8214554c334e4d3541f3bc39c9c7256ae425b1dd3b64e1ee"
+    },
+    {
+      "path": "geography/stats.json",
+      "mediaType": "application/json",
+      "bytes": 932,
+      "sha256": "4abe76772d66d471651d2401416c03395f191e79f718c8ea94f7290136e32634"
+    },
+    {
+      "path": "geography/top_centers.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 1165,
+      "sha256": "77d07fc94e721746895fc3fa25fb8e3b4ff9e6954fb3a7538db487ec8d3467d1"
+    },
+    {
+      "path": "geography/top_migrations.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 2006,
+      "sha256": "7d0e566c88c342e722cc54ca9063f25a81aac70304c019d4a1281e25e2652af2"
+    },
+    {
+      "path": "intertext-edges.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 1713,
+      "sha256": "0bd98f942c7546abadf7c479cbdca7f1873b37b3f9ba0bb034e9c340e4543f80"
+    },
+    {
+      "path": "lexical-examples.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 1330,
+      "sha256": "e86672189f4262a171b25587c293b4dea2b7e391213b7623956958fca0c1a607"
+    },
+    {
+      "path": "lexical-lifecycle.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 287,
+      "sha256": "9d0d703794e640734ad071a57990ca7054dadbe7b45ba3217312b5afdb653aa8"
+    },
+    {
+      "path": "metaphors-by-century.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 1144,
+      "sha256": "82338e56f0a35c98f7493b13e6e461590dee2e365db71b9f7af9733ba0e58eb4"
+    },
+    {
+      "path": "poets.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 4098,
+      "sha256": "a9c184183a2bf3f8e97555989b36e29158933e6cd21d771c7a0efb772fed8533"
+    },
+    {
+      "path": "public-questions-analysis.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 33916,
+      "sha256": "9cb1277661a5495c7d71855c1c5168bc49a786416a89eb52fb5f6d983a3b7b2e"
+    },
+    {
+      "path": "stylometry-anomalies.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 11754,
+      "sha256": "0383b498123a9377519a7a64cd9f5d636289c39c8a30ab088e486df0eea65ba5"
+    },
+    {
+      "path": "topics-by-century.csv",
+      "mediaType": "text/csv; charset=utf-8",
+      "bytes": 10054,
+      "sha256": "973ebb5cf68ca199a2503c2ac9314c964ff668592ec6273c9c97302d8dcbf539"
+    }
+  ]
+}

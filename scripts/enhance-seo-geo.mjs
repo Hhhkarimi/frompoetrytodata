@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { researchPages, faqItems } from '../src/content/siteContent.js';
+import { resolvePublicationOrigin } from './lib/publication-identity.mjs';
+import { buildPersianCitation, PUBLICATION } from '../src/publication/publication.js';
+import { persianDigits, persianNumber } from '../src/publication/persian-format.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -13,25 +16,18 @@ data.overview.couplets = data.overview.poets.reduce((sum, poet) => sum + poet.to
 const formResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/formResearch.json'), 'utf8'));
 const geographyResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/geographyResearch.json'), 'utf8'));
 const lexicalResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/lexicalResearch.json'), 'utf8'));
-const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/attributionResearch.json'), 'utf8'));
-const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/publicQuestionsResearch.json'), 'utf8'));
+const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/attribution-data.json'), 'utf8'));
+const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/research-data.json'), 'utf8'));
 const buildDate = new Date().toISOString().slice(0, 10);
-const productionHost = process.env.SITE_URL
-  || process.env.VITE_SITE_URL
-  || process.env.VITE_VERCEL_PROJECT_PRODUCTION_URL
-  || process.env.VERCEL_PROJECT_PRODUCTION_URL
-  || 'localhost:4173';
-const siteUrl = /^https?:\/\//.test(productionHost)
-  ? productionHost.replace(/\/$/, '')
-  : `${productionHost.startsWith('localhost') ? 'http' : 'https'}://${productionHost.replace(/\/$/, '')}`;
+const siteUrl = resolvePublicationOrigin();
 const isProduction = siteUrl.startsWith('https://') && !siteUrl.includes('localhost');
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION || '';
 const bingVerification = process.env.BING_SITE_VERIFICATION || '';
 
 if (!fs.existsSync(dist)) throw new Error('dist پیدا نشد؛ ابتدا vite build و postbuild را اجرا کنید.');
 
-const faDigits = (value) => String(value).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-const faNumber = (value, maxFraction = 1) => Number(value).toLocaleString('fa-IR', { maximumFractionDigits: maxFraction });
+const faDigits = persianDigits;
+const faNumber = (value, maxFraction = 1) => persianNumber(value, { maximumFractionDigits: maxFraction });
 const faPercent = (value, maxFraction = 1) => `${faNumber(value, maxFraction)}٪`;
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -124,7 +120,9 @@ function globalGraph() {
       url: absolute('/data/'), inLanguage: 'fa', isAccessibleForFree: true,
       description: `خروجی‌های تحلیلی ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر فارسی.`,
       creator: { '@id': `${siteUrl}/#hossein-karimi` },
-      version: '7.0.0', dateModified: buildDate,
+      version: PUBLICATION.version, datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
+      license: absolute('/attributions/'),
+      distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/manifest.json'), name: 'نسخه، منشأ و checksum دانلودها' }],
     },
   ];
 }
@@ -134,7 +132,7 @@ function head({ title, description, pathname, image = '/og/og-research.png', sch
   const robots = isProduction ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow';
   const webPage = {
     '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: title,
-    description, inLanguage: 'fa-IR', dateModified: buildDate,
+    description, inLanguage: 'fa-IR', dateModified: PUBLICATION.modifiedDate,
     isPartOf: { '@id': `${siteUrl}/#website` },
     primaryImageOfPage: { '@type': 'ImageObject', url: absolute(image), width: 1200, height: 630 },
   };
@@ -154,9 +152,9 @@ ${jsonPath ? `<link rel="alternate" type="application/json" href="${absolute(jso
 <meta property="og:locale" content="fa_IR"><meta property="og:site_name" content="از شعر تا داده"><meta property="og:type" content="article">
 <meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:url" content="${canonical}">
 <meta property="og:image" content="${absolute(image)}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${escapeHtml(title)}">
-<meta property="article:published_time" content="2026-07-26T00:00:00Z"><meta property="article:modified_time" content="${buildDate}T00:00:00Z"><meta property="article:author" content="${absolute('/about/')}">
+<meta property="article:published_time" content="${PUBLICATION.publishedDate}T00:00:00Z"><meta property="article:modified_time" content="${PUBLICATION.modifiedDate}T00:00:00Z"><meta property="article:author" content="${absolute('/about/')}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(title)}"><meta name="twitter:description" content="${escapeHtml(description)}"><meta name="twitter:image" content="${absolute(image)}"><meta name="twitter:image:alt" content="${escapeHtml(title)}">
-<meta name="citation_author" content="حسین کریمی"><meta name="citation_title" content="${escapeHtml(title)}"><meta name="citation_publication_date" content="2026-07-26"><meta name="citation_online_date" content="${buildDate}">
+<meta name="citation_author" content="${PUBLICATION.creator}"><meta name="citation_title" content="${escapeHtml(title)}"><meta name="citation_publication_date" content="${PUBLICATION.publishedDate}"><meta name="citation_online_date" content="${PUBLICATION.publishedDate}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="/seo-pages.css"><link rel="stylesheet" href="/entity-pages.css">${jsonLd(graph)}</head>`;
 }
@@ -165,15 +163,15 @@ function shell({ title, description, pathname, image, schemas = [], keywords = [
   const crumbs = breadcrumbs.map((item, index) => `<li>${index === breadcrumbs.length - 1 ? `<span>${escapeHtml(item.name)}</span>` : `<a href="${item.path}">${escapeHtml(item.name)}</a>`}</li>`).join('');
   return `${head({ title, description, pathname, image, schemas, keywords, jsonPath })}<body>
 <a class="skip-link" href="#main">پرش به محتوای اصلی</a>
-<header class="seo-header"><div class="seo-header-inner">${logo}<nav aria-label="فهرست اصلی"><a href="/research/">پژوهش‌ها</a><a href="/themes/">مضامین</a><a href="/metaphors/">استعاره‌ها</a><a href="/centuries/">سده‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a></nav><a class="interactive-link" href="/#overview">اطلس تعاملی</a></div></header>
+<header class="seo-header"><div class="seo-header-inner">${logo}<nav aria-label="فهرست اصلی"><a href="/research/">پژوهش‌ها</a><a href="/themes/">مضامین</a><a href="/metaphors/">استعاره‌ها</a><a href="/centuries/">سده‌ها</a><a href="/poets/">شاعران</a><a href="/data/">داده‌ها</a></nav><a class="interactive-link" href="/atlas/#overview">اطلس تعاملی</a></div></header>
 <nav class="breadcrumbs" aria-label="مسیر صفحه"><ol>${crumbs}</ol></nav><div class="reading-progress" aria-hidden="true"></div>
 <div class="seo-layout${toc.length ? '' : ' seo-layout-wide'}">${toc.length ? `<aside class="seo-toc"><strong>در این صفحه</strong><ol>${toc.map((item) => `<li><a href="#${item.id}">${escapeHtml(item.label)}</a></li>`).join('')}</ol></aside>` : ''}<main id="main" class="seo-main">${content}</main></div>
-<footer class="seo-footer"><div>${logo}<p>روایت داده‌محور شعر فارسی برای مخاطب عام، پژوهشگر و ماشین.</p></div><div><strong>کاری از حسین کریمی</strong><a href="${data.meta.linkedin}" target="_blank" rel="me noopener">LinkedIn</a><a href="/questions/">پرسش‌های کلیدی</a><a href="/methodology/">روش‌شناسی</a><a href="/attributions/">اعتبارها</a></div><small>آخرین به‌روزرسانی: ${faDigits(buildDate)} · نتایج محاسباتی جایگزین نقد ادبی نیستند.</small></footer>
+<footer class="seo-footer"><div>${logo}<p>روایت داده‌محور شعر فارسی برای مخاطب عام، پژوهشگر و ماشین.</p></div><div><strong>کاری از حسین کریمی</strong><a href="${data.meta.linkedin}" target="_blank" rel="me noopener">LinkedIn</a><a href="/questions/">پرسش‌های کلیدی</a><a href="/methodology/">روش‌شناسی</a><a href="/attributions/">اعتبارها</a></div><small>آخرین به‌روزرسانی محتوایی: ${faDigits(PUBLICATION.modifiedDate)} · نتایج محاسباتی جایگزین نقد ادبی نیستند.</small></footer>
 <script src="/seo-pages.js" defer></script></body></html>`;
 }
 
 function citationBlock(title, pathname) {
-  const citation = `کریمی، حسین. (${faDigits(new Date().getFullYear())}). «${title}». از شعر تا داده. ${absolute(pathname)}`;
+  const citation = buildPersianCitation(title, pathname, siteUrl);
   return `<section id="citation" class="citation-box"><div><span class="kicker">استناد آماده</span><h2>استناد پیشنهادی</h2></div><blockquote id="citation-text">${escapeHtml(citation)}</blockquote><button type="button" data-copy="#citation-text">کپی استناد</button></section>`;
 }
 
@@ -237,7 +235,7 @@ function generateThemePages() {
     schemas: [setSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'مضامین', path: indexPath }])],
     keywords: ['مضامین شعر فارسی', 'موضوع شعر فارسی', 'تحلیل موضوعی شعر', 'مدل موضوعی فارسی'],
     breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'مضامین', path: indexPath }],
-    content: `<header class="article-hero"><span class="kicker">واژه‌نامه موضوعی</span><h1>یازده مسیر برای خواندن تاریخ شعر فارسی</h1><p>این صفحه موضوع‌های کشف‌شده توسط مدل را به زبان ساده معرفی می‌کند. هر کارت به یک پرونده مستقل با روند تاریخی، جدول سده‌ای و موضوع‌های هم‌حرکت پیوند دارد.</p><div class="answer-box"><strong>نتیجه کلیدی</strong><p>سده تاریخی حدود ${faPercent(data.topics.globalStats.rSquared * 100)} از تفاوت ترکیب موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی معنادار است.</p></div><div class="hero-actions"><a class="primary" href="/research/topics/">پژوهش کامل مضامین</a><a href="/#topics">نمودار تعاملی</a></div></header><section class="entity-grid">${cards}</section>${citationBlock('نمایه مضامین شعر فارسی', indexPath)}`,
+    content: `<header class="article-hero"><span class="kicker">واژه‌نامه موضوعی</span><h1>یازده مسیر برای خواندن تاریخ شعر فارسی</h1><p>این صفحه موضوع‌های کشف‌شده توسط مدل را به زبان ساده معرفی می‌کند. هر کارت به یک پرونده مستقل با روند تاریخی، جدول سده‌ای و موضوع‌های هم‌حرکت پیوند دارد.</p><div class="answer-box"><strong>نتیجه کلیدی</strong><p>سده تاریخی حدود ${faPercent(data.topics.globalStats.rSquared * 100)} از تفاوت ترکیب موضوعی میان شاعران را توضیح می‌دهد و آزمون جایگشتی معنادار است.</p></div><div class="hero-actions"><a class="primary" href="/research/topics/">پژوهش کامل مضامین</a><a href="/atlas/#topics">نمودار تعاملی</a></div></header><section class="entity-grid">${cards}</section>${citationBlock('نمایه مضامین شعر فارسی', indexPath)}`,
   }));
 
   for (const topic of data.topics.items) {
@@ -251,11 +249,11 @@ function generateThemePages() {
       description: topicAnswer(topic), url: absolute(pathname), termCode: `topic-${topic.id}`,
       inDefinedTermSet: { '@id': `${siteUrl}/themes/#set` },
       subjectOf: { '@type': 'ScholarlyArticle', '@id': `${absolute(pathname)}#article`, headline: `تحول مضمون ${topic.name} در شعر فارسی`,
-        author: { '@id': `${siteUrl}/#hossein-karimi` }, datePublished: '2026-07-26', dateModified: buildDate,
+        author: { '@id': `${siteUrl}/#hossein-karimi` }, datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
         isBasedOn: { '@id': `${siteUrl}/data/#dataset` }, inLanguage: 'fa-IR' },
     };
     const qText = topic.significantTrend ? `پس از اصلاح چندآزمونی نیز روند معنادار گزارش شده است (q = ${faDigits(topic.qTrend)}).` : `پس از اصلاح چندآزمونی، شواهد کافی برای یک روند خطی معنادار وجود ندارد (q = ${faDigits(topic.qTrend)}).`;
-    const content = `<article><header class="article-hero"><span class="kicker">مضمون ${faNumber(topic.id)} از ${faNumber(data.topics.items.length)}</span><h1>${topic.name}</h1><p>واژه‌های شاخص این محور: ${topic.keywords.join('، ')}.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>${topicAnswer(topic)} ${qText}</p></div><div class="hero-actions"><a class="primary" href="/#topics">مشاهده نمودار تعاملی</a><a href="/downloads/topics-by-century.csv">دریافت CSV</a></div></header>
+    const content = `<article><header class="article-hero"><span class="kicker">مضمون ${faNumber(topic.id)} از ${faNumber(data.topics.items.length)}</span><h1>${topic.name}</h1><p>واژه‌های شاخص این محور: ${topic.keywords.join('، ')}.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>${topicAnswer(topic)} ${qText}</p></div><div class="hero-actions"><a class="primary" href="/atlas/#topics">مشاهده نمودار تعاملی</a><a href="/downloads/topics-by-century.csv">دریافت CSV</a></div></header>
 <section id="profile"><span class="kicker">پروفایل کمی</span><h2>این مضمون در یک نگاه</h2>${renderMetrics([['سهم کلی', faPercent(topic.overallShare)], ['سده اوج', `سده ${faNumber(topic.peakCentury)}`], ['سهم در اوج', faPercent(topic.peakShare)], ['کمینه ثبت‌شده', `${faPercent(minPoint.share)} در سده ${faNumber(minPoint.century)}`], ['سهم سده پایانی', faPercent(lastPoint.share)], ['اندازه اثر سده', faDigits(topic.epsilonSquared)]])}</section>
 <section id="trajectory"><span class="kicker">سیر سده‌ای</span><h2>تغییر سهم «${topic.name}»</h2><p>طول هر نوار سهم این محور از ترکیب موضوعی سده را نشان می‌دهد. اعداد از تحلیل برابرِ شاعران به دست آمده‌اند، نه شمار خام متن‌ها.</p>${renderSeries(topic.values, 'share', `روند مضمون ${topic.name}`, '٪')}${renderTable(['سده هجری', 'سهم موضوع'], topic.values.map((v) => [`سده ${faNumber(v.century)}`, faPercent(v.share)]))}</section>
 <section id="relations"><span class="kicker">ارتباط موضوعی</span><h2>موضوع‌های هم‌حرکت یا خلاف‌جهت</h2><p>همبستگی زیر فقط شباهت مسیر تاریخی را می‌سنجد؛ رابطه علّی یا هم‌معنایی را اثبات نمی‌کند.</p><div class="relation-grid">${related.map((item) => `<a href="/themes/${topicSlugs[item.id]}/"><strong>${item.name}</strong><span>${item.similarity >= 0 ? 'هم‌حرکت' : 'خلاف‌جهت'} · r = ${faDigits(item.similarity.toFixed(2))}</span></a>`).join('')}</div></section>
@@ -276,7 +274,7 @@ ${citationBlock(`تحول مضمون ${topic.name} در شعر فارسی`, path
       name: topic.name, keywords: topic.keywords, answer: topicAnswer(topic), overallShare: topic.overallShare,
       peakCentury: topic.peakCentury, peakShare: topic.peakShare, trend: { rho: topic.rho, q: topic.qTrend, significant: topic.significantTrend, direction: topic.direction },
       values: topic.values, related: related.map((r) => ({ id: r.id, name: r.name, slug: topicSlugs[r.id], correlation: Number(r.similarity.toFixed(4)) })),
-      methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: buildDate,
+      methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: PUBLICATION.modifiedDate,
     }, null, 2));
   }
 }
@@ -312,7 +310,7 @@ function generateMetaphorPages() {
     pathname: indexPath, image: '/og/og-metaphors.png', schemas: [setSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'استعاره‌ها', path: indexPath }])],
     keywords: ['استعاره در شعر فارسی', 'نمادهای شعر فارسی', 'گل و بلبل', 'آینه در شعر فارسی'],
     breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'استعاره‌ها', path: indexPath }],
-    content: `<header class="article-hero"><span class="kicker">اطلس تصویرهای ادبی</span><h1>استعاره‌ها نمی‌میرند؛ میدان معنایی عوض می‌کنند</h1><p>ده خانواده تصویری در سده‌های مختلف ردیابی شده‌اند. صفحه هر خانواده، فراوانی، دوره اوج، شبکه هم‌رخدادی و محدودیت تشخیص کاربرد مجازی را نشان می‌دهد.</p><div class="answer-box"><strong>نتیجه کلیدی</strong><p>هیچ‌یک از ده خانواده بررسی‌شده کاملاً ناپدید نمی‌شود؛ الگوی غالب خاموشی موقت، بازگشت و جابه‌جایی همسایگان معنایی است.</p></div><div class="hero-actions"><a class="primary" href="/research/metaphors/">پژوهش کامل استعاره‌ها</a><a href="/#metaphors">نمودار تعاملی</a></div></header><section class="entity-grid">${cards}</section>${citationBlock('نمایه استعاره‌های شعر فارسی', indexPath)}`,
+    content: `<header class="article-hero"><span class="kicker">اطلس تصویرهای ادبی</span><h1>استعاره‌ها نمی‌میرند؛ میدان معنایی عوض می‌کنند</h1><p>ده خانواده تصویری در سده‌های مختلف ردیابی شده‌اند. صفحه هر خانواده، فراوانی، دوره اوج، شبکه هم‌رخدادی و محدودیت تشخیص کاربرد مجازی را نشان می‌دهد.</p><div class="answer-box"><strong>نتیجه کلیدی</strong><p>هیچ‌یک از ده خانواده بررسی‌شده کاملاً ناپدید نمی‌شود؛ الگوی غالب خاموشی موقت، بازگشت و جابه‌جایی همسایگان معنایی است.</p></div><div class="hero-actions"><a class="primary" href="/research/metaphors/">پژوهش کامل استعاره‌ها</a><a href="/atlas/#metaphors">نمودار تعاملی</a></div></header><section class="entity-grid">${cards}</section>${citationBlock('نمایه استعاره‌های شعر فارسی', indexPath)}`,
   }));
 
   for (const item of data.metaphors.items) {
@@ -326,10 +324,10 @@ function generateMetaphorPages() {
       description: metaphorAnswer(item), url: absolute(pathname), termCode: `metaphor-${slug}`,
       inDefinedTermSet: { '@id': `${siteUrl}/metaphors/#set` },
       subjectOf: { '@type': 'ScholarlyArticle', '@id': `${absolute(pathname)}#article`, headline: `تحول استعاره ${item.name} در شعر فارسی`,
-        author: { '@id': `${siteUrl}/#hossein-karimi` }, datePublished: '2026-07-26', dateModified: buildDate,
+        author: { '@id': `${siteUrl}/#hossein-karimi` }, datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
         isBasedOn: { '@id': `${siteUrl}/data/#dataset` }, inLanguage: 'fa-IR' },
     };
-    const content = `<article><header class="article-hero"><span class="kicker">خانواده استعاری</span><h1>${item.name}</h1><p>میدان معنایی غالب در تحلیل همسایگان واژگانی: ${item.semanticField}.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>${metaphorAnswer(item)} دوره غالب آن «${item.dominantPeriod}» گزارش شده است.</p></div><div class="hero-actions"><a class="primary" href="/#metaphors">مشاهده نمودار تعاملی</a><a href="/downloads/metaphors-by-century.csv">دریافت CSV</a></div></header>
+    const content = `<article><header class="article-hero"><span class="kicker">خانواده استعاری</span><h1>${item.name}</h1><p>میدان معنایی غالب در تحلیل همسایگان واژگانی: ${item.semanticField}.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>${metaphorAnswer(item)} دوره غالب آن «${item.dominantPeriod}» گزارش شده است.</p></div><div class="hero-actions"><a class="primary" href="/atlas/#metaphors">مشاهده نمودار تعاملی</a><a href="/downloads/metaphors-by-century.csv">دریافت CSV</a></div></header>
 <section id="profile"><span class="kicker">چرخه عمر</span><h2>پروفایل کمی «${item.name}»</h2>${renderMetrics([['تعداد رخداد', faNumber(item.occurrences)], ['تعداد شعر', faNumber(item.poems)], ['درصد شعرهای پیکره', faPercent(item.poemPercent)], ['نرخ در هزار واژه', faNumber(item.rate, 2)], ['تعداد شاعر', faNumber(item.poets)], ['ظهور پایدار', `سده ${faNumber(item.stableEmergence)}`], ['اوج پایدار', `سده ${faNumber(item.stablePeak)}`], ['نسبت دوره جدید به آغازین', faNumber(item.newToEarlyRatio, 2)]])}</section>
 <section id="trajectory"><span class="kicker">روند تاریخی</span><h2>فراوانی در سده‌های سوم تا پانزدهم</h2><p>نرخ‌ها به‌صورت رخداد در هر هزار واژه گزارش شده‌اند تا تفاوت حجم متن‌ها کمتر بر مقایسه اثر بگذارد.</p>${renderSeries(series, 'rate', `روند استعاره ${item.name}`, '')}${renderTable(['سده هجری', 'نرخ در هر هزار واژه'], series.map((v) => [`سده ${faNumber(v.century)}`, faNumber(v.rate, 3)]))}</section>
 <section id="shift"><span class="kicker">رانش معنایی</span><h2>معنا ثابت نمی‌ماند</h2><p>${strongestShift ? `بزرگ‌ترین گسست همسایگان معنایی در گذار سده ${faNumber(strongestShift.from)} به ${faNumber(strongestShift.to)} ثبت شده است (JSD = ${faDigits(strongestShift.jsd)}). این گذار بر پایه ${faNumber(strongestShift.poetsBefore)} شاعر پیش و ${faNumber(strongestShift.poetsAfter)} شاعر پس از مرز محاسبه شده است.` : 'برای این خانواده گذار مستقلی در جدول اصلی ثبت نشده است.'}</p><p>رانش معنایی به معنی تغییر قطعی تعریف واژه نیست؛ بلکه نشان می‌دهد چه واژه‌ها و میدان‌هایی در پیرامون این تصویر بیشتر یا کمتر ظاهر شده‌اند.</p></section>
@@ -349,7 +347,7 @@ ${citationBlock(`تحول استعاره ${item.name} در شعر فارسی`, p
     write(`api/metaphors/${slug}.json`, JSON.stringify({
       '@context': 'https://schema.org', '@type': 'DefinedTerm', slug, url: absolute(pathname), name: item.name,
       answer: metaphorAnswer(item), ...item, values: series, related: relations.map((r) => ({ name: r.other, slug: metaphorSlugs[r.other], period: r.period, npmi: r.npmi })),
-      strongestSemanticShift: strongestShift || null, methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: buildDate,
+      strongestSemanticShift: strongestShift || null, methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: PUBLICATION.modifiedDate,
     }, null, 2));
   }
 }
@@ -390,13 +388,13 @@ function generateCenturyPages() {
       mainEntity: { '@type': 'ItemList', numberOfItems: poets.length, itemListElement: poets.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: absolute(`/poets/${poetSlug(p.name)}/`) })) },
       isPartOf: { '@id': `${siteUrl}/centuries/#collection` },
     };
-    const content = `<article><header class="article-hero"><span class="kicker">خط زمانی شعر فارسی</span><h1>سده ${faNumber(century)} هجری</h1><p>${faNumber(row.texts)} متن از ${faNumber(row.poets)} شاعر و ${faNumber(row.books)} عنوان کتاب در این بخش پیکره قرار گرفته‌اند.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>در مدل موضوعی متوازن، برجسته‌ترین محور این سده «${topics[0].name}» با سهم ${faPercent(topics[0].share)} است. پرتراکم‌ترین خانواده تصویری نیز «${metaphors[0].name}» با نرخ ${faNumber(metaphors[0].centuryRate, 2)} در هر هزار واژه است.</p></div><div class="hero-actions"><a class="primary" href="/#overview">مشاهده خط زمانی تعاملی</a><a href="/downloads/poets.csv">دریافت داده شاعران</a></div></header>
+    const content = `<article><header class="article-hero"><span class="kicker">خط زمانی شعر فارسی</span><h1>سده ${faNumber(century)} هجری</h1><p>${faNumber(row.texts)} متن از ${faNumber(row.poets)} شاعر و ${faNumber(row.books)} عنوان کتاب در این بخش پیکره قرار گرفته‌اند.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>در مدل موضوعی متوازن، برجسته‌ترین محور این سده «${topics[0].name}» با سهم ${faPercent(topics[0].share)} است. پرتراکم‌ترین خانواده تصویری نیز «${metaphors[0].name}» با نرخ ${faNumber(metaphors[0].centuryRate, 2)} در هر هزار واژه است.</p></div><div class="hero-actions"><a class="primary" href="/atlas/#overview">مشاهده خط زمانی تعاملی</a><a href="/downloads/poets.csv">دریافت داده شاعران</a></div></header>
 <section id="corpus"><span class="kicker">پوشش پیکره</span><h2>آمار توصیفی سده ${faNumber(century)}</h2>${renderMetrics([['تعداد متن', faNumber(row.texts)], ['تعداد شاعر', faNumber(row.poets)], ['عنوان کتاب', faNumber(row.books)], ['میانه طول متن', `${faNumber(row.medianWords)} واژه`], ['سهم از کل پیکره', faPercent(row.share)]])}<p class="notice">این اعداد میزان حضور در فایل داده را نشان می‌دهند. برای سده‌هایی با یک یا دو شاعر، نتیجه تاریخی باید با احتیاط بیشتری خوانده شود.</p></section>
 <section id="poets"><span class="kicker">چهره‌های حاضر</span><h2>شاعران سده ${faNumber(century)} در پیکره</h2><div class="poet-link-grid">${poets.map((p) => `<a href="/poets/${poetSlug(p.name)}/"><strong>${p.name}</strong><span>${faNumber(p.poems)} متن · ${faNumber(p.totalCouplets)} بیت · ${faNumber(p.totalWords)} واژه</span></a>`).join('')}</div></section>
 <section id="topics"><span class="kicker">ترکیب موضوعی</span><h2>موضوع‌های برجسته این سده</h2>${renderTable(['رتبه', 'مضمون', 'سهم'], topics.map((topic, i) => [faNumber(i + 1), topic.name, faPercent(topic.share)]))}<div class="tag-links">${topics.slice(0, 5).map((topic) => `<a href="/themes/${topicSlugs[topic.id]}/">${topic.name}</a>`).join('')}</div></section>
 <section id="metaphors"><span class="kicker">منظومه تصویری</span><h2>خانواده‌های استعاری پرتراکم</h2>${renderTable(['رتبه', 'خانواده تصویری', 'نرخ در هزار واژه'], metaphors.map((item, i) => [faNumber(i + 1), item.name, faNumber(item.centuryRate, 3)]))}<div class="tag-links">${metaphors.slice(0, 5).map((item) => `<a href="/metaphors/${metaphorSlugs[item.name]}/">${item.name}</a>`).join('')}</div></section>
 <section id="context"><span class="kicker">جایگاه در خط زمانی</span><h2>پیش و پس از این سده</h2><div class="timeline-neighbors">${prev ? `<a href="/centuries/${prev.century}/">← سده ${faNumber(prev.century)}</a>` : '<span>آغاز پوشش پیکره</span>'}<strong>سده ${faNumber(century)}</strong>${next ? `<a href="/centuries/${next.century}/">سده ${faNumber(next.century)} ←</a>` : '<span>پایان پوشش پیکره</span>'}</div>${transition ? `<p>شاخص گسست موضوعی در گذار ${faNumber(transition.from)} به ${faNumber(transition.to)} برابر ${faDigits(transition.jsd)} گزارش شده است؛ این مقدار فاصله ترکیب موضوعی دو سده را خلاصه می‌کند.</p>` : '<p>برای این مرز زمانی، گسست مستقلی در فهرست گذارهای برتر ثبت نشده است.</p>'}</section>
-<section id="limits" class="warning"><span class="kicker">محدودیت تاریخی</span><h2>از «سده شاعر» تا «تاریخ شعر» فاصله است</h2><p>آثار یک شاعر ممکن است در دهه‌های مختلف زندگی سروده شده باشند. همچنین گزینش کتاب‌ها و حجم متفاوت آثار سبب می‌شود این صفحه نماینده کامل همه ادبیات تولیدشده در سده ${faNumber(century)} نباشد.</p></section>
+<section id="limits" class="warning"><span class="kicker">محدودیت تاریخی</span><h2>از «سده شاعر» تا «تاریخ شعر» فاصله است</h2><p>سدهٔ این صفحه به دورهٔ زندگی منتسب شاعر اشاره دارد، نه تاریخ دقیق سرایش هر شعر. آثار یک شاعر ممکن است در دهه‌های مختلف زندگی سروده شده باشند. همچنین گزینش کتاب‌ها و حجم متفاوت آثار سبب می‌شود این صفحه نماینده کامل همه ادبیات تولیدشده در سده ${faNumber(century)} نباشد.</p></section>
 ${citationBlock(`شعر فارسی در سده ${faNumber(century)} هجری`, pathname)}</article>`;
     write(path.join('centuries', String(century), 'index.html'), shell({
       title: `شعر فارسی در سده ${faNumber(century)} هجری؛ شاعران و مضامین | از شعر تا داده`,
@@ -413,7 +411,7 @@ ${citationBlock(`شعر فارسی در سده ${faNumber(century)} هجری`, p
       poets: poets.map((p) => ({ name: p.name, slug: poetSlug(p.name), url: absolute(`/poets/${poetSlug(p.name)}/`), poems: p.poems, totalCouplets: p.totalCouplets, totalWords: p.totalWords, books: p.books, medianWords: p.medianWords })),
       topics: topics.map((t) => ({ id: t.id, name: t.name, slug: topicSlugs[t.id], share: t.share })),
       metaphors: metaphors.map((m) => ({ name: m.name, slug: metaphorSlugs[m.name], rate: m.centuryRate })),
-      methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: buildDate,
+      methodology: absolute('/methodology/'), dataset: absolute('/data/'), dateModified: PUBLICATION.modifiedDate,
     }, null, 2));
   }
 }
@@ -494,7 +492,7 @@ function generateMachineKnowledge() {
     ...metaphors.map((item) => ({ type: 'metaphor', title: item.name, url: item.url, summary: item.answer })),
     ...centuries.map((item) => ({ type: 'century', title: `سده ${faNumber(item.century)} هجری`, url: item.url, summary: `${faNumber(item.texts)} متن از ${faNumber(item.poets.length)} شاعر.` })),
     ...data.overview.poets.map((p) => ({ type: 'poet', title: p.name, url: absolute(`/poets/${poetSlug(p.name)}/`), summary: `شاعر سده ${faNumber(p.century)} هجری؛ ${faNumber(p.poems)} متن، ${faNumber(p.totalCouplets)} بیت و ${faNumber(p.totalWords)} واژه در پیکره.` })),
-  ].map((item) => ({ ...item, language: 'fa-IR', dateModified: buildDate }));
+  ].map((item) => ({ ...item, language: 'fa-IR', dateModified: PUBLICATION.modifiedDate }));
   write('api/content-index.json', JSON.stringify(contentIndex, null, 2));
 
   const graph = [
@@ -508,7 +506,7 @@ function generateMachineKnowledge() {
 
   const openapi = {
     openapi: '3.1.0',
-    info: { title: 'From Poetry to Data Static API', version: '7.0.0', description: 'Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian.' },
+    info: { title: 'From Poetry to Data Static API', version: PUBLICATION.version, description: 'Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian.' },
     servers: [{ url: siteUrl }],
     paths: {
       '/api/atlas-summary.json': { get: { summary: 'خلاصه اطلس', operationId: 'getAtlasSummary', responses: { 200: { description: 'Atlas summary JSON', content: { 'application/json': { schema: { type: 'object' } } } } } } },
@@ -530,10 +528,10 @@ function generateMachineKnowledge() {
   const citation = {
     type: 'webpage', id: 'karimi-from-poetry-to-data', title: 'از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی',
     author: [{ family: 'کریمی', given: 'حسین' }], issued: { 'date-parts': [[2026, 7, 27]] },
-    URL: siteUrl, language: 'fa', version: '7.0.0', accessed: { 'date-parts': [[Number(buildDate.slice(0, 4)), Number(buildDate.slice(5, 7)), Number(buildDate.slice(8, 10))]] },
+    URL: absolute('/'), language: 'fa', version: PUBLICATION.version,
   };
   write('citation.json', JSON.stringify(citation, null, 2));
-  write('citation.bib', `@misc{karimi_from_poetry_to_data_2026,\n  author = {Hossein Karimi},\n  title = {از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی},\n  year = {2026},\n  url = {${siteUrl}},\n  note = {Version 7.0.0; accessed ${buildDate}}\n}\n`);
+  write('citation.bib', `@misc{karimi_from_poetry_to_data_2026,\n  author = {Hossein Karimi},\n  title = {${PUBLICATION.title}},\n  year = {${PUBLICATION.publishedDate.slice(0, 4)}},\n  url = {${absolute('/')}},\n  note = {Version ${PUBLICATION.version}}\n}\n`);
   write('manifest.webmanifest', JSON.stringify({
     name: 'از شعر تا داده؛ اطلس تعاملی شعر فارسی', short_name: 'از شعر تا داده',
     description: 'دانشنامه داده‌ای و تعاملی تحلیل شعر فارسی', lang: 'fa', dir: 'rtl',
@@ -549,7 +547,7 @@ function generateMachineKnowledge() {
 }
 
 function generateDiscovery() {
-  const core = ['/', '/research/', ...researchPages.map((p) => p.path), '/data/', '/methodology/', '/glossary/', '/about/', '/attributions/', '/questions/'];
+  const core = ['/', '/atlas/', '/research/', ...researchPages.map((p) => p.path), '/data/', '/methodology/', '/glossary/', '/about/', '/attributions/', '/questions/'];
   const entities = [
     '/poets/', ...data.overview.poets.map((p) => `/poets/${poetSlug(p.name)}/`),
     '/themes/', ...data.topics.items.map((t) => `/themes/${topicSlugs[t.id]}/`),

@@ -3,7 +3,7 @@
   "@type": "DefinedTerm",
   "id": 9,
   "slug": "mystical-romantic-love",
-  "url": "http://localhost:4173/themes/mystical-romantic-love/",
+  "url": "https://frompoetrytodata.vercel.app/themes/mystical-romantic-love/",
   "name": "عشق عرفانی و عاشقانه",
   "keywords": [
     "عشق",
@@ -103,7 +103,7 @@
       "correlation": -0.5725
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

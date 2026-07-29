@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "century": 6,
-  "url": "http://localhost:4173/centuries/6/",
+  "url": "https://frompoetrytodata.vercel.app/centuries/6/",
   "corpus": {
     "century": 6,
     "texts": 10990,
@@ -15,7 +15,7 @@
     {
       "name": "عطار",
       "slug": "attar",
-      "url": "http://localhost:4173/poets/attar/",
+      "url": "https://frompoetrytodata.vercel.app/poets/attar/",
       "poems": 5015,
       "totalCouplets": 98289,
       "totalWords": 1405175,
@@ -25,7 +25,7 @@
     {
       "name": "سنایی",
       "slug": "sanai",
-      "url": "http://localhost:4173/poets/sanai/",
+      "url": "https://frompoetrytodata.vercel.app/poets/sanai/",
       "poems": 1794,
       "totalCouplets": 26109,
       "totalWords": 353076,
@@ -35,7 +35,7 @@
     {
       "name": "انوری",
       "slug": "anvari",
-      "url": "http://localhost:4173/poets/anvari/",
+      "url": "https://frompoetrytodata.vercel.app/poets/anvari/",
       "poems": 1464,
       "totalCouplets": 13308,
       "totalWords": 177365,
@@ -45,7 +45,7 @@
     {
       "name": "خاقانی",
       "slug": "khaghani",
-      "url": "http://localhost:4173/poets/khaghani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/khaghani/",
       "poems": 1365,
       "totalCouplets": 17432,
       "totalWords": 241822,
@@ -55,7 +55,7 @@
     {
       "name": "نظامی",
       "slug": "nezami",
-      "url": "http://localhost:4173/poets/nezami/",
+      "url": "https://frompoetrytodata.vercel.app/poets/nezami/",
       "poems": 378,
       "totalCouplets": 27779,
       "totalWords": 324560,
@@ -65,7 +65,7 @@
     {
       "name": "خیام",
       "slug": "khayyam",
-      "url": "http://localhost:4173/poets/khayyam/",
+      "url": "https://frompoetrytodata.vercel.app/poets/khayyam/",
       "poems": 324,
       "totalCouplets": 715,
       "totalWords": 20298,
@@ -75,7 +75,7 @@
     {
       "name": "نصرالله منشی",
       "slug": "nasrallah-monshi",
-      "url": "http://localhost:4173/poets/nasrallah-monshi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/nasrallah-monshi/",
       "poems": 250,
       "totalCouplets": 818,
       "totalWords": 85096,
@@ -85,7 +85,7 @@
     {
       "name": "باباافضل کاشانی",
       "slug": "baba-afzal-kashani",
-      "url": "http://localhost:4173/poets/baba-afzal-kashani/",
+      "url": "https://frompoetrytodata.vercel.app/poets/baba-afzal-kashani/",
       "poems": 202,
       "totalCouplets": 500,
       "totalWords": 7475,
@@ -95,7 +95,7 @@
     {
       "name": "مهستی گنجوی",
       "slug": "mahasti-ganjavi",
-      "url": "http://localhost:4173/poets/mahasti-ganjavi/",
+      "url": "https://frompoetrytodata.vercel.app/poets/mahasti-ganjavi/",
       "poems": 191,
       "totalCouplets": 382,
       "totalWords": 5385,
@@ -105,7 +105,7 @@
     {
       "name": "عبدالواسع جبلی",
       "slug": "abd-al-vase-jabali",
-      "url": "http://localhost:4173/poets/abd-al-vase-jabali/",
+      "url": "https://frompoetrytodata.vercel.app/poets/abd-al-vase-jabali/",
       "poems": 7,
       "totalCouplets": 320,
       "totalWords": 5263,
@@ -233,7 +233,7 @@
       "rate": 1.328
     }
   ],
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

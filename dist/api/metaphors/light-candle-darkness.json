@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "light-candle-darkness",
-  "url": "http://localhost:4173/metaphors/light-candle-darkness/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/",
   "name": "نور، شمع و تاریکی",
   "answer": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
   "occurrences": 23952,
@@ -97,7 +97,7 @@
     "poetsBefore": 3,
     "poetsAfter": 16
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

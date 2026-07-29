@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "fire-flame-spark",
-  "url": "http://localhost:4173/metaphors/fire-flame-spark/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/",
   "name": "آتش، شعله و شرر",
   "answer": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
   "occurrences": 19037,
@@ -103,7 +103,7 @@
     "poetsBefore": 3,
     "poetsAfter": 16
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

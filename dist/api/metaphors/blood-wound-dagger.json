@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "DefinedTerm",
   "slug": "blood-wound-dagger",
-  "url": "http://localhost:4173/metaphors/blood-wound-dagger/",
+  "url": "https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/",
   "name": "خون، زخم و خنجر",
   "answer": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
   "occurrences": 23438,
@@ -91,7 +91,7 @@
     "poetsBefore": 9,
     "poetsAfter": 10
   },
-  "methodology": "http://localhost:4173/methodology/",
-  "dataset": "http://localhost:4173/data/",
-  "dateModified": "2026-07-26"
+  "methodology": "https://frompoetrytodata.vercel.app/methodology/",
+  "dataset": "https://frompoetrytodata.vercel.app/data/",
+  "dateModified": "2026-07-29"
 }

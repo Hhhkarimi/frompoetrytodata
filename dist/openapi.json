@@ -2,12 +2,12 @@
   "openapi": "3.1.0",
   "info": {
     "title": "From Poetry to Data Static API",
-    "version": "5.0.2",
+    "version": "7.0.0",
     "description": "Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian."
   },
   "servers": [
     {
-      "url": "http://localhost:4173"
+      "url": "https://frompoetrytodata.vercel.app"
     }
   ],
   "paths": {
@@ -177,6 +177,42 @@
         "responses": {
           "200": {
             "description": "Lexical lifecycle research",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/attribution.json": {
+      "get": {
+        "summary": "ممیزی انتساب شعر و کیفیت پیکره",
+        "operationId": "getPoetryAttribution",
+        "responses": {
+          "200": {
+            "description": "Poetry attribution research triage",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/public-questions.json": {
+      "get": {
+        "summary": "ده پرسش عمومی درباره شعر فارسی",
+        "operationId": "getPublicPoetryQuestions",
+        "responses": {
+          "200": {
+            "description": "Public-facing corpus questions and results",
             "content": {
               "application/json": {
                 "schema": {

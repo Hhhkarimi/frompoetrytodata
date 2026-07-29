@@ -1,5 +1,5 @@
 # از شعر تا داده — دانشنامه داده‌ای شعر فارسی
-# Generated: 2026-07-26
+# Generated: 2026-07-29
 User-agent: *
 Allow: /
 
@@ -21,4 +21,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: http://localhost:4173/sitemap.xml
+Sitemap: https://frompoetrytodata.vercel.app/sitemap.xml
