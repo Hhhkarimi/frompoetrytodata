@@ -216,7 +216,7 @@ test('research results separate evidence, method, interpretation, and reuse path
     assert.match(article, /تفسیر ادبی/, `${page.id} interpretation section`);
     assert.match(article, /دانلود مستقیم شاهد CSV/, `${page.id} download path`);
     assert.match(article, /href="\/methodology\/"/, `${page.id} methodology path`);
-    assert.match(article, /href="\/(?:poets|centuries|themes|metaphors)\/"/, `${page.id} entity path`);
+    assert.match(article, /href="\/(?:poets|centuries|themes|metaphors)\/[^"]+\/"/, `${page.id} entity path`);
     assert.match(article, /href="\/downloads\/[^"]+\.(?:csv|json)"/, `${page.id} direct evidence download`);
   }
 });

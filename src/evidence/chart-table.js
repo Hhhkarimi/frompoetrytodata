@@ -38,7 +38,15 @@ export function chartTableRows(option = {}) {
 
     if (itemSeries.type === 'graph' || itemSeries.type === 'sankey') {
       for (const node of itemSeries.data || itemSeries.nodes || []) {
-        rows.push({ category: node.name || 'گره', series: 'گره', value: displayValue(node.value ?? '') });
+        const nodeValue = node.value ?? '';
+        if (Array.isArray(nodeValue)) {
+          rows.push({ category: node.name || 'گره', series: 'تعداد پیوند گره', value: nodeValue[0], unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 });
+          if (nodeValue[1] !== undefined) {
+            rows.push({ category: node.name || 'گره', series: 'سدهٔ منتسب گره', value: nodeValue[1], unit: 'سده هجری', denominator: 'برچسب انتسابی شاعر', precision: 0 });
+          }
+        } else {
+          rows.push({ category: node.name || 'گره', series: 'تعداد پیوند گره', value: displayValue(nodeValue), unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 });
+        }
       }
       for (const link of itemSeries.links || itemSeries.edges || []) {
         const linkLabel = `${link.source} ← ${link.target}`;
@@ -46,12 +54,18 @@ export function chartTableRows(option = {}) {
           category: linkLabel,
           series: 'امتیاز پیوند',
           value: displayValue(link.value ?? link.score ?? ''),
+          unit: 'امتیاز مرکب از ۰ تا ۱',
+          denominator: 'شاهدهای واژگانی، موضوعی و عبارتی همان جفت',
+          precision: 3,
         });
         if (link.phrases !== undefined) {
           rows.push({
             category: linkLabel,
             series: 'تعداد عبارت مشترک',
             value: displayValue(link.phrases),
+            unit: 'عبارت پنج‌واژه‌ای',
+            denominator: 'عبارت‌های مشترک همان جفت شاعر',
+            precision: 0,
           });
         }
         if (link.evidence) {
@@ -59,6 +73,9 @@ export function chartTableRows(option = {}) {
             category: linkLabel,
             series: 'نوع شاهد',
             value: link.evidence,
+            unit: 'ردهٔ متنی',
+            denominator: 'ترکیب شاهدهای همان پیوند',
+            precision: 0,
           });
         }
       }
@@ -78,18 +95,26 @@ export function chartTableRows(option = {}) {
       }
 
       if (itemSeries.type === 'scatter' && Array.isArray(value)) {
-        const dimensionLabels = [
+        const defaultDimensionLabels = [
           xAxis?.name || itemSeries.dimensions?.[0] || 'محور افقی',
           yAxis?.name || itemSeries.dimensions?.[1] || 'محور عمودی',
           itemSeries.dimensions?.[2] || 'اندازه نشانه',
         ];
         const label = item?.name || categoryLabel(categoryAxis, item, index);
         value.forEach((dimensionValue, dimensionIndex) => {
+          const dimension = itemSeries.tableDimensions?.[dimensionIndex];
+          const dimensionSeries = dimension ? {
+            ...itemSeries,
+            tableUnit: dimension.unit,
+            tableDenominator: dimension.denominator,
+            tablePrecision: dimension.precision,
+            tableScale: dimension.scale,
+          } : itemSeries;
           rows.push(rowWithMetadata({
             category: label,
-            series: dimensionLabels[dimensionIndex] || `بعد ${dimensionIndex + 1}`,
+            series: dimension?.label || defaultDimensionLabels[dimensionIndex] || `بعد ${dimensionIndex + 1}`,
             value: displayValue(dimensionValue),
-          }, itemSeries));
+          }, dimensionSeries));
         });
         continue;
       }

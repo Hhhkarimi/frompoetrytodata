@@ -1,11 +1,13 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 
 import App from '../src/App.jsx';
 import { buildPersianCitation } from '../src/publication/publication.js';
+import atlas from '../src/data/atlasData.json';
+import { faNumber } from '../src/utils.js';
 
 class IdleIntersectionObserver {
   observe() {}
@@ -182,4 +184,24 @@ test('history navigation restores explorer state and search focus', async () => 
   await waitFor(() => expect(search.value).toBe('حافظ'));
   expect(screen.getByRole('combobox', { name: 'فیلتر سدهٔ منتسب' }).value).toBe('8');
   await waitFor(() => expect(document.activeElement).toBe(search));
+});
+
+test('active graph threshold produces an equivalent filtered table with explicit units', async () => {
+  const user = userEvent.setup();
+  window.history.replaceState({}, '', '/atlas/?threshold=0.96');
+  render(<App />);
+
+  const evidenceView = screen.getByRole('region', { name: 'نقشه تعاملی شاخص شباهت متنی میان شاعران' });
+  await user.click(within(evidenceView).getByRole('button', { name: 'نمایش جدول داده' }));
+
+  const table = within(evidenceView).getByRole('table');
+  const scoreRows = within(table).getAllByRole('row')
+    .filter((row) => row.textContent.includes('امتیاز پیوند'));
+  const expectedEdges = atlas.intertext.edges.filter((edge) => edge.score >= 0.96);
+
+  expect(scoreRows).toHaveLength(expectedEdges.length);
+  expect(scoreRows[0].textContent).toContain(`${expectedEdges[0].source} ← ${expectedEdges[0].target}`);
+  expect(scoreRows[0].textContent).toContain(faNumber(expectedEdges[0].score, { maximumFractionDigits: 3 }));
+  expect(scoreRows[0].textContent).toContain('امتیاز مرکب از ۰ تا ۱');
+  expect(scoreRows[0].textContent).toContain('شاهدهای واژگانی، موضوعی و عبارتی همان جفت');
 });

@@ -422,16 +422,16 @@ function relatedResearch(currentId) {
 }
 
 const researchReuse = Object.freeze({
-  topics: { download: '/downloads/topics-by-century.csv', entity: '/themes/', entityLabel: 'مضمون‌های محاسباتی' },
-  metaphors: { download: '/downloads/metaphors-by-century.csv', entity: '/metaphors/', entityLabel: 'خانواده‌های استعاری' },
-  intertextuality: { download: '/downloads/intertext-edges.csv', entity: '/poets/', entityLabel: 'شاعران شبکه' },
-  'century-ai': { download: '/downloads/century-model-recall.csv', entity: '/centuries/', entityLabel: 'سده‌های منتسب' },
-  stylometry: { download: '/downloads/stylometry-anomalies.csv', entity: '/poets/', entityLabel: 'پرونده‌های شاعر' },
-  forms: { download: '/downloads/forms-comparison.csv', entity: '/poets/', entityLabel: 'شاعران پیکره' },
-  geography: { download: '/downloads/geography/poet_geography.csv', entity: '/poets/', entityLabel: 'شاعران و کانون‌ها' },
-  'lexical-life': { download: '/downloads/lexical-lifecycle.csv', entity: '/centuries/', entityLabel: 'سده‌های منتسب' },
-  attribution: { download: '/downloads/attribution-corpus-audit.csv', entity: '/poets/', entityLabel: 'پرونده‌های شاعر' },
-  'public-questions': { download: '/downloads/public-questions-analysis.csv', entity: '/themes/', entityLabel: 'مضمون‌های مرتبط' },
+  topics: { download: '/downloads/topics-by-century.csv', entity: '/themes/ethics-wisdom/', entityLabel: 'نمونه موجودیت: اخلاق، حکمت و خرد' },
+  metaphors: { download: '/downloads/metaphors-by-century.csv', entity: '/metaphors/journey-road-destination/', entityLabel: 'نمونه موجودیت: راه، سفر و منزل' },
+  intertextuality: { download: '/downloads/intertext-edges.csv', entity: '/poets/hafez/', entityLabel: 'نمونه موجودیت شبکه: حافظ' },
+  'century-ai': { download: '/downloads/century-model-recall.csv', entity: '/centuries/8/', entityLabel: 'نمونه موجودیت: سدهٔ ۸ منتسب' },
+  stylometry: { download: '/downloads/stylometry-anomalies.csv', entity: '/poets/hafez/', entityLabel: 'نمونه پروندهٔ شاعر: حافظ' },
+  forms: { download: '/downloads/forms-comparison.csv', entity: '/poets/rumi/', entityLabel: 'نمونه شاعر چندقالبی: مولوی' },
+  geography: { download: '/downloads/geography/poet_geography.csv', entity: '/poets/rumi/', entityLabel: 'نمونه پروندهٔ جغرافیایی: مولوی' },
+  'lexical-life': { download: '/downloads/lexical-lifecycle.csv', entity: '/centuries/14/', entityLabel: 'نمونه موجودیت: سدهٔ ۱۴ منتسب' },
+  attribution: { download: '/downloads/attribution-corpus-audit.csv', entity: '/poets/hafez/', entityLabel: 'نمونه پروندهٔ بازبینی: حافظ' },
+  'public-questions': { download: '/downloads/public-questions-analysis.csv', entity: '/themes/night-time-life/', entityLabel: 'نمونه مضمون پرسش‌ها: شب، زمان و زندگی' },
 });
 
 function publishedResearchEvidence(page) {

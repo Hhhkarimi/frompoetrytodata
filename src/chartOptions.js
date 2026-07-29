@@ -169,6 +169,11 @@ export function metaphorBubbleOption(items, dark = false) {
     visualMap: { show: false, min: 0.2, max: 0.5, dimension: 2, inRange: { color: ['#d29d35', '#9f2f38'] } },
     series: [{
       type: 'scatter',
+      tableDimensions: [
+        { label: 'درصد شعرهای دارای تصویر', unit: 'درصد', denominator: 'همهٔ شعرهای پیکره', precision: 1 },
+        { label: 'نرخ در ۱۰هزار واژه', unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
+        { label: 'روند زمانی', unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
+      ],
       data: items.map((d) => ({ name: d.name, value: [d.poemPercent, d.rate, d.rho], occurrences: d.occurrences, rho: d.rho })),
       symbolSize: (v, p) => 18 + Math.sqrt(p.data.occurrences) / 5,
       label: { show: true, formatter: (p) => p.name.split('،')[0], position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#eaf5f3' : '#364b48', fontSize: 11 },

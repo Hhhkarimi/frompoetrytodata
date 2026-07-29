@@ -13,9 +13,9 @@ test('graph tables preserve link scores and node values', () => {
   });
 
   assert.deepEqual(rows, [
-    { category: 'حافظ', series: 'گره', value: 3 },
-    { category: 'سعدی ← حافظ', series: 'امتیاز پیوند', value: 0.972 },
-    { category: 'سعدی ← حافظ', series: 'تعداد عبارت مشترک', value: 4 },
+    { category: 'حافظ', series: 'تعداد پیوند گره', value: 3, unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 },
+    { category: 'سعدی ← حافظ', series: 'امتیاز پیوند', value: 0.972, unit: 'امتیاز مرکب از ۰ تا ۱', denominator: 'شاهدهای واژگانی، موضوعی و عبارتی همان جفت', precision: 3 },
+    { category: 'سعدی ← حافظ', series: 'تعداد عبارت مشترک', value: 4, unit: 'عبارت پنج‌واژه‌ای', denominator: 'عبارت‌های مشترک همان جفت شاعر', precision: 0 },
   ]);
 });
 
@@ -106,4 +106,32 @@ test('intertext graph tables expose evidence type in addition to color', () => {
   });
 
   assert.ok(rows.some((row) => row.series === 'نوع شاهد' && row.value === 'بسیار قوی'));
+});
+
+test('scatter dimensions preserve independent units and denominators', () => {
+  const rows = chartTableRows({
+    xAxis: { type: 'value', name: 'درصد شعرهای دارای تصویر' },
+    yAxis: { type: 'value', name: 'نرخ در ۱۰هزار واژه' },
+    series: [{
+      type: 'scatter',
+      tableDimensions: [
+        { label: 'درصد شعرهای دارای تصویر', unit: 'درصد', denominator: 'همهٔ شعرهای پیکره', precision: 1 },
+        { label: 'نرخ در ۱۰هزار واژه', unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
+        { label: 'روند زمانی', unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
+      ],
+      data: [{ name: 'راه، سفر و منزل', value: [42, 19.4, 0.31] }],
+    }],
+  });
+
+  assert.deepEqual(rows.map(({ series, value, unit, denominator, precision }) => ({
+    series,
+    value,
+    unit,
+    denominator,
+    precision,
+  })), [
+    { series: 'درصد شعرهای دارای تصویر', value: 42, unit: 'درصد', denominator: 'همهٔ شعرهای پیکره', precision: 1 },
+    { series: 'نرخ در ۱۰هزار واژه', value: 19.4, unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
+    { series: 'روند زمانی', value: 0.31, unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
+  ]);
 });

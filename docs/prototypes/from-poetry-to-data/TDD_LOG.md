@@ -147,3 +147,9 @@ keeping publication dates projected from the shared publication model.
   jsdom cannot compute. It then found a nested complementary landmark, an
   invalid tabpanel host, and redundant image alternatives; all three source
   semantics were corrected before the test returned green.
+- **Per-dimension and filtered equivalence:** a second standards review found
+  that a three-dimensional scatter inherited one series-level unit. A failing
+  test now requires independent unit, denominator, and precision metadata for
+  every dimension. A browser-level test also opens the intertext table after
+  applying `threshold=0.96` and proves its link ordering, values, units, and
+  denominators against the filtered canonical edge set.
