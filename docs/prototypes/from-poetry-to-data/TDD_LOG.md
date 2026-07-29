@@ -158,3 +158,34 @@ keeping publication dates projected from the shared publication model.
   Production-builder tests now cover every scatter family and all three graph
   families. Graph adapters consume series-specific node/link metadata, omit
   empty node values, and expose precision in the native table.
+
+## 2026-07-29 — disposable production output regression
+
+- **Reproduce:** the committed production artifact unexpectedly contained
+  `dist/prototype/`, even though prototype source is intentionally disposable.
+- **Root cause:** a generated `dist` snapshot was captured after the prototype
+  had been copied by the bundler and before the production postbuild exclusion
+  was represented in the committed artifact.
+- **Regression seam:** `tests/production-build.test.mjs` requires
+  `dist/prototype/` to be absent and rejects prototype URLs in the sitemap.
+- **Fix:** regenerated the complete production build through the official
+  `vite build` plus postbuild pipeline and removed the prototype artifacts from
+  version control. The throwaway source remains available under
+  `public/prototype/` for design history.
+
+## 2026-07-29 — complete scatter evidence equivalence
+
+- **Reproduce:** the final Standards review found that scatter tables projected
+  tuple axes but omitted values represented by point size, opacity, or tooltip.
+- **Red:** a production-builder test required topic share/significance,
+  metaphor occurrences, intertext phrase count, and geography
+  poet/text/word/region fields. It failed first on the missing topic share.
+- **Competing hypotheses:** the table adapter ignored auxiliary item fields;
+  option builders omitted those fields from the table contract; or the table
+  UI filtered valid rows. Direct option-to-row output confirmed the first two
+  and ruled out the UI.
+- **Green:** each visual encoding now belongs to the same `value` tuple and
+  carries explicit label, unit, denominator, and precision metadata. Tooltip
+  and symbol-size callbacks consume those tuple values as well.
+- **Regression seam:** `node --test tests/chart-table.test.mjs` exercises all
+  production scatter and graph builders through the public table-row adapter.

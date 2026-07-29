@@ -142,6 +142,7 @@ test('scatter dimensions preserve independent units and denominators', () => {
     { series: 'درصد شعرهای دارای تصویر', value: 42, unit: 'درصد', denominator: 'همهٔ شعرهای پیکره', precision: 1 },
     { series: 'نرخ در ۱۰هزار واژه', value: 19.4, unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
     { series: 'روند زمانی', value: 0.31, unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
+    { series: 'تعداد رخداد', value: 120, unit: 'رخداد', denominator: 'همهٔ رخدادهای خانواده در پیکره', precision: 0 },
   ]);
 });
 
@@ -158,6 +159,72 @@ test('every production scatter family exposes dimension-specific table metadata'
     assert.ok(rows.length >= 2);
     assert.ok(rows.every((row) => row.unit && row.denominator && Number.isInteger(row.precision)));
     assert.ok(new Set(rows.map((row) => row.series)).size >= 2);
+  }
+});
+
+test('production scatter tables include every size, opacity, and tooltip encoding', () => {
+  const cases = [
+    {
+      option: topicStatsOption([{
+        name: 'حکمت',
+        rho: 0.2,
+        epsilonSquared: 0.15,
+        overallShare: 10,
+        significantTrend: true,
+      }]),
+      expected: [
+        ['سهم کل مضمون', 10, 'درصد'],
+        ['وضعیت روند', 'معنادار', 'نتیجهٔ آزمون'],
+      ],
+    },
+    {
+      option: metaphorBubbleOption([{
+        name: 'راه، سفر و منزل',
+        poemPercent: 42,
+        rate: 19.4,
+        rho: 0.31,
+        occurrences: 120,
+      }]),
+      expected: [['تعداد رخداد', 120, 'رخداد']],
+    },
+    {
+      option: intertextScatterOption([{
+        source: 'سعدی',
+        target: 'حافظ',
+        lexical: 0.3,
+        topic: 0.9,
+        phraseZ: 4,
+        phrases: 3,
+      }]),
+      expected: [['تعداد عبارت مشترک', 3, 'عبارت پنج‌واژه‌ای']],
+    },
+    {
+      option: geographyCentersOption([{
+        city: 'شیراز',
+        lon: 52.5,
+        lat: 29.6,
+        words: 1000,
+        poets: 2,
+        poems: 20,
+        region: 'فارس',
+      }]),
+      expected: [
+        ['تعداد شاعر', 2, 'شاعر'],
+        ['تعداد متن', 20, 'متن'],
+        ['تعداد واژه', 1000, 'واژه'],
+        ['منطقهٔ فرهنگی', 'فارس', 'ردهٔ جغرافیایی'],
+      ],
+    },
+  ];
+
+  for (const { option, expected } of cases) {
+    const rows = chartTableRows(option);
+    for (const [series, value, unit] of expected) {
+      assert.ok(
+        rows.some((row) => row.series === series && row.value === value && row.unit === unit),
+        `missing accessible encoding: ${series}`,
+      );
+    }
   }
 });
 

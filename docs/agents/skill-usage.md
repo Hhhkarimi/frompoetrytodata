@@ -36,18 +36,26 @@
   standards/specification review of the complete implementation. The first
   implementation review drove the multi-entity explorer, evidence contract,
   research-page, API/manifest, citation-fallback, mobile-navigation, and
-  automated-accessibility remediation slices.
+  automated-accessibility remediation slices. The final review repeated both
+  independent axes from fixed point `c75b939`; its result and explicit
+  limitations are recorded in
+  `docs/reviews/integrated-publication-code-review.md`.
 
 ## Deliberate boundaries
 
 - `diagnosing-bugs`: used for the prototype production-domain metadata
   regression, the TypeScript 7 compiler failure under the container's
   `/proc/self/exe` restrictions, graph/scatter table projection failures, and
-  the first automated accessibility run. Root causes were corrected in
+  the first automated accessibility run. The final Standards review also
+  exposed scatter size, opacity, and tooltip fields that were absent from the
+  equivalent table; a production-builder reproduction isolated the incomplete
+  tuple contract. Root causes were corrected in
   publication identity, the exact TypeScript 5.9 toolchain, the shared table
-  adapter, and source control semantics. The unavailable headless browser
-  remains an environment limitation and was not patched around in application
-  code.
+  adapter and option metadata, and source control semantics. The unavailable
+  headless browser remains an environment limitation and was not patched around
+  in application code.
 
 Optional wholesale pipeline rewrites and unrelated content changes remain out
-of scope.
+of scope. The strict one-record projection across runtime charts, static pages,
+JSON, and CSV remains an explicit follow-up rather than a speculative
+last-minute pipeline rewrite.

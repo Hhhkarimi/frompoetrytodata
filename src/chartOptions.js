@@ -129,7 +129,7 @@ export function topicStatsOption(topics, dark = false) {
     color: palette,
     tooltip: {
       ...baseTooltip(dark), trigger: 'item',
-      formatter: (p) => `<b>${p.data.name}</b><br/>روند زمانی: ${faNumber(p.data.value[0], { maximumFractionDigits: 3 })}<br/>اندازه اثر سده: ${faNumber(p.data.value[1], { maximumFractionDigits: 3 })}<br/>سهم کل: ${faPercent(p.data.share)}`,
+      formatter: (p) => `<b>${p.data.name}</b><br/>روند زمانی: ${faNumber(p.data.value[0], { maximumFractionDigits: 3 })}<br/>اندازه اثر سده: ${faNumber(p.data.value[1], { maximumFractionDigits: 3 })}<br/>سهم کل: ${faPercent(p.data.value[2])}<br/>وضعیت روند: ${p.data.value[3]}`,
     },
     grid: { left: 52, right: 28, top: 30, bottom: 50, containLabel: true },
     xAxis: { type: 'value', min: -0.55, max: 0.72, name: 'همبستگی روند زمانی', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 2 }) } },
@@ -139,9 +139,15 @@ export function topicStatsOption(topics, dark = false) {
       tableDimensions: [
         { label: 'همبستگی روند زمانی', unit: 'ضریب ρ', denominator: 'سده‌های دارای داده برای همان مضمون', precision: 3 },
         { label: 'اندازه اثر سده‌ای', unit: 'ε²', denominator: 'تفاوت سهم مضمون میان سده‌های دارای داده', precision: 3 },
+        { label: 'سهم کل مضمون', unit: 'درصد', denominator: 'همهٔ متن‌های پیکره', precision: 1 },
+        { label: 'وضعیت روند', unit: 'نتیجهٔ آزمون', denominator: 'آزمون روند زمانی همان مضمون', precision: 0 },
       ],
-      data: topics.map((t, i) => ({ name: t.name, value: [t.rho, t.epsilonSquared], share: t.overallShare, itemStyle: { color: palette[i % palette.length], opacity: t.significantTrend ? 1 : 0.5 } })),
-      symbolSize: (v, p) => 13 + p.data.share * 1.25,
+      data: topics.map((t, i) => ({
+        name: t.name,
+        value: [t.rho, t.epsilonSquared, t.overallShare, t.significantTrend ? 'معنادار' : 'نامعنادار'],
+        itemStyle: { color: palette[i % palette.length], opacity: t.significantTrend ? 1 : 0.5 },
+      })),
+      symbolSize: (value) => 13 + value[2] * 1.25,
       label: { show: false, fontFamily: 'Vazirmatn' },
       emphasis: { label: { show: true, formatter: (p) => p.name, position: 'top', color: dark ? '#fff' : '#263533', fontFamily: 'Vazirmatn' } },
       markLine: { silent: true, symbol: 'none', lineStyle: { type: 'dashed', color: dark ? '#6e8784' : '#a5a097' }, data: [{ xAxis: 0 }, { yAxis: 0.15 }] },
@@ -165,7 +171,7 @@ export function metaphorBubbleOption(items, dark = false) {
     color: palette,
     tooltip: {
       ...baseTooltip(dark), trigger: 'item',
-      formatter: (p) => `<b>${p.data.name}</b><br/>درصد شعرها: ${faPercent(p.data.value[0])}<br/>نرخ در ده‌هزار واژه: ${faNumber(p.data.value[1], { maximumFractionDigits: 1 })}<br/>رخداد: ${faNumber(p.data.occurrences)}<br/>روند: ${faNumber(p.data.rho, { maximumFractionDigits: 3 })}`,
+      formatter: (p) => `<b>${p.data.name}</b><br/>درصد شعرها: ${faPercent(p.data.value[0])}<br/>نرخ در ده‌هزار واژه: ${faNumber(p.data.value[1], { maximumFractionDigits: 1 })}<br/>رخداد: ${faNumber(p.data.value[3])}<br/>روند: ${faNumber(p.data.value[2], { maximumFractionDigits: 3 })}`,
     },
     grid: { left: 52, right: 26, top: 28, bottom: 52, containLabel: true },
     xAxis: { type: 'value', name: 'درصد شعرهای دارای تصویر', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => `${faNumber(v)}٪` } },
@@ -177,9 +183,10 @@ export function metaphorBubbleOption(items, dark = false) {
         { label: 'درصد شعرهای دارای تصویر', unit: 'درصد', denominator: 'همهٔ شعرهای پیکره', precision: 1 },
         { label: 'نرخ در ۱۰هزار واژه', unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
         { label: 'روند زمانی', unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
+        { label: 'تعداد رخداد', unit: 'رخداد', denominator: 'همهٔ رخدادهای خانواده در پیکره', precision: 0 },
       ],
-      data: items.map((d) => ({ name: d.name, value: [d.poemPercent, d.rate, d.rho], occurrences: d.occurrences, rho: d.rho })),
-      symbolSize: (v, p) => 18 + Math.sqrt(p.data.occurrences) / 5,
+      data: items.map((d) => ({ name: d.name, value: [d.poemPercent, d.rate, d.rho, d.occurrences] })),
+      symbolSize: (value) => 18 + Math.sqrt(value[3]) / 5,
       label: { show: true, formatter: (p) => p.name.split('،')[0], position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#eaf5f3' : '#364b48', fontSize: 11 },
     }],
   };
@@ -290,7 +297,7 @@ export function intertextNetworkOption(edges, threshold, dark = false, layoutMod
 
 export function intertextScatterOption(edges, dark = false) {
   return {
-    tooltip: { ...baseTooltip(dark), trigger: 'item', formatter: (p) => `<b>${p.data.name}</b><br/>شباهت واژگانی: ${faNumber(p.data.value[0], { maximumFractionDigits: 3 })}<br/>شباهت موضوعی: ${faNumber(p.data.value[1], { maximumFractionDigits: 3 })}<br/>پنج‌واژه: ${faNumber(p.data.phrases)}` },
+    tooltip: { ...baseTooltip(dark), trigger: 'item', formatter: (p) => `<b>${p.data.name}</b><br/>شباهت واژگانی: ${faNumber(p.data.value[0], { maximumFractionDigits: 3 })}<br/>شباهت موضوعی: ${faNumber(p.data.value[1], { maximumFractionDigits: 3 })}<br/>پنج‌واژه: ${faNumber(p.data.value[3])}` },
     grid: { left: 55, right: 26, top: 30, bottom: 52, containLabel: true },
     xAxis: { type: 'value', name: 'شباهت واژگانی', min: .18, max: .47, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 2 }) } },
     yAxis: { type: 'value', name: 'شباهت موضوعی', min: .86, max: 1, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 2 }) } },
@@ -301,9 +308,10 @@ export function intertextScatterOption(edges, dark = false) {
         { label: 'شباهت واژگانی', unit: 'امتیاز ۰ تا ۱', denominator: 'بردارهای واژگانی همان جفت شاعر', precision: 3 },
         { label: 'شباهت موضوعی', unit: 'امتیاز ۰ تا ۱', denominator: 'بردارهای موضوعی همان جفت شاعر', precision: 3 },
         { label: 'قدرت عبارت مشترک', unit: 'z-score', denominator: 'عبارت‌های پنج‌واژه‌ای همان جفت شاعر', precision: 3 },
+        { label: 'تعداد عبارت مشترک', unit: 'عبارت پنج‌واژه‌ای', denominator: 'عبارت‌های مشترک همان جفت شاعر', precision: 0 },
       ],
-      data: edges.map((e) => ({ name: `${e.source} ← ${e.target}`, value: [e.lexical, e.topic, Math.min(e.phraseZ, 12)], phrases: e.phrases })),
-      symbolSize: (v, p) => 12 + Math.sqrt(p.data.phrases) * 5,
+      data: edges.map((e) => ({ name: `${e.source} ← ${e.target}`, value: [e.lexical, e.topic, Math.min(e.phraseZ, 12), e.phrases] })),
+      symbolSize: (value) => 12 + Math.sqrt(value[3]) * 5,
       emphasis: { label: { show: true, formatter: (p) => p.name, position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#263b38' } },
     }],
   };
@@ -451,9 +459,13 @@ export function geographyCentersOption(centers, dark = false) {
       tableDimensions: [
         { label: 'طول جغرافیایی تقریبی', unit: 'درجهٔ جغرافیایی', denominator: 'مختصات تقریبی کانون فعالیت', precision: 3 },
         { label: 'عرض جغرافیایی تقریبی', unit: 'درجهٔ جغرافیایی', denominator: 'مختصات تقریبی کانون فعالیت', precision: 3 },
+        { label: 'تعداد شاعر', unit: 'شاعر', denominator: 'شاعران منتسب به همان کانون فعالیت', precision: 0 },
+        { label: 'تعداد متن', unit: 'متن', denominator: 'متن‌های شاعران منتسب به همان کانون فعالیت', precision: 0 },
+        { label: 'تعداد واژه', unit: 'واژه', denominator: 'واژه‌های متن‌های همان کانون فعالیت', precision: 0 },
+        { label: 'منطقهٔ فرهنگی', unit: 'ردهٔ جغرافیایی', denominator: 'طبقه‌بندی کانون فعالیت همان شهر', precision: 0 },
       ],
-      data: centers.map((d) => ({ name: d.city, value: [d.lon, d.lat], ...d, symbolSize: size(d.words) })),
-      symbolSize: (value, params) => params.data.symbolSize,
+      data: centers.map((d) => ({ name: d.city, value: [d.lon, d.lat, d.poets, d.poems, d.words, d.region], ...d })),
+      symbolSize: (value) => size(value[4]),
       itemStyle: { opacity: .78, borderColor: dark ? '#d9f1f5' : '#fff', borderWidth: 2 },
       label: { show: true, position: 'top', formatter: (p) => p.name, fontFamily: 'Vazirmatn', fontSize: 11, color: dark ? '#ecf8fa' : '#29494f' },
       emphasis: { scale: 1.15, itemStyle: { opacity: 1 } },
