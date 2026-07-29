@@ -135,3 +135,15 @@ keeping publication dates projected from the shared publication model.
 - **Citation fallback:** a rejected clipboard promise first failed the browser
   test; visible selectable citation text and an announced manual-copy path now
   remain available without changing focus.
+- **Final review remediation:** period «جدید» first failed URL round-trip;
+  mixed-unit geography values first exposed raw fractions; graph tables first
+  omitted textual evidence type; generated entity pages first omitted required
+  related paths; and OpenAPI first described the new versioned list payloads
+  as arrays. Each was reproduced with a focused failing test before the URL
+  vocabulary, per-series evidence metadata, graph cues, page generators, and
+  API schema were corrected.
+- **Full axe rule set:** after the serious/critical pass, the test was tightened
+  to reject every automated violation except the color-contrast rule that
+  jsdom cannot compute. It then found a nested complementary landmark, an
+  invalid tabpanel host, and redundant image alternatives; all three source
+  semantics were corrected before the test returned green.

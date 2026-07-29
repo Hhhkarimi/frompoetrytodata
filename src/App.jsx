@@ -58,7 +58,7 @@ const atlasUrlOptions = {
   centuries: [...new Set(corpusPoets.map((poet) => poet.century))],
   topics: atlas.topics.items.map((topic) => topic.id),
   metaphors: atlas.metaphors.items.map((item) => item.name),
-  periods: ['کلاسیک', 'میانه', 'معاصر'],
+  periods: ['کلاسیک', 'میانه', 'معاصر', 'جدید'],
   poets: intertextPoets,
   cases: attributionResearch.cases.map((item) => item.id),
   questions: publicQuestionsResearch.questions.map((item) => item.id),
@@ -89,7 +89,7 @@ function StatCard({ value, label, note, icon: Icon, accent = '#0f766e' }) {
   );
 }
 
-function ChartCard({ title, kicker, children, className = '', actions, note }) {
+function ChartCard({ title, kicker, children, className = '', actions, note, dataset = 'atlas-data' }) {
   const chart = Children.map(children, (child) => (
     isValidElement(child) && child.type === Chart
       ? cloneElement(child, {
@@ -97,6 +97,7 @@ function ChartCard({ title, kicker, children, className = '', actions, note }) {
         metricId: child.props.metricId || `atlas:${title}`,
         qualification: child.props.qualification || note,
         summary: child.props.summary || [kicker, title].filter(Boolean).join('؛ '),
+        dataset: child.props.dataset || dataset,
       })
       : child
   ));
@@ -401,7 +402,7 @@ function App() {
           <a className="nav-linkedin" href={atlas.meta.linkedin} target="_blank" rel="me noreferrer"><Linkedin size={17} />لینکدین</a>
         </nav>
         <div className="header-actions">
-          <div className="audience-switch" role="group" aria-label="سطح نمایش توضیحات"><button className={audienceMode === 'general' ? 'active' : ''} onClick={() => setAudienceMode('general')}>عمومی</button><button className={audienceMode === 'research' ? 'active' : ''} onClick={() => setAudienceMode('research')}>پژوهشی</button></div>
+          <div className="audience-switch" role="group" aria-label="سطح نمایش توضیحات"><button aria-pressed={audienceMode === 'general'} className={audienceMode === 'general' ? 'active' : ''} onClick={() => setAudienceMode('general')}>عمومی</button><button aria-pressed={audienceMode === 'research'} className={audienceMode === 'research' ? 'active' : ''} onClick={() => setAudienceMode('research')}>پژوهشی</button></div>
           <button className="icon-button" onClick={copyCurrentView} aria-label="کپی پیوند این نما"><Share2 /></button>
           <button className="icon-button" onClick={() => setGlossaryOpen(true)} aria-label="واژه‌نامه ساده"><CircleHelp /></button>
           <button className="icon-button" onClick={() => setDark(!dark)} aria-label={dark ? 'حالت روشن' : 'حالت تاریک'}>{dark ? <Sun /> : <Moon />}</button>
@@ -429,7 +430,7 @@ function App() {
               <div className="orbit-core"><Logo compact /><span>{faNumber(atlas.overview.texts)}</span><small>متن</small></div>
               {featuredPoets.map((poet, i) => (
                 <button className={`orbit-poet orbit-poet-${i + 1}`} key={poet.name} onClick={() => setSelectedPoet(poet)} title={poet.name}>
-                  <img src={poet.image.src} alt={poet.name} /><span>{poet.name}</span>
+                  <img src={poet.image.src} alt="" /><span>{poet.name}</span>
                 </button>
               ))}
             </div>
@@ -480,12 +481,12 @@ function App() {
           <div className="curiosity-question-grid reveal" role="tablist" aria-label="پرسش‌های عمومی شعر فارسی">
             {publicQuestionsResearch.questions.map((question, index) => <button type="button" id={`curiosity-tab-${question.id}`} role="tab" aria-controls="curiosity-panel" aria-selected={curiosityId === question.id} tabIndex={curiosityId === question.id ? 0 : -1} className={curiosityId === question.id ? 'active' : ''} onClick={() => setCuriosityId(question.id)} onKeyDown={(event) => handleTabKeyDown(event, publicQuestionsResearch.questions.map((item) => item.id), curiosityId, setCuriosityId)} key={question.id}><span>{faNumber(index + 1)}</span><div><small>{question.category}</small><strong>{question.shortTitle}</strong></div></button>)}
           </div>
-          <article id="curiosity-panel" role="tabpanel" aria-labelledby={`curiosity-tab-${selectedCuriosity.id}`} tabIndex="0" className="curiosity-dossier reveal">
+          <div id="curiosity-panel" role="tabpanel" aria-labelledby={`curiosity-tab-${selectedCuriosity.id}`} tabIndex="0" className="curiosity-dossier reveal">
             <div className="curiosity-copy"><span className="eyebrow">پرسش منتخب</span><h3>{selectedCuriosity.title}</h3><p className="curiosity-teaser">{selectedCuriosity.teaser}</p><div className="curiosity-answer"><CircleHelp size={22} /><p>{selectedCuriosity.answer}</p></div></div>
             <div className="curiosity-metrics">{selectedCuriosity.metrics.map((metric) => <MiniMetric key={metric.label} label={metric.label} value={`${faNumber(metric.value, { maximumFractionDigits: 2 })}${metric.suffix ? ` ${metric.suffix}` : ''}`} detail={metric.detail} />)}</div>
-          </article>
+          </div>
           <div className="two-column curiosity-analysis">
-            <ChartCard title={`پاسخ تصویری: ${selectedCuriosity.shortTitle}`} kicker={selectedCuriosity.chart.yLabel} note="نمودار با تغییر پرسش به‌روزرسانی می‌شود. برای دیدن مقدار دقیق روی هر نقطه یا میله مکث کنید.">
+            <ChartCard dataset="public-questions" title={`پاسخ تصویری: ${selectedCuriosity.shortTitle}`} kicker={selectedCuriosity.chart.yLabel} note="نمودار با تغییر پرسش به‌روزرسانی می‌شود. برای دیدن مقدار دقیق روی هر نقطه یا میله مکث کنید.">
               <Chart option={publicQuestionOption(selectedCuriosity, dark)} height={430} ariaLabel={`نمودار ${selectedCuriosity.title}`} />
             </ChartCard>
             <Card className="curiosity-evidence reveal">
@@ -580,7 +581,7 @@ function App() {
           </div>
           <div className="two-column">
             <ChartCard title="منظومه هم‌رخدادی استعاره‌ها" kicker="کدام تصویرها بیش از انتظار کنار هم می‌آیند؟" actions={
-              <div className="segmented"><button className={metaphorPeriod === 'کلاسیک' ? 'active' : ''} onClick={() => setMetaphorPeriod('کلاسیک')}>کلاسیک</button><button className={metaphorPeriod === 'جدید' ? 'active' : ''} onClick={() => setMetaphorPeriod('جدید')}>جدید</button></div>
+              <div className="segmented" role="group" aria-label="دورهٔ شبکهٔ استعاره"><button aria-pressed={metaphorPeriod === 'کلاسیک'} className={metaphorPeriod === 'کلاسیک' ? 'active' : ''} onClick={() => setMetaphorPeriod('کلاسیک')}>کلاسیک</button><button aria-pressed={metaphorPeriod === 'جدید'} className={metaphorPeriod === 'جدید' ? 'active' : ''} onClick={() => setMetaphorPeriod('جدید')}>جدید</button></div>
             }>
               <Chart option={metaphorNetworkOption(atlas.metaphors.pairs, metaphorPeriod, dark)} height={500} />
             </ChartCard>
@@ -595,10 +596,10 @@ function App() {
           <div className="network-workbench reveal">
             <div className="network-control"><label htmlFor="intertext-threshold"><span>حداقل قدرت پیوند</span><strong>{faNumber(edgeThreshold, { maximumFractionDigits: 3 })}</strong></label><input id="intertext-threshold" type="range" min="0.93" max="0.98" step="0.005" value={edgeThreshold} onChange={(e) => setEdgeThreshold(Number(e.target.value))} /></div>
             <PersianSelect label="تمرکز روی شاعر" value={intertextPoet} onChange={setIntertextPoet}><option value="همه">همه شاعران</option>{intertextPoets.map((name) => <option value={name} key={name}>{name}</option>)}</PersianSelect>
-            <div className="segmented" role="group" aria-label="چیدمان نقشه"><button className={intertextLayout === 'force' ? 'active' : ''} onClick={() => setIntertextLayout('force')}>آزاد</button><button className={intertextLayout === 'circular' ? 'active' : ''} onClick={() => setIntertextLayout('circular')}>حلقه‌ای</button></div>
+            <div className="segmented" role="group" aria-label="چیدمان نقشه"><button aria-pressed={intertextLayout === 'force'} className={intertextLayout === 'force' ? 'active' : ''} onClick={() => setIntertextLayout('force')}>آزاد</button><button aria-pressed={intertextLayout === 'circular'} className={intertextLayout === 'circular' ? 'active' : ''} onClick={() => setIntertextLayout('circular')}>حلقه‌ای</button></div>
             <div className="network-counts"><span>{faNumber(visibleIntertextEdges.filter((edge) => edge.score >= edgeThreshold).length)} پیوند</span><span>{faNumber(new Set(visibleIntertextEdges.filter((edge) => edge.score >= edgeThreshold).flatMap((edge) => [edge.source, edge.target])).size)} شاعر</span></div>
           </div>
-          <ChartCard title="نقشه تعاملی پیوندهای متنی" kicker="روی شاعر یا خط مکث کنید؛ گره‌ها را جابه‌جا و نقشه را بزرگ‌نمایی کنید" note="رنگ خط نوع شاهد را نشان می‌دهد و ضخامت، امتیاز مرکب را. پیکان از شاعر متقدم به متأخر است؛ جهت زمانی، رابطه علت و معلولی نیست.">
+          <ChartCard title="نقشه تعاملی پیوندهای متنی" kicker="روی شاعر یا خط مکث کنید؛ گره‌ها را جابه‌جا و نقشه را بزرگ‌نمایی کنید" note="رنگ و الگوی پیوسته/خط‌چین/نقطه‌ای خط، نوع شاهد را نشان می‌دهد و ضخامت، امتیاز مرکب را. نوع شاهد در جدول هم نوشته شده است. پیکان از شاعر متقدم به متأخر است؛ جهت زمانی، رابطه علت و معلولی نیست.">
             <Chart option={intertextNetworkOption(visibleIntertextEdges, edgeThreshold, dark, intertextLayout)} height={650} ariaLabel="نقشه تعاملی شاخص شباهت متنی میان شاعران" />
             <div className="network-legend" aria-label="راهنمای نقشه">
               <span><i className="edge-thin" />شباهت کمتر</span>
@@ -735,10 +736,10 @@ function App() {
             <div className="case-columns"><div><strong>دادهٔ مرجع لازم</strong><ul>{selectedAttributionCase.reference.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>خطرهای تفسیر</strong><ul>{selectedAttributionCase.risks.map((item) => <li key={item}>{item}</li>)}</ul></div></div>
           </div>
           <div className="two-column attribution-charts">
-            <ChartCard title={selectedAttributionCase.id === 'systemic' ? 'پوشش متن در سده‌ها' : 'ترکیب دادهٔ پرونده'} kicker="بر پایه برچسب‌های واقعی پیکره" note="اندازهٔ دسته‌ها پوشش داده را نشان می‌دهد، نه اعتبار ادبی یا اصالت.">
+            <ChartCard dataset="attribution-research" title={selectedAttributionCase.id === 'systemic' ? 'پوشش متن در سده‌ها' : 'ترکیب دادهٔ پرونده'} kicker="بر پایه برچسب‌های واقعی پیکره" note="اندازهٔ دسته‌ها پوشش داده را نشان می‌دهد، نه اعتبار ادبی یا اصالت.">
               <Chart option={attributionDistributionOption(selectedAttributionCase.distribution, dark, selectedAttributionCase.id === 'hafez' ? '#9f2f38' : '#7c3aed')} height={430} />
             </ChartCard>
-            {selectedAttributionCase.id === 'systemic' ? <ChartCard title="روند شاعرمتوازن مفاهیم" kicker="میانگین نرخ هر شاعر، سپس میانگین سده" note="این نمودار هم‌زمانی را نشان می‌دهد؛ برای ادعای اثر سیاسی یا فکری، خط زمانی و گروه کنترل لازم است."><Chart option={systemConceptTrendOption(attributionResearch.systemTrends, dark)} height={430} /></ChartCard> : <ChartCard title="نمایهٔ مفهومی درون پیکره" kicker="رخداد در ده‌هزار واژه" note="این واژه‌نامه‌های مفهومی برای کاوش‌اند و جای تفسیر ادبی یا مدل معنایی کامل را نمی‌گیرند."><Chart option={conceptProfileOption(selectedAttributionCase.conceptProfile, dark)} height={430} /></ChartCard>}
+            {selectedAttributionCase.id === 'systemic' ? <ChartCard dataset="attribution-research" title="روند شاعرمتوازن مفاهیم" kicker="میانگین نرخ هر شاعر، سپس میانگین سده" note="این نمودار هم‌زمانی را نشان می‌دهد؛ برای ادعای اثر سیاسی یا فکری، خط زمانی و گروه کنترل لازم است."><Chart option={systemConceptTrendOption(attributionResearch.systemTrends, dark)} height={430} /></ChartCard> : <ChartCard dataset="attribution-research" title="نمایهٔ مفهومی درون پیکره" kicker="رخداد در ده‌هزار واژه" note="این واژه‌نامه‌های مفهومی برای کاوش‌اند و جای تفسیر ادبی یا مدل معنایی کامل را نمی‌گیرند."><Chart option={conceptProfileOption(selectedAttributionCase.conceptProfile, dark)} height={430} /></ChartCard>}
           </div>
           <div className="attribution-findings reveal"><span className="eyebrow">آنچه از دادهٔ فعلی می‌توان گفت</span>{selectedAttributionCase.findings.map((item, index) => <article key={item}><span>{faNumber(index + 1)}</span><p>{item}</p></article>)}</div>
           <Card className="review-list reveal">
@@ -826,15 +827,15 @@ function App() {
             <StatCard icon={Network} value={faNumber(geographyResearch.intertextGeography.meanDistanceKm, { maximumFractionDigits: 0 })} label="کیلومتر میانگین یال‌های منتخب" note="فاصله، قدرت یال را توضیح نداد" accent="#315ba8" />
           </div>
           <div className="two-column">
-            <ChartCard title="کانون‌های اصلی فعالیت" kicker="مختصات تقریبی؛ اندازه دایره بر پایه حجم واژه" note="این نمودار جای نقشه تاریخی مرزبندی‌شده را نمی‌گیرد. روی هر کانون بروید تا شاعر، متن و واژه را ببینید.">
+            <ChartCard dataset="geography-research" title="کانون‌های اصلی فعالیت" kicker="مختصات تقریبی؛ اندازه دایره بر پایه حجم واژه" note="این نمودار جای نقشه تاریخی مرزبندی‌شده را نمی‌گیرد. روی هر کانون بروید تا شاعر، متن و واژه را ببینید.">
               <Chart option={geographyCentersOption(geographyResearch.centers, dark)} />
             </ChartCard>
-            <ChartCard title="جابه‌جایی در چهار دوره تاریخی" kicker="نرخ شاعران جابه‌جا و میانه طول مسیر" note="میله، سهم شاعران جابه‌جا و خط، میانه طول مسیر تقریبی را نشان می‌دهد؛ میانگین مسیر در برابر چند سفر بسیار بلند حساس است.">
+            <ChartCard dataset="geography-research" title="جابه‌جایی در چهار دوره تاریخی" kicker="نرخ شاعران جابه‌جا و میانه طول مسیر" note="میله، سهم شاعران جابه‌جا و خط، میانه طول مسیر تقریبی را نشان می‌دهد؛ میانگین مسیر در برابر چند سفر بسیار بلند حساس است.">
               <Chart option={periodMobilityOption(geographyResearch.periods, dark)} />
             </ChartCard>
           </div>
           <div className="two-column">
-            <ChartCard title="جریان‌های میان‌منطقه‌ای" kicker="از منطقه خاستگاه به کانون فعالیت" note="ضخامت پیوند بر اساس تعداد شاعر نرمال شده است؛ پیوندهای درون همان منطقه برای خوانایی این نما حذف شده‌اند.">
+            <ChartCard dataset="geography-research" title="جریان‌های میان‌منطقه‌ای" kicker="از منطقه خاستگاه به کانون فعالیت" note="ضخامت پیوند بر اساس تعداد شاعر نرمال شده است؛ پیوندهای درون همان منطقه برای خوانایی این نما حذف شده‌اند.">
               <Chart option={regionFlowOption(geographyResearch.flows, dark)} />
             </ChartCard>
             <Card className="migration-card reveal">
@@ -875,10 +876,10 @@ function App() {
             <StatCard icon={CircleHelp} value={faPercent(lexicalResearch.halfLife.censoredShare * 100)} label="سانسور راست" note="تا پایان سده پانزدهم به نصف نرسیدند" accent="#9f2f38" />
           </div>
           <div className="two-column">
-            <ChartCard title="شش الگوی چرخه عمر" kicker="رده‌بندی ۷٬۹۳۵ واژه" note="رده‌ها از شکل کلی مسیر تاریخی ساخته شده‌اند؛ یک واژه می‌تواند در معنای ادبی، کارکردهای متفاوتی درون یک رده داشته باشد.">
+            <ChartCard dataset="lexical-research" title="شش الگوی چرخه عمر" kicker="رده‌بندی ۷٬۹۳۵ واژه" note="رده‌ها از شکل کلی مسیر تاریخی ساخته شده‌اند؛ یک واژه می‌تواند در معنای ادبی، کارکردهای متفاوتی درون یک رده داشته باشد.">
               <Chart option={lexicalLifecycleOption(lexicalResearch.categories, dark)} />
             </ChartCard>
-            <ChartCard title="نیمه‌عمر پس از اوج" kicker="چارک یکم، میانه و چارک سوم" note={`این خلاصه فقط ${faNumber(lexicalResearch.halfLife.observedWords)} واژه با افت مشاهده‌شده را دربر می‌گیرد؛ ${faNumber(lexicalResearch.halfLife.censoredWords)} واژه سانسور راست‌اند.`}>
+            <ChartCard dataset="lexical-research" title="نیمه‌عمر پس از اوج" kicker="چارک یکم، میانه و چارک سوم" note={`این خلاصه فقط ${faNumber(lexicalResearch.halfLife.observedWords)} واژه با افت مشاهده‌شده را دربر می‌گیرد؛ ${faNumber(lexicalResearch.halfLife.censoredWords)} واژه سانسور راست‌اند.`}>
               <Chart option={halfLifeOption(lexicalResearch.halfLife, dark)} />
             </ChartCard>
           </div>
@@ -905,7 +906,7 @@ function App() {
             </article>
           </div>
           <div className="insight-grid">
-            <Insight title="تغییر تاریخی واقعی است" tone="teal" icon={<BarChart3 />}>فاصله میان سده‌های مجاور {faDigits(lexicalResearch.tests.adjacentCenturyCosineDistance)} بود و در {faNumber(lexicalResearch.tests.orderingPermutations)} جایگشت، ترتیب واقعی معنادار ماند (p &lt; ۰٫۰۰۱).</Insight>
+            <Insight title="الگوی ترتیبی در سده‌های منتسب مشاهده شد" tone="teal" icon={<BarChart3 />}>در همین پیکره، فاصله میان سده‌های مجاور {faDigits(lexicalResearch.tests.adjacentCenturyCosineDistance)} بود و در {faNumber(lexicalResearch.tests.orderingPermutations)} جایگشت، ترتیب سده‌های منتسب معنادار ماند (p &lt; ۰٫۰۰۱). این شاهد تاریخ دقیق سرایش یا علت تاریخی را ثابت نمی‌کند.</Insight>
             <Insight title="فراوانی با ماندگاری همراه است" tone="gold" icon={<Database />}>رابطه فراوانی و نیمه‌عمر مثبت اما متوسط بود: ρ = {faDigits(lexicalResearch.tests.frequencyHalfLifeRho)}، p &lt; ۰٫۰۰۱.</Insight>
             <Insight title="حجم پیکره بر نرخ جابه‌جایی اثر دارد" tone="blue" icon={<CircleHelp />}>در سده‌های کم‌حجم، جابه‌جایی ظاهری بیشتر بود (ρ = {faDigits(lexicalResearch.tests.turnoverVolumeRho)}). این هشدار در تفسیر تولد و افول لحاظ شده است.</Insight>
           </div>

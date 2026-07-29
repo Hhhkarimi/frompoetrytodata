@@ -136,6 +136,10 @@ test('every atlas chart receives a distinct card-level accessible identity', () 
   expect(labels.length).toBeGreaterThan(20);
   expect(genericTitles).toEqual([]);
   expect(new Set(labels).size).toBe(labels.length);
+  expect(
+    container.querySelector('[aria-label="جابه‌جایی در چهار دوره تاریخی"]')
+      ?.getAttribute('data-evidence-source'),
+  ).toBe('geography-research');
 });
 
 test('mobile navigation exposes expanded and current state', async () => {

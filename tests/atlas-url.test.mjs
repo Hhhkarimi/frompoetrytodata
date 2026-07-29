@@ -4,13 +4,14 @@ import { test } from 'node:test';
 import {
   normalizeAtlasUrl,
   parseAtlasUrl,
+  serializeAtlasState,
 } from '../src/atlas/atlas-url.js';
 
 const options = {
   centuries: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   topics: [1, 2, 3],
   metaphors: ['راه، سفر و مقصد', 'آینه و بازتاب'],
-  periods: ['کلاسیک', 'میانه', 'معاصر'],
+  periods: ['کلاسیک', 'میانه', 'معاصر', 'جدید'],
   poets: ['حافظ', 'سعدی'],
   cases: ['khayyam', 'hafez', 'systemic'],
   questions: ['heart-mind', 'sadness-joy'],
@@ -56,4 +57,11 @@ test('multi-entity explorer dimensions normalize in deterministic order', () => 
     normalizeAtlasUrl(input, options),
     'https://frompoetrytodata.vercel.app/atlas/?q=%D8%B4%D8%A8&entity=research&study=topics&sort=title',
   );
+});
+
+test('every visible metaphor-period control value survives URL round-trip', () => {
+  const parsed = parseAtlasUrl('https://example.test/atlas/?period=%D8%AC%D8%AF%DB%8C%D8%AF', options);
+  assert.equal(parsed.state.period, 'جدید');
+  assert.deepEqual(parsed.invalidParameters, []);
+  assert.equal(serializeAtlasState(parsed.state), 'period=%D8%AC%D8%AF%DB%8C%D8%AF');
 });

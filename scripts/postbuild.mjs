@@ -6,6 +6,7 @@ import { researchPages, faqItems, glossaryItems } from '../src/content/siteConte
 import { resolvePublicationOrigin } from './lib/publication-identity.mjs';
 import { buildPersianCitation, PUBLICATION } from '../src/publication/publication.js';
 import { persianDigits, persianNumber } from '../src/publication/persian-format.js';
+import { createPublishedEvidence } from '../src/evidence/published-evidence.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -420,6 +421,38 @@ function relatedResearch(currentId) {
   return `<section class="related"><span class="kicker">مطالعه بیشتر</span><h2>پژوهش‌های مرتبط</h2><div class="related-grid">${researchPages.filter((p) => p.id !== currentId).slice(0, 3).map((p) => `<a href="${p.path}" style="--accent:${p.color}"><small>${p.eyebrow}</small><strong>${p.shortTitle}</strong><p>${p.description}</p></a>`).join('')}</div></section>`;
 }
 
+const researchReuse = Object.freeze({
+  topics: { download: '/downloads/topics-by-century.csv', entity: '/themes/', entityLabel: 'مضمون‌های محاسباتی' },
+  metaphors: { download: '/downloads/metaphors-by-century.csv', entity: '/metaphors/', entityLabel: 'خانواده‌های استعاری' },
+  intertextuality: { download: '/downloads/intertext-edges.csv', entity: '/poets/', entityLabel: 'شاعران شبکه' },
+  'century-ai': { download: '/downloads/century-model-recall.csv', entity: '/centuries/', entityLabel: 'سده‌های منتسب' },
+  stylometry: { download: '/downloads/stylometry-anomalies.csv', entity: '/poets/', entityLabel: 'پرونده‌های شاعر' },
+  forms: { download: '/downloads/forms-comparison.csv', entity: '/poets/', entityLabel: 'شاعران پیکره' },
+  geography: { download: '/downloads/geography/poet_geography.csv', entity: '/poets/', entityLabel: 'شاعران و کانون‌ها' },
+  'lexical-life': { download: '/downloads/lexical-lifecycle.csv', entity: '/centuries/', entityLabel: 'سده‌های منتسب' },
+  attribution: { download: '/downloads/attribution-corpus-audit.csv', entity: '/poets/', entityLabel: 'پرونده‌های شاعر' },
+  'public-questions': { download: '/downloads/public-questions-analysis.csv', entity: '/themes/', entityLabel: 'مضمون‌های مرتبط' },
+});
+
+function publishedResearchEvidence(page) {
+  const values = researchData(page.id);
+  const reuse = researchReuse[page.id];
+  return createPublishedEvidence({
+    id: `research:${page.id}`,
+    label: page.title,
+    definition: page.description,
+    unit: 'مطابق برچسب هر سنجه و ستون جدول',
+    denominator: 'مطابق روش و واحد تحلیل اعلام‌شده در همین صفحه',
+    precision: 4,
+    source: {
+      dataset: reuse.download,
+      publicationVersion: PUBLICATION.version,
+    },
+    qualification: page.qualification,
+    values,
+  });
+}
+
 function generateResearchPages() {
   const missingQualification = researchPages.find((page) => !page.qualification);
   if (missingQualification) throw new Error(`Missing research qualification: ${missingQualification.id}`);
@@ -438,7 +471,9 @@ function generateResearchPages() {
   }));
 
   for (const page of researchPages) {
-    const r = researchData(page.id);
+    const evidence = publishedResearchEvidence(page);
+    const r = evidence.values;
+    const reuse = researchReuse[page.id];
     const schema = {
       '@type': 'Article', '@id': `${siteUrl}${page.path}#article`, headline: page.title, description: page.description,
       url: absolute(page.path), image: absolute(`/og/og-${page.id}.png`), inLanguage: 'fa-IR', datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
@@ -453,7 +488,7 @@ function generateResearchPages() {
 <section id="data"><span class="kicker">جدول داده</span><h2>خلاصه عددی قابل جست‌وجو</h2><p>جدول زیر همان اعداد اصلی نمودارها را به‌صورت متنی و قابل خواندن برای موتورهای جست‌وجو، ابزارهای کمکی و پژوهشگران ارائه می‌کند.</p>${renderTable(r.tableHeaders, r.tableRows)}</section>
 <section id="method"><div class="method-grid"><div><span class="kicker">روش و عدم‌قطعیت</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div></section>
 <section id="interpretation"><span class="kicker">تفسیر ادبی</span><h2>این شاهد چه خوانشی را پیشنهاد می‌کند؟</h2><p>${page.answer}</p><p class="local-qualification">${page.qualification}</p></section>
-<section id="downloads"><span class="kicker">ممیزی و استفادهٔ دوباره</span><h2>داده، روش و موجودیت‌های مرتبط</h2><div class="hero-actions"><a class="primary" href="/data/">دانلودهای JSON و CSV</a><a href="/methodology/">روش‌شناسی مشترک</a><a href="/poets/">شاعران</a><a href="/centuries/">سده‌ها</a><a href="/themes/">مضمون‌ها</a><a href="/metaphors/">استعاره‌ها</a></div></section>
+<section id="downloads"><span class="kicker">ممیزی و استفادهٔ دوباره</span><h2>داده، روش و موجودیت‌های مرتبط</h2><div class="hero-actions"><a class="primary" href="${reuse.download}" download>دانلود مستقیم شاهد CSV</a><a href="/api/research-findings.json">شاهد پژوهش در JSON</a><a href="/methodology/">روش‌شناسی مشترک</a><a href="${reuse.entity}">${reuse.entityLabel}</a><a href="/data/">فهرست همهٔ داده‌ها</a></div></section>
 <section id="faq"><span class="kicker">پرسش‌های مرتبط</span><h2>خوانش درست نتیجه</h2><div class="faq-list">${faqItems.slice(1, 5).map((item) => `<details><summary>${item.question}</summary><p>${item.answer}</p></details>`).join('')}</div></section>
 ${citationBlock(page.title, page.path)}${relatedResearch(page.id)}</article>`;
     const faqsSchema = { '@type': 'FAQPage', mainEntity: faqItems.slice(1, 5).map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) };
@@ -506,7 +541,9 @@ function generatePoetPages() {
     };
     const content = `<article><header class="poet-profile-hero">${poet.image ? `<figure><img src="${poet.image.src}" alt="تصویر ${poet.name}" width="320" height="320"><figcaption>منبع و مجوز تصویر در پایین صفحه آمده است.</figcaption></figure>` : `<div class="poet-profile-initial">${poet.name.slice(0, 1)}</div>`}<div><span class="kicker">پرونده داده‌ای شاعر</span><h1>${poet.name}</h1><p>سده ${faNumber(poet.century)} هجری</p><a class="primary" href="/atlas/#poets">بازکردن در نمای تعاملی شاعران</a></div></header>
 <section id="statistics"><span class="kicker">در پیکره</span><h2>آمار توصیفی ${poet.name}</h2>${renderMetrics([['تعداد متن', faNumber(poet.poems)], ['تعداد ابیات', faNumber(poet.totalCouplets)], ['عنوان کتاب', faNumber(poet.books)], ['کل واژه‌ها', faNumber(poet.totalWords)], ['میانه طول متن', `${faNumber(poet.medianWords)} واژه`], ['سهم از کل پیکره', faPercent(share)]])}<p class="notice">کم یا زیاد بودن تعداد متن، بیت یا واژه معادل اهمیت ادبی شاعر نیست؛ این اعداد فقط پوشش داده را نشان می‌دهند.</p></section>
+<section id="records"><span class="kicker">دامنه رکورد</span><h2>رکوردها و آثار در دسترس</h2><p>artifact منتشرشده برای ${poet.name} شامل ${faNumber(poet.poems)} رکورد متنی در ${faNumber(poet.books)} عنوان کتاب است. نام تک‌تک آثار در این خلاصهٔ عمومی نگهداری نشده و این صفحه عنوانی را حدس نمی‌زند.</p><div class="hero-actions"><a href="/downloads/poets.csv" download>دانلود رکورد خلاصه شاعر</a><a href="/api/poets.json">نسخه JSON</a></div></section>
 <section id="context"><span class="kicker">هم‌دوره‌ها در پیکره</span><h2>شاعران دیگر سده ${faNumber(poet.century)}</h2><div class="tag-links">${peers.map((p) => `<a href="/poets/${poetSlug(p.name)}/">${p.name}</a>`).join('') || '<span>برای این سده شاعر دیگری در پیکره ثبت نشده است.</span>'}</div></section>
+<section id="research"><span class="kicker">پژوهش‌های مرتبط</span><h2>شواهدی برای ادامهٔ بررسی</h2><div class="tag-links"><a href="/research/stylometry/">اثر انگشت سبکی و نامتعارف‌ها</a><a href="/research/intertextuality/">پیوندهای متنی شاعران</a><a href="/research/attribution/">انتساب و اعتبار پیکره</a><a href="/centuries/${poet.century}/">زمینهٔ سدهٔ منتسب</a></div></section>
 <section id="interpretation"><span class="kicker">راهنمای خوانش</span><h2>این صفحه چه می‌گوید و چه نمی‌گوید؟</h2><p>این نمایه برای فهم ساختار پیکره ساخته شده است. برای قضاوت درباره سبک، دوره‌های زندگی، انتساب آثار یا جایگاه تاریخی ${poet.name} باید از نسخه‌ها و منابع تخصصی تاریخ ادبیات استفاده کرد.</p></section>
 ${poet.image ? `<section class="image-credit"><h2>اعتبار تصویر</h2><p>${escapeHtml(poet.image.credit)} · ${escapeHtml(poet.image.license)}</p><a href="${poet.image.source}" target="_blank" rel="noopener">مشاهده صفحه منبع تصویر</a></section>` : ''}${citationBlock(`نمایه داده‌ای ${poet.name}`, `/poets/${slug}/`)}</article>`;
     write(path.join('poets', slug, 'index.html'), pageShell({
@@ -515,7 +552,7 @@ ${poet.image ? `<section class="image-credit"><h2>اعتبار تصویر</h2><p
       pathname: `/poets/${slug}/`, image, type: 'profile', schemas: [personSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'شاعران', path: '/poets/' }, { name: poet.name, path: `/poets/${slug}/` }])],
       keywords: [poet.name, `شعرهای ${poet.name}`, `شاعر سده ${faNumber(poet.century)}`, 'شعر فارسی'],
       breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'شاعران', path: '/poets/' }, { name: poet.name, path: `/poets/${slug}/` }],
-      toc: [{ id: 'statistics', label: 'آمار پیکره' }, { id: 'context', label: 'شاعران هم‌دوره' }, { id: 'interpretation', label: 'راهنمای خوانش' }, { id: 'citation', label: 'استناد' }], content,
+      toc: [{ id: 'statistics', label: 'آمار پیکره' }, { id: 'records', label: 'رکوردها و آثار' }, { id: 'context', label: 'شاعران هم‌دوره' }, { id: 'research', label: 'پژوهش مرتبط' }, { id: 'interpretation', label: 'راهنمای خوانش' }, { id: 'citation', label: 'استناد' }], content,
     }));
   }
 }
@@ -573,6 +610,7 @@ function generateUtilityPages() {
 <a href="/downloads/geography/period_mobility.csv"><strong>جابه‌جایی در چهار دوره</strong><span>CSV · نرخ و فاصله‌های مسیر</span></a>
 <a href="/downloads/lexical-lifecycle.csv"><strong>رده‌های چرخه عمر واژگان</strong><span>CSV · تعداد، سهم و نیمه‌عمر</span></a>
 <a href="/downloads/lexical-examples.csv"><strong>نمونه واژگان تاریخی</strong><span>CSV · پایدار، افولی، متأخر و بازبرجسته</span></a>
+<a href="/api/published-evidence.json"><strong>رکوردهای شواهد منتشرشده</strong><span>JSON · شناسه، تعریف، واحد، مخرج، دقت، نسخه و صلاحیت</span></a>
 <a href="/downloads/manifest.json"><strong>راستی‌آزمایی دانلودها</strong><span>JSON · نسخه، منشأ، اندازه و SHA-256 همه فایل‌ها</span></a>
 </div></section><section id="dictionary"><h2>فرهنگ داده</h2>${renderTable(['فیلد', 'معنا'], [['poet','نام شاعر'],['century','سده هجری منتسب به دوره زندگی شاعر'],['poems','تعداد متن‌های شاعر در پیکره'],['totalCouplets','تعداد ابیات؛ جفت مصراع‌های جداشده در منبع، با گردکردن واحد پایانی فرد در هر رکورد'],['totalWords','مجموع واژه‌های فارسی شاعر پس از نرمال‌سازی'],['share','سهم موضوع یا رده، به درصد'],['rate','نرخ نرمال‌شده رخداد'],['score','شاخص ترکیبی شباهت و پیوند متنی'],['robustZ','فاصله مقاوم متن از مرکز سبک شاعر'],['center_city','کانون تقریبی فعالیت شاعر'],['route_km','طول تقریبی مسیر منتخب، به کیلومتر'],['half_life','زمان پس از اوج تا نصف فراوانی'],['right_censored','نرسیدن به نصف اوج تا پایان پیکره']])}</section><section id="license"><h2>منبع، انتساب و مجوز</h2><p>کد رابط با مجوز MIT منتشر می‌شود؛ داده‌ها و تصاویر تابع شرایط منبع و اعتبارهای درج‌شده در پروژه‌اند. مختصات و مسیرهای پژوهش جغرافیا برای تحلیل کلان تقریبی‌اند.</p><div class="hero-actions"><a href="/attributions/">اعتبارها و مجوزها</a></div></section>${citationBlock('پیکره و خروجی‌های تحلیلی از شعر تا داده', '/data/')}</article>`,
   }));
@@ -609,7 +647,18 @@ function generateMachineReadable() {
     },
   });
   write('api/atlas-summary.json', JSON.stringify(summary, null, 2));
-  write('api/research-findings.json', JSON.stringify(versionItems(researchPages.map((page) => ({ ...page, metrics: researchData(page.id).metrics, findings: researchData(page.id).findings, method: researchData(page.id).method, limitation: researchData(page.id).limit }))), null, 2));
+  const publishedEvidence = researchPages.map((page) => publishedResearchEvidence(page));
+  write('api/published-evidence.json', JSON.stringify(versionItems(publishedEvidence), null, 2));
+  write('api/research-findings.json', JSON.stringify(versionItems(publishedEvidence.map((evidence) => ({
+    ...researchPages.find((page) => `research:${page.id}` === evidence.id),
+    evidenceId: evidence.id,
+    metrics: evidence.values.metrics,
+    findings: evidence.values.findings,
+    method: evidence.values.method,
+    limitation: evidence.values.limit,
+    source: evidence.source,
+    qualification: evidence.qualification,
+  }))), null, 2));
   write('api/poets.json', JSON.stringify(versionItems(data.overview.poets.map((p) => ({ ...p, slug: poetSlug(p.name), url: absolute(`/poets/${poetSlug(p.name)}/`) }))), null, 2));
   write('api/atlas-data.json', JSON.stringify(versionObject(data), null, 2));
   write('api/forms.json', JSON.stringify(versionObject(formResearch), null, 2));
@@ -768,7 +817,7 @@ function generateDiscoveryFiles() {
 }
 
 function validateOutput() {
-  const required = ['index.html', 'sitemap.xml', 'robots.txt', 'llms.txt', 'research/topics/index.html', 'research/geography/index.html', 'research/lexical-life/index.html', 'research/attribution/index.html', 'research/public-questions/index.html', 'poets/index.html', 'data/index.html', 'attributions/index.html', 'api/atlas-summary.json', 'api/geography.json', 'api/lexical-life.json', 'api/attribution.json', 'api/public-questions.json', 'downloads/public-questions-analysis.csv', 'downloads/geography/poet_geography.csv', 'downloads/lexical-lifecycle.csv'];
+  const required = ['index.html', 'sitemap.xml', 'robots.txt', 'llms.txt', 'research/topics/index.html', 'research/geography/index.html', 'research/lexical-life/index.html', 'research/attribution/index.html', 'research/public-questions/index.html', 'poets/index.html', 'data/index.html', 'attributions/index.html', 'api/atlas-summary.json', 'api/published-evidence.json', 'api/geography.json', 'api/lexical-life.json', 'api/attribution.json', 'api/public-questions.json', 'downloads/public-questions-analysis.csv', 'downloads/geography/poet_geography.csv', 'downloads/lexical-lifecycle.csv'];
   const missing = required.filter((p) => !fs.existsSync(path.join(dist, p)));
   if (missing.length) throw new Error(`Missing generated files: ${missing.join(', ')}`);
   const sitemapText = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');

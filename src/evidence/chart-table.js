@@ -13,6 +13,18 @@ function categoryLabel(axis, item, index) {
   return axis?.data?.[index] ?? index + 1;
 }
 
+function rowWithMetadata(row, series) {
+  const scale = Number.isFinite(series.tableScale) ? series.tableScale : 1;
+  const enriched = {
+    ...row,
+    value: typeof row.value === 'number' ? row.value * scale : row.value,
+  };
+  if (series.tableUnit) enriched.unit = series.tableUnit;
+  if (series.tableDenominator) enriched.denominator = series.tableDenominator;
+  if (Number.isInteger(series.tablePrecision)) enriched.precision = series.tablePrecision;
+  return enriched;
+}
+
 /** @param {any} option */
 export function chartTableRows(option = {}) {
   const series = Array.isArray(option.series) ? option.series : option.series ? [option.series] : [];
@@ -42,6 +54,13 @@ export function chartTableRows(option = {}) {
             value: displayValue(link.phrases),
           });
         }
+        if (link.evidence) {
+          rows.push({
+            category: linkLabel,
+            series: 'نوع شاهد',
+            value: link.evidence,
+          });
+        }
       }
       continue;
     }
@@ -50,11 +69,11 @@ export function chartTableRows(option = {}) {
       const value = item && typeof item === 'object' && !Array.isArray(item) ? item.value : item;
 
       if (itemSeries.type === 'heatmap' && Array.isArray(value)) {
-        rows.push({
+        rows.push(rowWithMetadata({
           category: `${xAxis?.data?.[value[0]] ?? value[0]} / ${yAxis?.data?.[value[1]] ?? value[1]}`,
           series: seriesName,
           value: value[2],
-        });
+        }, itemSeries));
         continue;
       }
 
@@ -66,20 +85,20 @@ export function chartTableRows(option = {}) {
         ];
         const label = item?.name || categoryLabel(categoryAxis, item, index);
         value.forEach((dimensionValue, dimensionIndex) => {
-          rows.push({
+          rows.push(rowWithMetadata({
             category: label,
             series: dimensionLabels[dimensionIndex] || `بعد ${dimensionIndex + 1}`,
             value: displayValue(dimensionValue),
-          });
+          }, itemSeries));
         });
         continue;
       }
 
-      rows.push({
+      rows.push(rowWithMetadata({
         category: categoryLabel(categoryAxis, item, index),
         series: seriesName,
         value: displayValue(value),
-      });
+      }, itemSeries));
     }
   }
 

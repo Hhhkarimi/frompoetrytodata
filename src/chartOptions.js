@@ -233,7 +233,7 @@ export function intertextNetworkOption(edges, threshold, dark = false, layoutMod
     tooltip: {
       ...baseTooltip(dark), trigger: 'item',
       formatter: (p) => {
-        if (p.dataType === 'edge') return `<b>از ${p.data.source} به ${p.data.target}</b><br/>امتیاز مرکب: ${faNumber(p.data.score, { maximumFractionDigits: 3 })}<br/>پنج‌واژه مشترک: ${faNumber(p.data.phrases)}<br/>واژگانی: ${faNumber(p.data.lexical, { maximumFractionDigits: 3 })}<br/>موضوعی: ${faNumber(p.data.topic, { maximumFractionDigits: 3 })}`;
+        if (p.dataType === 'edge') return `<b>از ${p.data.source} به ${p.data.target}</b><br/>نوع شاهد: ${p.data.evidence}<br/>امتیاز مرکب: ${faNumber(p.data.score, { maximumFractionDigits: 3 })}<br/>پنج‌واژه مشترک: ${faNumber(p.data.phrases)}<br/>واژگانی: ${faNumber(p.data.lexical, { maximumFractionDigits: 3 })}<br/>موضوعی: ${faNumber(p.data.topic, { maximumFractionDigits: 3 })}`;
         return `<b>${p.name}</b><br/>سده ${faNumber(p.data.century)}<br/>خروجی: ${faNumber(stats[p.name].out)} | ورودی: ${faNumber(stats[p.name].in)}`;
       },
     },
@@ -243,7 +243,22 @@ export function intertextNetworkOption(edges, threshold, dark = false, layoutMod
       force: { repulsion: 320, edgeLength: [100, 220], gravity: 0.055 },
       circular: { rotateLabel: true },
       data: names.map((name) => ({ name, value: [stats[name].in + stats[name].out, stats[name].century], century: stats[name].century, symbolSize: 32 + (stats[name].in + stats[name].out) * 6 })),
-      links: chosen.map((e) => ({ source: e.source, target: e.target, score: e.score, phrases: e.phrases, lexical: e.lexical, topic: e.topic, evidence: e.evidence, lineStyle: { width: edgeWidth(e.score), opacity: .76, curveness: .12, color: evidenceColor[e.evidence] || evidenceColor['محدود'] } })),
+      links: chosen.map((e) => ({
+        source: e.source,
+        target: e.target,
+        score: e.score,
+        phrases: e.phrases,
+        lexical: e.lexical,
+        topic: e.topic,
+        evidence: e.evidence,
+        lineStyle: {
+          width: edgeWidth(e.score),
+          opacity: .76,
+          curveness: .12,
+          color: evidenceColor[e.evidence] || evidenceColor['محدود'],
+          type: e.evidence === 'بسیار قوی' ? 'solid' : e.evidence === 'قابل توجه' ? 'dashed' : 'dotted',
+        },
+      })),
       edgeSymbol: ['none', 'arrow'], edgeSymbolSize: [0, 11],
       label: { show: true, fontFamily: 'Vazirmatn', color: dark ? '#f6efe0' : '#233b38', fontSize: 11 },
       emphasis: { focus: 'adjacency', lineStyle: { opacity: 1, width: 5 } },
@@ -284,7 +299,7 @@ export function centuryHeatmapOption(model, dark = false) {
     xAxis: { type: 'category', data: labels, name: 'سده پیش‌بینی‌شده (میلادی)', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
     yAxis: { type: 'category', data: labels, name: 'سده واقعی', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
     visualMap: { min: 0, max: .9, calculable: true, orient: 'horizontal', left: 'center', bottom: 8, textStyle: { fontFamily: 'Vazirmatn', color: dark ? '#dce8e5' : '#53605e' }, inRange: { color: dark ? ['#123e3b','#2c7f77','#e0bd68'] : ['#f4ead4','#62a6a0','#0b5a55'] } },
-    series: [{ type: 'heatmap', data, label: { show: true, formatter: (p) => p.value[2] >= .1 ? faNumber(p.value[2], { maximumFractionDigits: 2 }) : '', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#203230', fontSize: 9 }, emphasis: { itemStyle: { shadowBlur: 12, shadowColor: 'rgba(0,0,0,.35)' } } }],
+    series: [{ type: 'heatmap', data, tableUnit: 'درصد', tableScale: 100, tablePrecision: 1, tableDenominator: 'همهٔ نمونه‌های سدهٔ واقعی در آزمون', label: { show: true, formatter: (p) => p.value[2] >= .1 ? faNumber(p.value[2], { maximumFractionDigits: 2 }) : '', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#203230', fontSize: 9 }, emphasis: { itemStyle: { shadowBlur: 12, shadowColor: 'rgba(0,0,0,.35)' } } }],
   };
 }
 
@@ -295,7 +310,7 @@ export function recallOption(model, dark = false) {
     grid: { left: 48, right: 24, top: 26, bottom: 48, containLabel: true },
     xAxis: { type: 'category', data: model.labels, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
     yAxis: { type: 'value', min: 0, max: 1, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => `${faNumber(v * 100)}٪` } },
-    series: [{ type: 'bar', data: model.recall, barMaxWidth: 30, itemStyle: { borderRadius: [8,8,0,0] }, markLine: { symbol: 'none', lineStyle: { type: 'dashed', color: '#9f2f38' }, data: [{ yAxis: model.benchmark.meanRecall, name: 'میانگین' }], label: { fontFamily: 'Vazirmatn', formatter: 'میانگین' } } }],
+    series: [{ type: 'bar', name: 'بازیابی', data: model.recall, tableUnit: 'درصد', tableScale: 100, tablePrecision: 1, tableDenominator: 'همهٔ نمونه‌های همان سده در آزمون', barMaxWidth: 30, itemStyle: { borderRadius: [8,8,0,0] }, markLine: { symbol: 'none', lineStyle: { type: 'dashed', color: '#9f2f38' }, data: [{ yAxis: model.benchmark.meanRecall, name: 'میانگین' }], label: { fontFamily: 'Vazirmatn', formatter: 'میانگین' } } }],
   };
 }
 
@@ -456,8 +471,8 @@ export function periodMobilityOption(periods, dark = false) {
       { type: 'value', name: 'کیلومتر', ...axis(dark), splitLine: { show: false }, axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
     ],
     series: [
-      { name: 'نرخ جابه‌جایی', type: 'bar', data: periods.map((d) => d.mobileRate), barMaxWidth: 46, itemStyle: { borderRadius: [9, 9, 0, 0] } },
-      { name: 'میانه طول مسیر', type: 'line', yAxisIndex: 1, data: periods.map((d) => Math.round(d.medianRouteKm)), symbolSize: 10, lineStyle: { width: 4 } },
+      { name: 'نرخ جابه‌جایی', type: 'bar', data: periods.map((d) => d.mobileRate), tableUnit: 'درصد', tableScale: 100, tablePrecision: 1, tableDenominator: 'همهٔ شاعران همان دوره', barMaxWidth: 46, itemStyle: { borderRadius: [9, 9, 0, 0] } },
+      { name: 'میانه طول مسیر', type: 'line', yAxisIndex: 1, data: periods.map((d) => Math.round(d.medianRouteKm)), tableUnit: 'کیلومتر', tablePrecision: 0, tableDenominator: 'شاعران جابه‌جاشدهٔ دارای مسیر تقریبی', symbolSize: 10, lineStyle: { width: 4 } },
     ],
   };
 }

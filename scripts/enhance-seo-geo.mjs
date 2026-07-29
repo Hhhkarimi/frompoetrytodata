@@ -325,6 +325,11 @@ function generateMetaphorPages() {
     const pathname = `/metaphors/${slug}/`;
     const series = metaphorSeries(item);
     const relations = metaphorRelations(item);
+    const operationalTerms = item.name
+      .split('،')
+      .flatMap((part) => part.split(' و '))
+      .map((term) => term.trim())
+      .filter(Boolean);
     const strongestShift = [...data.metaphors.transitions].filter((t) => t.name === item.name).sort((a, b) => b.jsd - a.jsd)[0];
     const schema = {
       '@type': 'DefinedTerm', '@id': `${absolute(pathname)}#term`, name: item.name,
@@ -336,6 +341,7 @@ function generateMetaphorPages() {
     };
     const content = `<article><header class="article-hero"><span class="kicker">خانواده استعاری</span><h1>${item.name}</h1><p>میدان معنایی غالب در تحلیل همسایگان واژگانی: ${item.semanticField}.</p><div class="answer-box"><strong>پاسخ مستقیم</strong><p>${metaphorAnswer(item)} دوره غالب آن «${item.dominantPeriod}» گزارش شده است.</p></div><div class="hero-actions"><a class="primary" href="/atlas/#metaphors">مشاهده نمودار تعاملی</a><a href="/downloads/metaphors-by-century.csv">دریافت CSV</a></div></header>
 <section id="profile"><span class="kicker">چرخه عمر</span><h2>پروفایل کمی «${item.name}»</h2>${renderMetrics([['تعداد رخداد', faNumber(item.occurrences)], ['تعداد شعر', faNumber(item.poems)], ['درصد شعرهای پیکره', faPercent(item.poemPercent)], ['نرخ در هزار واژه', faNumber(item.rate, 2)], ['تعداد شاعر', faNumber(item.poets)], ['ظهور پایدار', `سده ${faNumber(item.stableEmergence)}`], ['اوج پایدار', `سده ${faNumber(item.stablePeak)}`], ['نسبت دوره جدید به آغازین', faNumber(item.newToEarlyRatio, 2)]])}</section>
+<section id="examples"><span class="kicker">تعریف عملیاتی</span><h2>نمونه‌های عملیاتی خانواده</h2><p>واژه‌های نام‌گذار این خانواده عبارت‌اند از ${operationalTerms.map((term) => `«${escapeHtml(term)}»`).join('، ')}. این‌ها نمونهٔ عضویت واژگانی‌اند، نه تضمین استعاری‌بودن هر رخداد. artifact خلاصهٔ فعلی بیت‌های شاهد را نگهداری نمی‌کند؛ بنابراین صفحه نمونهٔ شعری را جعل یا بازسازی نمی‌کند.</p><div class="tag-links">${operationalTerms.map((term) => `<span>${escapeHtml(term)}</span>`).join('')}</div><a href="/downloads/metaphors-by-century.csv">دانلود دادهٔ خانواده‌ها</a></section>
 <section id="trajectory"><span class="kicker">روند تاریخی</span><h2>فراوانی در سده‌های سوم تا پانزدهم</h2><p>نرخ‌ها به‌صورت رخداد در هر هزار واژه گزارش شده‌اند تا تفاوت حجم متن‌ها کمتر بر مقایسه اثر بگذارد.</p>${renderSeries(series, 'rate', `روند استعاره ${item.name}`, '')}${renderTable(['سده هجری', 'نرخ در هر هزار واژه'], series.map((v) => [`سده ${faNumber(v.century)}`, faNumber(v.rate, 3)]))}</section>
 <section id="shift"><span class="kicker">رانش معنایی</span><h2>معنا ثابت نمی‌ماند</h2><p>${strongestShift ? `بزرگ‌ترین گسست همسایگان معنایی در گذار سده ${faNumber(strongestShift.from)} به ${faNumber(strongestShift.to)} ثبت شده است (JSD = ${faDigits(strongestShift.jsd)}). این گذار بر پایه ${faNumber(strongestShift.poetsBefore)} شاعر پیش و ${faNumber(strongestShift.poetsAfter)} شاعر پس از مرز محاسبه شده است.` : 'برای این خانواده گذار مستقلی در جدول اصلی ثبت نشده است.'}</p><p>رانش معنایی به معنی تغییر قطعی تعریف واژه نیست؛ بلکه نشان می‌دهد چه واژه‌ها و میدان‌هایی در پیرامون این تصویر بیشتر یا کمتر ظاهر شده‌اند.</p></section>
 <section id="relations"><span class="kicker">شبکه هم‌رخدادی</span><h2>تصویرهای همراه</h2><div class="relation-grid">${relations.length ? relations.map((rel) => `<a href="/metaphors/${metaphorSlugs[rel.other]}/"><strong>${rel.other}</strong><span>${rel.period} · NPMI = ${faDigits(rel.npmi)}</span></a>`).join('') : '<p>هم‌رخدادی شاخصی در فهرست برتر ثبت نشده است.</p>'}</div></section>
@@ -348,7 +354,7 @@ ${citationBlock(`تحول استعاره ${item.name} در شعر فارسی`, p
       schemas: [schema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'استعاره‌ها', path: '/metaphors/' }, { name: item.name, path: pathname }])],
       keywords: [item.name, item.semanticField, 'استعاره شعر فارسی', 'تحول معنایی'],
       breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'استعاره‌ها', path: '/metaphors/' }, { name: item.name, path: pathname }],
-      toc: [{ id: 'profile', label: 'پروفایل کمی' }, { id: 'trajectory', label: 'روند تاریخی' }, { id: 'shift', label: 'رانش معنایی' }, { id: 'relations', label: 'تصویرهای همراه' }, { id: 'interpretation', label: 'راهنمای تفسیر' }, { id: 'citation', label: 'استناد' }],
+      toc: [{ id: 'profile', label: 'پروفایل کمی' }, { id: 'examples', label: 'نمونه‌های عملیاتی' }, { id: 'trajectory', label: 'روند تاریخی' }, { id: 'shift', label: 'رانش معنایی' }, { id: 'relations', label: 'تصویرهای همراه' }, { id: 'interpretation', label: 'راهنمای تفسیر' }, { id: 'citation', label: 'استناد' }],
       content,
     }));
     write(`api/metaphors/${slug}.json`, JSON.stringify(versionObject({
@@ -401,6 +407,7 @@ function generateCenturyPages() {
 <section id="topics"><span class="kicker">ترکیب موضوعی</span><h2>موضوع‌های برجسته این سده</h2>${renderTable(['رتبه', 'مضمون', 'سهم'], topics.map((topic, i) => [faNumber(i + 1), topic.name, faPercent(topic.share)]))}<div class="tag-links">${topics.slice(0, 5).map((topic) => `<a href="/themes/${topicSlugs[topic.id]}/">${topic.name}</a>`).join('')}</div></section>
 <section id="metaphors"><span class="kicker">منظومه تصویری</span><h2>خانواده‌های استعاری پرتراکم</h2>${renderTable(['رتبه', 'خانواده تصویری', 'نرخ در هزار واژه'], metaphors.map((item, i) => [faNumber(i + 1), item.name, faNumber(item.centuryRate, 3)]))}<div class="tag-links">${metaphors.slice(0, 5).map((item) => `<a href="/metaphors/${metaphorSlugs[item.name]}/">${item.name}</a>`).join('')}</div></section>
 <section id="context"><span class="kicker">جایگاه در خط زمانی</span><h2>پیش و پس از این سده</h2><div class="timeline-neighbors">${prev ? `<a href="/centuries/${prev.century}/">← سده ${faNumber(prev.century)}</a>` : '<span>آغاز پوشش پیکره</span>'}<strong>سده ${faNumber(century)}</strong>${next ? `<a href="/centuries/${next.century}/">سده ${faNumber(next.century)} ←</a>` : '<span>پایان پوشش پیکره</span>'}</div>${transition ? `<p>شاخص گسست موضوعی در گذار ${faNumber(transition.from)} به ${faNumber(transition.to)} برابر ${faDigits(transition.jsd)} گزارش شده است؛ این مقدار فاصله ترکیب موضوعی دو سده را خلاصه می‌کند.</p>` : '<p>برای این مرز زمانی، گسست مستقلی در فهرست گذارهای برتر ثبت نشده است.</p>'}</section>
+<section id="research"><span class="kicker">پژوهش‌های مرتبط</span><h2>از این سده به شواهد پژوهشی</h2><div class="tag-links"><a href="/research/topics/">تحول مضامین</a><a href="/research/metaphors/">زندگی استعاره‌ها</a><a href="/research/century-ai/">تشخیص سده با هوش مصنوعی</a><a href="/research/lexical-life/">چرخه عمر واژگان</a><a href="/downloads/topics-by-century.csv">دانلود شاهد سده‌ای</a></div></section>
 <section id="limits" class="warning"><span class="kicker">محدودیت تاریخی</span><h2>از «سده شاعر» تا «تاریخ شعر» فاصله است</h2><p>سدهٔ این صفحه به دورهٔ زندگی منتسب شاعر اشاره دارد، نه تاریخ دقیق سرایش هر شعر. آثار یک شاعر ممکن است در دهه‌های مختلف زندگی سروده شده باشند. همچنین گزینش کتاب‌ها و حجم متفاوت آثار سبب می‌شود این صفحه نماینده کامل همه ادبیات تولیدشده در سده ${faNumber(century)} نباشد.</p></section>
 ${citationBlock(`شعر فارسی در سده ${faNumber(century)} هجری`, pathname)}</article>`;
     write(path.join('centuries', String(century), 'index.html'), shell({
@@ -410,7 +417,7 @@ ${citationBlock(`شعر فارسی در سده ${faNumber(century)} هجری`, p
       schemas: [schema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'سده‌ها', path: '/centuries/' }, { name: `سده ${faNumber(century)}`, path: pathname }])],
       keywords: [`شعر سده ${faNumber(century)}`, `شاعران سده ${faNumber(century)}`, 'تاریخ شعر فارسی', ...poets.slice(0, 5).map((p) => p.name)],
       breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'سده‌ها', path: '/centuries/' }, { name: `سده ${faNumber(century)}`, path: pathname }],
-      toc: [{ id: 'corpus', label: 'آمار پیکره' }, { id: 'poets', label: 'شاعران' }, { id: 'topics', label: 'مضامین' }, { id: 'metaphors', label: 'استعاره‌ها' }, { id: 'context', label: 'خط زمانی' }, { id: 'limits', label: 'محدودیت' }, { id: 'citation', label: 'استناد' }],
+      toc: [{ id: 'corpus', label: 'آمار پیکره' }, { id: 'poets', label: 'شاعران' }, { id: 'topics', label: 'مضامین' }, { id: 'metaphors', label: 'استعاره‌ها' }, { id: 'context', label: 'خط زمانی' }, { id: 'research', label: 'پژوهش مرتبط' }, { id: 'limits', label: 'محدودیت' }, { id: 'citation', label: 'استناد' }],
       content,
     }));
     write(`api/centuries/${century}.json`, JSON.stringify(versionObject({
@@ -511,17 +518,28 @@ function generateMachineKnowledge() {
   ];
   write('api/knowledge-graph.json', JSON.stringify(versionObject({ '@context': 'https://schema.org', '@graph': graph }), null, 2));
 
+  const versionedListSchema = {
+    type: 'object',
+    required: ['schemaVersion', 'publicationVersion', 'modifiedDate', 'items'],
+    properties: {
+      schemaVersion: { type: 'integer', const: 1 },
+      publicationVersion: { type: 'string' },
+      modifiedDate: { type: 'string', format: 'date' },
+      items: { type: 'array', items: { type: 'object' } },
+    },
+  };
   const openapi = {
     openapi: '3.1.0',
     info: { title: 'From Poetry to Data Static API', version: PUBLICATION.version, description: 'Static, read-only JSON endpoints for the Persian poetry data atlas. Content language is Persian.' },
     servers: [{ url: siteUrl }],
     paths: {
       '/api/atlas-summary.json': { get: { summary: 'خلاصه اطلس', operationId: 'getAtlasSummary', responses: { 200: { description: 'Atlas summary JSON', content: { 'application/json': { schema: { type: 'object' } } } } } } },
-      '/api/content-index.json': { get: { summary: 'نمایه همه صفحات و موجودیت‌ها', operationId: 'getContentIndex', responses: { 200: { description: 'Content index', content: { 'application/json': { schema: { type: 'array', items: { type: 'object' } } } } } } } },
-      '/api/themes.json': { get: { summary: 'فهرست مضامین', operationId: 'getThemes', responses: { 200: { description: 'Themes', content: { 'application/json': { schema: { type: 'array', items: { type: 'object' } } } } } } } },
-      '/api/metaphors.json': { get: { summary: 'فهرست خانواده‌های استعاری', operationId: 'getMetaphors', responses: { 200: { description: 'Metaphors', content: { 'application/json': { schema: { type: 'array', items: { type: 'object' } } } } } } } },
-      '/api/centuries.json': { get: { summary: 'فهرست سده‌ها', operationId: 'getCenturies', responses: { 200: { description: 'Centuries', content: { 'application/json': { schema: { type: 'array', items: { type: 'object' } } } } } } } },
-      '/api/poets.json': { get: { summary: 'فهرست شاعران', operationId: 'getPoets', responses: { 200: { description: 'Poets', content: { 'application/json': { schema: { type: 'array', items: { type: 'object' } } } } } } } },
+      '/api/published-evidence.json': { get: { summary: 'رکوردهای نسخه‌دار شواهد پژوهشی', operationId: 'getPublishedEvidence', responses: { 200: { description: 'Versioned published evidence records', content: { 'application/json': { schema: versionedListSchema } } } } } },
+      '/api/content-index.json': { get: { summary: 'نمایه همه صفحات و موجودیت‌ها', operationId: 'getContentIndex', responses: { 200: { description: 'Versioned content index', content: { 'application/json': { schema: versionedListSchema } } } } } },
+      '/api/themes.json': { get: { summary: 'فهرست مضامین', operationId: 'getThemes', responses: { 200: { description: 'Versioned themes', content: { 'application/json': { schema: versionedListSchema } } } } } },
+      '/api/metaphors.json': { get: { summary: 'فهرست خانواده‌های استعاری', operationId: 'getMetaphors', responses: { 200: { description: 'Versioned metaphors', content: { 'application/json': { schema: versionedListSchema } } } } } },
+      '/api/centuries.json': { get: { summary: 'فهرست سده‌ها', operationId: 'getCenturies', responses: { 200: { description: 'Versioned centuries', content: { 'application/json': { schema: versionedListSchema } } } } } },
+      '/api/poets.json': { get: { summary: 'فهرست شاعران', operationId: 'getPoets', responses: { 200: { description: 'Versioned poets', content: { 'application/json': { schema: versionedListSchema } } } } } },
       '/api/forms.json': { get: { summary: 'مقایسه غزل، قصیده، رباعی و مثنوی', operationId: 'getPoetryForms', responses: { 200: { description: 'Poetry form comparison', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/geography.json': { get: { summary: 'جغرافیا و جابه‌جایی شاعران', operationId: 'getPoetryGeography', responses: { 200: { description: 'Poet geography and mobility', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/lexical-life.json': { get: { summary: 'چرخه عمر و نیمه‌عمر واژگان', operationId: 'getLexicalLifecycle', responses: { 200: { description: 'Lexical lifecycle research', content: { 'application/json': { schema: { type: 'object' } } } } } } },

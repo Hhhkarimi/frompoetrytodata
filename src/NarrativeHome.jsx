@@ -32,7 +32,7 @@ export default function NarrativeHome({ summary }) {
               <a className="secondary-button" href="/research/" onClick={() => emitAnalyticsEvent('homepage_primary_action', { destination: '/research/', audience_path: 'research' })}>دیدن یافته‌های پژوهشی</a>
             </div>
           </div>
-          <aside className="narrative-scope" aria-label="دامنه پیکره">
+          <div className="narrative-scope" role="note" aria-label="دامنه پیکره">
             <strong>پیش از تفسیر</strong>
             <p>
               واحدهای این انتشار رکوردهای متنی پیکره‌اند و سده، عمدتاً سدهٔ
@@ -46,7 +46,7 @@ export default function NarrativeHome({ summary }) {
                 <div><dt>پژوهش</dt><dd>{faNumber(researchPages.length)}</dd></div>
               </dl>
             )}
-          </aside>
+          </div>
         </section>
 
         <section className="audience-entry" aria-labelledby="audience-title">

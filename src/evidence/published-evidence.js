@@ -37,7 +37,7 @@ function firstAxis(axis) {
 function numericValues(value, output = []) {
   if (typeof value === 'number' && Number.isFinite(value)) output.push(value);
   else if (Array.isArray(value)) value.forEach((item) => numericValues(item, output));
-  else if (value && typeof value === 'object') numericValues(value.value, output);
+  else if (value && typeof value === 'object') Object.values(value).forEach((item) => numericValues(item, output));
   return output;
 }
 
@@ -50,18 +50,35 @@ export function inferEvidenceMetadata(option = {}) {
   const series = Array.isArray(option.series) ? option.series : option.series ? [option.series] : [];
   const xAxis = firstAxis(option.xAxis);
   const yAxis = firstAxis(option.yAxis);
-  const unit = yAxis?.name || xAxis?.name || series[0]?.name || 'مقدار محاسباتی';
-  const types = new Set(series.map((item) => item.type));
-  const values = series.flatMap((item) => numericValues(item.data || item.links || []));
-  const precision = values.reduce((maximum, value) => Math.max(maximum, decimalPlaces(value)), 0);
+  const yAxes = Array.isArray(option.yAxis) ? option.yAxis : [yAxis];
+  const seriesDefinitions = series.map((item, index) => {
+    const axis = yAxes[item.yAxisIndex || 0] || yAxis;
+    const unit = item.tableUnit || axis?.name || xAxis?.name || item.name || 'مقدار محاسباتی';
+    const values = numericValues([item.data || [], item.links || item.edges || []]);
+    const precision = item.tablePrecision
+      ?? values.reduce((maximum, value) => Math.max(maximum, decimalPlaces(value)), 0);
+    let denominator = item.tableDenominator || 'همهٔ رکوردهای منبع در فیلتر فعال';
+    if (!item.tableDenominator && item.type === 'pie') denominator = 'مجموع دسته‌های نمایش‌داده‌شده';
+    else if (!item.tableDenominator && (item.type === 'graph' || item.type === 'sankey')) denominator = 'گره‌ها و پیوندهای عبورکرده از آستانهٔ فعال';
+    else if (!item.tableDenominator && item.type === 'scatter') denominator = 'هر رکورد یا جفتِ نمایش‌داده‌شده';
+    else if (!item.tableDenominator && /درصد|نرخ|سهم/.test(unit)) denominator = 'همهٔ رکوردهای گروه مقایسه در فیلتر فعال';
+    return {
+      id: item.id || item.name || `series-${index + 1}`,
+      label: item.name || `مجموعه ${index + 1}`,
+      unit,
+      denominator,
+      precision,
+    };
+  });
+  const units = [...new Set(seriesDefinitions.map((item) => item.unit))];
+  const denominators = [...new Set(seriesDefinitions.map((item) => item.denominator))];
 
-  let denominator = 'همهٔ رکوردهای منبع در فیلتر فعال';
-  if (types.has('pie')) denominator = 'مجموع دسته‌های نمایش‌داده‌شده';
-  else if (types.has('graph') || types.has('sankey')) denominator = 'گره‌ها و پیوندهای عبورکرده از آستانهٔ فعال';
-  else if (types.has('scatter')) denominator = 'هر رکورد یا جفتِ نمایش‌داده‌شده';
-  else if (/درصد|نرخ|سهم/.test(unit)) denominator = 'همهٔ رکوردهای گروه مقایسه در فیلتر فعال';
-
-  return { unit, denominator, precision };
+  return {
+    unit: units.length === 1 ? units[0] : 'چندواحدی؛ برای هر مجموعه در جدول',
+    denominator: denominators.length === 1 ? denominators[0] : 'متفاوت؛ برای هر مجموعه در جدول',
+    precision: seriesDefinitions.reduce((maximum, item) => Math.max(maximum, item.precision), 0),
+    seriesDefinitions,
+  };
 }
 
 export function evidenceFromChart({
@@ -89,5 +106,6 @@ export function evidenceFromChart({
     },
     qualification,
     values,
+    seriesDefinitions: inferred.seriesDefinitions,
   });
 }

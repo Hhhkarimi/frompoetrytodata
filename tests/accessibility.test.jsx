@@ -20,24 +20,27 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-async function expectNoSeriousViolations(container) {
+async function expectNoAutomatedViolations(container) {
   const result = await axe.run(container, {
     rules: {
       'color-contrast': { enabled: false },
     },
     resultTypes: ['violations'],
   });
-  const serious = result.violations.filter(({ impact }) => impact === 'serious' || impact === 'critical');
-  expect(serious.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => node.target) }))).toEqual([]);
+  expect(result.violations.map(({ id, impact, nodes }) => ({
+    id,
+    impact,
+    targets: nodes.map((node) => node.target),
+  }))).toEqual([]);
 }
 
-test('narrative homepage has no serious automated accessibility violations', async () => {
+test('narrative homepage has no automated accessibility violations', async () => {
   const { container } = render(<NarrativeHome summary={{ texts: 54524, poets: 67, centuries: 13 }} />);
-  await expectNoSeriousViolations(container);
+  await expectNoAutomatedViolations(container);
 });
 
-test('atlas shell has no serious automated accessibility violations', async () => {
+test('atlas shell has no automated accessibility violations', async () => {
   window.history.replaceState({}, '', '/atlas/');
   const { container } = render(<App />);
-  await expectNoSeriousViolations(container);
+  await expectNoAutomatedViolations(container);
 });

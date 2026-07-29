@@ -8,9 +8,9 @@ const LazyECharts = lazy(() => import('echarts-for-react'));
 
 const DEFAULT_QUALIFICATION = 'این نمودار شاهد محاسباتی در پیکره است و به‌تنهایی رتبهٔ ادبی، علت تاریخی یا تفسیر قطعی را ثابت نمی‌کند.';
 
-function formatTableValue(value) {
+function formatTableValue(value, precision = 4) {
   if (value === '' || value === null || value === undefined) return '—';
-  if (typeof value === 'number') return faNumber(value, { maximumFractionDigits: 4 });
+  if (typeof value === 'number') return faNumber(value, { maximumFractionDigits: precision });
   return String(value).replace(/\d/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)]);
 }
 
@@ -72,6 +72,7 @@ export default function Chart({
       className={`evidence-view ${className}`}
       aria-label={label}
       data-evidence-id={evidence.id}
+      data-evidence-source={evidence.source.dataset}
       data-publication-version={evidence.source.publicationVersion}
     >
       <p className="chart-summary">{summary || label}</p>
@@ -102,15 +103,21 @@ export default function Chart({
       {tableVisible && (
         <div className="chart-table-region" tabIndex="0" role="region" aria-label={`جدول ${label}`}>
           <table aria-label={`داده‌های ${label}`}>
-            <thead><tr><th scope="col">دسته</th><th scope="col">مجموعه</th><th scope="col">مقدار</th></tr></thead>
+            <thead><tr><th scope="col">دسته</th><th scope="col">مجموعه</th><th scope="col">مقدار</th><th scope="col">واحد</th><th scope="col">مخرج/دامنه</th></tr></thead>
             <tbody>
-              {rows.map((row, index) => (
-                <tr key={`${row.category}-${row.series}-${index}`}>
-                  <th scope="row">{formatTableValue(row.category)}</th>
-                  <td>{row.series}</td>
-                  <td>{formatTableValue(row.value)}</td>
-                </tr>
-              ))}
+              {rows.map((row, index) => {
+                const seriesEvidence = evidence.seriesDefinitions.find((item) => item.label === row.series);
+                const rowPrecision = row.precision ?? seriesEvidence?.precision ?? evidence.precision;
+                return (
+                  <tr key={`${row.category}-${row.series}-${index}`}>
+                    <th scope="row">{formatTableValue(row.category)}</th>
+                    <td>{row.series}</td>
+                    <td>{formatTableValue(row.value, rowPrecision)}</td>
+                    <td>{row.unit || seriesEvidence?.unit || evidence.unit}</td>
+                    <td>{row.denominator || seriesEvidence?.denominator || evidence.denominator}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

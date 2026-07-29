@@ -133,6 +133,7 @@ test('published JSON APIs declare their schema and publication version', () => {
     'atlas-summary.json',
     'atlas-data.json',
     'research-findings.json',
+    'published-evidence.json',
     'poets.json',
     'themes.json',
     'metaphors.json',
@@ -148,6 +149,21 @@ test('published JSON APIs declare their schema and publication version', () => {
     const payload = JSON.parse(fs.readFileSync(path.join(dist, 'api', filename), 'utf8'));
     assert.equal(payload.schemaVersion, 1, `${filename} schemaVersion`);
     assert.equal(payload.publicationVersion, '7.0.0', `${filename} publicationVersion`);
+  }
+});
+
+test('generated research pages and APIs share published evidence identities', () => {
+  const payload = JSON.parse(fs.readFileSync(path.join(dist, 'api/published-evidence.json'), 'utf8'));
+  assert.equal(payload.items.length, researchPages.length);
+  for (const page of researchPages) {
+    const evidence = payload.items.find((item) => item.id === `research:${page.id}`);
+    assert.ok(evidence, page.id);
+    assert.equal(evidence.source.publicationVersion, '7.0.0');
+    assert.equal(evidence.source.dataset.startsWith('/downloads/'), true);
+    assert.equal(evidence.qualification, page.qualification);
+    const article = fs.readFileSync(path.join(dist, page.path.slice(1), 'index.html'), 'utf8');
+    assert.ok(article.includes(evidence.values.method), `${page.id} method projection`);
+    assert.ok(article.includes(evidence.qualification), `${page.id} qualification projection`);
   }
 });
 
@@ -198,9 +214,36 @@ test('research results separate evidence, method, interpretation, and reuse path
     assert.match(article, /شاهد محاسباتی و واحد تحلیل/, `${page.id} evidence section`);
     assert.match(article, /روش و عدم‌قطعیت/, `${page.id} method section`);
     assert.match(article, /تفسیر ادبی/, `${page.id} interpretation section`);
-    assert.match(article, /دانلودهای JSON و CSV/, `${page.id} download path`);
+    assert.match(article, /دانلود مستقیم شاهد CSV/, `${page.id} download path`);
     assert.match(article, /href="\/methodology\/"/, `${page.id} methodology path`);
     assert.match(article, /href="\/(?:poets|centuries|themes|metaphors)\/"/, `${page.id} entity path`);
+    assert.match(article, /href="\/downloads\/[^"]+\.(?:csv|json)"/, `${page.id} direct evidence download`);
+  }
+});
+
+test('entity pages expose records, related research, downloads, and operational examples', () => {
+  const poet = fs.readFileSync(path.join(dist, 'poets/hafez/index.html'), 'utf8');
+  const century = fs.readFileSync(path.join(dist, 'centuries/8/index.html'), 'utf8');
+  const metaphor = fs.readFileSync(path.join(dist, 'metaphors/journey-road-destination/index.html'), 'utf8');
+
+  assert.match(poet, /رکوردها و آثار در دسترس/);
+  assert.match(poet, /href="\/research\/(?:stylometry|intertextuality)\//);
+  assert.match(poet, /href="\/downloads\/poets\.csv"/);
+  assert.match(century, /پژوهش‌های مرتبط/);
+  assert.match(century, /href="\/research\/topics\//);
+  assert.match(metaphor, /نمونه‌های عملیاتی خانواده/);
+  assert.match(metaphor, /href="\/downloads\/metaphors-by-century\.csv"/);
+});
+
+test('OpenAPI schemas match versioned list endpoint payloads', () => {
+  const openapi = JSON.parse(fs.readFileSync(path.join(dist, 'openapi.json'), 'utf8'));
+  for (const endpoint of ['content-index', 'themes', 'metaphors', 'centuries', 'poets']) {
+    const schema = openapi.paths[`/api/${endpoint}.json`].get.responses['200']
+      .content['application/json'].schema;
+    assert.equal(schema.type, 'object', endpoint);
+    assert.equal(schema.properties.schemaVersion.type, 'integer', endpoint);
+    assert.equal(schema.properties.publicationVersion.type, 'string', endpoint);
+    assert.equal(schema.properties.items.type, 'array', endpoint);
   }
 });
 

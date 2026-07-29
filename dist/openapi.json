@@ -29,19 +29,84 @@
         }
       }
     },
+    "/api/published-evidence.json": {
+      "get": {
+        "summary": "رکوردهای نسخه‌دار شواهد پژوهشی",
+        "operationId": "getPublishedEvidence",
+        "responses": {
+          "200": {
+            "description": "Versioned published evidence records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "schemaVersion",
+                    "publicationVersion",
+                    "modifiedDate",
+                    "items"
+                  ],
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "publicationVersion": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/content-index.json": {
       "get": {
         "summary": "نمایه همه صفحات و موجودیت‌ها",
         "operationId": "getContentIndex",
         "responses": {
           "200": {
-            "description": "Content index",
+            "description": "Versioned content index",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
+                  "type": "object",
+                  "required": [
+                    "schemaVersion",
+                    "publicationVersion",
+                    "modifiedDate",
+                    "items"
+                  ],
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "publicationVersion": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
                   }
                 }
               }
@@ -56,13 +121,35 @@
         "operationId": "getThemes",
         "responses": {
           "200": {
-            "description": "Themes",
+            "description": "Versioned themes",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
+                  "type": "object",
+                  "required": [
+                    "schemaVersion",
+                    "publicationVersion",
+                    "modifiedDate",
+                    "items"
+                  ],
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "publicationVersion": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
                   }
                 }
               }
@@ -77,13 +164,35 @@
         "operationId": "getMetaphors",
         "responses": {
           "200": {
-            "description": "Metaphors",
+            "description": "Versioned metaphors",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
+                  "type": "object",
+                  "required": [
+                    "schemaVersion",
+                    "publicationVersion",
+                    "modifiedDate",
+                    "items"
+                  ],
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "publicationVersion": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
                   }
                 }
               }
@@ -98,13 +207,35 @@
         "operationId": "getCenturies",
         "responses": {
           "200": {
-            "description": "Centuries",
+            "description": "Versioned centuries",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
+                  "type": "object",
+                  "required": [
+                    "schemaVersion",
+                    "publicationVersion",
+                    "modifiedDate",
+                    "items"
+                  ],
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "publicationVersion": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
                   }
                 }
               }
@@ -119,13 +250,35 @@
         "operationId": "getPoets",
         "responses": {
           "200": {
-            "description": "Poets",
+            "description": "Versioned poets",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
+                  "type": "object",
+                  "required": [
+                    "schemaVersion",
+                    "publicationVersion",
+                    "modifiedDate",
+                    "items"
+                  ],
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "integer",
+                      "const": 1
+                    },
+                    "publicationVersion": {
+                      "type": "string"
+                    },
+                    "modifiedDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
                   }
                 }
               }
