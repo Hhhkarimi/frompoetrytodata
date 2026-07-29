@@ -37,45 +37,67 @@ export function chartTableRows(option = {}) {
     const seriesName = itemSeries.name || 'مقدار';
 
     if (itemSeries.type === 'graph' || itemSeries.type === 'sankey') {
+      const graphMetadata = itemSeries.tableGraph || {};
       for (const node of itemSeries.data || itemSeries.nodes || []) {
         const nodeValue = node.value ?? '';
-        if (Array.isArray(nodeValue)) {
-          rows.push({ category: node.name || 'گره', series: 'تعداد پیوند گره', value: nodeValue[0], unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 });
-          if (nodeValue[1] !== undefined) {
-            rows.push({ category: node.name || 'گره', series: 'سدهٔ منتسب گره', value: nodeValue[1], unit: 'سده هجری', denominator: 'برچسب انتسابی شاعر', precision: 0 });
-          }
+        if (nodeValue === '') continue;
+        const dimensions = graphMetadata.nodeDimensions;
+        if (Array.isArray(nodeValue) && dimensions) {
+          nodeValue.forEach((value, index) => {
+            const metadata = dimensions[index];
+            if (!metadata) return;
+            rows.push({
+              category: node.name || 'گره',
+              series: metadata.label,
+              value: displayValue(value),
+              unit: metadata.unit,
+              denominator: metadata.denominator,
+              precision: metadata.precision,
+            });
+          });
         } else {
-          rows.push({ category: node.name || 'گره', series: 'تعداد پیوند گره', value: displayValue(nodeValue), unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 });
+          const metadata = graphMetadata.node || {};
+          rows.push({
+            category: node.name || 'گره',
+            series: metadata.label || 'مقدار گره',
+            value: displayValue(nodeValue),
+            unit: metadata.unit || 'مقدار',
+            denominator: metadata.denominator || 'گره‌های نمایش‌داده‌شده',
+            precision: metadata.precision ?? 4,
+          });
         }
       }
       for (const link of itemSeries.links || itemSeries.edges || []) {
         const linkLabel = `${link.source} ← ${link.target}`;
+        const linkMetadata = graphMetadata.link || {};
         rows.push({
           category: linkLabel,
-          series: 'امتیاز پیوند',
+          series: linkMetadata.label || 'مقدار پیوند',
           value: displayValue(link.value ?? link.score ?? ''),
-          unit: 'امتیاز مرکب از ۰ تا ۱',
-          denominator: 'شاهدهای واژگانی، موضوعی و عبارتی همان جفت',
-          precision: 3,
+          unit: linkMetadata.unit || 'مقدار',
+          denominator: linkMetadata.denominator || 'همان جفت گره',
+          precision: linkMetadata.precision ?? 4,
         });
         if (link.phrases !== undefined) {
+          const phraseMetadata = graphMetadata.phrases || {};
           rows.push({
             category: linkLabel,
-            series: 'تعداد عبارت مشترک',
+            series: phraseMetadata.label || 'تعداد عبارت مشترک',
             value: displayValue(link.phrases),
-            unit: 'عبارت پنج‌واژه‌ای',
-            denominator: 'عبارت‌های مشترک همان جفت شاعر',
-            precision: 0,
+            unit: phraseMetadata.unit || 'عبارت',
+            denominator: phraseMetadata.denominator || 'همان جفت گره',
+            precision: phraseMetadata.precision ?? 0,
           });
         }
         if (link.evidence) {
+          const evidenceMetadata = graphMetadata.evidence || {};
           rows.push({
             category: linkLabel,
-            series: 'نوع شاهد',
+            series: evidenceMetadata.label || 'نوع شاهد',
             value: link.evidence,
-            unit: 'ردهٔ متنی',
-            denominator: 'ترکیب شاهدهای همان پیوند',
-            precision: 0,
+            unit: evidenceMetadata.unit || 'ردهٔ متنی',
+            denominator: evidenceMetadata.denominator || 'همان پیوند',
+            precision: evidenceMetadata.precision ?? 0,
           });
         }
       }

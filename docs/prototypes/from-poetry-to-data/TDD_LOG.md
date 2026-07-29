@@ -153,3 +153,8 @@ keeping publication dates projected from the shared publication model.
   every dimension. A browser-level test also opens the intertext table after
   applying `threshold=0.96` and proves its link ordering, values, units, and
   denominators against the filtered canonical edge set.
+- **Production option coverage:** the first generic graph fix accidentally
+  encoded intertext-specific units for metaphor nPMI and geography poet counts.
+  Production-builder tests now cover every scatter family and all three graph
+  families. Graph adapters consume series-specific node/link metadata, omit
+  empty node values, and expose precision in the native table.

@@ -2,20 +2,35 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { chartTableRows } from '../src/evidence/chart-table.js';
+import {
+  geographyCentersOption,
+  intertextNetworkOption,
+  intertextScatterOption,
+  metaphorBubbleOption,
+  metaphorNetworkOption,
+  regionFlowOption,
+  stylometryPcaOption,
+  topicStatsOption,
+} from '../src/chartOptions.js';
 
 test('graph tables preserve link scores and node values', () => {
-  const rows = chartTableRows({
-    series: [{
-      type: 'graph',
-      data: [{ name: 'حافظ', value: 3 }],
-      links: [{ source: 'سعدی', target: 'حافظ', score: 0.972, phrases: 4 }],
-    }],
-  });
+  const rows = chartTableRows(intertextNetworkOption([{
+    source: 'سعدی',
+    target: 'حافظ',
+    sourceCentury: 7,
+    targetCentury: 8,
+    score: 0.972,
+    phrases: 4,
+    lexical: 0.31,
+    topic: 0.91,
+    evidence: 'بسیار قوی',
+  }], 0.94));
 
-  assert.deepEqual(rows, [
-    { category: 'حافظ', series: 'تعداد پیوند گره', value: 3, unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 },
+  assert.deepEqual(rows.filter((row) => row.category === 'سعدی ← حافظ' || (row.category === 'حافظ' && row.series === 'تعداد پیوند گره')), [
+    { category: 'حافظ', series: 'تعداد پیوند گره', value: 1, unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 },
     { category: 'سعدی ← حافظ', series: 'امتیاز پیوند', value: 0.972, unit: 'امتیاز مرکب از ۰ تا ۱', denominator: 'شاهدهای واژگانی، موضوعی و عبارتی همان جفت', precision: 3 },
     { category: 'سعدی ← حافظ', series: 'تعداد عبارت مشترک', value: 4, unit: 'عبارت پنج‌واژه‌ای', denominator: 'عبارت‌های مشترک همان جفت شاعر', precision: 0 },
+    { category: 'سعدی ← حافظ', series: 'نوع شاهد', value: 'بسیار قوی', unit: 'ردهٔ متنی', denominator: 'ترکیب شاهدهای همان پیوند', precision: 0 },
   ]);
 });
 
@@ -109,19 +124,13 @@ test('intertext graph tables expose evidence type in addition to color', () => {
 });
 
 test('scatter dimensions preserve independent units and denominators', () => {
-  const rows = chartTableRows({
-    xAxis: { type: 'value', name: 'درصد شعرهای دارای تصویر' },
-    yAxis: { type: 'value', name: 'نرخ در ۱۰هزار واژه' },
-    series: [{
-      type: 'scatter',
-      tableDimensions: [
-        { label: 'درصد شعرهای دارای تصویر', unit: 'درصد', denominator: 'همهٔ شعرهای پیکره', precision: 1 },
-        { label: 'نرخ در ۱۰هزار واژه', unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
-        { label: 'روند زمانی', unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
-      ],
-      data: [{ name: 'راه، سفر و منزل', value: [42, 19.4, 0.31] }],
-    }],
-  });
+  const rows = chartTableRows(metaphorBubbleOption([{
+    name: 'راه، سفر و منزل',
+    poemPercent: 42,
+    rate: 19.4,
+    rho: 0.31,
+    occurrences: 120,
+  }]));
 
   assert.deepEqual(rows.map(({ series, value, unit, denominator, precision }) => ({
     series,
@@ -134,4 +143,37 @@ test('scatter dimensions preserve independent units and denominators', () => {
     { series: 'نرخ در ۱۰هزار واژه', value: 19.4, unit: 'رخداد در ۱۰هزار واژه', denominator: 'همهٔ واژه‌های پیکره', precision: 1 },
     { series: 'روند زمانی', value: 0.31, unit: 'ضریب ρ', denominator: 'سده‌های دارای داده', precision: 3 },
   ]);
+});
+
+test('every production scatter family exposes dimension-specific table metadata', () => {
+  const options = [
+    topicStatsOption([{ name: 'حکمت', rho: 0.2, epsilonSquared: 0.15, overallShare: 10, significantTrend: true }]),
+    intertextScatterOption([{ source: 'سعدی', target: 'حافظ', lexical: 0.3, topic: 0.9, phraseZ: 4, phrases: 3 }]),
+    stylometryPcaOption([{ poet: 'حافظ', pc1: 1.2, pc2: -0.4, century: 8, uniqueRatio: 0.5 }]),
+    geographyCentersOption([{ city: 'شیراز', lon: 52.5, lat: 29.6, words: 1000, poets: 2, poems: 20, region: 'فارس' }]),
+  ];
+
+  for (const option of options) {
+    const rows = chartTableRows(option);
+    assert.ok(rows.length >= 2);
+    assert.ok(rows.every((row) => row.unit && row.denominator && Number.isInteger(row.precision)));
+    assert.ok(new Set(rows.map((row) => row.series)).size >= 2);
+  }
+});
+
+test('production graph families expose graph-specific node and link semantics', () => {
+  const metaphorRows = chartTableRows(metaphorNetworkOption([
+    { period: 'کلاسیک', source: 'آتش', target: 'نور', npmi: 0.253 },
+  ], 'کلاسیک'));
+  const metaphorLink = metaphorRows.find((row) => row.series === 'هم‌رخدادی فراتر از انتظار');
+  assert.equal(metaphorLink.unit, 'nPMI');
+  assert.equal(metaphorLink.value, 0.253);
+
+  const geographyRows = chartTableRows(regionFlowOption([
+    { origin: 'خراسان', center: 'فارس', poets: 3 },
+  ]));
+  const geographyLink = geographyRows.find((row) => row.series === 'شاعران جابه‌جاشده');
+  assert.equal(geographyLink.unit, 'شاعر');
+  assert.equal(geographyLink.value, 3);
+  assert.equal(geographyRows.some((row) => row.value === ''), false);
 });

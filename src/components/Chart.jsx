@@ -103,7 +103,7 @@ export default function Chart({
       {tableVisible && (
         <div className="chart-table-region" tabIndex="0" role="region" aria-label={`جدول ${label}`}>
           <table aria-label={`داده‌های ${label}`}>
-            <thead><tr><th scope="col">دسته</th><th scope="col">مجموعه</th><th scope="col">مقدار</th><th scope="col">واحد</th><th scope="col">مخرج/دامنه</th></tr></thead>
+            <thead><tr><th scope="col">دسته</th><th scope="col">مجموعه</th><th scope="col">مقدار</th><th scope="col">واحد</th><th scope="col">مخرج/دامنه</th><th scope="col">دقت</th></tr></thead>
             <tbody>
               {rows.map((row, index) => {
                 const seriesEvidence = evidence.seriesDefinitions.find((item) => item.label === row.series);
@@ -115,6 +115,7 @@ export default function Chart({
                     <td>{formatTableValue(row.value, rowPrecision)}</td>
                     <td>{row.unit || seriesEvidence?.unit || evidence.unit}</td>
                     <td>{row.denominator || seriesEvidence?.denominator || evidence.denominator}</td>
+                    <td>{faNumber(rowPrecision)} رقم اعشار</td>
                   </tr>
                 );
               })}

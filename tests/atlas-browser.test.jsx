@@ -200,8 +200,12 @@ test('active graph threshold produces an equivalent filtered table with explicit
   const expectedEdges = atlas.intertext.edges.filter((edge) => edge.score >= 0.96);
 
   expect(scoreRows).toHaveLength(expectedEdges.length);
-  expect(scoreRows[0].textContent).toContain(`${expectedEdges[0].source} ← ${expectedEdges[0].target}`);
-  expect(scoreRows[0].textContent).toContain(faNumber(expectedEdges[0].score, { maximumFractionDigits: 3 }));
-  expect(scoreRows[0].textContent).toContain('امتیاز مرکب از ۰ تا ۱');
-  expect(scoreRows[0].textContent).toContain('شاهدهای واژگانی، موضوعی و عبارتی همان جفت');
+  scoreRows.forEach((row, index) => {
+    const edge = expectedEdges[index];
+    expect(row.textContent).toContain(`${edge.source} ← ${edge.target}`);
+    expect(row.textContent).toContain(faNumber(edge.score, { maximumFractionDigits: 3 }));
+    expect(row.textContent).toContain('امتیاز مرکب از ۰ تا ۱');
+    expect(row.textContent).toContain('شاهدهای واژگانی، موضوعی و عبارتی همان جفت');
+    expect(row.textContent).toContain('۳ رقم اعشار');
+  });
 });

@@ -136,6 +136,10 @@ export function topicStatsOption(topics, dark = false) {
     yAxis: { type: 'value', name: 'اندازه اثر سده‌ای', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 2 }) } },
     series: [{
       type: 'scatter',
+      tableDimensions: [
+        { label: 'همبستگی روند زمانی', unit: 'ضریب ρ', denominator: 'سده‌های دارای داده برای همان مضمون', precision: 3 },
+        { label: 'اندازه اثر سده‌ای', unit: 'ε²', denominator: 'تفاوت سهم مضمون میان سده‌های دارای داده', precision: 3 },
+      ],
       data: topics.map((t, i) => ({ name: t.name, value: [t.rho, t.epsilonSquared], share: t.overallShare, itemStyle: { color: palette[i % palette.length], opacity: t.significantTrend ? 1 : 0.5 } })),
       symbolSize: (v, p) => 13 + p.data.share * 1.25,
       label: { show: false, fontFamily: 'Vazirmatn' },
@@ -205,8 +209,12 @@ export function metaphorNetworkOption(pairs, period, dark = false) {
     },
     series: [{
       type: 'graph', layout: 'force', roam: true, draggable: true,
+      tableGraph: {
+        node: { label: 'تعداد پیوند خانواده', unit: 'پیوند', denominator: 'پیوندهای دورهٔ انتخاب‌شده', precision: 0 },
+        link: { label: 'هم‌رخدادی فراتر از انتظار', unit: 'nPMI', denominator: 'هم‌رخدادی همان دو خانواده در دورهٔ انتخاب‌شده', precision: 3 },
+      },
       force: { repulsion: 240, edgeLength: [100, 180], gravity: 0.08 },
-      data: names.map((name, i) => ({ name, symbolSize: 42 + degrees[name] * 9, itemStyle: { color: palette[i % palette.length] } })),
+      data: names.map((name, i) => ({ name, value: degrees[name], symbolSize: 42 + degrees[name] * 9, itemStyle: { color: palette[i % palette.length] } })),
       links: chosen.map((e) => ({ source: e.source, target: e.target, value: e.npmi, lineStyle: { width: 2 + e.npmi * 9, opacity: 0.72, curveness: 0.1 } })),
       label: { show: true, fontFamily: 'Vazirmatn', color: dark ? '#f5f1e6' : '#233b38', fontSize: 11 },
       lineStyle: { color: 'source' }, emphasis: { focus: 'adjacency', lineStyle: { width: 6 } },
@@ -245,6 +253,15 @@ export function intertextNetworkOption(edges, threshold, dark = false, layoutMod
     visualMap: { show: false, min: minCentury, max: maxCentury, dimension: 1, inRange: { color: ['#d29d35', '#0f766e', '#315ba8', '#9f2f38'] } },
     series: [{
       type: 'graph', layout: layoutMode === 'circular' ? 'circular' : 'force', roam: true, draggable: layoutMode !== 'circular',
+      tableGraph: {
+        nodeDimensions: [
+          { label: 'تعداد پیوند گره', unit: 'پیوند', denominator: 'پیوندهای عبورکرده از آستانهٔ فعال', precision: 0 },
+          { label: 'سدهٔ منتسب گره', unit: 'سده هجری', denominator: 'برچسب انتسابی شاعر', precision: 0 },
+        ],
+        link: { label: 'امتیاز پیوند', unit: 'امتیاز مرکب از ۰ تا ۱', denominator: 'شاهدهای واژگانی، موضوعی و عبارتی همان جفت', precision: 3 },
+        phrases: { label: 'تعداد عبارت مشترک', unit: 'عبارت پنج‌واژه‌ای', denominator: 'عبارت‌های مشترک همان جفت شاعر', precision: 0 },
+        evidence: { label: 'نوع شاهد', unit: 'ردهٔ متنی', denominator: 'ترکیب شاهدهای همان پیوند', precision: 0 },
+      },
       force: { repulsion: 320, edgeLength: [100, 220], gravity: 0.055 },
       circular: { rotateLabel: true },
       data: names.map((name) => ({ name, value: [stats[name].in + stats[name].out, stats[name].century], century: stats[name].century, symbolSize: 32 + (stats[name].in + stats[name].out) * 6 })),
@@ -278,7 +295,17 @@ export function intertextScatterOption(edges, dark = false) {
     xAxis: { type: 'value', name: 'شباهت واژگانی', min: .18, max: .47, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 2 }) } },
     yAxis: { type: 'value', name: 'شباهت موضوعی', min: .86, max: 1, ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 2 }) } },
     visualMap: { show: false, min: 0, max: 12, dimension: 2, inRange: { color: ['#d29d35', '#9f2f38'] } },
-    series: [{ type: 'scatter', data: edges.map((e) => ({ name: `${e.source} ← ${e.target}`, value: [e.lexical, e.topic, Math.min(e.phraseZ, 12)], phrases: e.phrases })), symbolSize: (v, p) => 12 + Math.sqrt(p.data.phrases) * 5, emphasis: { label: { show: true, formatter: (p) => p.name, position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#263b38' } } }],
+    series: [{
+      type: 'scatter',
+      tableDimensions: [
+        { label: 'شباهت واژگانی', unit: 'امتیاز ۰ تا ۱', denominator: 'بردارهای واژگانی همان جفت شاعر', precision: 3 },
+        { label: 'شباهت موضوعی', unit: 'امتیاز ۰ تا ۱', denominator: 'بردارهای موضوعی همان جفت شاعر', precision: 3 },
+        { label: 'قدرت عبارت مشترک', unit: 'z-score', denominator: 'عبارت‌های پنج‌واژه‌ای همان جفت شاعر', precision: 3 },
+      ],
+      data: edges.map((e) => ({ name: `${e.source} ← ${e.target}`, value: [e.lexical, e.topic, Math.min(e.phraseZ, 12)], phrases: e.phrases })),
+      symbolSize: (v, p) => 12 + Math.sqrt(p.data.phrases) * 5,
+      emphasis: { label: { show: true, formatter: (p) => p.name, position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#263b38' } },
+    }],
   };
 }
 
@@ -341,7 +368,17 @@ export function stylometryPcaOption(profiles, dark = false) {
     xAxis: { type: 'value', name: 'مولفه نخست', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 1 }) } },
     yAxis: { type: 'value', name: 'مولفه دوم', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v, { maximumFractionDigits: 1 }) } },
     visualMap: { min: 3, max: 15, dimension: 2, orient: 'horizontal', left: 'center', bottom: 0, text: ['جدیدتر','کهن‌تر'], textStyle: { fontFamily: 'Vazirmatn', color: dark ? '#dce8e5' : '#596663' }, inRange: { color: ['#d4a23d','#0f766e','#315ba8','#9f2f38'] } },
-    series: [{ type: 'scatter', data: profiles.map((d) => ({ name: d.poet, value: [d.pc1, d.pc2, d.century], century: d.century, uniqueRatio: d.uniqueRatio })), symbolSize: 12, emphasis: { scale: 1.7, label: { show: true, formatter: (p) => p.name, position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#203735' } } }],
+    series: [{
+      type: 'scatter',
+      tableDimensions: [
+        { label: 'مؤلفه نخست', unit: 'امتیاز مؤلفه اصلی', denominator: 'پروفایل ویژگی‌های سبکی شاعر', precision: 3 },
+        { label: 'مؤلفه دوم', unit: 'امتیاز مؤلفه اصلی', denominator: 'پروفایل ویژگی‌های سبکی شاعر', precision: 3 },
+        { label: 'سدهٔ منتسب', unit: 'سده هجری', denominator: 'برچسب انتسابی شاعر', precision: 0 },
+      ],
+      data: profiles.map((d) => ({ name: d.poet, value: [d.pc1, d.pc2, d.century], century: d.century, uniqueRatio: d.uniqueRatio })),
+      symbolSize: 12,
+      emphasis: { scale: 1.7, label: { show: true, formatter: (p) => p.name, position: 'top', fontFamily: 'Vazirmatn', color: dark ? '#fff' : '#203735' } },
+    }],
   };
 }
 
@@ -411,6 +448,10 @@ export function geographyCentersOption(centers, dark = false) {
     yAxis: { type: 'value', min: 26, max: 43, name: 'عرض جغرافیایی تقریبی', ...axis(dark), axisLabel: { ...axis(dark).axisLabel, formatter: (v) => faNumber(v) } },
     series: [{
       type: 'scatter',
+      tableDimensions: [
+        { label: 'طول جغرافیایی تقریبی', unit: 'درجهٔ جغرافیایی', denominator: 'مختصات تقریبی کانون فعالیت', precision: 3 },
+        { label: 'عرض جغرافیایی تقریبی', unit: 'درجهٔ جغرافیایی', denominator: 'مختصات تقریبی کانون فعالیت', precision: 3 },
+      ],
       data: centers.map((d) => ({ name: d.city, value: [d.lon, d.lat], ...d, symbolSize: size(d.words) })),
       symbolSize: (value, params) => params.data.symbolSize,
       itemStyle: { opacity: .78, borderColor: dark ? '#d9f1f5' : '#fff', borderWidth: 2 },
@@ -435,11 +476,16 @@ export function regionFlowOption(flows, dark = false) {
     },
     series: [{
       type: 'graph',
+      tableGraph: {
+        node: { label: 'حجم پیوندهای منطقه', unit: 'شاعر', denominator: 'شاعران پیوندهای بین‌منطقه‌ای', precision: 0 },
+        link: { label: 'شاعران جابه‌جاشده', unit: 'شاعر', denominator: 'مسیر همان دو منطقه', precision: 0 },
+      },
       layout: 'circular',
       roam: true,
       circular: { rotateLabel: false },
       data: names.map((name, index) => ({
         name,
+        value: volumes[name],
         symbolSize: 34 + volumes[name] * 5,
         itemStyle: { color: palette[index % palette.length] },
       })),
