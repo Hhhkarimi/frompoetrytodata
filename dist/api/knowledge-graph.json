@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "publicationVersion": "7.0.0",
-  "modifiedDate": "2026-07-29",
+  "modifiedDate": "2026-08-01",
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -39,9 +39,24 @@
       },
       "version": "7.0.0",
       "datePublished": "2026-07-27",
-      "dateModified": "2026-07-29",
+      "dateModified": "2026-08-01",
       "license": "https://frompoetrytodata.vercel.app/attributions/",
+      "measurementTechnique": [
+        "ارزیابی هشت شاخص زیبایی‌شناختی با GPT-5.6-sol"
+      ],
       "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://frompoetrytodata.vercel.app/downloads/computational-aesthetics.csv",
+          "name": "نتایج زیبایی‌شناسی محاسباتی"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://frompoetrytodata.vercel.app/api/computational-aesthetics.json",
+          "name": "پروفایل‌های زیبایی‌شناسی محاسباتی"
+        },
         {
           "@type": "DataDownload",
           "encodingFormat": "application/json",
@@ -54,7 +69,7 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/topics/#article",
       "headline": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
-      "abstract": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ canonical ساخته می‌شوند.",
+      "abstract": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ مرجع ساخته می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/topics/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
@@ -171,8 +186,21 @@
       "@type": "ScholarlyArticle",
       "@id": "https://frompoetrytodata.vercel.app/research/public-questions/#article",
       "headline": "ده پرسش جذاب از هزار سال شعر فارسی",
-      "abstract": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ canonical هر پرسش نمایش داده می‌شوند.",
+      "abstract": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ مرجع هر پرسش نمایش داده می‌شوند.",
       "url": "https://frompoetrytodata.vercel.app/research/public-questions/",
+      "author": {
+        "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
+      },
+      "isBasedOn": {
+        "@id": "https://frompoetrytodata.vercel.app/data/#dataset"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://frompoetrytodata.vercel.app/research/computational-aesthetics/#article",
+      "headline": "زیبایی‌شناسی محاسباتی شعر فارسی",
+      "abstract": "این مدل می‌تواند بیت‌های پُرتراکم را برای خوانش نزدیک اولویت‌بندی کند، اما امتیاز آن داوری انسانی یا حقیقت قطعی دربارهٔ زیبایی و ارزش ادبی نیست.",
+      "url": "https://frompoetrytodata.vercel.app/research/computational-aesthetics/",
       "author": {
         "@id": "https://frompoetrytodata.vercel.app/#hossein-karimi"
       },

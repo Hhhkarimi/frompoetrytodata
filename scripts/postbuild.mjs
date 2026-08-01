@@ -7,6 +7,8 @@ import { resolvePublicationOrigin } from './lib/publication-identity.mjs';
 import { buildPersianCitation, PUBLICATION } from '../src/publication/publication.js';
 import { persianDigits, persianNumber } from '../src/publication/persian-format.js';
 import { createPublishedEvidence } from '../src/evidence/published-evidence.js';
+import { poetSlug as resolvePoetSlug } from '../src/entities/poet-identity.js';
+import { buildComputationalAestheticsArtifact } from '../src/research/computational-aesthetics.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -20,6 +22,9 @@ const geographyResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/g
 const lexicalResearch = JSON.parse(fs.readFileSync(path.join(root, 'src/data/lexicalResearch.json'), 'utf8'));
 const attributionResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/attribution-data.json'), 'utf8'));
 const publicQuestionsResearch = JSON.parse(fs.readFileSync(path.join(root, 'app/research-data.json'), 'utf8'));
+const computationalAesthetics = buildComputationalAestheticsArtifact(
+  fs.readFileSync(path.join(root, 'research-data/computational-aesthetics/top-couplets.csv'), 'utf8'),
+);
 const buildDate = PUBLICATION.modifiedDate;
 const securityExpiry = `${Number(PUBLICATION.modifiedDate.slice(0, 4)) + 1}${PUBLICATION.modifiedDate.slice(4)}T00:00:00.000Z`;
 const siteUrl = resolvePublicationOrigin();
@@ -49,28 +54,7 @@ const publicationMetadata = () => ({
 const versionObject = (value) => ({ ...publicationMetadata(), ...value });
 const versionItems = (items) => ({ ...publicationMetadata(), items });
 
-const knownSlugs = {
-  'رودکی': 'rudaki', 'فردوسی': 'ferdowsi', 'کسایی': 'kasaei', 'ابوسعید ابوالخیر': 'abu-saeid-abul-kheir',
-  'ناصرخسرو': 'naser-khosrow', 'باباطاهر': 'baba-taher', 'هجویری': 'hojviri', 'اسدی توسی': 'asadi-tusi',
-  'فخرالدین اسعد گرگانی': 'fakhr-al-din-asad-gorgani', 'منوچهری': 'manuchehri', 'فرخی سیستانی': 'farrokhi-sistani',
-  'مسعود سعد سلمان': 'masud-sad-salman', 'عطار': 'attar', 'سنایی': 'sanai', 'انوری': 'anvari', 'خاقانی': 'khaghani',
-  'نظامی': 'nezami', 'خیام': 'khayyam', 'نصرالله منشی': 'nasrallah-monshi', 'باباافضل کاشانی': 'baba-afzal-kashani',
-  'مهستی گنجوی': 'mahasti-ganjavi', 'عبدالواسع جبلی': 'abd-al-vase-jabali', 'مولوی': 'rumi', 'سعدی': 'saadi',
-  'خواجوی کرمانی': 'khwaju-kermani', 'عراقی': 'iraqi', 'سیف فرغانی': 'seyf-farghani', 'شاه نعمت‌الله ولی': 'shah-nematollah-vali',
-  'اوحدی': 'owhadi', 'سلمان ساوجی': 'salman-savoji', 'امیرخسرو دهلوی': 'amir-khosrow-dehlavi', 'حافظ': 'hafez',
-  'عبید زاکانی': 'obeyd-zakani', 'شیخ محمود شبستری': 'mahmud-shabestari', 'هلالی جغتایی': 'helali-jaghatai', 'جامی': 'jami',
-  'محتشم کاشانی': 'mohtasham-kashani', 'عرفی': 'orfi', 'وحشی': 'vahshi', 'رضی‌الدین آرتیمانی': 'razi-al-din-artimani',
-  'شیخ بهایی': 'sheikh-bahaei', 'صائب تبریزی': 'saeb-tabrizi', 'بیدل دهلوی': 'bidel-dehlavi', 'فیض کاشانی': 'feiz-kashani',
-  'هاتف اصفهانی': 'hatef-esfahani', 'قاآنی': 'qaani', 'فروغی بسطامی': 'forughi-bastami', 'ملا هادی سبزواری': 'molla-hadi-sabzevari',
-  'ملک‌الشعرای بهار': 'malek-al-shoara-bahar', 'اقبال لاهوری': 'iqbal-lahori', 'احمد شاملو': 'ahmad-shamlou',
-  'سیمین بهبهانی': 'simin-behbahani', 'پروین اعتصامی': 'parvin-etesami', 'شهریار': 'shahriar',
-  'کامبیز صدیقی کسمایی': 'kambiz-sedighi-kasmaei', 'رهی معیری': 'rahi-moayeri', 'سهراب سپهری': 'sohrab-sepehri',
-  'فروغ فرخزاد': 'forough-farrokhzad', 'مهدی اخوان ثالث': 'mehdi-akhavan-sales', 'بهرام سالکی': 'bahram-saleki',
-  'شاطرعباس صبوحی': 'shater-abbas-sabouhi', 'شیون فومنی': 'shivon-foumani', 'نیما یوشیج (آوای آزاد)': 'nima-yushij',
-  'خلیل‌الله خلیلی': 'khalilullah-khalili', 'محمدحسن بارق شفیعی': 'mohammad-hasan-bareq-shafiei',
-  'ا لیار (جبار محمدی)': 'a-liyar-jabbar-mohammadi', 'عبدالقهار عاصی': 'abdul-qahar-asi',
-};
-const poetSlug = (name) => knownSlugs[name] || `poet-${Buffer.from(name).toString('hex').slice(0, 16)}`;
+const poetSlug = (name) => resolvePoetSlug(name) || `poet-${Buffer.from(name).toString('hex').slice(0, 16)}`;
 
 const logo = `<a class="seo-brand" href="/" aria-label="از شعر تا داده؛ صفحه اصلی">
   <svg viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b615c"/><stop offset="1" stop-color="#b9862d"/></linearGradient></defs><path d="M64 8 114 37v54L64 120 14 91V37Z" fill="url(#g)"/><path d="M64 28 87 56 64 99 41 56Z" fill="#fff8e8"/><circle cx="64" cy="60" r="8" fill="#9f2f38"/><path d="M64 68v23" stroke="#9f2f38" stroke-width="6" stroke-linecap="round"/></svg>
@@ -110,7 +94,7 @@ function globalSchemas() {
     '@type': 'Dataset', '@id': `${siteUrl}/data/#dataset`,
     name: 'پیکره و خروجی‌های تحلیلی از شعر تا داده',
     alternateName: 'From Poetry to Data Persian Poetry Analytics Dataset',
-    description: `خروجی‌های توصیفی و تحلیلی ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر فارسی، شامل ده پژوهش دربارهٔ پرسش‌های عمومی، مضمون، استعاره، پیوند متنی، تشخیص سده، سبک، قالب، جغرافیا، چرخهٔ واژگان و سنجش انتساب.`,
+    description: `خروجی‌های توصیفی و تحلیلی ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر فارسی، شامل یازده پژوهش دربارهٔ پرسش‌های عمومی، مضمون، استعاره، پیوند متنی، تشخیص سده، سبک، قالب، جغرافیا، چرخهٔ واژگان، سنجش انتساب و زیبایی‌شناسی محاسباتی.`,
     url: absolute('/data/'), inLanguage: 'fa', isAccessibleForFree: true,
     creator: { '@id': `${siteUrl}/#hossein-karimi` },
     version: PUBLICATION.version,
@@ -118,11 +102,11 @@ function globalSchemas() {
     dateModified: PUBLICATION.modifiedDate,
     license: absolute('/attributions/'),
     includedInDataCatalog: { '@id': `${siteUrl}/data/#catalog` },
-    measurementTechnique: ['مدل موضوعی', 'تحلیل هم‌رخدادی', 'TF–IDF', 'آزمون جایگشتی', 'سبک‌سنجی نویسه‌ای', 'ممیزی انتساب', 'تحلیل جغرافیایی', 'تحلیل چرخه عمر واژه'],
+    measurementTechnique: ['مدل موضوعی', 'تحلیل هم‌رخدادی', 'TF–IDF', 'آزمون جایگشتی', 'سبک‌سنجی نویسه‌ای', 'ممیزی انتساب', 'تحلیل جغرافیایی', 'تحلیل چرخه عمر واژه', 'ارزیابی هشت شاخص زیبایی‌شناختی با GPT-5.6-sol'],
     temporalCoverage: '800/2025',
     additionalProperty: [{ '@type': 'PropertyValue', name: 'پوشش تاریخی در گاه‌شماری هجری', value: 'سده سوم تا پانزدهم هجری' }],
     keywords: ['شعر فارسی', 'ادبیات فارسی', 'علوم انسانی دیجیتال', 'پردازش زبان طبیعی فارسی', 'سبک‌سنجی', 'بینامتنیت', 'جغرافیای ادبی', 'نیمه‌عمر واژگان'],
-    variableMeasured: ['شاعر', 'سده هجری', 'عنوان کتاب', 'عنوان شعر', 'متن شعر', 'تعداد ابیات', 'تعداد واژه', 'سهم موضوع', 'نرخ استعاره', 'شاخص شباهت متنی', 'ویژگی سبک‌سنجی', 'وضعیت انتساب', 'کانون فعالیت', 'طول مسیر', 'نیمه‌عمر واژه'],
+    variableMeasured: ['شاعر', 'سده هجری', 'عنوان کتاب', 'عنوان شعر', 'متن شعر', 'تعداد ابیات', 'تعداد واژه', 'سهم موضوع', 'نرخ استعاره', 'شاخص شباهت متنی', 'ویژگی سبک‌سنجی', 'وضعیت انتساب', 'کانون فعالیت', 'طول مسیر', 'نیمه‌عمر واژه', ...computationalAesthetics.dimensions.map((dimension) => dimension.label), 'امتیاز نهایی زیبایی‌شناختی محاسباتی'],
     distribution: [
       { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/atlas-summary.json'), name: 'خلاصه JSON اطلس' },
       { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/poets.csv'), name: 'فهرست شاعران و آمار پیکره' },
@@ -133,6 +117,8 @@ function globalSchemas() {
       { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/attribution-corpus-audit.csv'), name: 'ممیزی انتساب و کیفیت پیکره' },
       { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/public-questions.json'), name: 'ده پرسش عمومی شعر فارسی' },
       { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/public-questions-analysis.csv'), name: 'اعداد پرسش‌های عمومی' },
+      { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/computational-aesthetics.csv'), name: 'ده بیت منتخب و هشت شاخص زیبایی‌شناختی برای هر شاعر' },
+      { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/computational-aesthetics.json'), name: 'پروفایل‌های ساخت‌یافته زیبایی‌شناسی محاسباتی' },
       { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/manifest.json'), name: 'نسخه، منشأ و checksum دانلودها' },
     ],
   };
@@ -185,6 +171,45 @@ function citationBlock(title, pathname) {
 }
 
 function researchData(id) {
+  if (id === 'computational-aesthetics') {
+    const poets = [...computationalAesthetics.poets].sort(
+      (left, right) => left.century - right.century || left.name.localeCompare(right.name, 'fa'),
+    );
+    const selectedMean = computationalAesthetics.records.reduce(
+      (sum, record) => sum + record.overall_score,
+      0,
+    ) / computationalAesthetics.records.length;
+    const topRecord = [...computationalAesthetics.records].sort(
+      (left, right) => right.overall_score - left.overall_score,
+    )[0];
+    const dimensionLabels = Object.fromEntries(
+      computationalAesthetics.dimensions.map((dimension) => [dimension.id, dimension.label]),
+    );
+    return {
+      metrics: [
+        ['بیت یا واحد دو‌سطری امتیازدهی‌شده', faNumber(computationalAesthetics.corpus.scoredUniqueUnits, 0)],
+        ['شاعر یا پدیدآورنده', faNumber(computationalAesthetics.poets.length, 0)],
+        ['انتخاب منتشرشده', faNumber(computationalAesthetics.records.length, 0)],
+        ['شاخص ارزیابی مدل', faNumber(computationalAesthetics.dimensions.length, 0)],
+      ],
+      findings: [
+        `میانگین نمرهٔ کل ${faNumber(computationalAesthetics.records.length, 0)} انتخاب درون‌شاعر ${faDigits(selectedMean.toFixed(2))} است؛ این مقدار میانگین گزیده‌هاست، نه میانگین کل پیکره.`,
+        `بالاترین نمرهٔ محاسباتی در خروجی منتشرشده ${faDigits(topRecord.overall_score)} و متعلق به یک بیت از ${topRecord.poet_display} است.`,
+        'هر ۶۷ شاعر یا پدیدآورنده دقیقاً ده انتخاب دارد؛ رتبهٔ ۱ تا ۱۰ فقط درون همان شاعر تعریف می‌شود.',
+        'هشت شاخص با GPT-5.6-sol ارزیابی شده‌اند و ارزیابی انسانی نیست؛ نمرهٔ کل از ترکیب وزن‌دار خروجی‌های مدل به دست آمده است.',
+      ],
+      tableHeaders: ['سدهٔ منتسب', 'شاعر', 'میانگین ده انتخاب', 'بیشترین نمره', 'شاخص غالب'],
+      tableRows: poets.map((poet) => [
+        faNumber(poet.century, 0),
+        poet.name,
+        faDigits(poet.meanOverall),
+        faDigits(poet.maxOverall),
+        dimensionLabels[poet.dominantDimension],
+      ]),
+      method: `GPT-5.6-sol هشت شاخص صفر تا صد را ارزیابی کرده است. نمرهٔ کل با وزن‌های مستند ساخته شده و سپس برای هر شاعر ده واحد سالم دارای بالاترین نمره با کنترل تکرار و تنوع منبع انتخاب شده‌اند. ارزیابی انسانی یا برچسب‌گذاری انسانی انجام نشده است. انتساب مدل بر پایهٔ اعلام مالک پروژه ثبت شده و سابقهٔ اجرای دست‌اول در دسترس نیست.`,
+      limit: 'این خروجی سنجهٔ عملیاتی همین مدل و پیکره است، نه تعریف جهان‌شمول زیبایی یا رتبهٔ ارزش ادبی. وزن عروضی کامل مدل‌سازی نشده، بیت‌ها بیرون از بافت شعر کامل بررسی شده‌اند و در شعر نو واحد دو سطر متوالی الزاماً بیت کلاسیک نیست.',
+    };
+  }
   if (id === 'topics') {
     const topics = [...data.topics.items].sort((a, b) => b.overallShare - a.overallShare);
     const rising = [...data.topics.items].filter((x) => x.significantTrend).sort((a, b) => b.rho - a.rho)[0];
@@ -417,11 +442,110 @@ function renderMetrics(metrics) {
 function renderTable(headers, rows, limit = 60) {
   return `<div class="table-wrap"><table><thead><tr>${headers.map((h) => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${rows.slice(0, limit).map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 }
+function renderComputationalAestheticsProfile(profile) {
+  const dimensions = computationalAesthetics.dimensions.map((dimension) => ({
+    ...dimension,
+    value: profile.dimensionMeans[dimension.id],
+  }));
+  const dimensionChartLabel = dimensions
+    .map((dimension) => `${dimension.label} ${faNumber(dimension.value, 1)} از صد`)
+    .join('، ');
+  const dominantDimension = dimensions.find(
+    (dimension) => dimension.id === profile.dominantDimension,
+  );
+  const dimensionChart = `<div class="aesthetic-chart" role="img" aria-label="میانگین هشت شاخص برای ${escapeHtml(profile.name)}: ${escapeHtml(dimensionChartLabel)}"><ol>${dimensions.map((dimension) => `<li data-aesthetic-dimension="chart:${dimension.id}" data-aesthetic-value="${dimension.value}"><span>${escapeHtml(dimension.label)}</span><i aria-hidden="true"><b style="--score:${dimension.value}"></b></i><strong>${faNumber(dimension.value, 1)}</strong></li>`).join('')}</ol></div>`;
+  const dimensionTable = `<div class="table-wrap aesthetic-dimension-table"><table><caption>معادل جدولی نمودار هشت شاخص زیبایی‌شناختی ${escapeHtml(profile.name)}</caption><thead><tr><th scope="col">شاخص</th><th scope="col">وزن در امتیاز نهایی</th><th scope="col">میانگین از ۱۰۰</th></tr></thead><tbody>${dimensions.map((dimension) => `<tr data-aesthetic-dimension="table:${dimension.id}" data-aesthetic-value="${dimension.value}"><th scope="row">${escapeHtml(dimension.label)}</th><td>${faPercent(dimension.weight * 100, 0)}</td><td>${faNumber(dimension.value, 1)}</td></tr>`).join('')}</tbody></table></div>`;
+  const couplets = [...profile.records]
+    .sort((left, right) => left.poet_rank - right.poet_rank)
+    .map((record) => `<article class="aesthetic-couplet" data-aesthetic-couplet="${record.id}">
+      <header><span>رتبه ${faNumber(record.poet_rank)} در میان بیت‌های منتخب شاعر</span><strong>${faNumber(record.overall_score, 2)} از ۱۰۰</strong></header>
+      <blockquote><span>${escapeHtml(record.hemistich1)}</span><span>${escapeHtml(record.hemistich2)}</span></blockquote>
+      <p>${escapeHtml(record.book_title)} · ${escapeHtml(record.poem_title)}</p>
+      <details><summary>مشاهده امتیاز هشت شاخص</summary><dl>${computationalAesthetics.dimensions.map((dimension) => `<div><dt>${escapeHtml(dimension.label)}</dt><dd>${faNumber(record[dimension.field], 2)}</dd></div>`).join('')}</dl></details>
+    </article>`)
+    .join('');
+
+  return `<section id="computational-aesthetics" class="aesthetic-profile">
+    <span class="kicker">پژوهش زیبایی‌شناسی محاسباتی</span>
+    <h2>ده بیت با بالاترین امتیاز زیبایی‌شناختی محاسباتی</h2>
+    <p>برای ${escapeHtml(profile.name)}، هر هشت شاخص و امتیاز نهایی با مدل <strong>GPT-5.6-sol</strong> ارزیابی شده‌اند؛ این ارزیابی انسانی نیست. امتیاز نهایی میانگین وزنی نمادپردازی، تصویرسازی، زبان مجازی، موسیقی، فشردگی معنا، عمق عاطفی، ساختار و تازگی بیان است.</p>
+    <p class="local-qualification"><strong>مرز ادعا:</strong> این امتیازها خروجی یک ارزیابی محاسباتی‌اند و جایگزین خوانش ادبی، داوری منتقد یا اجماع پژوهشی نیستند. انتخاب «ده بیت» رتبه‌بندی درون داده‌های همین شاعر است و رتبه‌بندی شاعران محسوب نمی‌شود.</p>
+    ${renderMetrics([
+      ['میانگین ده بیت', faNumber(profile.meanOverall, 2)],
+      ['بیشترین امتیاز', faNumber(profile.maxOverall, 2)],
+      ['قوی‌ترین میانگین شاخص', dominantDimension?.label || '—'],
+      ['تعداد شاخص‌ها', faNumber(dimensions.length)],
+    ])}
+    <div class="aesthetic-evidence-grid"><div><h3>پروفایل هشت شاخص</h3>${dimensionChart}</div><div><h3>همان داده به‌شکل جدول</h3>${dimensionTable}</div></div>
+    <div class="aesthetic-couplets">${couplets}</div>
+    <div class="hero-actions aesthetic-actions"><a class="primary" href="/research/computational-aesthetics/">روش، یافته‌ها و محدودیت‌ها</a><a href="/downloads/computational-aesthetics.csv" download>دانلود CSV نتایج</a><a href="/api/computational-aesthetics.json">دریافت JSON</a></div>
+  </section>`;
+}
+function renderComputationalAestheticsExplorer() {
+  const metricOptions = [
+    ['overall', 'امتیاز نهایی'],
+    ['symbolism', 'نمادپردازی'],
+    ['imagery', 'تصویرسازی'],
+    ['figurative', 'زبان مجازی'],
+    ['music', 'موسیقی'],
+    ['compression', 'فشردگی معنا'],
+    ['emotion', 'عمق عاطفی'],
+    ['structure', 'ساختار'],
+    ['novelty', 'تازگی بیان'],
+  ];
+  const dimensionLabels = Object.fromEntries(
+    computationalAesthetics.dimensions.map((dimension) => [dimension.id, dimension.label]),
+  );
+  const poets = [...computationalAesthetics.poets].sort(
+    (left, right) => left.century - right.century || left.name.localeCompare(right.name, 'fa'),
+  );
+  const centuries = [...new Set(poets.map((poet) => poet.century))].sort((a, b) => a - b);
+  const rows = poets.map((poet) => `<tr
+      data-aesthetic-poet="${escapeHtml(poet.name)}"
+      data-century="${poet.century}"
+      data-overall="${poet.meanOverall}"
+      data-symbolism="${poet.dimensionMeans.symbolism}"
+      data-imagery="${poet.dimensionMeans.imagery}"
+      data-figurative="${poet.dimensionMeans['figurative-language']}"
+      data-music="${poet.dimensionMeans.music}"
+      data-compression="${poet.dimensionMeans['semantic-compression']}"
+      data-emotion="${poet.dimensionMeans.emotion}"
+      data-structure="${poet.dimensionMeans.structure}"
+      data-novelty="${poet.dimensionMeans.novelty}">
+      <th scope="row"><a href="/poets/${poet.slug}/">${escapeHtml(poet.name)}</a></th>
+      <td>${faNumber(poet.century, 0)}</td>
+      <td data-aesthetic-score>${faNumber(poet.meanOverall, 2)}</td>
+      <td>${faNumber(poet.maxOverall, 2)}</td>
+      <td>${escapeHtml(dimensionLabels[poet.dominantDimension])}</td>
+    </tr>`).join('');
+
+  return `<section id="data" class="aesthetic-explorer">
+    <span class="kicker">کاوش ۶۷ پروفایل شاعر</span>
+    <h2>جست‌وجو، مقایسه و پیوند قابل اشتراک</h2>
+    <p>ترتیب پیش‌فرض بر پایهٔ سدهٔ منتسب و نام شاعر است. مرتب‌سازی امتیازی صرفاً برای کاوش خروجی مدل است و جدول رتبه‌بندی ارزش ادبی شاعران نیست.</p>
+    <form method="get" action="/research/computational-aesthetics/" data-aesthetic-explorer>
+      <label>جست‌وجوی شاعر<input type="search" name="q" autocomplete="off" placeholder="مثلاً حافظ"></label>
+      <label>سدهٔ منتسب<select name="century"><option value="">همهٔ سده‌ها</option>${centuries.map((century) => `<option value="${century}">سده ${faNumber(century, 0)}</option>`).join('')}</select></label>
+      <label>شاخص نمایشی<select name="metric">${metricOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}</select></label>
+      <label>ترتیب<select name="sort"><option value="century-name">سده و نام</option><option value="score-desc">امتیاز شاخص، نزولی</option></select></label>
+      <button type="button" data-aesthetic-reset>پاک‌کردن فیلترها</button>
+    </form>
+    <p data-aesthetic-status role="status" aria-live="polite">${faNumber(poets.length, 0)} نتیجه نمایش داده می‌شود.</p>
+    <p class="notice" data-aesthetic-empty hidden>برای این ترکیب فیلتر نتیجه‌ای پیدا نشد. فیلترها را پاک کنید یا نام دیگری بنویسید.</p>
+    <noscript><p class="notice">جاوااسکریپت خاموش است؛ جدول کامل هر ۶۷ شاعر همچنان در ادامه در دسترس است، اما فیلتر تعاملی اجرا نمی‌شود.</p></noscript>
+    <div class="table-wrap"><table>
+      <caption>خلاصهٔ محاسباتی ده بیت منتخب هر شاعر؛ ستون «امتیاز شاخص» با انتخاب فیلتر تغییر می‌کند.</caption>
+      <thead><tr><th scope="col">شاعر</th><th scope="col">سده</th><th scope="col">امتیاز شاخص</th><th scope="col">بیشترین امتیاز نهایی</th><th scope="col">شاخص غالب</th></tr></thead>
+      <tbody data-aesthetic-results>${rows}</tbody>
+    </table></div>
+  </section>`;
+}
 function relatedResearch(currentId) {
   return `<section class="related"><span class="kicker">مطالعه بیشتر</span><h2>پژوهش‌های مرتبط</h2><div class="related-grid">${researchPages.filter((p) => p.id !== currentId).slice(0, 3).map((p) => `<a href="${p.path}" style="--accent:${p.color}"><small>${p.eyebrow}</small><strong>${p.shortTitle}</strong><p>${p.description}</p></a>`).join('')}</div></section>`;
 }
 
 const researchReuse = Object.freeze({
+  'computational-aesthetics': { download: '/downloads/computational-aesthetics.csv', entity: '/poets/hafez/', entityLabel: 'نمونه پروفایل زیبایی‌شناختی: حافظ' },
   topics: { download: '/downloads/topics-by-century.csv', entity: '/themes/ethics-wisdom/', entityLabel: 'نمونه موجودیت: اخلاق، حکمت و خرد' },
   metaphors: { download: '/downloads/metaphors-by-century.csv', entity: '/metaphors/journey-road-destination/', entityLabel: 'نمونه موجودیت: راه، سفر و منزل' },
   intertextuality: { download: '/downloads/intertext-edges.csv', entity: '/poets/hafez/', entityLabel: 'نمونه موجودیت شبکه: حافظ' },
@@ -463,38 +587,70 @@ function generateResearchPages() {
   };
   write('research/index.html', pageShell({
     title: 'پژوهش‌های تحلیل داده شعر فارسی | از شعر تا داده',
-    description: 'ده مطالعهٔ کامل دربارهٔ پرسش‌های عمومی، مضامین، استعاره‌ها، پیوندهای متنی، تشخیص سده، سبک، قالب، جغرافیای شعر، چرخهٔ واژگان و سنجش انتساب.',
+    description: 'یازده مطالعهٔ کامل دربارهٔ پرسش‌های عمومی، مضامین، استعاره‌ها، پیوندهای متنی، تشخیص سده، سبک، قالب، جغرافیای شعر، چرخهٔ واژگان، سنجش انتساب و زیبایی‌شناسی محاسباتی.',
     pathname: '/research/', image: '/og/og-research.png', type: 'website', schemas: [indexSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }])],
     keywords: ['تحلیل داده شعر فارسی', 'علوم انسانی دیجیتال', 'پردازش زبان طبیعی فارسی'],
     breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }],
-    content: `<header class="article-hero"><span class="kicker">مرکز پژوهش</span><h1>ده راه برای دیدن تاریخ شعر فارسی با داده</h1><p>هر صفحه با یک پاسخ روشن آغاز می‌شود، سپس شواهد کمی، روش، جدول داده و محدودیت‌های تفسیر را ارائه می‌کند.</p><div class="hero-actions"><a class="primary" href="/atlas/#topics">مشاهده نمودارهای تعاملی</a><a href="/methodology/">روش‌شناسی مشترک</a></div></header><section class="research-index-grid">${researchIndexItems}</section>`,
+    content: `<header class="article-hero"><span class="kicker">مرکز پژوهش</span><h1>یازده راه برای دیدن تاریخ شعر فارسی با داده</h1><p>هر صفحه با یک پاسخ روشن آغاز می‌شود، سپس شواهد کمی، روش، جدول داده و محدودیت‌های تفسیر را ارائه می‌کند.</p><div class="hero-actions"><a class="primary" href="/atlas/#topics">مشاهده نمودارهای تعاملی</a><a href="/methodology/">روش‌شناسی مشترک</a></div></header><section class="research-index-grid">${researchIndexItems}</section>`,
   }));
 
   for (const page of researchPages) {
     const evidence = publishedResearchEvidence(page);
     const r = evidence.values;
     const reuse = researchReuse[page.id];
+    const pageImage = page.image || `/og/og-${page.id}.png`;
+    const studyDataset = page.id === 'computational-aesthetics' ? {
+      '@type': 'Dataset', '@id': `${siteUrl}${page.path}#dataset`, name: 'دادهٔ پژوهش زیبایی‌شناسی محاسباتی شعر فارسی',
+      description: page.description, url: absolute(page.path), inLanguage: 'fa', isAccessibleForFree: true,
+      creator: { '@id': `${siteUrl}/#hossein-karimi` }, version: PUBLICATION.version,
+      datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
+      license: absolute('/attributions/'), temporalCoverage: 'سده سوم تا پانزدهم هجری',
+      measurementTechnique: ['ارزیابی هشت شاخص و امتیاز نهایی با GPT-5.6-sol', 'انتخاب ده واحد دارای بالاترین امتیاز درون هر شاعر'],
+      variableMeasured: computationalAesthetics.dimensions.map((dimension) => dimension.label),
+      additionalProperty: [
+        { '@type': 'PropertyValue', name: 'نوع ارزیابی', value: 'ارزیابی ماشینی؛ ارزیابی انسانی نیست' },
+        { '@type': 'PropertyValue', name: 'تعداد رکورد منتشرشده', value: computationalAesthetics.records.length },
+        { '@type': 'PropertyValue', name: 'تعداد شاعر یا پدیدآورنده', value: computationalAesthetics.poets.length },
+      ],
+      distribution: [
+        { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/computational-aesthetics.csv'), name: 'نتایج ردیفی CSV' },
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/computational-aesthetics.json'), name: 'نتایج و پروفایل‌های JSON' },
+      ],
+    } : null;
     const schema = {
       '@type': 'Article', '@id': `${siteUrl}${page.path}#article`, headline: page.title, description: page.description,
-      url: absolute(page.path), image: absolute(`/og/og-${page.id}.png`), inLanguage: 'fa-IR', datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
+      url: absolute(page.path), image: absolute(pageImage), inLanguage: 'fa-IR', datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
       author: { '@id': `${siteUrl}/#hossein-karimi` }, publisher: { '@id': `${siteUrl}/#hossein-karimi` },
       isPartOf: { '@id': `${siteUrl}/#website` }, about: page.keywords,
       mainEntityOfPage: absolute(page.path),
       citation: [absolute('/methodology/'), absolute('/data/')],
+      ...(studyDataset ? { mainEntity: { '@id': studyDataset['@id'] } } : {}),
     };
+    const dataSection = page.id === 'computational-aesthetics'
+      ? renderComputationalAestheticsExplorer()
+      : `<section id="data"><span class="kicker">جدول داده</span><h2>خلاصه عددی قابل جست‌وجو</h2><p>جدول زیر همان اعداد اصلی نمودارها را به‌صورت متنی و قابل خواندن برای موتورهای جست‌وجو، ابزارهای کمکی و پژوهشگران ارائه می‌کند.</p>${renderTable(r.tableHeaders, r.tableRows)}</section>`;
+    const jsonReuse = page.id === 'computational-aesthetics'
+      ? '/api/computational-aesthetics.json'
+      : '/api/research-findings.json';
+    const interactiveHref = page.id === 'computational-aesthetics'
+      ? '#data'
+      : `/atlas/#${page.anchor}`;
+    const interactiveLabel = page.id === 'computational-aesthetics'
+      ? 'کاوش پروفایل‌های شاعر'
+      : 'بازکردن نمودار تعاملی';
     const content = `<article>
-<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${page.qualification}</p></div><div class="hero-actions"><a class="primary" href="/atlas/#${page.anchor}">بازکردن نمودار تعاملی</a><a href="/methodology/">روش‌شناسی</a></div></header>
+<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${page.qualification}</p></div><div class="hero-actions"><a class="primary" href="${interactiveHref}">${interactiveLabel}</a><a href="/methodology/">روش‌شناسی</a></div></header>
 <section id="results"><span class="kicker">شاهد محاسباتی و واحد تحلیل</span><h2>چه چیزی محاسبه شد؟</h2>${renderMetrics(r.metrics)}<ol class="finding-list">${r.findings.map((f) => `<li>${f}</li>`).join('')}</ol></section>
-<section id="data"><span class="kicker">جدول داده</span><h2>خلاصه عددی قابل جست‌وجو</h2><p>جدول زیر همان اعداد اصلی نمودارها را به‌صورت متنی و قابل خواندن برای موتورهای جست‌وجو، ابزارهای کمکی و پژوهشگران ارائه می‌کند.</p>${renderTable(r.tableHeaders, r.tableRows)}</section>
+${dataSection}
 <section id="method"><div class="method-grid"><div><span class="kicker">روش و عدم‌قطعیت</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div></section>
 <section id="interpretation"><span class="kicker">تفسیر ادبی</span><h2>این شاهد چه خوانشی را پیشنهاد می‌کند؟</h2><p>${page.answer}</p><p class="local-qualification">${page.qualification}</p></section>
-<section id="downloads"><span class="kicker">ممیزی و استفادهٔ دوباره</span><h2>داده، روش و موجودیت‌های مرتبط</h2><div class="hero-actions"><a class="primary" href="${reuse.download}" download>دانلود مستقیم شاهد CSV</a><a href="/api/research-findings.json">شاهد پژوهش در JSON</a><a href="/methodology/">روش‌شناسی مشترک</a><a href="${reuse.entity}">${reuse.entityLabel}</a><a href="/data/">فهرست همهٔ داده‌ها</a></div></section>
+<section id="downloads"><span class="kicker">ممیزی و استفادهٔ دوباره</span><h2>داده، روش و موجودیت‌های مرتبط</h2><div class="hero-actions"><a class="primary" href="${reuse.download}" download>دانلود مستقیم شاهد CSV</a><a href="${jsonReuse}">شاهد پژوهش در JSON</a><a href="/methodology/">روش‌شناسی مشترک</a><a href="${reuse.entity}">${reuse.entityLabel}</a><a href="/data/">فهرست همهٔ داده‌ها</a></div></section>
 <section id="faq"><span class="kicker">پرسش‌های مرتبط</span><h2>خوانش درست نتیجه</h2><div class="faq-list">${faqItems.slice(1, 5).map((item) => `<details><summary>${item.question}</summary><p>${item.answer}</p></details>`).join('')}</div></section>
 ${citationBlock(page.title, page.path)}${relatedResearch(page.id)}</article>`;
     const faqsSchema = { '@type': 'FAQPage', mainEntity: faqItems.slice(1, 5).map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) };
     write(path.join('research', page.id, 'index.html'), pageShell({
       title: `${page.title} | از شعر تا داده`, description: page.description, pathname: page.path,
-      image: `/og/og-${page.id}.png`, type: 'article', schemas: [schema, faqsSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }, { name: page.shortTitle, path: page.path }])],
+      image: pageImage, type: 'article', schemas: [schema, ...(studyDataset ? [studyDataset] : []), faqsSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }, { name: page.shortTitle, path: page.path }])],
       keywords: page.keywords, breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'پژوهش‌ها', path: '/research/' }, { name: page.shortTitle, path: page.path }],
       toc: [{ id: 'results', label: 'شاهد محاسباتی' }, { id: 'data', label: 'جدول داده' }, { id: 'method', label: 'روش و محدودیت' }, { id: 'interpretation', label: 'تفسیر ادبی' }, { id: 'downloads', label: 'داده و پیوندها' }, { id: 'citation', label: 'استناد' }], content,
     }));
@@ -503,6 +659,9 @@ ${citationBlock(page.title, page.path)}${relatedResearch(page.id)}</article>`;
 
 function generatePoetPages() {
   const totalTexts = data.overview.texts;
+  const aestheticsByPoet = new Map(
+    computationalAesthetics.poets.map((profile) => [profile.name, profile]),
+  );
   const centuryGroups = new Map();
   for (const poet of data.overview.poets) {
     if (!centuryGroups.has(poet.century)) centuryGroups.set(poet.century, []);
@@ -520,6 +679,10 @@ function generatePoetPages() {
 
   for (const poet of data.overview.poets) {
     const slug = poetSlug(poet.name);
+    const aestheticsProfile = aestheticsByPoet.get(poet.name);
+    if (!aestheticsProfile) {
+      throw new Error(`Missing computational-aesthetics profile for canonical poet: ${poet.name}`);
+    }
     const peers = (centuryGroups.get(poet.century) || []).filter((p) => p.name !== poet.name).sort((a, b) => b.poems - a.poems).slice(0, 6);
     const share = poet.poems / totalTexts * 100;
     const image = poet.image?.src || '/og/og-poets.png';
@@ -536,12 +699,15 @@ function generatePoetPages() {
           { '@type': 'PropertyValue', name: 'تعداد عنوان کتاب', value: poet.books },
           { '@type': 'PropertyValue', name: 'کل واژه‌ها در پیکره', value: poet.totalWords },
           { '@type': 'PropertyValue', name: 'میانه تعداد واژه', value: poet.medianWords },
+          { '@type': 'PropertyValue', name: 'میانگین زیبایی‌شناختی محاسباتی ده بیت منتخب', value: aestheticsProfile.meanOverall },
+          { '@type': 'PropertyValue', name: 'مدل ارزیاب شاخص‌های زیبایی‌شناختی', value: computationalAesthetics.provenance.evaluator },
         ],
       },
     };
     const content = `<article><header class="poet-profile-hero">${poet.image ? `<figure><img src="${poet.image.src}" alt="تصویر ${poet.name}" width="320" height="320"><figcaption>منبع و مجوز تصویر در پایین صفحه آمده است.</figcaption></figure>` : `<div class="poet-profile-initial">${poet.name.slice(0, 1)}</div>`}<div><span class="kicker">پرونده داده‌ای شاعر</span><h1>${poet.name}</h1><p>سده ${faNumber(poet.century)} هجری</p><a class="primary" href="/atlas/#poets">بازکردن در نمای تعاملی شاعران</a></div></header>
 <section id="statistics"><span class="kicker">در پیکره</span><h2>آمار توصیفی ${poet.name}</h2>${renderMetrics([['تعداد متن', faNumber(poet.poems)], ['تعداد ابیات', faNumber(poet.totalCouplets)], ['عنوان کتاب', faNumber(poet.books)], ['کل واژه‌ها', faNumber(poet.totalWords)], ['میانه طول متن', `${faNumber(poet.medianWords)} واژه`], ['سهم از کل پیکره', faPercent(share)]])}<p class="notice">کم یا زیاد بودن تعداد متن، بیت یا واژه معادل اهمیت ادبی شاعر نیست؛ این اعداد فقط پوشش داده را نشان می‌دهند.</p></section>
 <section id="records"><span class="kicker">دامنه رکورد</span><h2>رکوردها و آثار در دسترس</h2><p>artifact منتشرشده برای ${poet.name} شامل ${faNumber(poet.poems)} رکورد متنی در ${faNumber(poet.books)} عنوان کتاب است. نام تک‌تک آثار در این خلاصهٔ عمومی نگهداری نشده و این صفحه عنوانی را حدس نمی‌زند.</p><div class="hero-actions"><a href="/downloads/poets.csv" download>دانلود رکورد خلاصه شاعر</a><a href="/api/poets.json">نسخه JSON</a></div></section>
+${renderComputationalAestheticsProfile(aestheticsProfile)}
 <section id="context"><span class="kicker">هم‌دوره‌ها در پیکره</span><h2>شاعران دیگر سده ${faNumber(poet.century)}</h2><div class="tag-links">${peers.map((p) => `<a href="/poets/${poetSlug(p.name)}/">${p.name}</a>`).join('') || '<span>برای این سده شاعر دیگری در پیکره ثبت نشده است.</span>'}</div></section>
 <section id="research"><span class="kicker">پژوهش‌های مرتبط</span><h2>شواهدی برای ادامهٔ بررسی</h2><div class="tag-links"><a href="/research/stylometry/">اثر انگشت سبکی و نامتعارف‌ها</a><a href="/research/intertextuality/">پیوندهای متنی شاعران</a><a href="/research/attribution/">انتساب و اعتبار پیکره</a><a href="/centuries/${poet.century}/">زمینهٔ سدهٔ منتسب</a></div></section>
 <section id="interpretation"><span class="kicker">راهنمای خوانش</span><h2>این صفحه چه می‌گوید و چه نمی‌گوید؟</h2><p>این نمایه برای فهم ساختار پیکره ساخته شده است. برای قضاوت درباره سبک، دوره‌های زندگی، انتساب آثار یا جایگاه تاریخی ${poet.name} باید از نسخه‌ها و منابع تخصصی تاریخ ادبیات استفاده کرد.</p></section>
@@ -552,7 +718,7 @@ ${poet.image ? `<section class="image-credit"><h2>اعتبار تصویر</h2><p
       pathname: `/poets/${slug}/`, image, type: 'profile', schemas: [personSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'شاعران', path: '/poets/' }, { name: poet.name, path: `/poets/${slug}/` }])],
       keywords: [poet.name, `شعرهای ${poet.name}`, `شاعر سده ${faNumber(poet.century)}`, 'شعر فارسی'],
       breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'شاعران', path: '/poets/' }, { name: poet.name, path: `/poets/${slug}/` }],
-      toc: [{ id: 'statistics', label: 'آمار پیکره' }, { id: 'records', label: 'رکوردها و آثار' }, { id: 'context', label: 'شاعران هم‌دوره' }, { id: 'research', label: 'پژوهش مرتبط' }, { id: 'interpretation', label: 'راهنمای خوانش' }, { id: 'citation', label: 'استناد' }], content,
+      toc: [{ id: 'statistics', label: 'آمار پیکره' }, { id: 'records', label: 'رکوردها و آثار' }, { id: 'computational-aesthetics', label: 'زیبایی‌شناسی محاسباتی' }, { id: 'context', label: 'شاعران هم‌دوره' }, { id: 'research', label: 'پژوهش مرتبط' }, { id: 'interpretation', label: 'راهنمای خوانش' }, { id: 'citation', label: 'استناد' }], content,
     }));
   }
 }
@@ -563,13 +729,14 @@ function generateUtilityPages() {
     title: 'روش‌شناسی تحلیل داده‌های شعر فارسی | از شعر تا داده', description: 'توضیح شفاف نمونه‌گیری متوازن، مدل موضوعی، استعاره، شبکه، هوش مصنوعی، سبک‌سنجی، قالب، جغرافیای ادبی، چرخه عمر واژگان و محدودیت‌ها.',
     pathname: '/methodology/', image: '/og/og-methodology.png', schemas: [methodSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'روش‌شناسی', path: '/methodology/' }])],
     keywords: ['روش تحلیل شعر فارسی', 'علوم انسانی دیجیتال', 'آزمون جایگشتی', 'سبک‌سنجی'], breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'روش‌شناسی', path: '/methodology/' }],
-    toc: [{ id: 'corpus', label: 'پیکره' }, { id: 'balance', label: 'کنترل عدم‌توازن' }, { id: 'models', label: 'مدل‌ها' }, { id: 'statistics', label: 'آمار' }, { id: 'reproducibility', label: 'بازتولید' }],
+    toc: [{ id: 'corpus', label: 'پیکره' }, { id: 'balance', label: 'کنترل عدم‌توازن' }, { id: 'models', label: 'مدل‌ها' }, { id: 'aesthetics', label: 'زیبایی‌شناسی محاسباتی' }, { id: 'statistics', label: 'آمار' }, { id: 'reproducibility', label: 'بازتولید' }],
     content: `<article><header class="article-hero"><span class="kicker">شفافیت پژوهش</span><h1>از داده خام تا نتیجه قابل دفاع</h1><p>این صفحه توضیح می‌دهد هر عدد چگونه ساخته شده، کجا قابل اعتماد است و کجا باید با احتیاط خوانده شود.</p></header>
 <section id="corpus"><h2>۱. واحد تحلیل و پیکره</h2><p>هر ردیف فایل اصلی یک متن یا شعر کامل است و ستون‌های شاعر، سده، کتاب، عنوان و متن را دارد. پیکره شامل ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر است. بیت با جفت‌کردن مصراع‌های جداشده در متن منبع و گردکردن واحد پایانیِ فرد در سطح هر رکورد شمارش شده است. برچسب سده، دوره زندگی شاعر را نشان می‌دهد و تاریخ دقیق سرایش نیست.</p></section>
 <section id="balance"><h2>۲. کنترل عدم‌توازن</h2><p>حجم آثار شاعران بسیار متفاوت است. برای جلوگیری از سلطه شاعران پرحجم، تحلیل‌های تاریخی از نمونه‌گیری سقف‌دار، میانگین برابر شاعران یا وزن‌دهی در سطح شاعر استفاده می‌کنند. شمار خام فقط در بخش توصیفی نمایش داده می‌شود.</p></section>
 <section id="models"><h2>۳. مدل‌های محاسباتی</h2><div class="definition-grid"><div><strong>پرسش‌های واژه‌محور</strong><p>شمارش فرهنگ‌های کوچک، نرخ شاعرمتوازن و پنجرهٔ هشت‌واژه‌ای؛ برای پاسخ توصیفی، نه داوری معنایی قطعی.</p></div><div><strong>مدل موضوعی</strong><p>کشف هم‌رخدادی واژه‌ها و تفسیر یازده محور موضوعی.</p></div><div><strong>رانش معنایی</strong><p>مقایسه همسایگان واژگانی استعاره‌ها در دوره‌های مختلف.</p></div><div><strong>شبکهٔ پیوند متنی</strong><p>ترکیب عبارت‌های نادر، TF–IDF و شباهت موضوعی؛ نام تخصصی این حوزه بینامتنیت است.</p></div><div><strong>سبک‌سنجی</strong><p>ویژگی‌های نویسه‌ای و واژگانی برای شناسایی امضای شاعر.</p></div><div><strong>جغرافیای ادبی</strong><p>مقایسه خاستگاه، کانون فعالیت و مسیر تقریبی با دوره، سبک و شبکه.</p></div><div><strong>چرخه عمر واژه</strong><p>فراوانی متوازن شاعر، اوج، افت تا نصف و سانسور راست در پایان پیکره.</p></div></div></section>
-<section id="statistics"><h2>۴. معناداری و اندازه اثر</h2><p>p-value به‌تنهایی گزارش نمی‌شود. آزمون‌های جایگشتی، اصلاح چندآزمونی، اندازه اثر، بازه اطمینان و تحلیل حساسیت در کنار تفسیر کیفی استفاده شده‌اند. در شبکه، QAP وابستگی میان یال‌ها را بهتر از آزمون‌های مستقل کنترل می‌کند.</p></section>
-<section id="reproducibility"><h2>۵. بازتولید و ممیزی</h2><p>خروجی‌های ماشین‌خوان، فرهنگ فیلدها و تعریف شمارش در <a href="/data/">صفحه داده</a> در دسترس‌اند. فایل‌های CITATION.cff و codemeta.json نیز هویت و نسخه پروژه را ثبت می‌کنند.</p></section>
+<section id="aesthetics"><h2>۴. زیبایی‌شناسی محاسباتی</h2><p>مدل GPT-5.6-sol برای هر واحد دو‌سطری هشت شاخص صفر تا صد تولید کرده است: نمادپردازی، تصویرسازی، زبان مجازی، موسیقی، فشردگی معنا، عمق عاطفی، ساختار و تازگی بیان. امتیاز نهایی از جمع وزن‌دار این هشت خروجی ساخته می‌شود و برای هر شاعر ده واحد دارای بالاترین امتیاز منتشر شده است.</p><p class="local-qualification"><strong>مرز روش:</strong> این فرایند ارزیابی انسانی نیست. خروجی مدل برای اولویت‌بندی خوانش نزدیک مناسب است، اما معیار جهان‌شمول زیبایی، ارزش ادبی یا برتری شاعر نیست.</p></section>
+<section id="statistics"><h2>۵. معناداری و اندازه اثر</h2><p>p-value به‌تنهایی گزارش نمی‌شود. آزمون‌های جایگشتی، اصلاح چندآزمونی، اندازه اثر، بازه اطمینان و تحلیل حساسیت در کنار تفسیر کیفی استفاده شده‌اند. در شبکه، QAP وابستگی میان یال‌ها را بهتر از آزمون‌های مستقل کنترل می‌کند.</p></section>
+<section id="reproducibility"><h2>۶. بازتولید و ممیزی</h2><p>خروجی‌های ماشین‌خوان، فرهنگ فیلدها و تعریف شمارش در <a href="/data/">صفحه داده</a> در دسترس‌اند. فایل‌های CITATION.cff و codemeta.json نیز هویت و نسخه پروژه را ثبت می‌کنند.</p></section>
 <section class="warning"><h2>اصل احتیاط</h2><p>مدل‌ها ابزار کشف الگو و تولید فرضیه‌اند. نتیجه محاسباتی باید با خوانش نزدیک متن، تاریخ ادبیات، نسخه‌شناسی و داوری متخصص ترکیب شود.</p></section>${citationBlock('روش‌شناسی تحلیل داده‌های شعر فارسی', '/methodology/')}</article>`,
   }));
 
@@ -591,7 +758,7 @@ function generateUtilityPages() {
 
   const datasetSchema = globalSchemas().dataset;
   write('data/index.html', pageShell({
-    title: 'داده‌ها و خروجی‌های قابل دانلود شعر فارسی | از شعر تا داده', description: 'دانلود JSON و CSV نتایج ده پژوهش روی ۵۴٬۵۲۴ متن فارسی؛ شامل پرسش‌های عمومی، جغرافیای شاعران، چرخهٔ واژگان و ممیزی انتساب.',
+    title: 'داده‌ها و خروجی‌های قابل دانلود شعر فارسی | از شعر تا داده', description: 'دانلود JSON و CSV نتایج یازده پژوهش روی ۵۴٬۵۲۴ متن فارسی؛ شامل پرسش‌های عمومی، جغرافیا، چرخهٔ واژگان، ممیزی انتساب و زیبایی‌شناسی محاسباتی.',
     pathname: '/data/', image: '/og/og-data.png', schemas: [datasetSchema, breadcrumbSchema([{ name: 'خانه', path: '/' }, { name: 'داده‌ها', path: '/data/' }])],
     keywords: ['دیتاست شعر فارسی', 'دانلود داده شعر فارسی', 'Persian poetry dataset', 'CSV شعر فارسی'], breadcrumbs: [{ name: 'خانه', path: '/' }, { name: 'داده‌ها', path: '/data/' }],
     toc: [{ id: 'downloads', label: 'دانلودها' }, { id: 'dictionary', label: 'فرهنگ داده' }, { id: 'license', label: 'منبع و مجوز' }],
@@ -603,6 +770,8 @@ function generateUtilityPages() {
 <a href="/downloads/intertext-edges.csv"><strong>لبه‌های پیوند متنی</strong><span>CSV · امتیازها و نوع شاهد</span></a>
 <a href="/downloads/public-questions-analysis.csv"><strong>ده پرسش عمومی شعر فارسی</strong><span>CSV · دل و عقل، شب و روز، رنگ، پرنده و جغرافیا</span></a>
 <a href="/api/public-questions.json"><strong>پروندهٔ ساخت‌یافتهٔ پرسش‌ها</strong><span>JSON · پاسخ، روش، محدودیت و دادهٔ نمودار</span></a>
+<a href="/downloads/computational-aesthetics.csv"><strong>زیبایی‌شناسی محاسباتی شاعران</strong><span>CSV · ۶۷۰ بیت منتخب و هشت شاخص مدل</span></a>
+<a href="/api/computational-aesthetics.json"><strong>پروفایل زیبایی‌شناختی شاعران</strong><span>JSON · رکوردها، میانگین‌ها، منشأ و مدل ارزیاب</span></a>
 <a href="/downloads/attribution-corpus-audit.csv"><strong>ممیزی انتساب و کیفیت پیکره</strong><span>CSV · نثر آلوده، متن کوتاه و اولویت بازبینی</span></a>
 <a href="/downloads/stylometry-anomalies.csv"><strong>متن‌های نامتعارف</strong><span>CSV · علت و نمره دورافتادگی</span></a>
 <a href="/downloads/forms-comparison.csv"><strong>مقایسه قالب‌های شعر</strong><span>CSV · غزل، قصیده، رباعی و مثنوی</span></a>
@@ -634,7 +803,7 @@ function writeCsv(file, headers, rows) {
 }
 function generateMachineReadable() {
   const summary = versionObject({
-    meta: { ...data.meta, generatedFrom: 'ده مطالعهٔ داده‌محور دربارهٔ پرسش‌های عمومی، مضامین، استعاره، پیوند متنی، تشخیص سده، سبک‌سنجی، قالب‌ها، جغرافیای ادبی، چرخهٔ واژگان و سنجش انتساب', siteUrl, buildDate, language: 'fa-IR', license: 'See ATTRIBUTIONS.md and LICENSE' },
+    meta: { ...data.meta, generatedFrom: 'یازده مطالعهٔ داده‌محور دربارهٔ پرسش‌های عمومی، مضامین، استعاره، پیوند متنی، تشخیص سده، سبک‌سنجی، قالب‌ها، جغرافیای ادبی، چرخهٔ واژگان، سنجش انتساب و زیبایی‌شناسی محاسباتی', siteUrl, buildDate, language: 'fa-IR', license: 'See ATTRIBUTIONS.md and LICENSE' },
     corpus: { texts: data.overview.texts, poets: data.overview.poets.length, books: data.overview.books, couplets: data.overview.couplets, words: data.overview.words, centuries: data.overview.centuries },
     research: researchPages.map((page) => ({ id: page.id, title: page.title, url: absolute(page.path), answer: page.answer, keywords: page.keywords })),
     keyResults: {
@@ -666,6 +835,7 @@ function generateMachineReadable() {
   write('api/lexical-life.json', JSON.stringify(versionObject(lexicalResearch), null, 2));
   write('api/attribution.json', JSON.stringify(versionObject(attributionResearch), null, 2));
   write('api/public-questions.json', JSON.stringify(versionObject(publicQuestionsResearch), null, 2));
+  write('api/computational-aesthetics.json', JSON.stringify(versionObject(computationalAesthetics), null, 2));
   write('CITATION.cff', fs.readFileSync(path.join(root, 'CITATION.cff'), 'utf8'));
   write('codemeta.json', fs.readFileSync(path.join(root, 'codemeta.json'), 'utf8'));
   write('CHANGELOG.md', fs.readFileSync(path.join(root, 'CHANGELOG.md'), 'utf8'));
@@ -677,6 +847,24 @@ function generateMachineReadable() {
   writeCsv('downloads/stylometry-anomalies.csv', ['شاعر', 'سده', 'کتاب', 'عنوان', 'تعداد واژه', 'علت', 'robustZ', 'صدک', 'نمونه متن'], data.stylometry.anomalies.map((a) => [a.poet, a.century, a.book, a.title, a.words, a.reason, a.robustZ, a.percentile, a.snippet]));
   writeCsv('downloads/century-model-recall.csv', ['سده', 'بازیابی'], data.centuryModel.labels.map((label, i) => [label, data.centuryModel.recall[i]]));
   writeCsv('downloads/forms-comparison.csv', ['قالب', 'تعداد متن', 'تعداد شاعر', 'سده تحت پوشش', 'میانه واژه', 'میانه بیت', 'بازیابی مدل'], formResearch.formats.map((item) => [item.name, item.texts, item.poets, item.centuries, item.medianWords, item.medianCouplets, item.recall]));
+  writeCsv(
+    'downloads/computational-aesthetics.csv',
+    [
+      'poet', 'poet_slug', 'source_poet_label', 'attributed_century',
+      'within_poet_rank', 'source_record_id', 'book_title', 'poem_title',
+      'hemistich_1', 'hemistich_2', 'symbolism_score', 'imagery_score',
+      'figurative_score', 'music_score', 'compression_score', 'emotion_score',
+      'structure_score', 'novelty_score', 'overall_score', 'within_poet_percentile',
+    ],
+    computationalAesthetics.records.map((record) => [
+      record.poet_display, record.poet_slug, record.source_poet_display, record.century,
+      record.poet_rank, record.id, record.book_title, record.poem_title,
+      record.hemistich1, record.hemistich2, record.symbolism_score, record.imagery_score,
+      record.figurative_score, record.music_score, record.compression_score,
+      record.emotion_score, record.structure_score, record.novelty_score,
+      record.overall_score, record.poet_percentile,
+    ]),
+  );
 }
 
 function generateDownloadManifest() {
@@ -764,7 +952,7 @@ function patchAtlas() {
     .replace('<title>از شعر تا داده | تحلیل تعاملی شعر فارسی و هوش مصنوعی</title>', '<title>اطلس کاوش شعر فارسی | از شعر تا داده</title>')
     .replace(
       '<meta name="description" content="روایتی داده‌محور از دگرگونی شعر فارسی در سیزده سده، با مسیرهای جدا برای خوانندگان عمومی، پژوهشگران ادبی، پژوهشگران داده و کاوش مستقیم در اطلس." />',
-      '<meta name="description" content="اطلس تعاملی ده پژوهش روی ۵۴٬۵۲۴ متن از ۶۷ شاعر فارسی؛ برای کاوش شاعران، سده‌های منتسب، مضمون‌ها، استعاره‌ها، روش‌شناسی و داده‌های قابل دانلود." />',
+      '<meta name="description" content="اطلس تعاملی یازده پژوهش روی ۵۴٬۵۲۴ متن از ۶۷ شاعر فارسی؛ برای کاوش شاعران، سده‌های منتسب، مضمون‌ها، استعاره‌ها، زیبایی‌شناسی محاسباتی، روش‌شناسی و داده‌های قابل دانلود." />',
     )
     .replace('<meta name="citation_title" content="از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی" />', '<meta name="citation_title" content="اطلس کاوش شعر فارسی" />')
     .replace('<div id="root"></div>', `<script type="application/json" id="publication-summary">${summary}</script><div id="root">${atlasFallback()}</div>`);

@@ -1,6 +1,8 @@
 import {
   AUDIENCE_PATHS,
   CORPUS_SUMMARY,
+  HAFEZ_AESTHETIC_AXES,
+  HAFEZ_AESTHETIC_COUPLETS,
   METAPHOR_SERIES,
   PAGES,
   POET_COVERAGE,
@@ -186,12 +188,43 @@ const audienceHome = () => `
   ${renderEvidencePair(POET_COVERAGE, { title: 'نمونهٔ شاهد مشترک برای همهٔ مسیرها', note: 'خواننده توضیح کوتاه می‌بیند؛ پژوهشگر به جدول و تعریف واحد تحلیل دسترسی مستقیم دارد.' })}
 `;
 
-const renderPoetPage = () => `
+const renderCoupletTable = (rows) => `
+  <div class="table-scroll" tabindex="0" aria-label="جدول ده بیت با بالاترین امتیاز محاسباتی حافظ">
+    <table>
+      <caption>بیت‌های حافظ در نمونهٔ واقعی پروتوتایپ؛ رتبه فقط درون همین شاعر است.</caption>
+      <thead><tr><th scope="col">رتبه</th><th scope="col">بیت</th><th scope="col">منبع</th><th scope="col">نمرهٔ کل</th></tr></thead>
+      <tbody>${rows.map((item) => `<tr><th scope="row">${number.format(item.rank)}</th><td><span class="couplet-lines">${escapeHtml(item.first)}<br>${escapeHtml(item.second)}</span></td><td>${escapeHtml(item.source)}</td><td>${number.format(item.score)}</td></tr>`).join('')}</tbody>
+    </table>
+  </div>`;
+
+const renderAestheticDisclosure = () => `
+  <aside class="ai-disclosure" aria-labelledby="ai-disclosure-title">
+    <p class="eyebrow">منشأ ارزیابی</p>
+    <h3 id="ai-disclosure-title">این امتیازدهی انسانی نیست</h3>
+    <p>هشت شاخص توسط GPT‑5.6‑sol ارزیابی شده‌اند و نمرهٔ کل از ترکیب وزن‌دار همان خروجی‌ها ساخته شده است. امتیاز، داوری قطعی دربارهٔ زیبایی یا ارزش ادبی نیست.</p>
+    <a href="/methodology/">روش، وزن‌ها و محدودیت‌ها</a>
+  </aside>`;
+
+const renderPoetPage = (state) => {
+  const query = state.q.trim();
+  const rows = HAFEZ_AESTHETIC_COUPLETS.filter((item) => !query || `${item.first} ${item.second} ${item.source}`.includes(query));
+  return `
   <article class="entity-page">
     <header><p class="eyebrow">صفحهٔ نمونهٔ شاعر</p><h2>حافظ</h2><p class="lead">نمایی از حضور حافظ در پیکره، مسیرهای پژوهشی مرتبط و دسترسی به متن و روش.</p>${qualification('تعداد متن و الگوهای محاسباتی، اندازهٔ پوشش همین پیکره‌اند و رتبهٔ ادبی یا نفوذ تاریخی را نشان نمی‌دهند.')}</header>
-    <div class="entity-summary"><dl><div><dt>سدهٔ منتسب</dt><dd>هشتم</dd></div><div><dt>متن در پیکره</dt><dd>${number.format(595)}</dd></div><div><dt>واحد زمانی</dt><dd>سدهٔ منتسب</dd></div></dl><div><h3>مسیرهای مرتبط</h3><a href="${makeUrl({ page:'metaphor' })}">استعاره‌ها</a><a href="${makeUrl({ page:'finding' })}">شباهت متنی</a><a href="/methodology/">روش‌شناسی</a></div></div>
-    ${renderEvidencePair(POET_COVERAGE, { title: 'مقایسهٔ پوشش نمونه', note: 'برای جلوگیری از برداشت رتبه‌ای، عنوان و قید در کنار نمودار و جدول تکرار شده‌اند.' })}
+    <div class="entity-summary"><dl><div><dt>سدهٔ منتسب</dt><dd>هشتم</dd></div><div><dt>میانگین ده انتخاب</dt><dd>${number.format(81.61)}</dd></div><div><dt>بیشترین نمره</dt><dd>${number.format(85.29)}</dd></div></dl><div><h3>مسیرهای مرتبط</h3><a href="${makeUrl({ page:'finding' })}">پژوهش زیبایی‌شناسی</a><a href="${makeUrl({ page:'metaphor' })}">استعاره‌ها</a><a href="/methodology/">روش‌شناسی</a></div></div>
+    <section class="prototype-study-section" aria-labelledby="poet-aesthetics-title">
+      <div class="section-heading"><div><p class="eyebrow">پروفایل هشت‌شاخصی</p><h2 id="poet-aesthetics-title">ده بیت با بالاترین امتیاز زیبایی‌شناختی محاسباتی</h2></div><p>میانگین هر شاخص فقط بر ده انتخاب همین شاعر محاسبه شده است.</p></div>
+      ${renderAestheticDisclosure()}
+      ${renderEvidencePair(HAFEZ_AESTHETIC_AXES, { title: 'میانگین هشت شاخص در ده انتخاب حافظ', note: 'نمودار میله‌ای و جدول از همان داده ساخته شده‌اند؛ مقیاس همهٔ شاخص‌ها صفر تا صد است.' })}
+      <form id="couplet-filter" class="inline-filter" role="search">
+        <label for="couplet-q">جست‌وجو در بیت و منبع</label>
+        <div class="search-row"><input id="couplet-q" name="q" value="${escapeHtml(state.q)}" placeholder="مثلاً شمع یا غزل ۲۹۴"><button type="submit">اعمال فیلتر</button></div>
+      </form>
+      <p class="result-status" role="status">${number.format(rows.length)} بیت نمایش داده می‌شود.</p>
+      ${rows.length ? renderCoupletTable(rows) : renderEmpty('در ده انتخاب حافظ، بیت یا منبعی مطابق این عبارت پیدا نشد.')}
+    </section>
   </article>`;
+};
 
 const renderCenturyPage = () => `
   <article class="entity-page">
@@ -207,22 +240,53 @@ const renderMetaphorPage = () => `
     ${renderEvidencePair(METAPHOR_SERIES, { title: 'روند نمونهٔ خانوادهٔ روشنایی و تاریکی', note: 'نمودار و جدول یک داده را بازنمایی می‌کنند؛ تفسیر ادبی نیازمند خوانش متن است.' })}
   </article>`;
 
-const renderFindingPage = () => `
+const aestheticsVariantIntro = (variant) => {
+  if (variant === 'explorer') return {
+    eyebrow: 'از شاعر و شاخص شروع کنید',
+    title: 'کاوشگر زیبایی‌شناسی محاسباتی',
+    copy: 'شاعر را پیدا کنید، هشت شاخص را کنار هم ببینید و از هر نتیجه به ده بیت و منبع آن برسید.',
+  };
+  if (variant === 'research') return {
+    eyebrow: 'ادعا، روش، منشأ، بازاستفاده',
+    title: 'ارزیابی محاسباتی زیبایی در ۶۷۶٬۷۴۸ بیت',
+    copy: 'نتیجه‌ها همراه با تعریف شاخص، وزن، منشأ ارزیابی مدل، محدودیت، جدول، citation و دادهٔ ماشین‌خوان منتشر می‌شوند.',
+  };
+  if (variant === 'audience') return {
+    eyebrow: 'یک پژوهش، چند مسیر خواندن',
+    title: 'زیبایی شعر را چگونه می‌توان محاسباتی کاوید؟',
+    copy: 'خواننده از یک بیت و توضیح روشن آغاز می‌کند؛ پژوهشگر به روش و محدودیت می‌رسد و کاربر داده CSV و JSON را دریافت می‌کند.',
+  };
+  return {
+    eyebrow: 'از یک پرسش دشوار آغاز کنیم',
+    title: 'آیا می‌توان زیبایی یک بیت را با داده کاوید؟',
+    copy: 'مدل هشت جنبهٔ قابل‌اندازه‌گیری را کنار هم می‌گذارد تا نامزدهای پُرتراکم را پیدا کند؛ نتیجه پایان نقد ادبی نیست، آغاز خوانش نزدیک است.',
+  };
+};
+
+const renderFindingPage = (state) => {
+  const intro = aestheticsVariantIntro(state.variant);
+  return `
   <article class="finding-page">
-    <header><p class="eyebrow">صفحهٔ نمونهٔ نتیجهٔ پژوهش</p><h2>شباهت متنی، نقطهٔ شروع بازبینی است</h2><p class="lead">نتیجهٔ کوتاه در کنار واحد تحلیل، محدودیت، جدول شواهد، citation و دانلود قابل بازتولید قرار می‌گیرد.</p>${qualification('شباهت آماری به‌تنهایی بینامتنیت، اقتباس، اثرگذاری یا انتساب را اثبات نمی‌کند.')}</header>
-    <div class="finding-grid"><section><h3>پاسخ کوتاه</h3><p>برخی جفت‌ها در بازنمایی زبانی نزدیک‌ترند و برای خوانش نزدیک اولویت بیشتری دارند.</p></section><section><h3>واحد تحلیل</h3><p>بردار ویژگی متن پس از نرمال‌سازی و کنترل اندازهٔ نمونه.</p></section><section><h3>اقدام بعدی</h3><p><a href="/methodology/">روش کامل</a> · <a href="/data/">CSV/JSON</a> · <button type="button" data-citation="finding">کپی citation</button></p></section></div>
-    ${renderEvidencePair(POET_COVERAGE, { title: 'نمونهٔ جدول شاهد', note: 'در نسخهٔ نهایی این بخش باید دادهٔ واقعی همان تحلیل را از منبع واحد دریافت کند.' })}
+    <header class="aesthetics-hero"><p class="eyebrow">${intro.eyebrow}</p><h2>${intro.title}</h2><p class="lead">${intro.copy}</p><div class="hero-actions"><a class="primary-action" href="${makeUrl({ page:'poet', q:'' })}">دیدن نمونهٔ حافظ</a><a href="/methodology/">روش پژوهش</a><a href="/data/">CSV و JSON</a></div>${qualification('نمره‌ها ارزیابی محاسباتی مدل در همین پیکره‌اند؛ جایگزین داوری انسانی، اهمیت ادبی یا اجماع زیبایی‌شناختی نیستند.')}</header>
+    <section class="study-facts" aria-label="دامنهٔ پژوهش"><dl><div><dt>بیت یکتای امتیازدهی‌شده</dt><dd>${number.format(676748)}</dd></div><div><dt>شاعر یا پدیدآورنده</dt><dd>${number.format(67)}</dd></div><div><dt>انتخاب درون هر شاعر</dt><dd>${number.format(10)}</dd></div><div><dt>شاخص محاسباتی</dt><dd>${number.format(8)}</dd></div></dl></section>
+    <section>
+      ${renderAestheticDisclosure()}
+      <div class="finding-grid"><section><h3>پاسخ کوتاه</h3><p>مدل می‌تواند بیت‌های پُرتراکم را برای خوانش نزدیک اولویت‌بندی کند، اما «زیباتر بودن» را به‌صورت انسانی اثبات نمی‌کند.</p></section><section><h3>واحد تحلیل</h3><p>بیت دو‌مصراعی؛ در شعر نو، دو سطر متوالی همان‌گونه که از پیکره استخراج شده است.</p></section><section><h3>مسیر بازبینی</h3><p><a href="/methodology/">روش و وزن‌ها</a> · <a href="/data/">CSV/JSON</a> · <button type="button" data-citation="aesthetics">کپی استناد</button></p></section></div>
+    </section>
+    ${renderEvidencePair(HAFEZ_AESTHETIC_AXES, { title: 'نمونهٔ پروفایل هشت‌شاخصی حافظ', note: 'نمونهٔ واقعی برای سنجش طراحی؛ مقدارها میانگین ده انتخاب حافظ و روی مقیاس صفر تا صد هستند.' })}
+    <section class="prototype-method"><h2>از ارزیابی مدل تا نتیجهٔ قابل‌بررسی</h2><ol><li><strong>ارزیابی هشت شاخص</strong><span>GPT‑5.6‑sol؛ بدون امتیازدهی انسانی</span></li><li><strong>ترکیب وزن‌دار</strong><span>وزن‌های مستند و نمرهٔ کل صفر تا صد</span></li><li><strong>کنترل کیفیت و تنوع</strong><span>ده انتخاب درون هر شاعر با منبع</span></li><li><strong>انتشار هم‌ارز</strong><span>صفحه، جدول، CSV و JSON از یک داده</span></li></ol></section>
   </article>`;
+};
 
 const renderLoading = () => `<section class="state-panel" aria-busy="true"><div class="skeleton wide"></div><div class="skeleton"></div><div class="skeleton"></div><p>در حال بارگذاری داده و توضیح روش…</p></section>`;
 const renderEmpty = (message = 'برای این انتخاب داده‌ای وجود ندارد.') => `<section class="state-panel"><h2>نتیجه‌ای پیدا نشد</h2><p>${escapeHtml(message)}</p><a href="${makeUrl({ state:'ready', q:'', century:'all' })}">پاک‌کردن فیلترها</a></section>`;
 const renderError = () => `<section class="state-panel error" role="alert"><h2>داده بارگذاری نشد</h2><p>آخرین دادهٔ تأییدشده نمایش داده نشده است؛ برای جلوگیری از عدد نادرست، نمودار پنهان مانده.</p><button type="button" id="retry-state">تلاش دوباره</button><a href="/data/">رفتن به داده‌های دانلودی</a></section>`;
 
 const renderReadyPage = (state) => {
-  if (state.page === 'poet') return renderPoetPage();
+  if (state.page === 'poet') return renderPoetPage(state);
   if (state.page === 'century') return renderCenturyPage();
   if (state.page === 'metaphor') return renderMetaphorPage();
-  if (state.page === 'finding') return renderFindingPage();
+  if (state.page === 'finding') return renderFindingPage(state);
   if (state.variant === 'explorer') return explorerHome(state);
   if (state.variant === 'research') return researchHome();
   if (state.variant === 'audience') return audienceHome();
@@ -236,6 +300,11 @@ const bindInteractions = () => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     setUrlState({ q: form.get('q'), century: form.get('century'), state: 'ready' });
+  });
+  document.querySelector('#couplet-filter')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    setUrlState({ q: form.get('q'), state: 'ready' });
   });
   document.querySelector('#copy-filter')?.addEventListener('click', async (event) => {
     try {

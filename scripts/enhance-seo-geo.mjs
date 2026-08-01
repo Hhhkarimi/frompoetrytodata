@@ -5,6 +5,7 @@ import { researchPages, faqItems } from '../src/content/siteContent.js';
 import { resolvePublicationOrigin } from './lib/publication-identity.mjs';
 import { buildPersianCitation, PUBLICATION } from '../src/publication/publication.js';
 import { persianDigits, persianNumber } from '../src/publication/persian-format.js';
+import { poetSlug as resolvePoetSlug } from '../src/entities/poet-identity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -74,28 +75,7 @@ const metaphorSlugs = {
   'قفس و زندان': 'cage-prison',
   'زنجیر و اسارت': 'chain-captivity',
 };
-const poetSlugs = {
-  'رودکی': 'rudaki', 'فردوسی': 'ferdowsi', 'کسایی': 'kasaei', 'ابوسعید ابوالخیر': 'abu-saeid-abul-kheir',
-  'ناصرخسرو': 'naser-khosrow', 'باباطاهر': 'baba-taher', 'هجویری': 'hojviri', 'اسدی توسی': 'asadi-tusi',
-  'فخرالدین اسعد گرگانی': 'fakhr-al-din-asad-gorgani', 'منوچهری': 'manuchehri', 'فرخی سیستانی': 'farrokhi-sistani',
-  'مسعود سعد سلمان': 'masud-sad-salman', 'عطار': 'attar', 'سنایی': 'sanai', 'انوری': 'anvari', 'خاقانی': 'khaghani',
-  'نظامی': 'nezami', 'خیام': 'khayyam', 'نصرالله منشی': 'nasrallah-monshi', 'باباافضل کاشانی': 'baba-afzal-kashani',
-  'مهستی گنجوی': 'mahasti-ganjavi', 'عبدالواسع جبلی': 'abd-al-vase-jabali', 'مولوی': 'rumi', 'سعدی': 'saadi',
-  'خواجوی کرمانی': 'khwaju-kermani', 'عراقی': 'iraqi', 'سیف فرغانی': 'seyf-farghani', 'شاه نعمت‌الله ولی': 'shah-nematollah-vali',
-  'اوحدی': 'owhadi', 'سلمان ساوجی': 'salman-savoji', 'امیرخسرو دهلوی': 'amir-khosrow-dehlavi', 'حافظ': 'hafez',
-  'عبید زاکانی': 'obeyd-zakani', 'شیخ محمود شبستری': 'mahmud-shabestari', 'هلالی جغتایی': 'helali-jaghatai', 'جامی': 'jami',
-  'محتشم کاشانی': 'mohtasham-kashani', 'عرفی': 'orfi', 'وحشی': 'vahshi', 'رضی‌الدین آرتیمانی': 'razi-al-din-artimani',
-  'شیخ بهایی': 'sheikh-bahaei', 'صائب تبریزی': 'saeb-tabrizi', 'بیدل دهلوی': 'bidel-dehlavi', 'فیض کاشانی': 'feiz-kashani',
-  'هاتف اصفهانی': 'hatef-esfahani', 'قاآنی': 'qaani', 'فروغی بسطامی': 'forughi-bastami', 'ملا هادی سبزواری': 'molla-hadi-sabzevari',
-  'ملک‌الشعرای بهار': 'malek-al-shoara-bahar', 'اقبال لاهوری': 'iqbal-lahori', 'احمد شاملو': 'ahmad-shamlou',
-  'سیمین بهبهانی': 'simin-behbahani', 'پروین اعتصامی': 'parvin-etesami', 'شهریار': 'shahriar',
-  'کامبیز صدیقی کسمایی': 'kambiz-sedighi-kasmaei', 'رهی معیری': 'rahi-moayeri', 'سهراب سپهری': 'sohrab-sepehri',
-  'فروغ فرخزاد': 'forough-farrokhzad', 'مهدی اخوان ثالث': 'mehdi-akhavan-sales', 'بهرام سالکی': 'bahram-saleki',
-  'شاطرعباس صبوحی': 'shater-abbas-sabouhi', 'شیون فومنی': 'shivon-foumani', 'نیما یوشیج (آوای آزاد)': 'nima-yushij',
-  'خلیل‌الله خلیلی': 'khalilullah-khalili', 'محمدحسن بارق شفیعی': 'mohammad-hasan-bareq-shafiei',
-  'ا لیار (جبار محمدی)': 'a-liyar-jabbar-mohammadi', 'عبدالقهار عاصی': 'abdul-qahar-asi',
-};
-const poetSlug = (name) => poetSlugs[name] || `poet-${Buffer.from(name).toString('hex').slice(0, 16)}`;
+const poetSlug = (name) => resolvePoetSlug(name) || `poet-${Buffer.from(name).toString('hex').slice(0, 16)}`;
 
 const logo = `<a class="seo-brand" href="/" aria-label="از شعر تا داده؛ صفحه اصلی">
 <svg viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="entity-logo" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b615c"/><stop offset="1" stop-color="#b9862d"/></linearGradient></defs><path d="M64 8 114 37v54L64 120 14 91V37Z" fill="url(#entity-logo)"/><path d="M64 28 87 56 64 99 41 56Z" fill="#fff8e8"/><circle cx="64" cy="60" r="8" fill="#9f2f38"/><path d="M64 68v23" stroke="#9f2f38" stroke-width="6" stroke-linecap="round"/></svg>
@@ -129,7 +109,12 @@ function globalGraph() {
       creator: { '@id': `${siteUrl}/#hossein-karimi` },
       version: PUBLICATION.version, datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
       license: absolute('/attributions/'),
-      distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/manifest.json'), name: 'نسخه، منشأ و checksum دانلودها' }],
+      measurementTechnique: ['ارزیابی هشت شاخص زیبایی‌شناختی با GPT-5.6-sol'],
+      distribution: [
+        { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/computational-aesthetics.csv'), name: 'نتایج زیبایی‌شناسی محاسباتی' },
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/computational-aesthetics.json'), name: 'پروفایل‌های زیبایی‌شناسی محاسباتی' },
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/manifest.json'), name: 'نسخه، منشأ و checksum دانلودها' },
+      ],
     },
   ];
 }
@@ -545,6 +530,7 @@ function generateMachineKnowledge() {
       '/api/lexical-life.json': { get: { summary: 'چرخه عمر و نیمه‌عمر واژگان', operationId: 'getLexicalLifecycle', responses: { 200: { description: 'Lexical lifecycle research', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/attribution.json': { get: { summary: 'ممیزی انتساب شعر و کیفیت پیکره', operationId: 'getPoetryAttribution', responses: { 200: { description: 'Poetry attribution research triage', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/public-questions.json': { get: { summary: 'ده پرسش عمومی درباره شعر فارسی', operationId: 'getPublicPoetryQuestions', responses: { 200: { description: 'Public-facing corpus questions and results', content: { 'application/json': { schema: { type: 'object' } } } } } } },
+      '/api/computational-aesthetics.json': { get: { summary: 'زیبایی‌شناسی محاسباتی و ده بیت منتخب هر شاعر', operationId: 'getComputationalAesthetics', responses: { 200: { description: 'Computational aesthetics records and canonical poet profiles', content: { 'application/json': { schema: { type: 'object' } } } } } } },
       '/api/knowledge-graph.json': { get: { summary: 'گراف دانش Schema.org', operationId: 'getKnowledgeGraph', responses: { 200: { description: 'Knowledge graph', content: { 'application/ld+json': { schema: { type: 'object' } } } } } } },
     },
   };
@@ -579,7 +565,7 @@ function generateDiscovery() {
     '/metaphors/', ...data.metaphors.items.map((m) => `/metaphors/${metaphorSlugs[m.name]}/`),
     '/centuries/', ...data.overview.centuryStats.map((c) => `/centuries/${c.century}/`),
   ];
-  const dataUrls = ['/openapi.json', '/api/atlas-summary.json', '/api/research-findings.json', '/api/poets.json', '/api/themes.json', '/api/metaphors.json', '/api/centuries.json', '/api/forms.json', '/api/geography.json', '/api/lexical-life.json', '/api/attribution.json', '/api/public-questions.json', '/api/content-index.json', '/api/knowledge-graph.json'];
+  const dataUrls = ['/openapi.json', '/api/atlas-summary.json', '/api/research-findings.json', '/api/poets.json', '/api/themes.json', '/api/metaphors.json', '/api/centuries.json', '/api/forms.json', '/api/geography.json', '/api/lexical-life.json', '/api/attribution.json', '/api/public-questions.json', '/api/computational-aesthetics.json', '/downloads/computational-aesthetics.csv', '/api/content-index.json', '/api/knowledge-graph.json'];
   const urlset = (urls, defaultPriority = '0.7') => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${escapeXml(absolute(u))}</loc><lastmod>${buildDate}</lastmod><changefreq>${u === '/' ? 'weekly' : 'monthly'}</changefreq><priority>${u === '/' ? '1.0' : defaultPriority}</priority></url>`).join('\n')}\n</urlset>`;
   write('sitemap-core.xml', urlset(core, '0.9'));
   write('sitemap-entities.xml', urlset(entities, '0.8'));
@@ -595,7 +581,7 @@ function generateDiscovery() {
 - [داده ممیزی انتساب](${absolute('/api/attribution.json')})
 - [ده پرسش عمومی](${absolute('/api/public-questions.json')})`);
   write('llms.txt', llmsExtended);
-  const llmsFull = `${llms}\n## ده مطالعهٔ پژوهشی\n${researchPages.map((p) => `### ${p.title}\n${p.answer}\nصفحه: ${absolute(p.path)}\n`).join('\n')}\n## یازده مضمون\n${data.topics.items.map((t) => `- ${t.name}: ${topicAnswer(t)} صفحه: ${absolute(`/themes/${topicSlugs[t.id]}/`)}`).join('\n')}\n\n## ده خانواده استعاری\n${data.metaphors.items.map((m) => `- ${m.name}: ${metaphorAnswer(m)} صفحه: ${absolute(`/metaphors/${metaphorSlugs[m.name]}/`)}`).join('\n')}\n\n## سده‌ها\n${data.overview.centuryStats.map((c) => `- سده ${faNumber(c.century)}: ${faNumber(c.texts)} متن، ${faNumber(c.poets)} شاعر. ${absolute(`/centuries/${c.century}/`)}`).join('\n')}\n\n## API\n- ${absolute('/api/content-index.json')}\n- ${absolute('/api/themes.json')}\n- ${absolute('/api/metaphors.json')}\n- ${absolute('/api/centuries.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/knowledge-graph.json')}\n`;
+  const llmsFull = `${llms}\n## یازده مطالعهٔ پژوهشی\n${researchPages.map((p) => `### ${p.title}\n${p.answer}\nصفحه: ${absolute(p.path)}\n`).join('\n')}\n## یازده مضمون\n${data.topics.items.map((t) => `- ${t.name}: ${topicAnswer(t)} صفحه: ${absolute(`/themes/${topicSlugs[t.id]}/`)}`).join('\n')}\n\n## ده خانواده استعاری\n${data.metaphors.items.map((m) => `- ${m.name}: ${metaphorAnswer(m)} صفحه: ${absolute(`/metaphors/${metaphorSlugs[m.name]}/`)}`).join('\n')}\n\n## سده‌ها\n${data.overview.centuryStats.map((c) => `- سده ${faNumber(c.century)}: ${faNumber(c.texts)} متن، ${faNumber(c.poets)} شاعر. ${absolute(`/centuries/${c.century}/`)}`).join('\n')}\n\n## API\n- ${absolute('/api/content-index.json')}\n- ${absolute('/api/themes.json')}\n- ${absolute('/api/metaphors.json')}\n- ${absolute('/api/centuries.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/computational-aesthetics.json')}\n- ${absolute('/downloads/computational-aesthetics.csv')}\n- ${absolute('/api/knowledge-graph.json')}\n`;
   const llmsFullExtended = llmsFull
     .replace(llms, llmsExtended)
     .replace(`- ${absolute('/api/forms.json')}\n`, `- ${absolute('/api/forms.json')}\n- ${absolute('/api/geography.json')}\n- ${absolute('/api/lexical-life.json')}\n- ${absolute('/api/attribution.json')}\n- ${absolute('/api/public-questions.json')}\n`);
@@ -626,7 +612,8 @@ function patchExistingPages() {
 function validate() {
   const required = [
     'themes/index.html', 'metaphors/index.html', 'centuries/index.html', 'questions/index.html',
-    'api/themes.json', 'api/metaphors.json', 'api/centuries.json', 'api/geography.json', 'api/lexical-life.json', 'api/attribution.json', 'api/public-questions.json', 'api/content-index.json', 'api/knowledge-graph.json',
+    'api/themes.json', 'api/metaphors.json', 'api/centuries.json', 'api/geography.json', 'api/lexical-life.json', 'api/attribution.json', 'api/public-questions.json', 'api/computational-aesthetics.json', 'api/content-index.json', 'api/knowledge-graph.json',
+    'downloads/computational-aesthetics.csv',
     'openapi.json', 'citation.json', 'citation.bib', 'llms-data.txt', 'sitemap-core.xml', 'sitemap-entities.xml',
   ];
   const missing = required.filter((file) => !fs.existsSync(path.join(dist, file)));

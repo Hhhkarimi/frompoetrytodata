@@ -121,6 +121,7 @@ const required = [
   'api/lexical-life.json', 'research/lexical-life/index.html', 'downloads/lexical-lifecycle.csv', 'downloads/lexical-examples.csv', 'og/og-lexical-life.png',
   'api/attribution.json', 'research/attribution/index.html', 'downloads/attribution-corpus-audit.csv', 'og/og-attribution.png',
   'api/public-questions.json', 'research/public-questions/index.html', 'downloads/public-questions-analysis.csv', 'og/og-public-questions.png',
+  'api/computational-aesthetics.json', 'research/computational-aesthetics/index.html', 'downloads/computational-aesthetics.csv',
   'themes/index.html', 'metaphors/index.html', 'centuries/index.html', 'questions/index.html',
   'icon-192.png', 'icon-512.png', 'apple-touch-icon.png',
 ];
@@ -128,7 +129,7 @@ for (const requiredFile of required) {
   if (!fs.existsSync(path.join(dist, requiredFile))) errors.push(`${requiredFile}: وجود ندارد`);
 }
 
-for (const jsonFile of ['openapi.json','citation.json','manifest.webmanifest','api/atlas-summary.json','api/content-index.json','api/knowledge-graph.json','api/themes.json','api/metaphors.json','api/centuries.json','api/forms.json','api/geography.json','api/lexical-life.json','api/attribution.json','api/public-questions.json']) {
+for (const jsonFile of ['openapi.json','citation.json','manifest.webmanifest','api/atlas-summary.json','api/content-index.json','api/knowledge-graph.json','api/themes.json','api/metaphors.json','api/centuries.json','api/forms.json','api/geography.json','api/lexical-life.json','api/attribution.json','api/public-questions.json','api/computational-aesthetics.json']) {
   const target = path.join(dist, jsonFile);
   if (!fs.existsSync(target)) continue;
   try { JSON.parse(fs.readFileSync(target, 'utf8')); }
@@ -170,7 +171,7 @@ const expectedCounts = {
   centuries: fs.readdirSync(path.join(dist, 'centuries'), { withFileTypes: true }).filter((x) => x.isDirectory()).length,
   poets: fs.readdirSync(path.join(dist, 'poets'), { withFileTypes: true }).filter((x) => x.isDirectory()).length,
 };
-if (expectedCounts.research !== 10) errors.push(`تعداد صفحات پژوهش ${expectedCounts.research} است؛ انتظار 10`);
+if (expectedCounts.research !== 11) errors.push(`تعداد صفحات پژوهش ${expectedCounts.research} است؛ انتظار 11`);
 if (expectedCounts.themes !== 11) errors.push(`تعداد صفحات مضمون ${expectedCounts.themes} است؛ انتظار 11`);
 if (expectedCounts.metaphors !== 10) errors.push(`تعداد صفحات استعاره ${expectedCounts.metaphors} است؛ انتظار 10`);
 if (expectedCounts.centuries !== 13) errors.push(`تعداد صفحات سده ${expectedCounts.centuries} است؛ انتظار 13`);

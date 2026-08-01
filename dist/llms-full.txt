@@ -39,9 +39,9 @@
 ## استناد
 کریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». https://frompoetrytodata.vercel.app/
 
-## ده مطالعهٔ پژوهشی
+## یازده مطالعهٔ پژوهشی
 ### تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم
-ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ canonical ساخته می‌شوند.
+ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ مرجع ساخته می‌شوند.
 صفحه: https://frompoetrytodata.vercel.app/research/topics/
 
 ### تولد، خاموشی و دگرگونی استعاره‌ها در شعر فارسی
@@ -77,8 +77,12 @@
 صفحه: https://frompoetrytodata.vercel.app/research/attribution/
 
 ### ده پرسش جذاب از هزار سال شعر فارسی
-در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ canonical هر پرسش نمایش داده می‌شوند.
+در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ مرجع هر پرسش نمایش داده می‌شوند.
 صفحه: https://frompoetrytodata.vercel.app/research/public-questions/
+
+### زیبایی‌شناسی محاسباتی شعر فارسی
+این مدل می‌تواند بیت‌های پُرتراکم را برای خوانش نزدیک اولویت‌بندی کند، اما امتیاز آن داوری انسانی یا حقیقت قطعی دربارهٔ زیبایی و ارزش ادبی نیست.
+صفحه: https://frompoetrytodata.vercel.app/research/computational-aesthetics/
 
 ## یازده مضمون
 - اخلاق، حکمت و خرد: مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳). صفحه: https://frompoetrytodata.vercel.app/themes/ethics-wisdom/
@@ -131,4 +135,6 @@
 - https://frompoetrytodata.vercel.app/api/lexical-life.json
 - https://frompoetrytodata.vercel.app/api/attribution.json
 - https://frompoetrytodata.vercel.app/api/public-questions.json
+- https://frompoetrytodata.vercel.app/api/computational-aesthetics.json
+- https://frompoetrytodata.vercel.app/downloads/computational-aesthetics.csv
 - https://frompoetrytodata.vercel.app/api/knowledge-graph.json

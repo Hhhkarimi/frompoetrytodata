@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "publicationVersion": "7.0.0",
-  "modifiedDate": "2026-07-29",
+  "modifiedDate": "2026-08-01",
   "items": [
     {
       "type": "website",
@@ -9,15 +9,15 @@
       "url": "https://frompoetrytodata.vercel.app/",
       "summary": "اطلس تعاملی تحلیل داده‌های شعر فارسی.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
       "title": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
       "url": "https://frompoetrytodata.vercel.app/research/topics/",
-      "summary": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ canonical ساخته می‌شوند.",
+      "summary": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ مرجع ساخته می‌شوند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -25,7 +25,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/metaphors/",
       "summary": "هیچ‌یک از خانواده‌های استعاری بررسی‌شده کاملاً ناپدید نمی‌شوند؛ الگوی غالب، خاموشی موقت، بازگشت و جابه‌جایی میدان معنایی است. تراکم کلی تصاویر میان دوره‌های تاریخی تفاوت معنادار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -33,7 +33,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/intertextuality/",
       "summary": "شباهت عبارتی، واژگانی و موضوعی با افزایش فاصله زمانی شاعران کاهش می‌یابد؛ اما هر پیوند فقط قرابت محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -41,7 +41,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/century-ai/",
       "summary": "هوش مصنوعی می‌تواند نشانه‌های زمانی را در زبان شعر بیابد، اما دقت ظاهراً بالا در تقسیم تصادفی ممکن است حاصل شناخت شاعر یا کتاب باشد. ارزیابی معتبر باید شاعر آزمون را کاملاً از آموزش حذف کند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -49,7 +49,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/stylometry/",
       "summary": "مدل نویسه‌ای در آزمون متوازن از خط مبنا بهتر عمل می‌کند؛ مقدارهای دقیق و تعریف نمونه از دادهٔ پژوهش در صفحهٔ شواهد نمایش داده می‌شوند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -57,7 +57,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/forms/",
       "summary": "قالب‌های بررسی‌شده در طول، ساختار و الگوی معنایی تفاوت دارند؛ اندازهٔ اثر دقیق و دامنهٔ نمونه از artifact پژوهش به صفحهٔ شواهد می‌آید.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -65,7 +65,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/geography/",
       "summary": "بخشی از شاعران پیکره در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ مشاهده‌شده میان دوره‌ها تفاوت دارد؛ عددها و آزمون‌ها مستقیماً از artifact جغرافیا نمایش داده می‌شوند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -73,7 +73,7 @@
       "url": "https://frompoetrytodata.vercel.app/research/lexical-life/",
       "summary": "چرخهٔ واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق؛ میانه، نمونهٔ مشاهده‌شده و موارد سانسور راست از artifact پژوهش محاسبه و نمایش داده می‌شوند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
@@ -81,15 +81,23 @@
       "url": "https://frompoetrytodata.vercel.app/research/attribution/",
       "summary": "پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد؛ شمار هشدارها از artifact ممیزی نمایش داده می‌شود.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "research",
       "title": "ده پرسش جذاب از هزار سال شعر فارسی",
       "url": "https://frompoetrytodata.vercel.app/research/public-questions/",
-      "summary": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ canonical هر پرسش نمایش داده می‌شوند.",
+      "summary": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ مرجع هر پرسش نمایش داده می‌شوند.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
+    },
+    {
+      "type": "research",
+      "title": "زیبایی‌شناسی محاسباتی شعر فارسی",
+      "url": "https://frompoetrytodata.vercel.app/research/computational-aesthetics/",
+      "summary": "این مدل می‌تواند بیت‌های پُرتراکم را برای خوانش نزدیک اولویت‌بندی کند، اما امتیاز آن داوری انسانی یا حقیقت قطعی دربارهٔ زیبایی و ارزش ادبی نیست.",
+      "language": "fa-IR",
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -97,7 +105,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/ethics-wisdom/",
       "summary": "مضمون محاسباتی «اخلاق، حکمت و خرد» در کل پیکره سهم ۱۰٫۸٪ دارد، در سده ۳ به بیشترین سهم خود یعنی ۱۸٫۲٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۱۳).",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -105,7 +113,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/epic-kingship-war/",
       "summary": "مضمون محاسباتی «حماسه، شاهی و جنگ» در کل پیکره سهم ۷٫۸٪ دارد، در سده ۴ به بیشترین سهم خود یعنی ۴۸٫۷٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۴۳۹).",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -113,7 +121,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/religion-sufism-praise/",
       "summary": "مضمون محاسباتی «دین، تصوف تعلیمی و مناقب» در کل پیکره سهم ۵٫۴٪ دارد، در سده ۵ به بیشترین سهم خود یعنی ۱۳٫۱٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -121,7 +129,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/soul-heart-romantic-bond/",
       "summary": "مضمون محاسباتی «جان، دل و پیوند عاشقانه» در کل پیکره سهم ۱۱٫۵٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۸٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -129,7 +137,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/sensory-existential-images/",
       "summary": "مضمون محاسباتی «تصویرهای حسی و وجودی» در کل پیکره سهم ۱۴٪ دارد، در سده ۱۱ به بیشترین سهم خود یعنی ۲۹٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۶۴۷).",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -137,7 +145,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/beloved-beauty-feast/",
       "summary": "مضمون محاسباتی «زیبایی معشوق و بزم» در کل پیکره سهم ۱۰٪ دارد، در سده ۱۳ به بیشترین سهم خود یعنی ۲۰٫۹٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -145,7 +153,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/nature-flower-spring/",
       "summary": "مضمون محاسباتی «طبیعت، گل و بهار» در کل پیکره سهم ۸٫۴٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -153,7 +161,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/night-time-life/",
       "summary": "مضمون محاسباتی «شب، زمان و گذر عمر» در کل پیکره سهم ۸٪ دارد، در سده ۱۴ به بیشترین سهم خود یعنی ۱۲٫۸٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -161,7 +169,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/mystical-romantic-love/",
       "summary": "مضمون محاسباتی «عشق عرفانی و عاشقانه» در کل پیکره سهم ۶٫۶٪ دارد، در سده ۱۵ به بیشترین سهم خود یعنی ۱۱٫۳٪ می‌رسد و روند بلندمدت افزایشی است (ρ = ۰.۳۹۳).",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -169,7 +177,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/cosmos-power-fortune/",
       "summary": "مضمون محاسباتی «کیهان، قدرت و بخت» در کل پیکره سهم ۱۰٫۹٪ دارد، در سده ۶ به بیشترین سهم خود یعنی ۱۸٫۵٪ می‌رسد و روند بلندمدت کاهشی است (ρ = -۰.۳۲۲).",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "theme",
@@ -177,7 +185,7 @@
       "url": "https://frompoetrytodata.vercel.app/themes/grief-separation/",
       "summary": "مضمون محاسباتی «غم، فراق و هجران» در کل پیکره سهم ۶٫۴٪ دارد، در سده ۱۲ به بیشترین سهم خود یعنی ۱۰٫۲٪ می‌رسد و روند یکنواخت و معنادار ثبت نشده است.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -185,7 +193,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/journey-road-destination/",
       "summary": "خانواده تصویری «راه، سفر و منزل» در ۲۸٫۶٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳۶٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۰ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -193,7 +201,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/flower-nightingale/",
       "summary": "خانواده تصویری «گل و بلبل» در ۲۴٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۸٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -201,7 +209,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/light-candle-darkness/",
       "summary": "خانواده تصویری «نور، شمع و تاریکی» در ۲۳٫۱٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -209,7 +217,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/blood-wound-dagger/",
       "summary": "خانواده تصویری «خون، زخم و خنجر» در ۲۳٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۴٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۳ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -217,7 +225,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/wine-cupbearer/",
       "summary": "خانواده تصویری «باده، شراب و ساقی» در ۱۹٫۹٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۲۲٫۴ رخداد در هر هزار واژه است و اوج پایدارش در سده ۸ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -225,7 +233,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/fire-flame-spark/",
       "summary": "خانواده تصویری «آتش، شعله و شرر» در ۲۰٫۲٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۹٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -233,7 +241,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/sea-wave-shore/",
       "summary": "خانواده تصویری «دریا، موج و ساحل» در ۱۶٫۸٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۱۷٫۶ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -241,7 +249,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/mirror-reflection/",
       "summary": "خانواده تصویری «آینه و بازتاب» در ۱۰٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۹٫۳ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -249,7 +257,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/cage-prison/",
       "summary": "خانواده تصویری «قفس و زندان» در ۴٫۷٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۵ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۴ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "metaphor",
@@ -257,7 +265,7 @@
       "url": "https://frompoetrytodata.vercel.app/metaphors/chain-captivity/",
       "summary": "خانواده تصویری «زنجیر و اسارت» در ۴٫۵٪ از شعرهای پیکره دیده شده، نرخ کلی آن ۳٫۱ رخداد در هر هزار واژه است و اوج پایدارش در سده ۱۱ قرار دارد.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -265,7 +273,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/3/",
       "summary": "۵۳۹ متن از ۱ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -273,7 +281,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/4/",
       "summary": "۷۳۰ متن از ۲ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -281,7 +289,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/5/",
       "summary": "۲٬۲۵۳ متن از ۹ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -289,7 +297,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/6/",
       "summary": "۱۰٬۹۹۰ متن از ۱۰ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -297,7 +305,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/7/",
       "summary": "۹٬۸۴۶ متن از ۵ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -305,7 +313,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/8/",
       "summary": "۶٬۷۰۹ متن از ۷ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -313,7 +321,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/9/",
       "summary": "۵۴۱ متن از ۲ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -321,7 +329,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/10/",
       "summary": "۲٬۷۳۰ متن از ۵ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -329,7 +337,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/11/",
       "summary": "۱۳٬۸۸۶ متن از ۳ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -337,7 +345,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/12/",
       "summary": "۱۹۴ متن از ۱ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -345,7 +353,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/13/",
       "summary": "۱٬۳۸۲ متن از ۳ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -353,7 +361,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/14/",
       "summary": "۴٬۲۱۲ متن از ۱۷ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "century",
@@ -361,7 +369,7 @@
       "url": "https://frompoetrytodata.vercel.app/centuries/15/",
       "summary": "۵۱۲ متن از ۲ شاعر.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -369,7 +377,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/rudaki/",
       "summary": "شاعر سده ۳ هجری؛ ۵۳۹ متن، ۱٬۰۴۷ بیت و ۱۳٬۸۰۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -377,7 +385,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/ferdowsi/",
       "summary": "شاعر سده ۴ هجری؛ ۶۱۶ متن، ۴۹٬۶۰۹ بیت و ۵۶۸٬۵۱۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -385,7 +393,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/kasaei/",
       "summary": "شاعر سده ۴ هجری؛ ۱۱۴ متن، ۳۰۷ بیت و ۴٬۴۷۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -393,7 +401,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/abu-saeid-abul-kheir/",
       "summary": "شاعر سده ۵ هجری؛ ۷۸۶ متن، ۱٬۵۸۹ بیت و ۲۱٬۷۳۱ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -401,7 +409,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/naser-khosrow/",
       "summary": "شاعر سده ۵ هجری؛ ۳۸۶ متن، ۱۰٬۹۱۱ بیت و ۱۸۷٬۴۳۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -409,7 +417,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/baba-taher/",
       "summary": "شاعر سده ۵ هجری؛ ۳۶۸ متن، ۷۶۴ بیت و ۹٬۱۳۱ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -417,7 +425,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/hojviri/",
       "summary": "شاعر سده ۵ هجری؛ ۲۱۰ متن، ۱٬۲۲۲ بیت و ۱۵۰٬۰۲۳ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -425,7 +433,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/asadi-tusi/",
       "summary": "شاعر سده ۵ هجری؛ ۱۴۴ متن، ۱۹٬۳۸۹ بیت و ۱۰۹٬۳۶۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -433,7 +441,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/fakhr-al-din-asad-gorgani/",
       "summary": "شاعر سده ۵ هجری؛ ۱۱۳ متن، ۸٬۹۸۳ بیت و ۱۱۰٬۶۲۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -441,7 +449,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/manuchehri/",
       "summary": "شاعر سده ۵ هجری؛ ۹۸ متن، ۲٬۸۱۶ بیت و ۳۹٬۶۱۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -449,7 +457,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/farrokhi-sistani/",
       "summary": "شاعر سده ۵ هجری؛ ۸۷ متن، ۲٬۹۵۲ بیت و ۴۰٬۹۶۷ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -457,7 +465,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/masud-sad-salman/",
       "summary": "شاعر سده ۵ هجری؛ ۶۱ متن، ۱٬۲۲۷ بیت و ۱۶٬۱۵۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -465,7 +473,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/attar/",
       "summary": "شاعر سده ۶ هجری؛ ۵٬۰۱۵ متن، ۹۸٬۲۸۹ بیت و ۱٬۴۰۵٬۱۷۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -473,7 +481,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/sanai/",
       "summary": "شاعر سده ۶ هجری؛ ۱٬۷۹۴ متن، ۲۶٬۱۰۹ بیت و ۳۵۳٬۰۷۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -481,7 +489,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/anvari/",
       "summary": "شاعر سده ۶ هجری؛ ۱٬۴۶۴ متن، ۱۳٬۳۰۸ بیت و ۱۷۷٬۳۶۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -489,7 +497,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/khaghani/",
       "summary": "شاعر سده ۶ هجری؛ ۱٬۳۶۵ متن، ۱۷٬۴۳۲ بیت و ۲۴۱٬۸۲۲ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -497,7 +505,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/nezami/",
       "summary": "شاعر سده ۶ هجری؛ ۳۷۸ متن، ۲۷٬۷۷۹ بیت و ۳۲۴٬۵۶۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -505,7 +513,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/khayyam/",
       "summary": "شاعر سده ۶ هجری؛ ۳۲۴ متن، ۷۱۵ بیت و ۲۰٬۲۹۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -513,7 +521,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/nasrallah-monshi/",
       "summary": "شاعر سده ۶ هجری؛ ۲۵۰ متن، ۸۱۸ بیت و ۸۵٬۰۹۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -521,7 +529,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/baba-afzal-kashani/",
       "summary": "شاعر سده ۶ هجری؛ ۲۰۲ متن، ۵۰۰ بیت و ۷٬۴۷۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -529,7 +537,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/mahasti-ganjavi/",
       "summary": "شاعر سده ۶ هجری؛ ۱۹۱ متن، ۳۸۲ بیت و ۵٬۳۸۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -537,7 +545,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/abd-al-vase-jabali/",
       "summary": "شاعر سده ۶ هجری؛ ۷ متن، ۳۲۰ بیت و ۵٬۲۶۳ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -545,7 +553,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/rumi/",
       "summary": "شاعر سده ۷ هجری؛ ۶٬۲۴۲ متن، ۶۵٬۹۷۲ بیت و ۹۲۳٬۶۹۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -553,7 +561,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/saadi/",
       "summary": "شاعر سده ۷ هجری؛ ۱٬۹۰۴ متن، ۱۶٬۱۰۲ بیت و ۲۳۳٬۰۴۳ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -561,7 +569,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/khwaju-kermani/",
       "summary": "شاعر سده ۷ هجری؛ ۹۳۲ متن، ۸٬۸۴۹ بیت و ۱۲۶٬۶۱۳ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -569,7 +577,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/iraqi/",
       "summary": "شاعر سده ۷ هجری؛ ۵۷۹ متن، ۵٬۷۸۹ بیت و ۷۶٬۲۹۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -577,7 +585,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/seyf-farghani/",
       "summary": "شاعر سده ۷ هجری؛ ۱۸۹ متن، ۲٬۷۵۸ بیت و ۳۹٬۹۹۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -585,7 +593,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/shah-nematollah-vali/",
       "summary": "شاعر سده ۸ هجری؛ ۲٬۷۰۱ متن، ۱۴٬۹۸۱ بیت و ۱۹۵٬۵۶۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -593,7 +601,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/owhadi/",
       "summary": "شاعر سده ۸ هجری؛ ۱٬۳۲۶ متن، ۱۴٬۶۷۴ بیت و ۲۰۳٬۸۳۱ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -601,7 +609,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/salman-savoji/",
       "summary": "شاعر سده ۸ هجری؛ ۸۹۷ متن، ۱۳٬۱۰۴ بیت و ۱۹۰٬۸۶۷ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -609,7 +617,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/amir-khosrow-dehlavi/",
       "summary": "شاعر سده ۸ هجری؛ ۸۲۵ متن، ۷٬۵۶۳ بیت و ۹۶٬۲۸۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -617,7 +625,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/hafez/",
       "summary": "شاعر سده ۸ هجری؛ ۵۹۵ متن، ۴٬۷۵۱ بیت و ۷۲٬۳۸۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -625,7 +633,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/obeyd-zakani/",
       "summary": "شاعر سده ۸ هجری؛ ۲۶۴ متن، ۲٬۹۲۵ بیت و ۳۸٬۵۶۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -633,7 +641,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/mahmud-shabestari/",
       "summary": "شاعر سده ۸ هجری؛ ۱۰۱ متن، ۱٬۶۸۴ بیت و ۲۱٬۶۳۲ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -641,7 +649,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/helali-jaghatai/",
       "summary": "شاعر سده ۹ هجری؛ ۳۵۳ متن، ۳٬۱۷۲ بیت و ۴۵٬۴۷۹ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -649,7 +657,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/jami/",
       "summary": "شاعر سده ۹ هجری؛ ۱۸۸ متن، ۵٬۴۱۰ بیت و ۶۴٬۶۸۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -657,7 +665,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/mohtasham-kashani/",
       "summary": "شاعر سده ۱۰ هجری؛ ۹۷۲ متن، ۱۰٬۷۱۶ بیت و ۱۶۳٬۰۰۱ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -665,7 +673,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/orfi/",
       "summary": "شاعر سده ۱۰ هجری؛ ۶۹۸ متن، ۳٬۹۰۲ بیت و ۶۰٬۶۵۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -673,7 +681,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/vahshi/",
       "summary": "شاعر سده ۱۰ هجری؛ ۶۵۱ متن، ۱۰٬۵۹۵ بیت و ۱۴۴٬۶۰۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -681,7 +689,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/razi-al-din-artimani/",
       "summary": "شاعر سده ۱۰ هجری؛ ۲۳۳ متن، ۱٬۵۵۰ بیت و ۱۹٬۹۰۷ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -689,7 +697,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/sheikh-bahaei/",
       "summary": "شاعر سده ۱۰ هجری؛ ۱۷۶ متن، ۱٬۲۸۹ بیت و ۱۶٬۴۳۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -697,7 +705,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/saeb-tabrizi/",
       "summary": "شاعر سده ۱۱ هجری؛ ۱۰٬۰۴۳ متن، ۷۸٬۸۹۰ بیت و ۱٬۲۱۰٬۲۶۹ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -705,7 +713,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/bidel-dehlavi/",
       "summary": "شاعر سده ۱۱ هجری؛ ۲٬۸۲۷ متن، ۳۲٬۳۳۳ بیت و ۴۸۳٬۲۴۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -713,7 +721,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/feiz-kashani/",
       "summary": "شاعر سده ۱۱ هجری؛ ۱٬۰۱۶ متن، ۹٬۸۴۴ بیت و ۱۳۷٬۷۶۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -721,7 +729,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/hatef-esfahani/",
       "summary": "شاعر سده ۱۲ هجری؛ ۱۹۴ متن، ۱٬۵۸۷ بیت و ۲۲٬۸۹۵ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -729,7 +737,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/qaani/",
       "summary": "شاعر سده ۱۳ هجری؛ ۶۲۵ متن، ۲۰٬۴۹۶ بیت و ۳۰۱٬۳۰۱ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -737,7 +745,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/forughi-bastami/",
       "summary": "شاعر سده ۱۳ هجری؛ ۵۴۹ متن، ۵٬۸۶۳ بیت و ۸۸٬۹۵۹ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -745,7 +753,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/molla-hadi-sabzevari/",
       "summary": "شاعر سده ۱۳ هجری؛ ۲۰۸ متن، ۱٬۷۹۵ بیت و ۲۳٬۷۰۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -753,7 +761,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/malek-al-shoara-bahar/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱٬۱۰۵ متن، ۲۱٬۸۰۷ بیت و ۲۷۹٬۴۱۸ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -761,7 +769,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/iqbal-lahori/",
       "summary": "شاعر سده ۱۴ هجری؛ ۹۷۲ متن، ۸٬۱۵۵ بیت و ۱۰۲٬۹۰۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -769,7 +777,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/ahmad-shamlou/",
       "summary": "شاعر سده ۱۴ هجری؛ ۳۲۳ متن، ۷٬۳۰۱ بیت و ۶۶٬۴۶۳ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -777,7 +785,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/simin-behbahani/",
       "summary": "شاعر سده ۱۴ هجری؛ ۲۲۷ متن، ۲٬۸۱۲ بیت و ۳۸٬۸۱۷ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -785,7 +793,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/parvin-etesami/",
       "summary": "شاعر سده ۱۴ هجری؛ ۲۲۳ متن، ۵٬۵۹۴ بیت و ۷۰٬۷۷۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -793,7 +801,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/shahriar/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۹۰ متن، ۲٬۶۰۷ بیت و ۳۷٬۲۴۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -801,7 +809,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/kambiz-sedighi-kasmaei/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۸۱ متن، ۱٬۲۶۸ بیت و ۱۱٬۱۶۹ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -809,7 +817,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/rahi-moayeri/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۵۹ متن، ۱٬۰۵۰ بیت و ۱۵٬۵۷۷ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -817,7 +825,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/sohrab-sepehri/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۳۶ متن، ۲٬۰۰۷ بیت و ۲۴٬۶۹۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -825,7 +833,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/forough-farrokhzad/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۲۴ متن، ۲٬۸۵۶ بیت و ۳۴٬۳۱۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -833,7 +841,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/mehdi-akhavan-sales/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۱۶ متن، ۲٬۶۵۱ بیت و ۳۴٬۲۳۴ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -841,7 +849,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/bahram-saleki/",
       "summary": "شاعر سده ۱۴ هجری؛ ۱۰۴ متن، ۲٬۳۳۲ بیت و ۲۷٬۰۹۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -849,7 +857,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/shater-abbas-sabouhi/",
       "summary": "شاعر سده ۱۴ هجری؛ ۹۸ متن، ۶۰۸ بیت و ۹٬۶۸۳ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -857,7 +865,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/shivon-foumani/",
       "summary": "شاعر سده ۱۴ هجری؛ ۹۷ متن، ۷۶۴ بیت و ۸٬۳۷۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -865,7 +873,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/nima-yushij/",
       "summary": "شاعر سده ۱۴ هجری؛ ۵۵ متن، ۱٬۴۶۳ بیت و ۱۷٬۳۸۹ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -873,7 +881,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/khalilullah-khalili/",
       "summary": "شاعر سده ۱۴ هجری؛ ۵۴ متن، ۱۰۸ بیت و ۱٬۴۸۱ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -881,7 +889,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/mohammad-hasan-bareq-shafiei/",
       "summary": "شاعر سده ۱۴ هجری؛ ۴۸ متن، ۷۱۱ بیت و ۸٬۴۲۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -889,7 +897,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/a-liyar-jabbar-mohammadi/",
       "summary": "شاعر سده ۱۵ هجری؛ ۴۲۴ متن، ۲٬۱۳۲ بیت و ۳۰٬۷۳۶ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     },
     {
       "type": "poet",
@@ -897,7 +905,7 @@
       "url": "https://frompoetrytodata.vercel.app/poets/abdul-qahar-asi/",
       "summary": "شاعر سده ۱۵ هجری؛ ۸۸ متن، ۷۱۱ بیت و ۷٬۸۳۰ واژه در پیکره.",
       "language": "fa-IR",
-      "dateModified": "2026-07-29"
+      "dateModified": "2026-08-01"
     }
   ]
 }

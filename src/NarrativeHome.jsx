@@ -53,7 +53,7 @@ export default function NarrativeHome({ summary }) {
           <div className="narrative-section-heading">
             <span className="eyebrow">مسیر مناسب شما</span>
             <h2 id="audience-title">برای چه کاری آمده‌اید؟</h2>
-            <p>همهٔ مسیرها به محتوای canonical یکسان می‌رسند؛ فقط نقطهٔ شروع فرق دارد.</p>
+            <p>همهٔ مسیرها به محتوای مرجع یکسان می‌رسند؛ فقط نقطهٔ شروع فرق دارد.</p>
           </div>
           <div className="audience-entry-grid">
             {audiencePaths.map((path) => (

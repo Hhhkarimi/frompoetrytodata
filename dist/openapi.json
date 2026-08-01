@@ -377,6 +377,24 @@
         }
       }
     },
+    "/api/computational-aesthetics.json": {
+      "get": {
+        "summary": "زیبایی‌شناسی محاسباتی و ده بیت منتخب هر شاعر",
+        "operationId": "getComputationalAesthetics",
+        "responses": {
+          "200": {
+            "description": "Computational aesthetics records and canonical poet profiles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/knowledge-graph.json": {
       "get": {
         "summary": "گراف دانش Schema.org",

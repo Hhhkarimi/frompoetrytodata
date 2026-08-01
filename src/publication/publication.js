@@ -9,7 +9,7 @@ export const PUBLICATION = Object.freeze({
   creatorGivenName: 'حسین',
   version: '7.0.0',
   publishedDate: '2026-07-27',
-  modifiedDate: '2026-07-29',
+  modifiedDate: '2026-08-01',
   license: 'MIT',
 });
 

@@ -9,71 +9,78 @@
       "id": "https://frompoetrytodata.vercel.app/research/topics/",
       "url": "https://frompoetrytodata.vercel.app/research/topics/",
       "title": "تحول مضامین شعر فارسی در سده‌های سوم تا پانزدهم",
-      "summary": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ canonical ساخته می‌شوند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "summary": "ترکیب موضوعی مشاهده‌شده در پیکره در طول سده‌های منتسب تغییر می‌کند؛ اندازهٔ اثر و آزمون جایگشتی در صفحهٔ شواهد از دادهٔ مرجع ساخته می‌شوند.",
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/metaphors/",
       "url": "https://frompoetrytodata.vercel.app/research/metaphors/",
       "title": "تولد، خاموشی و دگرگونی استعاره‌ها در شعر فارسی",
       "summary": "هیچ‌یک از خانواده‌های استعاری بررسی‌شده کاملاً ناپدید نمی‌شوند؛ الگوی غالب، خاموشی موقت، بازگشت و جابه‌جایی میدان معنایی است. تراکم کلی تصاویر میان دوره‌های تاریخی تفاوت معنادار دارد.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/intertextuality/",
       "url": "https://frompoetrytodata.vercel.app/research/intertextuality/",
       "title": "نقشه پیوندهای متنی و شباهت شاعران فارسی",
       "summary": "شباهت عبارتی، واژگانی و موضوعی با افزایش فاصله زمانی شاعران کاهش می‌یابد؛ اما هر پیوند فقط قرابت محاسباتی است و به‌تنهایی تأثیر تاریخی مستقیم را اثبات نمی‌کند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/century-ai/",
       "url": "https://frompoetrytodata.vercel.app/research/century-ai/",
       "title": "آیا هوش مصنوعی می‌تواند سده یک شعر فارسی را تشخیص دهد؟",
       "summary": "هوش مصنوعی می‌تواند نشانه‌های زمانی را در زبان شعر بیابد، اما دقت ظاهراً بالا در تقسیم تصادفی ممکن است حاصل شناخت شاعر یا کتاب باشد. ارزیابی معتبر باید شاعر آزمون را کاملاً از آموزش حذف کند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/stylometry/",
       "url": "https://frompoetrytodata.vercel.app/research/stylometry/",
       "title": "اثر انگشت سبکی شاعران و کشف شعرهای نامتعارف",
       "summary": "مدل نویسه‌ای در آزمون متوازن از خط مبنا بهتر عمل می‌کند؛ مقدارهای دقیق و تعریف نمونه از دادهٔ پژوهش در صفحهٔ شواهد نمایش داده می‌شوند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/forms/",
       "url": "https://frompoetrytodata.vercel.app/research/forms/",
       "title": "مقایسه تکامل غزل، قصیده، رباعی و مثنوی",
       "summary": "قالب‌های بررسی‌شده در طول، ساختار و الگوی معنایی تفاوت دارند؛ اندازهٔ اثر دقیق و دامنهٔ نمونه از artifact پژوهش به صفحهٔ شواهد می‌آید.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/geography/",
       "url": "https://frompoetrytodata.vercel.app/research/geography/",
       "title": "جغرافیای تخیل و مهاجرت شعر فارسی",
       "summary": "بخشی از شاعران پیکره در تعریف عملیاتی پژوهش جابه‌جا محسوب می‌شوند و نرخ مشاهده‌شده میان دوره‌ها تفاوت دارد؛ عددها و آزمون‌ها مستقیماً از artifact جغرافیا نمایش داده می‌شوند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/lexical-life/",
       "url": "https://frompoetrytodata.vercel.app/research/lexical-life/",
       "title": "نیمه‌عمر واژگان در شعر فارسی",
       "summary": "چرخهٔ واژه‌ها بیشتر تغییر شدت و نقش است تا تولد و مرگ مطلق؛ میانه، نمونهٔ مشاهده‌شده و موارد سانسور راست از artifact پژوهش محاسبه و نمایش داده می‌شوند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/attribution/",
       "url": "https://frompoetrytodata.vercel.app/research/attribution/",
       "title": "سنجش انتساب شعر با شواهد زبانی، فکری و تاریخی",
       "summary": "پیکرهٔ فعلی برای پالایش، کشف هم‌پوشانی مجموعه‌ها و اولویت‌بندی بازبینی مفید است، اما بدون تاریخ و تبار نسخه‌ها نمی‌تواند حکم قطعی اصالت بدهد؛ شمار هشدارها از artifact ممیزی نمایش داده می‌شود.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "date_modified": "2026-08-01T00:00:00Z"
     },
     {
       "id": "https://frompoetrytodata.vercel.app/research/public-questions/",
       "url": "https://frompoetrytodata.vercel.app/research/public-questions/",
       "title": "ده پرسش جذاب از هزار سال شعر فارسی",
-      "summary": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ canonical هر پرسش نمایش داده می‌شوند.",
-      "date_modified": "2026-07-29T00:00:00Z"
+      "summary": "در این پیکره برخی تقابل‌های واژگانی مانند دل/عقل، غم/شادی و من/ما توزیع نابرابر دارند؛ نسبت‌های دقیق از دادهٔ مرجع هر پرسش نمایش داده می‌شوند.",
+      "date_modified": "2026-08-01T00:00:00Z"
+    },
+    {
+      "id": "https://frompoetrytodata.vercel.app/research/computational-aesthetics/",
+      "url": "https://frompoetrytodata.vercel.app/research/computational-aesthetics/",
+      "title": "زیبایی‌شناسی محاسباتی شعر فارسی",
+      "summary": "این مدل می‌تواند بیت‌های پُرتراکم را برای خوانش نزدیک اولویت‌بندی کند، اما امتیاز آن داوری انسانی یا حقیقت قطعی دربارهٔ زیبایی و ارزش ادبی نیست.",
+      "date_modified": "2026-08-01T00:00:00Z"
     }
   ]
 }

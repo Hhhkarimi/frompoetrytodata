@@ -418,7 +418,7 @@ function App() {
             <span className="hero-badge"><Sparkles size={16} />روایت تعاملی هزار سال شعر فارسی</span>
             <h1>از <em>شعر</em> تا <strong>داده</strong></h1>
             <p className="nastaliq">واژه‌ها را ببین؛ تاریخ را لمس کن</p>
-            <p className="hero-intro">اطلسی عمومی و پژوهشی با ده مطالعه درباره پرسش‌های جذاب شعر، تحول مضامین، زندگی استعاره‌ها، شبکه شاعران، هوش مصنوعی، سبک، قالب، جغرافیا، چرخه عمر واژگان و سنجش انتساب.</p>
+            <p className="hero-intro">اطلسی عمومی و پژوهشی با یازده مطالعه درباره پرسش‌های جذاب شعر، تحول مضامین، زندگی استعاره‌ها، شبکه شاعران، هوش مصنوعی، سبک، قالب، جغرافیا، چرخه عمر واژگان، سنجش انتساب و زیبایی‌شناسی محاسباتی.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo('overview')}>شروع کاوش <ArrowDown size={18} /></button>
               <a className="secondary-button" href="/research/">مطالعات پژوهشی <BookOpen size={18} /></a>
@@ -916,7 +916,7 @@ function App() {
           </div>
         </Section>
 
-        <Section id="poets" eyebrow="کاوشگر چندموجودیتی" title="شاعر، سده، مضمون، استعاره و پژوهش" intro="یک جست‌وجوی canonical برای رسیدن مستقیم به صفحهٔ موجودیت؛ همهٔ فیلترهای متعهدشده در نشانی قابل اشتراک باقی می‌مانند.">
+        <Section id="poets" eyebrow="کاوشگر چندموجودیتی" title="شاعر، سده، مضمون، استعاره و پژوهش" intro="یک جست‌وجوی یکپارچه برای رسیدن مستقیم به صفحهٔ موجودیت؛ همهٔ فیلترهای متعهدشده در نشانی قابل اشتراک باقی می‌مانند.">
           {urlNotice.length > 0 && <p className="url-notice" role="status">پارامترهای نامعتبر حذف شدند: <bdi dir="ltr">{urlNotice.join(', ')}</bdi></p>}
           <form className="poet-tools explorer-tools reveal" role="search" onSubmit={(event) => { event.preventDefault(); window.history.pushState({}, '', window.location.href); emitAnalyticsEvent('atlas_search_committed', { query_length_bucket: searchLengthBucket(poetSearch), result_count: filteredExplorerItems.length, entity_type: entityType }); }}>
             <label className="search-box"><span className="sr-only">جست‌وجوی اطلس</span><Search size={20} /><input ref={explorerSearchRef} type="search" value={poetSearch} onChange={(event) => setPoetSearch(event.target.value)} placeholder="شاعر، سده، مضمون، استعاره یا پژوهش…" /></label>

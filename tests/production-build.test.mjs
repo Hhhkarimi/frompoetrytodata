@@ -73,6 +73,126 @@ test('build publishes a narrative homepage and a no-JavaScript atlas entry', () 
   assert.doesNotMatch(atlas, /__(?:PUBLICATION|MODIFIED)_DATE__/);
 });
 
+test('build publishes the computational-aesthetics study and machine-readable results', () => {
+  const research = fs.readFileSync(
+    path.join(dist, 'research/computational-aesthetics/index.html'),
+    'utf8',
+  );
+  const payload = JSON.parse(
+    fs.readFileSync(path.join(dist, 'api/computational-aesthetics.json'), 'utf8'),
+  );
+  const csv = fs.readFileSync(
+    path.join(dist, 'downloads/computational-aesthetics.csv'),
+    'utf8',
+  );
+
+  assert.equal(researchPages.length, 11);
+  assert.match(research, /زیبایی‌شناسی محاسباتی/);
+  assert.match(research, /GPT-5\.6-sol/);
+  assert.match(research, /ارزیابی انسانی نیست/);
+  assert.equal(payload.records.length, 670);
+  assert.equal(payload.poets.length, 67);
+  assert.equal(csv.replace(/^\uFEFF/, '').trim().split('\n').length, 671);
+  assert.doesNotMatch(research, /گزارش_جامع_زیبایی_شناسی|\.docx/i);
+});
+
+test('every canonical poet page publishes its computational-aesthetics profile', () => {
+  const payload = JSON.parse(
+    fs.readFileSync(path.join(dist, 'api/computational-aesthetics.json'), 'utf8'),
+  );
+
+  for (const poet of payload.poets) {
+    const html = fs.readFileSync(
+      path.join(dist, 'poets', poet.slug, 'index.html'),
+      'utf8',
+    );
+
+    assert.match(html, /id="computational-aesthetics"/, `${poet.name} study section`);
+    assert.match(html, /GPT-5\.6-sol/, `${poet.name} evaluator disclosure`);
+    assert.match(html, /ارزیابی انسانی نیست/, `${poet.name} non-human disclosure`);
+    assert.equal(
+      [...html.matchAll(/data-aesthetic-couplet=/g)].length,
+      10,
+      `${poet.name} top-couplet count`,
+    );
+    assert.equal(
+      [...html.matchAll(/data-aesthetic-dimension=/g)].length,
+      16,
+      `${poet.name} chart and table expose the same eight dimensions`,
+    );
+    const dimensionValues = [...html.matchAll(
+      /data-aesthetic-dimension="(chart|table):([^"]+)" data-aesthetic-value="([^"]+)"/g,
+    )].reduce((values, [, view, dimension, value]) => {
+      if (!values[dimension]) values[dimension] = {};
+      values[dimension][view] = Number(value);
+      return values;
+    }, {});
+    assert.equal(Object.keys(dimensionValues).length, 8, `${poet.name} dimension identities`);
+    for (const [dimension, value] of Object.entries(poet.dimensionMeans)) {
+      assert.deepEqual(
+        dimensionValues[dimension],
+        { chart: value, table: value },
+        `${poet.name} ${dimension} chart/table equivalence`,
+      );
+    }
+    assert.match(html, /href="\/downloads\/computational-aesthetics\.csv"/);
+    assert.match(html, /href="\/api\/computational-aesthetics\.json"/);
+    assert.doesNotMatch(html, /گزارش_جامع_زیبایی_شناسی|\.docx/i);
+  }
+});
+
+test('computational-aesthetics research page exposes a no-JavaScript, URL-driven explorer', () => {
+  const html = fs.readFileSync(
+    path.join(dist, 'research/computational-aesthetics/index.html'),
+    'utf8',
+  );
+
+  assert.match(html, /<form[^>]+method="get"[^>]+data-aesthetic-explorer/);
+  assert.match(html, /name="q"/);
+  assert.match(html, /name="century"/);
+  assert.match(html, /name="metric"/);
+  assert.match(html, /name="sort"/);
+  assert.match(html, /data-aesthetic-status[^>]+aria-live="polite"/);
+  assert.match(html, /<noscript>[\s\S]*۶۷ شاعر/);
+  assert.equal(
+    [...html.matchAll(/data-aesthetic-poet=/g)].length,
+    67,
+    'all canonical poet summaries remain in the static table',
+  );
+  assert.match(html, /href="\/poets\/hafez\/"/);
+  assert.match(html, /href="\/downloads\/computational-aesthetics\.csv"/);
+  assert.match(html, /href="\/api\/computational-aesthetics\.json"/);
+});
+
+test('computational-aesthetics publishes scholarly Dataset metadata and catalog downloads', () => {
+  const research = fs.readFileSync(
+    path.join(dist, 'research/computational-aesthetics/index.html'),
+    'utf8',
+  );
+  const dataPage = fs.readFileSync(path.join(dist, 'data/index.html'), 'utf8');
+
+  assert.match(research, /research\/computational-aesthetics\/#dataset/);
+  assert.match(research, /"@type":"Dataset"/);
+  assert.match(research, /"measurementTechnique":\[[^\]]*GPT-5\.6-sol/);
+  assert.match(research, /"variableMeasured":\[[^\]]*نمادپردازی[^\]]*تازگی بیان/);
+  assert.match(research, /"contentUrl":"https:\/\/frompoetrytodata\.vercel\.app\/downloads\/computational-aesthetics\.csv"/);
+  assert.match(research, /"contentUrl":"https:\/\/frompoetrytodata\.vercel\.app\/api\/computational-aesthetics\.json"/);
+  assert.match(dataPage, /href="\/downloads\/computational-aesthetics\.csv"/);
+  assert.match(dataPage, /href="\/api\/computational-aesthetics\.json"/);
+});
+
+test('machine discovery indexes the computational-aesthetics dataset', () => {
+  const openapi = JSON.parse(fs.readFileSync(path.join(dist, 'openapi.json'), 'utf8'));
+  const sitemap = fs.readFileSync(path.join(dist, 'sitemap-data.xml'), 'utf8');
+  const llms = fs.readFileSync(path.join(dist, 'llms-full.txt'), 'utf8');
+
+  assert.ok(openapi.paths['/api/computational-aesthetics.json']);
+  assert.match(sitemap, /\/api\/computational-aesthetics\.json/);
+  assert.match(llms, /## یازده مطالعهٔ پژوهشی/);
+  assert.match(llms, /\/api\/computational-aesthetics\.json/);
+  assert.match(llms, /\/downloads\/computational-aesthetics\.csv/);
+});
+
 test('production styles preserve a visible focus indicator', () => {
   const homepage = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
   const stylesheetPath = homepage.match(/href="(\/assets\/[^"]+\.css)"/)?.[1];
@@ -93,7 +213,7 @@ test('citations and scholarly metadata use source-controlled publication identit
 
   assert.match(research, /کریمی، حسین\. \(۲۰۲۶\)/);
   assert.match(research, /"datePublished":"2026-07-27"/);
-  assert.match(research, /"dateModified":"2026-07-29"/);
+  assert.match(research, /"dateModified":"2026-08-01"/);
   assert.match(cff, /url: "https:\/\/frompoetrytodata\.vercel\.app\/"/);
   assert.deepEqual(citation.issued, { 'date-parts': [[2026, 7, 27]] });
   assert.equal(citation.URL, `${officialOrigin}/`);
@@ -110,7 +230,7 @@ test('download manifest records version, provenance, and verified checksums', ()
 
   assert.equal(manifest.schemaVersion, 1);
   assert.equal(manifest.publicationVersion, '7.0.0');
-  assert.equal(manifest.modifiedDate, '2026-07-29');
+  assert.equal(manifest.modifiedDate, '2026-08-01');
   assert.match(manifest.license, /attributions/i);
   assert.equal(manifest.provenance.methodology, `${officialOrigin}/methodology/`);
   assert.ok(manifest.files.length > 10);
@@ -143,6 +263,7 @@ test('published JSON APIs declare their schema and publication version', () => {
     'lexical-life.json',
     'attribution.json',
     'public-questions.json',
+    'computational-aesthetics.json',
   ];
 
   for (const filename of files) {
@@ -177,7 +298,7 @@ test('all entity families are generated with local qualifications and current at
     ['poets', 67, /اهمیت ادبی/],
     ['centuries', 13, /تاریخ دقیق سرایش/],
     ['metaphors', 10, /کاربرد حقیقی، نمادین و استعاری/],
-    ['research', 10, /محدودیت/],
+    ['research', researchPages.length, /محدودیت/],
   ];
 
   for (const [directory, count, qualification] of families) {

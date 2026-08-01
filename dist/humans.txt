@@ -5,5 +5,5 @@ LinkedIn: https://www.linkedin.com/in/hossein-karimi-8a452153/
 /* SITE */
 Name: از شعر تا داده
 Language: Persian (fa-IR)
-Last update: 2026-07-29
+Last update: 2026-08-01
 Technology: React, Vite, Apache ECharts

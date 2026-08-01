@@ -140,3 +140,34 @@ test('published CSV statistics equal the source datasets', () => {
     assert.equal(number(formRows[index]['بازیابی مدل']), form.recall);
   });
 });
+
+test('computational-aesthetics CSV and JSON preserve every committed source score', () => {
+  const sourceRows = parseCsv('research-data/computational-aesthetics/top-couplets.csv');
+  const publishedRows = parseCsv('dist/downloads/computational-aesthetics.csv');
+  const publishedJson = readJson('dist/api/computational-aesthetics.json');
+
+  assert.equal(sourceRows.length, 670);
+  assert.equal(publishedRows.length, sourceRows.length);
+  assert.equal(publishedJson.records.length, sourceRows.length);
+
+  for (const source of sourceRows) {
+    const csv = publishedRows.find((row) => number(row.source_record_id) === number(source.id));
+    const json = publishedJson.records.find((row) => row.id === number(source.id));
+    assert.ok(csv, `missing published CSV record: ${source.id}`);
+    assert.ok(json, `missing published JSON record: ${source.id}`);
+    assert.equal(csv.source_poet_label, source.poet_display);
+    assert.equal(json.source_poet_display, source.poet_display);
+    assert.equal(csv.hemistich_1, source.hemistich1);
+    assert.equal(csv.hemistich_2, source.hemistich2);
+    assert.equal(json.hemistich1, source.hemistich1);
+    assert.equal(json.hemistich2, source.hemistich2);
+    for (const field of [
+      'symbolism_score', 'imagery_score', 'figurative_score', 'music_score',
+      'compression_score', 'emotion_score', 'structure_score', 'novelty_score',
+      'overall_score',
+    ]) {
+      assert.equal(number(csv[field]), number(source[field]), `${source.id} CSV ${field}`);
+      assert.equal(json[field], number(source[field]), `${source.id} JSON ${field}`);
+    }
+  }
+});
