@@ -124,7 +124,7 @@
 - سده ۱۴: ۴٬۲۱۲ متن، ۱۷ شاعر. https://frompoetrytodata.vercel.app/centuries/14/
 - سده ۱۵: ۵۱۲ متن، ۲ شاعر. https://frompoetrytodata.vercel.app/centuries/15/
 
-## API
+## API و دانلود
 - https://frompoetrytodata.vercel.app/api/content-index.json
 - https://frompoetrytodata.vercel.app/api/themes.json
 - https://frompoetrytodata.vercel.app/api/metaphors.json
@@ -137,4 +137,5 @@
 - https://frompoetrytodata.vercel.app/api/public-questions.json
 - https://frompoetrytodata.vercel.app/api/computational-aesthetics.json
 - https://frompoetrytodata.vercel.app/downloads/computational-aesthetics.csv
+- https://frompoetrytodata.vercel.app/downloads/computational-aesthetics.json
 - https://frompoetrytodata.vercel.app/api/knowledge-graph.json

@@ -43,6 +43,17 @@
       "sha256": "1d36dacaaf28ed9252be64966140f0cead54c99e8ab3919b98d359471bbebbc4"
     },
     {
+      "path": "computational-aesthetics.json",
+      "datasetId": "computational-aesthetics",
+      "mediaType": "application/json",
+      "scope": "Published computational-aesthetics.json distribution from From Poetry to Data",
+      "license": "https://frompoetrytodata.vercel.app/attributions/",
+      "provenance": "https://frompoetrytodata.vercel.app/methodology/",
+      "citation": "کریمی، حسین. (۲۰۲۶). «مجموعه‌دادهٔ از شعر تا داده». از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی. https://frompoetrytodata.vercel.app/data/",
+      "bytes": 1154147,
+      "sha256": "1013318b9d4b60c061dc505dc6f14eb330c0045c5a51841780ad4562ac95fbca"
+    },
+    {
       "path": "forms-comparison.csv",
       "datasetId": "forms-comparison",
       "mediaType": "text/csv; charset=utf-8",

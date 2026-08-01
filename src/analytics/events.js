@@ -12,6 +12,9 @@ const EVENT_PROPERTIES = Object.freeze({
   citation_copied: ['resource_type', 'citation_format'],
   dataset_download_started: ['dataset_id', 'format', 'version'],
   recoverable_error_shown: ['surface', 'error_category'],
+  research_study_viewed: ['study_id'],
+  research_explorer_changed: ['study_id', 'filter_keys', 'query_length_bucket', 'result_count'],
+  research_poet_section_viewed: ['study_id', 'poet_slug'],
 });
 
 export function createAnalyticsEvent(name, properties = {}) {

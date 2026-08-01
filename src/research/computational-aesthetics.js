@@ -1,4 +1,6 @@
-import { canonicalPoetName, poetSlug } from '../entities/poet-identity.js';
+import { createHash } from 'node:crypto';
+import { canonicalPoetName, poetSlug, POET_ALIASES } from '../entities/poet-identity.js';
+import { PUBLICATION } from '../publication/publication.js';
 
 const SCORE_FIELDS = Object.freeze([
   'symbolism_score',
@@ -12,6 +14,22 @@ const SCORE_FIELDS = Object.freeze([
   'overall_score',
   'poet_percentile',
 ]);
+
+const REQUIRED_FIELDS = Object.freeze([
+  'poet_display', 'century', 'poet_rank', 'id', 'book_title', 'poem_title',
+  'hemistich1', 'hemistich2', ...SCORE_FIELDS,
+]);
+
+const FIELD_DESCRIPTIONS = Object.freeze({
+  poet_display: 'برچسب شاعر در منبع', century: 'سدهٔ منتسب', poet_rank: 'رتبهٔ درون‌شاعر',
+  id: 'شناسهٔ رکورد منبع', book_title: 'عنوان کتاب', poem_title: 'عنوان شعر',
+  hemistich1: 'سطر یا مصراع نخست', hemistich2: 'سطر یا مصراع دوم',
+  symbolism_score: 'امتیاز نمادپردازی', imagery_score: 'امتیاز تصویرسازی',
+  figurative_score: 'امتیاز زبان مجازی', music_score: 'امتیاز موسیقی',
+  compression_score: 'امتیاز فشردگی معنا', emotion_score: 'امتیاز عمق عاطفی',
+  structure_score: 'امتیاز ساختار', novelty_score: 'امتیاز تازگی بیان',
+  overall_score: 'جمع وزن‌دار هشت شاخص', poet_percentile: 'صدک رکورد در دادهٔ شاعر',
+});
 
 const DIMENSION_WEIGHTS = Object.freeze({
   symbolism_score: 0.18,
@@ -78,24 +96,53 @@ function parseCsv(input) {
     rows.push(row);
   }
 
-  const [headers, ...values] = rows;
-  return values.map((valuesRow) => Object.fromEntries(
-    headers.map((header, index) => [header, valuesRow[index] ?? '']),
-  ));
+  const [headers = [], ...values] = rows;
+  return {
+    headers,
+    records: values.map((valuesRow) => Object.fromEntries(
+      headers.map((header, index) => [header, valuesRow[index] ?? '']),
+    )),
+  };
 }
 
 function normalizeRecord(record) {
   const canonicalName = canonicalPoetName(record.poet_display);
+  const canonicalSlug = poetSlug(canonicalName);
+  if (!canonicalSlug) {
+    throw new TypeError(`Computational aesthetics unmapped poet: ${record.poet_display}`);
+  }
   return Object.freeze({
     ...record,
     source_poet_display: record.poet_display,
     poet_display: canonicalName,
-    poet_slug: poetSlug(canonicalName),
+    poet_slug: canonicalSlug,
     century: Number(record.century),
     poet_rank: Number(record.poet_rank),
     id: Number(record.id),
     ...Object.fromEntries(SCORE_FIELDS.map((field) => [field, Number(record[field])])),
   });
+}
+
+function validateRawRecord(record, rowNumber) {
+  for (const field of REQUIRED_FIELDS) {
+    if (record[field] === undefined || String(record[field]).trim() === '') {
+      throw new TypeError(`Computational aesthetics missing ${field} at row ${rowNumber}`);
+    }
+  }
+  for (const field of SCORE_FIELDS) {
+    const value = Number(record[field]);
+    if (!Number.isFinite(value)) {
+      throw new TypeError(`Computational aesthetics nonnumeric ${field} at row ${rowNumber}`);
+    }
+    if (value < 0 || value > 100) {
+      throw new TypeError(`Computational aesthetics ${field} outside 0-100 at row ${rowNumber}`);
+    }
+  }
+  for (const field of ['century', 'poet_rank', 'id']) {
+    if (!Number.isInteger(Number(record[field]))) {
+      throw new TypeError(`Computational aesthetics invalid integer ${field} at row ${rowNumber}`);
+    }
+  }
 }
 
 function validateOverallScore(record) {
@@ -109,12 +156,29 @@ function validateOverallScore(record) {
 }
 
 export function buildComputationalAestheticsArtifact(csvText) {
-  const records = parseCsv(csvText).map(normalizeRecord);
+  const parsed = parseCsv(csvText);
+  if (parsed.headers.length !== REQUIRED_FIELDS.length
+    || parsed.headers.some((header, index) => header !== REQUIRED_FIELDS[index])) {
+    throw new TypeError('Computational aesthetics schema mismatch');
+  }
+  parsed.records.forEach((record, index) => validateRawRecord(record, index + 2));
+  const records = parsed.records.map(normalizeRecord);
   const poetRecords = new Map();
   const poetRanks = new Set();
+  const sourceIds = new Set();
+  const couplets = new Set();
 
   for (const record of records) {
     validateOverallScore(record);
+    if (sourceIds.has(record.id)) {
+      throw new TypeError(`Computational aesthetics duplicate source id: ${record.id}`);
+    }
+    sourceIds.add(record.id);
+    const coupletKey = `${record.poet_display}:${record.hemistich1}:${record.hemistich2}`;
+    if (couplets.has(coupletKey)) {
+      throw new TypeError(`Computational aesthetics duplicate couplet: ${record.id}`);
+    }
+    couplets.add(coupletKey);
     const poetRankKey = `${record.poet_display}:${record.poet_rank}`;
     if (poetRanks.has(poetRankKey)) {
       throw new TypeError(`Computational aesthetics duplicate poet rank: ${poetRankKey}`);
@@ -139,8 +203,45 @@ export function buildComputationalAestheticsArtifact(csvText) {
     }
   }
 
+  const dimensions = Object.freeze(DIMENSIONS.map(([id, field]) => Object.freeze({
+    id,
+    field,
+    label: DIMENSION_LABELS[id],
+    weight: DIMENSION_WEIGHTS[field],
+    scale: Object.freeze([0, 100]),
+  })));
+  const poets = Object.freeze([...poetRecords].map(([name, poetRows]) => {
+    const dimensionMeans = Object.fromEntries(DIMENSIONS.map(([id, field]) => [
+      id,
+      poetRows.reduce((sum, record) => sum + record[field], 0) / poetRows.length,
+    ]));
+    const dominantDimension = DIMENSIONS.reduce(
+      (selected, [id]) => dimensionMeans[id] > dimensionMeans[selected] ? id : selected,
+      DIMENSIONS[0][0],
+    );
+    return Object.freeze({
+      name,
+      slug: poetSlug(name),
+      century: poetRows[0].century,
+      meanOverall: Number((
+        poetRows.reduce((sum, record) => sum + record.overall_score, 0) / poetRows.length
+      ).toFixed(2)),
+      maxOverall: Math.max(...poetRows.map((record) => record.overall_score)),
+      dominantDimension,
+      dimensionMeans: Object.freeze(Object.fromEntries(
+        Object.entries(dimensionMeans).map(([id, value]) => [id, Number(value.toFixed(1))]),
+      )),
+      records: Object.freeze(poetRows),
+    });
+  }));
+  const semanticPayloadSha256 = createHash('sha256')
+    .update(JSON.stringify({ dimensions, records, poets }))
+    .digest('hex');
+
   return Object.freeze({
     schemaVersion: 1,
+    publicationVersion: PUBLICATION.version,
+    generatedDate: PUBLICATION.modifiedDate,
     id: 'computational-aesthetics',
     title: 'زیبایی‌شناسی محاسباتی شعر فارسی',
     corpus: Object.freeze({
@@ -149,42 +250,41 @@ export function buildComputationalAestheticsArtifact(csvText) {
       poets: 67,
       attributedCenturies: 13,
     }),
-    dimensions: Object.freeze(DIMENSIONS.map(([id, field]) => Object.freeze({
-      id,
-      field,
-      label: DIMENSION_LABELS[id],
-      weight: DIMENSION_WEIGHTS[field],
-      scale: Object.freeze([0, 100]),
-    }))),
+    dimensions,
     provenance: Object.freeze({
       evaluator: 'GPT-5.6-sol',
       evaluatorAttribution: 'project-owner-supplied',
       humanScoring: false,
+      model: Object.freeze({
+        identifier: 'GPT-5.6-sol', provider: null, rubricVersion: null, runId: null, runDate: null,
+      }),
+    }),
+    poetAliases: Object.freeze({ ...POET_ALIASES }),
+    fieldDictionary: Object.freeze([
+      Object.freeze({ field: 'poet_display', description: 'نام معیار شاعر پس از یکسان‌سازی هویت' }),
+      Object.freeze({ field: 'poet_slug', description: 'شناسهٔ پایدار و URL-safe شاعر معیار' }),
+      Object.freeze({ field: 'source_poet_display', description: 'برچسب شاعر دقیقاً مطابق فایل منبع' }),
+      ...REQUIRED_FIELDS.filter((field) => field !== 'poet_display').map((field) => Object.freeze({
+        field, description: FIELD_DESCRIPTIONS[field],
+      })),
+    ]),
+    limitations: Object.freeze([
+      'امتیازها تعریف جهان‌شمول زیبایی یا رتبهٔ ارزش ادبی نیستند.',
+      'واحدها بیرون از بافت کامل شعر ارزیابی شده‌اند و در شعر نو دو سطر الزاماً بیت کلاسیک نیست.',
+      'سابقهٔ اجرای دست‌اول مدل، نسخهٔ rubric و شناسهٔ run در اختیار پروژه نیست.',
+    ]),
+    qualification: 'هشت شاخص و امتیاز نهایی خروجی GPT-5.6-sol هستند؛ این ارزیابی انسانی نیست.',
+    reproduction: Object.freeze({
+      sourcePath: 'research-data/computational-aesthetics/top-couplets.csv',
+      command: 'node scripts/postbuild.mjs',
+      formula: Object.freeze({ ...DIMENSION_WEIGHTS }),
+    }),
+    checksums: Object.freeze({
+      sourceCsvSha256: createHash('sha256').update(csvText).digest('hex'),
+      semanticPayloadSha256,
+      semanticPayloadScope: 'dimensions+records+poets',
     }),
     records: Object.freeze(records),
-    poets: Object.freeze([...poetRecords].map(([name, poetRows]) => {
-      const dimensionMeans = Object.fromEntries(DIMENSIONS.map(([id, field]) => [
-        id,
-        poetRows.reduce((sum, record) => sum + record[field], 0) / poetRows.length,
-      ]));
-      const dominantDimension = DIMENSIONS.reduce(
-        (selected, [id]) => dimensionMeans[id] > dimensionMeans[selected] ? id : selected,
-        DIMENSIONS[0][0],
-      );
-      return Object.freeze({
-        name,
-        slug: poetSlug(name),
-        century: poetRows[0].century,
-        meanOverall: Number((
-          poetRows.reduce((sum, record) => sum + record.overall_score, 0) / poetRows.length
-        ).toFixed(2)),
-        maxOverall: Math.max(...poetRows.map((record) => record.overall_score)),
-        dominantDimension,
-        dimensionMeans: Object.freeze(Object.fromEntries(
-          Object.entries(dimensionMeans).map(([id, value]) => [id, Number(value.toFixed(1))]),
-        )),
-        records: Object.freeze(poetRows),
-      });
-    })),
+    poets,
   });
 }

@@ -23,3 +23,22 @@ test('analytics event contracts remove raw and unapproved content', () => {
 test('unknown analytics events fail closed', () => {
   assert.throws(() => createAnalyticsEvent('raw_search_text', { query: 'حافظ' }), /Unknown analytics event/);
 });
+
+test('computational-aesthetics analytics exclude raw search and poem content', () => {
+  assert.deepEqual(createAnalyticsEvent('research_explorer_changed', {
+    study_id: 'computational-aesthetics',
+    filter_keys: ['q', 'century'],
+    query_length_bucket: '1-10',
+    result_count: 1,
+    query: 'حافظ',
+    poem_text: 'متن حساس',
+  }), {
+    name: 'research_explorer_changed',
+    properties: {
+      study_id: 'computational-aesthetics',
+      filter_keys: ['q', 'century'],
+      query_length_bucket: '1-10',
+      result_count: 1,
+    },
+  });
+});

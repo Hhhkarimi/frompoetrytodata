@@ -19,6 +19,20 @@ test('computational-aesthetics source builds one complete canonical study artifa
   assert.equal(artifact.id, 'computational-aesthetics');
   assert.equal(artifact.provenance.evaluator, 'GPT-5.6-sol');
   assert.equal(artifact.provenance.humanScoring, false);
+  assert.equal(artifact.publicationVersion, '7.0.0');
+  assert.equal(artifact.generatedDate, '2026-08-01');
+  assert.equal(artifact.provenance.model.provider, null);
+  assert.equal(artifact.provenance.model.runId, null);
+  assert.deepEqual(artifact.poetAliases, {
+    'نیما یوشیج': 'نیما یوشیج (آوای آزاد)',
+    'الیار (جبار محمدی)': 'ا لیار (جبار محمدی)',
+  });
+  assert.match(artifact.checksums.sourceCsvSha256, /^[a-f0-9]{64}$/);
+  assert.match(artifact.checksums.semanticPayloadSha256, /^[a-f0-9]{64}$/);
+  assert.ok(artifact.fieldDictionary.length >= 18);
+  assert.ok(artifact.limitations.length > 0);
+  assert.match(artifact.qualification, /ارزیابی انسانی نیست/);
+  assert.match(artifact.reproduction.command, /postbuild/);
   assert.equal(artifact.records.length, 670);
   assert.equal(artifact.poets.length, 67);
   assert.deepEqual(
@@ -69,4 +83,18 @@ test('computational-aesthetics ingest rejects an incomplete publication set', ()
     () => buildComputationalAestheticsArtifact(invalidCsv),
     /expected 670 records/i,
   );
+});
+
+test('computational-aesthetics ingest fails closed on invalid source contracts', () => {
+  const cases = [
+    [sourceCsv.replace('poem_title', 'poem_heading'), /schema mismatch/i],
+    [sourceCsv.replace('رباعیات,رباعی شماره ۲۲', ',رباعی شماره ۲۲'), /missing book_title/i],
+    [sourceCsv.replace(',99.94,78.97,', ',101,78.97,'), /outside 0-100/i],
+    [sourceCsv.replace('رودکی,3,2,378,', 'رودکی,3,2,108,'), /duplicate source id/i],
+    [sourceCsv.replace('رودکی,3,1,108,', 'شاعر ناشناخته,3,1,108,'), /unmapped poet/i],
+  ];
+
+  for (const [invalidCsv, expected] of cases) {
+    assert.throws(() => buildComputationalAestheticsArtifact(invalidCsv), expected);
+  }
 });

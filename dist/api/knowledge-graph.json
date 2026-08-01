@@ -54,7 +54,7 @@
         {
           "@type": "DataDownload",
           "encodingFormat": "application/json",
-          "contentUrl": "https://frompoetrytodata.vercel.app/api/computational-aesthetics.json",
+          "contentUrl": "https://frompoetrytodata.vercel.app/downloads/computational-aesthetics.json",
           "name": "پروفایل‌های زیبایی‌شناسی محاسباتی"
         },
         {

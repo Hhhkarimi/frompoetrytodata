@@ -112,7 +112,7 @@ function globalGraph() {
       measurementTechnique: ['ارزیابی هشت شاخص زیبایی‌شناختی با GPT-5.6-sol'],
       distribution: [
         { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: absolute('/downloads/computational-aesthetics.csv'), name: 'نتایج زیبایی‌شناسی محاسباتی' },
-        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/api/computational-aesthetics.json'), name: 'پروفایل‌های زیبایی‌شناسی محاسباتی' },
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/computational-aesthetics.json'), name: 'پروفایل‌های زیبایی‌شناسی محاسباتی' },
         { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: absolute('/downloads/manifest.json'), name: 'نسخه، منشأ و checksum دانلودها' },
       ],
     },
@@ -565,7 +565,7 @@ function generateDiscovery() {
     '/metaphors/', ...data.metaphors.items.map((m) => `/metaphors/${metaphorSlugs[m.name]}/`),
     '/centuries/', ...data.overview.centuryStats.map((c) => `/centuries/${c.century}/`),
   ];
-  const dataUrls = ['/openapi.json', '/api/atlas-summary.json', '/api/research-findings.json', '/api/poets.json', '/api/themes.json', '/api/metaphors.json', '/api/centuries.json', '/api/forms.json', '/api/geography.json', '/api/lexical-life.json', '/api/attribution.json', '/api/public-questions.json', '/api/computational-aesthetics.json', '/downloads/computational-aesthetics.csv', '/api/content-index.json', '/api/knowledge-graph.json'];
+  const dataUrls = ['/openapi.json', '/api/atlas-summary.json', '/api/research-findings.json', '/api/poets.json', '/api/themes.json', '/api/metaphors.json', '/api/centuries.json', '/api/forms.json', '/api/geography.json', '/api/lexical-life.json', '/api/attribution.json', '/api/public-questions.json', '/api/computational-aesthetics.json', '/downloads/computational-aesthetics.csv', '/downloads/computational-aesthetics.json', '/api/content-index.json', '/api/knowledge-graph.json'];
   const urlset = (urls, defaultPriority = '0.7') => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${escapeXml(absolute(u))}</loc><lastmod>${buildDate}</lastmod><changefreq>${u === '/' ? 'weekly' : 'monthly'}</changefreq><priority>${u === '/' ? '1.0' : defaultPriority}</priority></url>`).join('\n')}\n</urlset>`;
   write('sitemap-core.xml', urlset(core, '0.9'));
   write('sitemap-entities.xml', urlset(entities, '0.8'));
@@ -581,7 +581,7 @@ function generateDiscovery() {
 - [داده ممیزی انتساب](${absolute('/api/attribution.json')})
 - [ده پرسش عمومی](${absolute('/api/public-questions.json')})`);
   write('llms.txt', llmsExtended);
-  const llmsFull = `${llms}\n## یازده مطالعهٔ پژوهشی\n${researchPages.map((p) => `### ${p.title}\n${p.answer}\nصفحه: ${absolute(p.path)}\n`).join('\n')}\n## یازده مضمون\n${data.topics.items.map((t) => `- ${t.name}: ${topicAnswer(t)} صفحه: ${absolute(`/themes/${topicSlugs[t.id]}/`)}`).join('\n')}\n\n## ده خانواده استعاری\n${data.metaphors.items.map((m) => `- ${m.name}: ${metaphorAnswer(m)} صفحه: ${absolute(`/metaphors/${metaphorSlugs[m.name]}/`)}`).join('\n')}\n\n## سده‌ها\n${data.overview.centuryStats.map((c) => `- سده ${faNumber(c.century)}: ${faNumber(c.texts)} متن، ${faNumber(c.poets)} شاعر. ${absolute(`/centuries/${c.century}/`)}`).join('\n')}\n\n## API\n- ${absolute('/api/content-index.json')}\n- ${absolute('/api/themes.json')}\n- ${absolute('/api/metaphors.json')}\n- ${absolute('/api/centuries.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/computational-aesthetics.json')}\n- ${absolute('/downloads/computational-aesthetics.csv')}\n- ${absolute('/api/knowledge-graph.json')}\n`;
+  const llmsFull = `${llms}\n## یازده مطالعهٔ پژوهشی\n${researchPages.map((p) => `### ${p.title}\n${p.answer}\nصفحه: ${absolute(p.path)}\n`).join('\n')}\n## یازده مضمون\n${data.topics.items.map((t) => `- ${t.name}: ${topicAnswer(t)} صفحه: ${absolute(`/themes/${topicSlugs[t.id]}/`)}`).join('\n')}\n\n## ده خانواده استعاری\n${data.metaphors.items.map((m) => `- ${m.name}: ${metaphorAnswer(m)} صفحه: ${absolute(`/metaphors/${metaphorSlugs[m.name]}/`)}`).join('\n')}\n\n## سده‌ها\n${data.overview.centuryStats.map((c) => `- سده ${faNumber(c.century)}: ${faNumber(c.texts)} متن، ${faNumber(c.poets)} شاعر. ${absolute(`/centuries/${c.century}/`)}`).join('\n')}\n\n## API و دانلود\n- ${absolute('/api/content-index.json')}\n- ${absolute('/api/themes.json')}\n- ${absolute('/api/metaphors.json')}\n- ${absolute('/api/centuries.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/computational-aesthetics.json')}\n- ${absolute('/downloads/computational-aesthetics.csv')}\n- ${absolute('/downloads/computational-aesthetics.json')}\n- ${absolute('/api/knowledge-graph.json')}\n`;
   const llmsFullExtended = llmsFull
     .replace(llms, llmsExtended)
     .replace(`- ${absolute('/api/forms.json')}\n`, `- ${absolute('/api/forms.json')}\n- ${absolute('/api/geography.json')}\n- ${absolute('/api/lexical-life.json')}\n- ${absolute('/api/attribution.json')}\n- ${absolute('/api/public-questions.json')}\n`);
@@ -613,7 +613,7 @@ function validate() {
   const required = [
     'themes/index.html', 'metaphors/index.html', 'centuries/index.html', 'questions/index.html',
     'api/themes.json', 'api/metaphors.json', 'api/centuries.json', 'api/geography.json', 'api/lexical-life.json', 'api/attribution.json', 'api/public-questions.json', 'api/computational-aesthetics.json', 'api/content-index.json', 'api/knowledge-graph.json',
-    'downloads/computational-aesthetics.csv',
+    'downloads/computational-aesthetics.csv', 'downloads/computational-aesthetics.json',
     'openapi.json', 'citation.json', 'citation.bib', 'llms-data.txt', 'sitemap-core.xml', 'sitemap-entities.xml',
   ];
   const missing = required.filter((file) => !fs.existsSync(path.join(dist, file)));

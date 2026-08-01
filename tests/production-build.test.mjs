@@ -81,6 +81,12 @@ test('build publishes the computational-aesthetics study and machine-readable re
   const payload = JSON.parse(
     fs.readFileSync(path.join(dist, 'api/computational-aesthetics.json'), 'utf8'),
   );
+  const downloadPayload = JSON.parse(
+    fs.readFileSync(path.join(dist, 'downloads/computational-aesthetics.json'), 'utf8'),
+  );
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(dist, 'downloads/manifest.json'), 'utf8'),
+  );
   const csv = fs.readFileSync(
     path.join(dist, 'downloads/computational-aesthetics.csv'),
     'utf8',
@@ -92,6 +98,16 @@ test('build publishes the computational-aesthetics study and machine-readable re
   assert.match(research, /ارزیابی انسانی نیست/);
   assert.equal(payload.records.length, 670);
   assert.equal(payload.poets.length, 67);
+  assert.deepEqual(downloadPayload, payload);
+  const jsonManifestEntry = manifest.files.find(
+    (file) => file.path === 'computational-aesthetics.json',
+  );
+  assert.ok(jsonManifestEntry, 'download JSON is included in the release manifest');
+  assert.match(jsonManifestEntry.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(
+    jsonManifestEntry.bytes,
+    fs.statSync(path.join(dist, 'downloads/computational-aesthetics.json')).size,
+  );
   assert.equal(csv.replace(/^\uFEFF/, '').trim().split('\n').length, 671);
   assert.doesNotMatch(research, /گزارش_جامع_زیبایی_شناسی|\.docx/i);
 });
@@ -153,6 +169,9 @@ test('computational-aesthetics research page exposes a no-JavaScript, URL-driven
   assert.match(html, /name="metric"/);
   assert.match(html, /name="sort"/);
   assert.match(html, /data-aesthetic-status[^>]+aria-live="polite"/);
+  assert.match(html, /data-aesthetic-loading[^>]+aria-live="polite"/);
+  assert.match(html, /data-aesthetic-error[^>]+role="alert"/);
+  assert.match(html, /data-aesthetic-retry/);
   assert.match(html, /<noscript>[\s\S]*۶۷ شاعر/);
   assert.equal(
     [...html.matchAll(/data-aesthetic-poet=/g)].length,
@@ -176,9 +195,22 @@ test('computational-aesthetics publishes scholarly Dataset metadata and catalog 
   assert.match(research, /"measurementTechnique":\[[^\]]*GPT-5\.6-sol/);
   assert.match(research, /"variableMeasured":\[[^\]]*نمادپردازی[^\]]*تازگی بیان/);
   assert.match(research, /"contentUrl":"https:\/\/frompoetrytodata\.vercel\.app\/downloads\/computational-aesthetics\.csv"/);
-  assert.match(research, /"contentUrl":"https:\/\/frompoetrytodata\.vercel\.app\/api\/computational-aesthetics\.json"/);
+  assert.match(research, /"contentUrl":"https:\/\/frompoetrytodata\.vercel\.app\/downloads\/computational-aesthetics\.json"/);
+  assert.match(research, /"contentSize":"[1-9][0-9]* bytes"/);
+  assert.match(research, /id="dataset-citation"/);
+  assert.match(research, /کپی استناد مجموعه‌داده/);
+  assert.match(research, /href="#downloads">داده و دانلود/);
+  assert.match(research, /href="#citation">استناد/);
+  assert.match(research, /id="audiences"/);
+  assert.match(research, /خوانندهٔ عمومی/);
+  assert.match(research, /پژوهشگر ادبی/);
+  assert.match(research, /پژوهشگر علوم انسانی دیجیتال/);
+  assert.match(research, /کاربر داده/);
   assert.match(dataPage, /href="\/downloads\/computational-aesthetics\.csv"/);
+  assert.match(dataPage, /href="\/downloads\/computational-aesthetics\.json"/);
   assert.match(dataPage, /href="\/api\/computational-aesthetics\.json"/);
+  assert.match(dataPage, /poet_slug/);
+  assert.match(dataPage, /source_poet_display/);
 });
 
 test('machine discovery indexes the computational-aesthetics dataset', () => {
@@ -188,9 +220,11 @@ test('machine discovery indexes the computational-aesthetics dataset', () => {
 
   assert.ok(openapi.paths['/api/computational-aesthetics.json']);
   assert.match(sitemap, /\/api\/computational-aesthetics\.json/);
+  assert.match(sitemap, /\/downloads\/computational-aesthetics\.json/);
   assert.match(llms, /## یازده مطالعهٔ پژوهشی/);
   assert.match(llms, /\/api\/computational-aesthetics\.json/);
   assert.match(llms, /\/downloads\/computational-aesthetics\.csv/);
+  assert.match(llms, /\/downloads\/computational-aesthetics\.json/);
 });
 
 test('production styles preserve a visible focus indicator', () => {
