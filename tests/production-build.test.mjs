@@ -96,6 +96,11 @@ test('build publishes the computational-aesthetics study and machine-readable re
   assert.match(research, /زیبایی‌شناسی محاسباتی/);
   assert.match(research, /GPT-5\.6-sol/);
   assert.match(research, /ارزیابی انسانی نیست/);
+  assert.match(research, /پرسش پژوهش:/);
+  assert.match(research, /تعریف عملیاتی هشت شاخص/);
+  assert.match(research, /خط مبنای داوری انسانی/);
+  assert.match(research, /"version":"7\.0\.0"/);
+  assert.match(research, /"abstract":"ارزیابی هشت بُعد متنی/);
   assert.equal(payload.records.length, 670);
   assert.equal(payload.poets.length, 67);
   assert.deepEqual(downloadPayload, payload);

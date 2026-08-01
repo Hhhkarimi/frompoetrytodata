@@ -214,7 +214,7 @@ function researchData(id) {
         dimensionLabels[poet.dominantDimension],
       ]),
       method: `GPT-5.6-sol هشت شاخص صفر تا صد را ارزیابی کرده است. نمرهٔ کل با وزن‌های مستند ساخته شده و سپس برای هر شاعر ده واحد سالم دارای بالاترین نمره با کنترل تکرار و تنوع منبع انتخاب شده‌اند. ارزیابی انسانی یا برچسب‌گذاری انسانی انجام نشده است. انتساب مدل بر پایهٔ اعلام مالک پروژه ثبت شده و سابقهٔ اجرای دست‌اول در دسترس نیست.`,
-      limit: 'این خروجی سنجهٔ عملیاتی همین مدل و پیکره است، نه تعریف جهان‌شمول زیبایی یا رتبهٔ ارزش ادبی. وزن عروضی کامل مدل‌سازی نشده، بیت‌ها بیرون از بافت شعر کامل بررسی شده‌اند و در شعر نو واحد دو سطر متوالی الزاماً بیت کلاسیک نیست.',
+      limit: computationalAesthetics.limitations.join(' '),
     };
   }
   if (id === 'topics') {
@@ -539,7 +539,7 @@ function renderComputationalAestheticsExplorer() {
     </form>
     <p data-aesthetic-status role="status" aria-live="polite">${faNumber(poets.length, 0)} نتیجه نمایش داده می‌شود.</p>
     <p class="notice" data-aesthetic-url-notice role="status" aria-live="polite" hidden></p>
-    <p data-aesthetic-loading role="status" aria-live="polite" aria-busy="false" hidden>در حال آماده‌سازی داده‌های پژوهش زیبایی‌شناسی محاسباتی…</p>
+    <p data-aesthetic-loading role="status" aria-live="polite" aria-busy="false" hidden>در حال به‌روزرسانی نمای پژوهش زیبایی‌شناسی محاسباتی…</p>
     <div class="warning" data-aesthetic-error role="alert" hidden><strong>نمایش تعاملی کامل نشد.</strong><p>جدول ایستا همچنان در دسترس است؛ دوباره تلاش کنید یا داده‌ها را مستقیم دریافت کنید.</p><div class="hero-actions"><button type="button" data-aesthetic-retry>تلاش دوباره</button><a href="/downloads/computational-aesthetics.csv">دریافت جدول ایستا</a></div></div>
     <p class="notice" data-aesthetic-empty hidden>برای این ترکیب فیلتر نتیجه‌ای پیدا نشد. فیلترها را پاک کنید یا نام دیگری بنویسید.</p>
     <noscript><p class="notice">جاوااسکریپت خاموش است؛ جدول کامل هر ۶۷ شاعر همچنان در ادامه در دسترس است، اما فیلتر تعاملی اجرا نمی‌شود.</p></noscript>
@@ -630,6 +630,7 @@ function generateResearchPages() {
     const schema = {
       '@type': 'Article', '@id': `${siteUrl}${page.path}#article`, headline: page.title, description: page.description,
       url: absolute(page.path), image: absolute(pageImage), inLanguage: 'fa-IR', datePublished: PUBLICATION.publishedDate, dateModified: PUBLICATION.modifiedDate,
+      version: PUBLICATION.version, abstract: page.description,
       author: { '@id': `${siteUrl}/#hossein-karimi` }, publisher: { '@id': `${siteUrl}/#hossein-karimi` },
       isPartOf: { '@id': `${siteUrl}/#website` }, about: page.keywords,
       mainEntityOfPage: absolute(page.path),
@@ -660,10 +661,10 @@ function generateResearchPages() {
       ? datasetCitationBlock('زیبایی‌شناسی محاسباتی شعر فارسی', '/downloads/computational-aesthetics.json')
       : '';
     const content = `<article>
-<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1><p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${page.qualification}</p></div><div class="hero-actions"><a class="primary" href="${interactiveHref}">${interactiveLabel}</a><a href="#downloads">داده و دانلود</a><a href="#citation">استناد</a><a href="/methodology/">روش‌شناسی</a></div></header>
+<header class="article-hero" style="--accent:${page.color}"><span class="kicker">${page.eyebrow}</span><h1>${page.title}</h1>${page.id === 'computational-aesthetics' ? '<p class="research-question"><strong>پرسش پژوهش:</strong> آیا می‌توان با یک ارزیابی محاسباتی، بیت‌های پُرتراکم هر شاعر را برای خوانش نزدیک اولویت‌بندی کرد؟</p>' : ''}<p>${page.description}</p><div class="answer-box"><strong>پاسخ در یک نگاه</strong><p>${page.answer}</p><p class="local-qualification"><strong>مرز ادعا:</strong> ${page.qualification}</p></div><div class="hero-actions"><a class="primary" href="${interactiveHref}">${interactiveLabel}</a><a href="#downloads">داده و دانلود</a><a href="#citation">استناد</a><a href="/methodology/">روش‌شناسی</a></div></header>
 <section id="results"><span class="kicker">شاهد محاسباتی و واحد تحلیل</span><h2>چه چیزی محاسبه شد؟</h2>${renderMetrics(r.metrics)}<ol class="finding-list">${r.findings.map((f) => `<li>${f}</li>`).join('')}</ol></section>
 ${dataSection}
-<section id="method"><div class="method-grid"><div><span class="kicker">روش و عدم‌قطعیت</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div></section>
+<section id="method"><div class="method-grid"><div><span class="kicker">روش و عدم‌قطعیت</span><h2>این نتیجه چگونه ساخته شد؟</h2><p>${r.method}</p></div><div class="warning"><span class="kicker">مرز تفسیر</span><h2>چه چیزی را نباید نتیجه گرفت؟</h2><p>${r.limit}</p></div></div>${page.id === 'computational-aesthetics' ? `<h3>تعریف عملیاتی هشت شاخص</h3>${renderTable(['شاخص', 'تعریف عملیاتی', 'وزن در امتیاز نهایی'], computationalAesthetics.dimensions.map((dimension) => [dimension.label, dimension.definition, faPercent(dimension.weight * 100, 0)]))}` : ''}</section>
 <section id="interpretation"><span class="kicker">تفسیر ادبی</span><h2>این شاهد چه خوانشی را پیشنهاد می‌کند؟</h2><p>${page.answer}</p><p class="local-qualification">${page.qualification}</p></section>
 ${audienceSection}
 <section id="downloads"><span class="kicker">ممیزی و استفادهٔ دوباره</span><h2>داده، روش و موجودیت‌های مرتبط</h2><div class="hero-actions"><a class="primary" href="${reuse.download}" download>دانلود مستقیم شاهد CSV</a><a href="${jsonReuse}" download>دانلود شاهد JSON</a>${page.id === 'computational-aesthetics' ? '<a href="/api/computational-aesthetics.json">مشاهده API</a>' : ''}<a href="/methodology/">روش‌شناسی مشترک</a><a href="${reuse.entity}">${reuse.entityLabel}</a><a href="/data/">فهرست همهٔ داده‌ها</a></div></section>
@@ -830,11 +831,11 @@ function writeCsv(file, headers, rows) {
 function computationalAestheticsCsvText() {
   return serializeCsv(
     [
-      'poet', 'poet_slug', 'source_poet_label', 'attributed_century',
-      'within_poet_rank', 'source_record_id', 'book_title', 'poem_title',
-      'hemistich_1', 'hemistich_2', 'symbolism_score', 'imagery_score',
+      'poet_display', 'poet_slug', 'source_poet_display', 'century',
+      'poet_rank', 'id', 'book_title', 'poem_title',
+      'hemistich1', 'hemistich2', 'symbolism_score', 'imagery_score',
       'figurative_score', 'music_score', 'compression_score', 'emotion_score',
-      'structure_score', 'novelty_score', 'overall_score', 'within_poet_percentile',
+      'structure_score', 'novelty_score', 'overall_score', 'poet_percentile',
     ],
     computationalAesthetics.records.map((record) => [
       record.poet_display, record.poet_slug, record.source_poet_display, record.century,
@@ -1027,9 +1028,9 @@ function generateDiscoveryFiles() {
   write('feed.json', JSON.stringify({ version: 'https://jsonfeed.org/version/1.1', title: 'از شعر تا داده', home_page_url: siteUrl, feed_url: absolute('/feed.json'), language: 'fa', items: researchPages.map((p) => ({ id: absolute(p.path), url: absolute(p.path), title: p.title, summary: p.answer, date_modified: `${PUBLICATION.modifiedDate}T00:00:00Z` })) }, null, 2));
   const llms = `# از شعر تا داده\n\n> اطلس تعاملی و پژوهشی تحلیل داده‌های شعر فارسی، کاری از حسین کریمی. پیکره شامل ${faNumber(data.overview.texts)} متن، ${faNumber(data.overview.couplets)} بیت و ${faNumber(data.overview.words)} واژه از ${faNumber(data.overview.poets.length)} شاعر است.\n\n## صفحات اصلی\n- [صفحه اصلی](${siteUrl}/): نمودارهای تعاملی و روایت عمومی\n- [پژوهش‌ها](${absolute('/research/')}): ده مطالعه مستقل با روش و جدول\n- [فهرست شاعران](${absolute('/poets/')}): نمایه داده‌ای همه شاعران\n- [داده‌های قابل دانلود](${absolute('/data/')}): JSON و CSV\n- [روش‌شناسی](${absolute('/methodology/')}): کنترل عدم‌توازن، آزمون‌ها و محدودیت‌ها\n- [واژه‌نامه](${absolute('/glossary/')}): تعریف اصطلاحات
 - [اعتبار منابع](${absolute('/attributions/')}): منابع، تصاویر و مجوزها\n\n## پژوهش‌ها\n${researchPages.map((p) => `- [${p.title}](${absolute(p.path)}): ${p.answer}`).join('\n')}\n\n## استناد\nکریمی، حسین. «از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی». ${siteUrl}/\n\n## سیاست تفسیر\nپیوندهای متنی، شباهت محاسباتی‌اند، نامتعارف آماری حکم انتساب نیست و اندازه حضور شاعر در پیکره رتبه ادبی محسوب نمی‌شود.\n`;
-  write('llms.txt', llms);
+  write('llms.txt', llms.replace('ده مطالعه مستقل', `${faNumber(researchPages.length)} مطالعه مستقل`));
   const full = `${llms}\n## یافته‌ها و روش‌های تفصیلی\n${researchPages.map((p) => { const r = researchData(p.id); return `\n### ${p.title}\n${p.description}\n\nپاسخ: ${p.answer}\n\nیافته‌ها:\n${r.findings.map((x) => `- ${x}`).join('\n')}\n\nروش: ${r.method}\n\nمحدودیت: ${r.limit}\n`; }).join('\n')}\n## داده و API\n- ${absolute('/api/atlas-summary.json')}\n- ${absolute('/api/research-findings.json')}\n- ${absolute('/api/poets.json')}\n- ${absolute('/api/forms.json')}\n- ${absolute('/api/geography.json')}\n- ${absolute('/api/lexical-life.json')}\n- ${absolute('/api/attribution.json')}\n- ${absolute('/downloads/attribution-corpus-audit.csv')}\n- ${absolute('/downloads/topics-by-century.csv')}\n- ${absolute('/downloads/metaphors-by-century.csv')}\n- ${absolute('/downloads/intertext-edges.csv')}\n- ${absolute('/downloads/forms-comparison.csv')}\n- ${absolute('/downloads/geography/poet_geography.csv')}\n- ${absolute('/downloads/lexical-lifecycle.csv')}\n`;
-  write('llms-full.txt', full);
+  write('llms-full.txt', full.replace('ده مطالعه مستقل', `${faNumber(researchPages.length)} مطالعه مستقل`));
   write('humans.txt', `/* TEAM */\nCreator: حسین کریمی\nLinkedIn: ${data.meta.linkedin}\n\n/* SITE */\nName: از شعر تا داده\nLanguage: Persian (fa-IR)\nLast update: ${buildDate}\nTechnology: React, Vite, Apache ECharts\n`);
   write('.well-known/security.txt', `Contact: ${data.meta.linkedin}\nPreferred-Languages: fa, en\nCanonical: ${absolute('/.well-known/security.txt')}\nExpires: ${securityExpiry}\n`);
   write('opensearch.xml', `<?xml version="1.0" encoding="UTF-8"?><OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"><ShortName>از شعر تا داده</ShortName><Description>جست‌وجوی شاعران در اطلس شعر فارسی</Description><InputEncoding>UTF-8</InputEncoding><Url type="text/html" template="${absolute('/poets/?q={searchTerms}')}"/></OpenSearchDescription>`);

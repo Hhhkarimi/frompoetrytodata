@@ -1,8 +1,25 @@
 (() => {
+  const eventProperties = Object.freeze({
+    entity_result_opened: ['entity_type', 'source_view'],
+    evidence_table_opened: ['metric_id', 'page_type'],
+    methodology_opened: ['claim_type', 'page_type'],
+    citation_copied: ['resource_type', 'citation_format'],
+    dataset_download_started: ['dataset_id', 'format', 'version'],
+    recoverable_error_shown: ['surface', 'error_category'],
+    research_study_viewed: ['study_id'],
+    research_explorer_changed: ['study_id', 'filter_keys', 'query_length_bucket', 'result_count'],
+    research_poet_section_viewed: ['study_id', 'poet_slug'],
+  });
   const emitStaticAnalytics = (name, properties = {}) => {
-    if (typeof CustomEvent === 'function') {
+    const allowedProperties = eventProperties[name];
+    if (allowedProperties && typeof CustomEvent === 'function') {
       dispatchEvent(new CustomEvent('from-poetry-to-data:analytics', {
-        detail: { name, properties },
+        detail: {
+          name,
+          properties: Object.fromEntries(allowedProperties
+            .filter((property) => properties[property] !== undefined)
+            .map((property) => [property, properties[property]])),
+        },
       }));
     }
   };
@@ -129,6 +146,12 @@
     };
 
     const runAestheticsFilters = (updateUrl = true) => {
+      const snapshot = rows.map((row) => ({
+        row,
+        hidden: row.hidden,
+        score: row.querySelector('[data-aesthetic-score]')?.textContent,
+      }));
+      const emptyWasHidden = empty?.hidden;
       if (loading) {
         loading.hidden = false;
         loading.setAttribute('aria-busy', 'true');
@@ -151,6 +174,13 @@
           });
         }
       } catch {
+        snapshot.forEach(({ row, hidden, score }) => {
+          row.hidden = hidden;
+          const scoreCell = row.querySelector('[data-aesthetic-score]');
+          if (scoreCell && score !== undefined) scoreCell.textContent = score;
+          aestheticsResults.append(row);
+        });
+        if (empty && emptyWasHidden !== undefined) empty.hidden = emptyWasHidden;
         if (error) error.hidden = false;
         if (status) status.textContent = 'نمایش تعاملی کامل نشد؛ جدول ایستا در دسترس است.';
         emitStaticAnalytics('recoverable_error_shown', {
@@ -163,6 +193,15 @@
           loading.setAttribute('aria-busy', 'false');
         }
       }
+    };
+    let pendingFilterUpdate;
+    const scheduleAestheticsFilters = (updateUrl = true) => {
+      if (loading) {
+        loading.hidden = false;
+        loading.setAttribute('aria-busy', 'true');
+      }
+      clearTimeout(pendingFilterUpdate);
+      pendingFilterUpdate = setTimeout(() => runAestheticsFilters(updateUrl), 0);
     };
 
     const restoreAestheticsFilters = () => {
@@ -186,19 +225,19 @@
       runAestheticsFilters(invalid);
     };
 
-    aestheticsForm.addEventListener('input', () => runAestheticsFilters());
-    aestheticsForm.addEventListener('change', () => runAestheticsFilters());
+    aestheticsForm.addEventListener('input', () => scheduleAestheticsFilters());
+    aestheticsForm.addEventListener('change', () => scheduleAestheticsFilters());
     aestheticsForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      runAestheticsFilters();
+      scheduleAestheticsFilters();
     });
     reset?.addEventListener('click', () => {
       aestheticsForm.reset();
       if (urlNotice) urlNotice.hidden = true;
-      runAestheticsFilters();
+      scheduleAestheticsFilters();
       controls.q?.focus();
     });
-    retry?.addEventListener('click', () => runAestheticsFilters(false));
+    retry?.addEventListener('click', () => scheduleAestheticsFilters(false));
     addEventListener('popstate', restoreAestheticsFilters);
     emitStaticAnalytics('research_study_viewed', { study_id: 'computational-aesthetics' });
     restoreAestheticsFilters();

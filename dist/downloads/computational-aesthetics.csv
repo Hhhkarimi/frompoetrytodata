@@ -1,4 +1,4 @@
-﻿poet,poet_slug,source_poet_label,attributed_century,within_poet_rank,source_record_id,book_title,poem_title,hemistich_1,hemistich_2,symbolism_score,imagery_score,figurative_score,music_score,compression_score,emotion_score,structure_score,novelty_score,overall_score,within_poet_percentile
+﻿poet_display,poet_slug,source_poet_display,century,poet_rank,id,book_title,poem_title,hemistich1,hemistich2,symbolism_score,imagery_score,figurative_score,music_score,compression_score,emotion_score,structure_score,novelty_score,overall_score,poet_percentile
 رودکی,rudaki,رودکی,3,1,108,رباعیات,رباعی شماره ۲۲,در منزل غم فگنده مفرش ماییم,وز آب دو چشم دل پر آتش ماییم,99.94,78.97,98.69,93.41,99.95,86.71,85.48,84.22,91.91,100
 رودکی,rudaki,رودکی,3,2,378,قصاید و قطعات,شماره ۷۰,چون سپرم نه میان بزم به نوروز,درمه بهمن بتاز و جان عدو سوز,91.55,78.97,96.52,69.92,96.94,56.08,62.6,98.89,82.12,99.90118577075098
 رودکی,rudaki,رودکی,3,3,852,ابیات به جا مانده از کلیله و دمنه و سندبادنامه,بخش ۱۲,هیچ تلخی نیست بر دل تلخ تر,از فراق دوستان پر هنر,93.58,92.94,79,53.4,93.3,96.67,27.15,60.56,78.21,99.70355731225297

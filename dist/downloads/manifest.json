@@ -39,8 +39,8 @@
       "license": "https://frompoetrytodata.vercel.app/attributions/",
       "provenance": "https://frompoetrytodata.vercel.app/methodology/",
       "citation": "کریمی، حسین. (۲۰۲۶). «مجموعه‌دادهٔ از شعر تا داده». از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی. https://frompoetrytodata.vercel.app/data/",
-      "bytes": 203822,
-      "sha256": "1d36dacaaf28ed9252be64966140f0cead54c99e8ab3919b98d359471bbebbc4"
+      "bytes": 203791,
+      "sha256": "e078770ba57992fc39eea57c0feebeae97500f8e668a33f2d99c83157d8831d0"
     },
     {
       "path": "computational-aesthetics.json",
@@ -50,8 +50,8 @@
       "license": "https://frompoetrytodata.vercel.app/attributions/",
       "provenance": "https://frompoetrytodata.vercel.app/methodology/",
       "citation": "کریمی، حسین. (۲۰۲۶). «مجموعه‌دادهٔ از شعر تا داده». از شعر تا داده: اطلس تعاملی تحلیل داده‌های شعر فارسی. https://frompoetrytodata.vercel.app/data/",
-      "bytes": 1154147,
-      "sha256": "1013318b9d4b60c061dc505dc6f14eb330c0045c5a51841780ad4562ac95fbca"
+      "bytes": 1156403,
+      "sha256": "8e6a5f8011867ea1da77970a32e47840ae29e18b5741e773f971e61868e40c3c"
     },
     {
       "path": "forms-comparison.csv",

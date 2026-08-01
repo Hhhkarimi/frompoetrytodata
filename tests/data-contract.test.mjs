@@ -151,14 +151,14 @@ test('computational-aesthetics CSV and JSON preserve every committed source scor
   assert.equal(publishedJson.records.length, sourceRows.length);
 
   for (const source of sourceRows) {
-    const csv = publishedRows.find((row) => number(row.source_record_id) === number(source.id));
+    const csv = publishedRows.find((row) => number(row.id) === number(source.id));
     const json = publishedJson.records.find((row) => row.id === number(source.id));
     assert.ok(csv, `missing published CSV record: ${source.id}`);
     assert.ok(json, `missing published JSON record: ${source.id}`);
-    assert.equal(csv.source_poet_label, source.poet_display);
+    assert.equal(csv.source_poet_display, source.poet_display);
     assert.equal(json.source_poet_display, source.poet_display);
-    assert.equal(csv.hemistich_1, source.hemistich1);
-    assert.equal(csv.hemistich_2, source.hemistich2);
+    assert.equal(csv.hemistich1, source.hemistich1);
+    assert.equal(csv.hemistich2, source.hemistich2);
     assert.equal(json.hemistich1, source.hemistich1);
     assert.equal(json.hemistich2, source.hemistich2);
     for (const field of [
@@ -170,4 +170,9 @@ test('computational-aesthetics CSV and JSON preserve every committed source scor
       assert.equal(json[field], number(source[field]), `${source.id} JSON ${field}`);
     }
   }
+  assert.deepEqual(
+    Object.keys(publishedRows[0]).sort(),
+    Object.keys(publishedJson.records[0]).sort(),
+    'CSV and JSON expose the same stable record fields',
+  );
 });

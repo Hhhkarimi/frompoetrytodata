@@ -62,6 +62,12 @@ test('poet summaries use canonical identity and derive statistics from their ten
   assert.equal(hafez.meanOverall, 81.61);
   assert.equal(hafez.maxOverall, 85.29);
   assert.equal(hafez.dominantDimension, 'symbolism');
+  assert.equal(artifact.dimensions.length, 8);
+  assert.ok(artifact.dimensions.every((dimension) => dimension.definition.length > 20));
+  assert.match(artifact.limitations.join(' '), /خط مبنای داوری انسانی/);
+  assert.match(artifact.limitations.join(' '), /rubric/);
+  assert.match(artifact.limitations.join(' '), /عدم‌توازن/);
+  assert.match(artifact.limitations.join(' '), /همین پیکره/);
   assert.ok(artifact.poets.some((poet) => poet.name === 'نیما یوشیج (آوای آزاد)'));
   assert.ok(artifact.poets.some((poet) => poet.name === 'ا لیار (جبار محمدی)'));
   assert.equal(artifact.poets.some((poet) => poet.name === 'نیما یوشیج'), false);

@@ -8,7 +8,7 @@ import { JSDOM } from 'jsdom';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const script = fs.readFileSync(path.join(root, 'public/seo-pages.js'), 'utf8');
 
-test('computational-aesthetics explorer restores and shares filters through its URL', () => {
+test('computational-aesthetics explorer restores and shares filters through its URL', async () => {
   const dom = new JSDOM(`<!doctype html><html><body>
     <form data-aesthetic-explorer>
       <input name="q" type="search">
@@ -46,6 +46,7 @@ test('computational-aesthetics explorer restores and shares filters through its 
   form.elements.q.value = 'سعدی';
   form.elements.century.value = '';
   form.elements.q.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  await new Promise((resolve) => dom.window.setTimeout(resolve, 5));
 
   assert.equal(dom.window.location.search, '?q=%D8%B3%D8%B9%D8%AF%DB%8C&metric=music&sort=score-desc');
   assert.equal(hafez.hidden, true);
@@ -97,7 +98,7 @@ test('computational-aesthetics explorer recovers invalid URLs and restores brows
   );
 });
 
-test('computational-aesthetics explorer exposes a recoverable error without removing static data', () => {
+test('computational-aesthetics explorer exposes a recoverable error without removing static data', async () => {
   const dom = new JSDOM(`<!doctype html><html><body>
     <form data-aesthetic-explorer>
       <input name="q" type="search">
@@ -113,13 +114,17 @@ test('computational-aesthetics explorer exposes a recoverable error without remo
   dom.window.eval(script);
   dom.window.history.replaceState = () => { throw new Error('simulated history failure'); };
   const input = dom.window.document.querySelector('[name="q"]');
-  input.value = 'حافظ';
+  input.value = 'ناموجود';
   input.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  assert.equal(dom.window.document.querySelector('[data-aesthetic-loading]').hidden, false);
+  assert.equal(dom.window.document.querySelector('[data-aesthetic-loading]').getAttribute('aria-busy'), 'true');
+  await new Promise((resolve) => dom.window.setTimeout(resolve, 5));
 
   assert.equal(dom.window.document.querySelector('[data-aesthetic-error]').hidden, false);
   assert.equal(dom.window.document.querySelector('[data-aesthetic-loading]').hidden, true);
   assert.equal(dom.window.document.querySelector('[data-aesthetic-loading]').getAttribute('aria-busy'), 'false');
   assert.ok(dom.window.document.querySelector('[data-aesthetic-poet="حافظ"]'));
+  assert.equal(dom.window.document.querySelector('[data-aesthetic-poet="حافظ"]').hidden, false);
 });
 
 test('poet study analytics expose identity but never poem text', () => {
